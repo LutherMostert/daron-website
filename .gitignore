@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# local-only reference material (scraped content, working docs)
+/DARON-SITE-EXTRACT.md
+
 # vercel
 .vercel
 
