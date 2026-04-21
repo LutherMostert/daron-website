@@ -84,3 +84,11 @@
 ## Sister systems (integrate Week 2–4, do NOT rebuild)
 - **Hermes** (`~/projects/hermes`, same machine) — Python/FastAPI RFQ quoting engine, Supabase, ~6600 SKUs, GPT-4o, WhatsApp KAM interface. New site's RFQ posts here.
 - **Falcon** — Notion-based vessel-arrival detection + outreach drafting; scores leads HOT/WARM/COLD. Week 4: Falcon response → Hermes RFQ handoff.
+
+## Deployment
+- Vercel project: daron-website
+- Vercel team: luthermostert's (Hobby plan)
+- Production URL: https://daron-website.vercel.app
+- Preview URL pattern: https://daron-website-git-<branch>-luthermosterts-projects.vercel.app
+- Auto-deploy: main branch → production; every push triggers rebuild
+- Env vars: none in Week 0 (added in Week 2 for Supabase/Anthropic)
