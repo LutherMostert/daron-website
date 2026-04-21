@@ -85,7 +85,7 @@ export const partners = [
     logo: "/images/partners/orlichem.png",
     logoWidth: 5500,
     logoHeight: 1872,
-    catalogues: [],
+    catalogues: [] satisfies PartnerCatalogue[],
   },
   {
     name: "Hempel",
@@ -94,7 +94,23 @@ export const partners = [
     logo: "/images/partners/hempel.png",
     logoWidth: 1467,
     logoHeight: 574,
-    catalogues: [],
+    catalogues: [
+      {
+        title: "Marine & Fleet coatings",
+        file: "/catalogues/hempel-marine-and-fleet-brochure.pdf",
+        sizeMB: 3.4,
+      },
+      {
+        title: "Oil & Gas coatings",
+        file: "/catalogues/hempel-oil-and-gas-brochure.pdf",
+        sizeMB: 1.2,
+      },
+      {
+        title: "Mineral & Mining coatings",
+        file: "/catalogues/hempel-mineral-and-mining-brochure.pdf",
+        sizeMB: 2.4,
+      },
+    ] satisfies PartnerCatalogue[],
   },
   {
     name: "Honeywell",
