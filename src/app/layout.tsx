@@ -71,7 +71,7 @@ const orgJsonLd = {
   description: site.description,
   email: contact.emails.operations,
   telephone: contact.phone.e164,
-  sameAs: [contact.socials.linkedin],
+  sameAs: [contact.socials.linkedin, contact.socials.facebook],
   address: {
     "@type": "PostalAddress",
     streetAddress: `${contact.address.line1}, ${contact.address.line2}`,

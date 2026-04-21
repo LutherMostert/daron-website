@@ -45,6 +45,7 @@ export const contact = {
   },
   socials: {
     linkedin: "https://linkedin.com/company/daron-namibia",
+    facebook: "https://www.facebook.com/WBshipchandlers",
   },
 } as const;
 

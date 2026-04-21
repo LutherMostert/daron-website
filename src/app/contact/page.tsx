@@ -87,7 +87,7 @@ export default function ContactPage() {
                 <br />
                 Offshore RFQs handled outside hours via WhatsApp
               </p>
-              <p>
+              <p className="flex flex-wrap gap-x-5 gap-y-2">
                 <a
                   href={contact.socials.linkedin}
                   className="font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
@@ -95,6 +95,14 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                 >
                   Daron Namibia on LinkedIn &rarr;
+                </a>
+                <a
+                  href={contact.socials.facebook}
+                  className="font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Walvis Bay Ship Chandlers on Facebook &rarr;
                 </a>
               </p>
             </address>

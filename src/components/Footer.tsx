@@ -84,7 +84,7 @@ export function Footer() {
                   {contact.emails.technical}
                 </a>
               </p>
-              <p>
+              <p className="flex flex-wrap gap-x-4 gap-y-1">
                 <a
                   href={contact.socials.linkedin}
                   className="transition-colors hover:text-white"
@@ -92,6 +92,14 @@ export function Footer() {
                   rel="noopener noreferrer"
                 >
                   LinkedIn &rarr;
+                </a>
+                <a
+                  href={contact.socials.facebook}
+                  className="transition-colors hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Facebook &rarr;
                 </a>
               </p>
             </address>
