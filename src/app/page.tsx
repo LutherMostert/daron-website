@@ -46,20 +46,20 @@ const serviceLinks = [
 export default function HomePage() {
   return (
     <>
-      {/* HERO */}
+      {/* HERO — Skeleton Coast road (desert meets Atlantic) */}
       <section className="relative isolate overflow-hidden bg-[var(--color-navy)] text-white">
         <Image
-          src="/images/vessel-seven-borealis.jpg"
+          src="/images/site/skeleton-coast.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-30"
+          className="object-cover object-center"
           aria-hidden="true"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-[var(--color-navy)] via-[var(--color-navy)]/85 to-[var(--color-navy)]/40"
+          className="absolute inset-0 bg-gradient-to-r from-[var(--color-navy)]/90 via-[var(--color-navy)]/70 to-[var(--color-navy)]/40"
         />
         <Container className="relative grid gap-12 py-20 sm:py-28 md:grid-cols-[1.4fr_1fr]">
           <div>
@@ -130,36 +130,55 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* From Walvis Bay to the World */}
-      <section className="bg-white py-20 sm:py-24">
-        <Container>
-          <div className="grid gap-10 md:grid-cols-[1fr_2fr] md:items-start">
+      {/* From Walvis Bay to the World — branded container + topographic bg */}
+      <section className="relative isolate overflow-hidden bg-[#e8f7f2] py-20 sm:py-24">
+        <Image
+          src="/images/site/topographic-lines.png"
+          alt=""
+          aria-hidden="true"
+          width={1667}
+          height={1609}
+          className="pointer-events-none absolute -right-24 top-0 h-full w-auto opacity-30"
+        />
+        <Container className="relative">
+          <div className="grid items-center gap-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
                 Our story
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
                 From Walvis Bay to the world: your one-stop supply partner
               </h2>
+              <div className="mt-8 inline-block max-w-lg rounded-xl bg-[#f5b63c] p-6 text-[var(--color-navy)] shadow-sm">
+                <p className="text-base leading-relaxed">
+                  Founded in {site.founded} in Walvis Bay, Daron Namibia has
+                  grown from a dedicated ship chandler into a full-service
+                  provider supporting the marine, oil &amp; gas, hospitality,
+                  mining, and industrial sectors.
+                </p>
+              </div>
+              <div className="mt-5 max-w-xl space-y-4 text-base leading-relaxed text-[var(--color-navy)]/85">
+                <p>
+                  We streamline procurement, logistics, and catering through
+                  our in-house infrastructure and expert teams, so you can
+                  focus on your operations while we take care of the rest.
+                </p>
+                <Link
+                  href="/about"
+                  className="inline-flex items-center font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
+                >
+                  Read our story &rarr;
+                </Link>
+              </div>
             </div>
-            <div className="space-y-5 text-base leading-relaxed text-[var(--color-mute)]">
-              <p>
-                Founded in {site.founded} in Walvis Bay, Daron Namibia has
-                grown from a dedicated ship chandler into a full-service
-                provider supporting the marine, oil &amp; gas, hospitality,
-                mining, and industrial sectors.
-              </p>
-              <p>
-                We streamline procurement, logistics, and catering through our
-                in-house infrastructure and expert teams, so you can focus on
-                your operations while we take care of the rest.
-              </p>
-              <Link
-                href="/about"
-                className="inline-flex items-center font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
-              >
-                Read our story &rarr;
-              </Link>
+            <div className="relative mx-auto w-full max-w-sm">
+              <Image
+                src="/images/site/container-lifted.png"
+                alt="A navy Daron Namibia branded shipping container being lowered by a crane"
+                width={924}
+                height={1603}
+                className="h-auto w-full"
+              />
             </div>
           </div>
         </Container>

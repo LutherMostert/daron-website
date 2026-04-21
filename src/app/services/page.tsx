@@ -97,6 +97,7 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="Four pillars. One partner. Endless solutions."
         intro="Procurement, catering, warehousing, logistics and health & safety — managed in-house by people who know your operation."
+        image={{ src: "/images/site/forklift-warehouse.png" }}
       />
 
       {pillars.map((pillar, idx) => (

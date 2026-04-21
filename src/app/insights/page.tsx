@@ -28,6 +28,7 @@ export default function InsightsPage() {
         eyebrow="Insights"
         title="From Africa&apos;s supply chain frontline"
         intro="Articles and updates designed to keep you informed — operating reality, market shifts, and the partnerships behind the work."
+        image={{ src: "/images/site/offshore-catering.jpg" }}
       />
 
       <section className="bg-white py-20 sm:py-24">

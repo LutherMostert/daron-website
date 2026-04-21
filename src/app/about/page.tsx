@@ -26,6 +26,7 @@ export default function AboutPage() {
         eyebrow="Our journey"
         title="From ship chandler to full-service partner"
         intro={`Daron Namibia was founded in ${site.founded} with a clear vision: to deliver world-class supply chain services from right here in Namibia.`}
+        image={{ src: "/images/site/harbour-port.jpg" }}
       />
 
       {/* Story */}

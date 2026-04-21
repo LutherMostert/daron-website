@@ -51,6 +51,7 @@ export default function WhyDaronPage() {
         eyebrow="Why Daron"
         title="Six reasons procurement teams across Africa pick us first"
         intro="Speed, depth, accountability, partnerships, certifications — and an AI quoting desk that answers in minutes. The full picture below."
+        image={{ src: "/images/site/man-loading-ship.jpg" }}
       />
 
       <section className="bg-white py-20 sm:py-24">

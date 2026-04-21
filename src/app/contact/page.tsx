@@ -18,6 +18,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Let&apos;s talk about your next delivery"
         intro="Looking for a trusted partner to simplify your supply chain? Get in touch with our team today."
+        image={{ src: "/images/site/containers-row.png" }}
       />
 
       <section className="bg-white py-20 sm:py-24">
