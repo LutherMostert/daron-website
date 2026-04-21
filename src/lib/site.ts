@@ -220,4 +220,29 @@ export const partners = [
       },
     ] satisfies PartnerCatalogue[],
   },
+  {
+    name: "Hammelmann",
+    note: "Exclusive distributor (Namibia) — high-pressure plunger pumps & water-jetting systems",
+    category: "Industrial pumps & water jetting",
+    logo: null,
+    logoWidth: 0,
+    logoHeight: 0,
+    catalogues: [
+      {
+        title: "Company presentation (2023)",
+        file: "/catalogues/hammelmann-company-presentation-2023.pdf",
+        sizeMB: 11.1,
+      },
+      {
+        title: "Industrial cleaning",
+        file: "/catalogues/hammelmann-industrial-cleaning-brochure.pdf",
+        sizeMB: 25.4,
+      },
+      {
+        title: "Petrochemical, oil & gas",
+        file: "/catalogues/hammelmann-petrochemical-oil-gas-brochure.pdf",
+        sizeMB: 13.6,
+      },
+    ] satisfies PartnerCatalogue[],
+  },
 ] as const;
