@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { contact, nav, site } from "@/lib/site";
@@ -10,16 +11,20 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-line)] bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
-      <Container className="flex h-16 items-center justify-between gap-4">
+      <Container className="flex h-20 items-center justify-between gap-4">
         <Link
           href="/"
-          className="font-[family-name:var(--font-poppins)] text-lg font-bold tracking-tight text-[var(--color-navy)]"
+          className="flex items-center"
           aria-label={`${site.name} home`}
         >
-          DARON<span className="text-[var(--color-orange)]">.</span>
-          <span className="ml-1 text-[10px] font-normal uppercase tracking-[0.18em] text-[var(--color-mute)]">
-            Namibia
-          </span>
+          <Image
+            src="/images/logo-daron.jpg"
+            alt="Daron Namibia"
+            width={359}
+            height={215}
+            priority
+            className="h-14 w-auto"
+          />
         </Link>
 
         <nav aria-label="Primary" className="hidden md:block">
@@ -30,7 +35,7 @@ export function Header() {
                 <li key={n.href}>
                   <Link
                     href={n.href}
-                    className="text-[var(--color-ink)] transition-colors hover:text-[var(--color-orange)]"
+                    className="text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent)]"
                   >
                     {n.label}
                   </Link>
@@ -42,7 +47,7 @@ export function Header() {
         <div className="hidden items-center gap-3 md:flex">
           <a
             href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-orange)] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-orange-deep)]"
+            className="rounded-full bg-[var(--color-accent)] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -95,7 +100,7 @@ export function Header() {
                   <Link
                     href={n.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-md px-2 py-2 text-[var(--color-ink)] transition-colors hover:bg-[var(--color-sand)] hover:text-[var(--color-orange)]"
+                    className="block rounded-md px-2 py-2 text-[var(--color-ink)] transition-colors hover:bg-[var(--color-sand)] hover:text-[var(--color-accent)]"
                   >
                     {n.label}
                   </Link>
@@ -105,7 +110,7 @@ export function Header() {
             <a
               href={contact.whatsapp.href}
               onClick={() => setOpen(false)}
-              className="mt-3 inline-flex items-center justify-center rounded-full bg-[var(--color-orange)] px-5 py-3 text-sm font-semibold text-white"
+              className="mt-3 inline-flex items-center justify-center rounded-full bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-white"
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 /*
-  Brand tokens — STARTER values pending Firecracker/Lisa refinement (Week 1).
-  Source: CLAUDE.md "Brand starter" decision, 2026-04-21.
+  Brand tokens — pulled from the real Daron Namibia logo (navy + emerald/teal).
+  Pending Firecracker/Lisa refinement (Week 1); to re-theme, change hex below.
 */
 @theme inline {
   --color-navy: #0a2540;
   --color-navy-deep: #081d33;
   --color-navy-soft: #122e4f;
-  --color-orange: #f97316;
-  --color-orange-deep: #ea680f;
+  --color-accent: #22d3a7;
+  --color-accent-deep: #10b98a;
   --color-sand: #f7f3ec;
   --color-ink: #0f172a;
   --color-mute: #475569;
@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Focus visibility for keyboard nav (a11y) */
 :focus-visible {
-  outline: 2px solid #f97316;
+  outline: 2px solid #22d3a7;
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -77,7 +77,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 .prose-daron blockquote {
-  border-left: 4px solid var(--color-orange);
+  border-left: 4px solid var(--color-accent);
   padding: 0.5rem 0 0.5rem 1.25rem;
   margin: 1.5rem 0;
   font-family: var(--font-poppins), sans-serif;

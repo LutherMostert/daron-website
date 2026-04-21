@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 
 import { Container } from "@/components/Container";
@@ -88,7 +89,7 @@ export default function ServicesPage() {
           }
         >
           <Container>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               {pillar.eyebrow}
             </p>
             <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -108,7 +109,7 @@ export default function ServicesPage() {
                     <li key={p} className="flex gap-3">
                       <span
                         aria-hidden="true"
-                        className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-[var(--color-orange)]"
+                        className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-[var(--color-accent)]"
                       />
                       <span>{p}</span>
                     </li>
@@ -139,7 +140,7 @@ export default function ServicesPage() {
       {/* Exclusive partners */}
       <section className="bg-[var(--color-navy)] py-16 text-white">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
             Exclusive distribution partners
           </p>
           <h2 className="mt-3 max-w-2xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl">
@@ -149,12 +150,23 @@ export default function ServicesPage() {
             {partners.map((p) => (
               <li
                 key={p.name}
-                className="rounded-2xl border border-white/15 bg-white/5 p-6"
+                className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white p-6"
               >
-                <p className="font-[family-name:var(--font-poppins)] text-xl font-bold">
-                  {p.name}
-                </p>
-                <p className="mt-2 text-sm text-white/75">{p.note}</p>
+                <div className="flex h-20 items-center justify-start">
+                  <Image
+                    src={p.logo}
+                    alt={`${p.name} logo`}
+                    width={p.logoWidth}
+                    height={p.logoHeight}
+                    className="max-h-16 w-auto"
+                  />
+                </div>
+                <div>
+                  <p className="font-[family-name:var(--font-poppins)] text-xl font-bold text-[var(--color-navy)]">
+                    {p.name}
+                  </p>
+                  <p className="mt-1 text-sm text-[var(--color-mute)]">{p.note}</p>
+                </div>
               </li>
             ))}
           </ul>

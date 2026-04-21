@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
             <p className="font-[family-name:var(--font-poppins)] text-2xl font-bold">
-              DARON<span className="text-[var(--color-orange)]">.</span>
+              DARON<span className="text-[var(--color-accent)]">.</span>
               <span className="ml-2 text-xs font-normal uppercase tracking-[0.2em] text-white/60">
                 Namibia
               </span>
@@ -22,7 +22,7 @@ export function Footer() {
             </p>
             <a
               href={contact.whatsapp.href}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-orange)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-orange-deep)]"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -31,7 +31,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-orange)]">
+            <h2 className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
               Sitemap
             </h2>
             <ul className="mt-4 space-y-2 text-sm">
@@ -49,7 +49,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-orange)]">
+            <h2 className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
               Contact
             </h2>
             <address className="mt-4 space-y-2 text-sm not-italic text-white/75">

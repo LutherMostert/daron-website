@@ -32,7 +32,7 @@ export default function AboutPage() {
       <section className="bg-white py-20 sm:py-24">
         <Container className="grid gap-10 md:grid-cols-[1fr_2fr] md:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               The story
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
@@ -58,7 +58,7 @@ export default function AboutPage() {
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container className="grid gap-6 md:grid-cols-2">
           <article className="rounded-2xl bg-white p-8 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               Mission
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--color-navy)]">
@@ -71,7 +71,7 @@ export default function AboutPage() {
             </p>
           </article>
           <article className="rounded-2xl bg-white p-8 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               Vision
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--color-navy)]">
@@ -89,7 +89,7 @@ export default function AboutPage() {
       {/* Values */}
       <section className="bg-white py-20 sm:py-24">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
             Values
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
@@ -103,7 +103,7 @@ export default function AboutPage() {
               >
                 <span
                   aria-hidden="true"
-                  className="font-[family-name:var(--font-poppins)] text-2xl font-bold text-[var(--color-orange)]"
+                  className="font-[family-name:var(--font-poppins)] text-2xl font-bold text-[var(--color-accent)]"
                 >
                   0{idx + 1}
                 </span>
@@ -121,7 +121,7 @@ export default function AboutPage() {
         <Container>
           <div className="grid gap-8 md:grid-cols-[1fr_2fr] md:items-center">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
                 Globally certified, locally grounded
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl">

@@ -118,11 +118,11 @@ export default async function PostPage({ params }: { params: Params }) {
           <Container className="py-20 sm:py-28">
             <Link
               href="/insights"
-              className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)] hover:underline"
+              className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)] hover:underline"
             >
               &larr; Back to insights
             </Link>
-            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               {post.category} &middot;{" "}
               <time dateTime={post.date}>
                 {formatter.format(new Date(post.date))}
@@ -168,7 +168,7 @@ export default async function PostPage({ params }: { params: Params }) {
               <span className="text-[var(--color-mute)]">&middot;</span>
               <a
                 href={contact.whatsapp.href}
-                className="font-semibold text-[var(--color-orange)] underline-offset-4 hover:underline"
+                className="font-semibold text-[var(--color-accent)] underline-offset-4 hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >

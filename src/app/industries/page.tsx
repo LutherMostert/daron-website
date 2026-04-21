@@ -51,7 +51,7 @@ export default function IndustriesPage() {
                 key={ind.name}
                 className="flex flex-col rounded-2xl border border-[var(--color-line)] bg-[var(--color-sand)] p-7 transition-shadow hover:shadow-md"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
                   {ind.name}
                 </p>
                 <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-xl font-bold leading-snug text-[var(--color-navy)] sm:text-2xl">

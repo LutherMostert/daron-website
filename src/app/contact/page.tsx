@@ -51,7 +51,7 @@ export default function ContactPage() {
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               Head office
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
@@ -73,7 +73,7 @@ export default function ContactPage() {
                 </span>
                 <a
                   href={contact.phone.href}
-                  className="text-lg font-semibold text-[var(--color-navy)] hover:text-[var(--color-orange)]"
+                  className="text-lg font-semibold text-[var(--color-navy)] hover:text-[var(--color-accent)]"
                 >
                   {contact.phone.display}
                 </a>
@@ -129,12 +129,12 @@ export default function ContactPage() {
                   name="message"
                   rows={4}
                   required
-                  className="rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-base text-[var(--color-ink)] focus:border-[var(--color-orange)] focus:outline-none"
+                  className="rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-base text-[var(--color-ink)] focus:border-[var(--color-accent)] focus:outline-none"
                 />
               </div>
               <button
                 type="submit"
-                className="mt-2 rounded-full bg-[var(--color-orange)] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[var(--color-orange-deep)]"
+                className="mt-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
               >
                 Send message
               </button>
@@ -171,13 +171,13 @@ function ContactCard({
     <article
       className={
         highlight
-          ? "rounded-2xl bg-[var(--color-orange)] p-7 text-white shadow-md"
+          ? "rounded-2xl bg-[var(--color-accent)] p-7 text-white shadow-md"
           : "rounded-2xl border border-[var(--color-line)] bg-white p-7 shadow-sm"
       }
     >
       <p
         className={`text-xs font-semibold uppercase tracking-[0.2em] ${
-          highlight ? "text-white/85" : "text-[var(--color-orange)]"
+          highlight ? "text-white/85" : "text-[var(--color-accent)]"
         }`}
       >
         {eyebrow}
@@ -230,7 +230,7 @@ function Field({
       >
         {label}
         {required && (
-          <span className="ml-0.5 text-[var(--color-orange)]" aria-hidden="true">
+          <span className="ml-0.5 text-[var(--color-accent)]" aria-hidden="true">
             *
           </span>
         )}
@@ -251,7 +251,7 @@ function Field({
                   ? "family-name"
                   : undefined
         }
-        className="rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-base text-[var(--color-ink)] focus:border-[var(--color-orange)] focus:outline-none"
+        className="rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-base text-[var(--color-ink)] focus:border-[var(--color-accent)] focus:outline-none"
       />
     </div>
   );

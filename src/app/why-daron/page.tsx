@@ -62,7 +62,7 @@ export default function WhyDaronPage() {
                 className="flex flex-col rounded-2xl border border-[var(--color-line)] bg-[var(--color-sand)] p-7"
               >
                 <div className="flex items-center justify-between">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
                     {r.eyebrow}
                   </p>
                   <span
@@ -112,7 +112,7 @@ function Stat({
 }) {
   return (
     <div>
-      <p className="font-[family-name:var(--font-poppins)] text-5xl font-bold text-[var(--color-orange)] sm:text-6xl">
+      <p className="font-[family-name:var(--font-poppins)] text-5xl font-bold text-[var(--color-accent)] sm:text-6xl">
         {value}
         {suffix && (
           <span className="ml-1 text-2xl font-semibold text-white sm:text-3xl">

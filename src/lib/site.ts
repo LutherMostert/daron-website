@@ -69,9 +69,15 @@ export const partners = [
   {
     name: "Orlichem",
     note: "Exclusive distributor — specialised marine chemicals",
+    logo: "/images/partners/orlichem.png",
+    logoWidth: 5500,
+    logoHeight: 1872,
   },
   {
     name: "Hempel",
     note: "Exclusive distributor — marine coatings",
+    logo: "/images/partners/hempel.png",
+    logoWidth: 1467,
+    logoHeight: 574,
   },
 ] as const;

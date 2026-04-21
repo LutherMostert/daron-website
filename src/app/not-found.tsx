@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <section className="bg-[var(--color-navy)] text-white">
       <Container className="flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
           404 &middot; Not found
         </p>
         <h1 className="mt-4 max-w-2xl font-[family-name:var(--font-poppins)] text-3xl font-bold leading-tight sm:text-5xl">
@@ -25,7 +25,7 @@ export default function NotFound() {
           </Link>
           <a
             href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-orange)] px-7 py-3 text-base font-semibold text-white transition-colors hover:bg-[var(--color-orange-deep)]"
+            className="rounded-full bg-[var(--color-accent)] px-7 py-3 text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
             target="_blank"
             rel="noopener noreferrer"
           >

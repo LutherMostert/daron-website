@@ -33,7 +33,7 @@ export function InlineRFQ({
           <div>
             <p
               className={`mb-3 text-xs font-semibold uppercase tracking-[0.2em] ${
-                isNavy ? "text-[var(--color-orange)]" : "text-[var(--color-orange)]"
+                isNavy ? "text-[var(--color-accent)]" : "text-[var(--color-accent)]"
               }`}
             >
               Inline RFQ
@@ -55,7 +55,7 @@ export function InlineRFQ({
           <div className="flex flex-col items-stretch gap-3">
             <a
               href={contact.whatsapp.href}
-              className="rounded-full bg-[var(--color-orange)] px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-[var(--color-orange-deep)]"
+              className="rounded-full bg-[var(--color-accent)] px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
               target="_blank"
               rel="noopener noreferrer"
             >

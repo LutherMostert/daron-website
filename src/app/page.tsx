@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -45,10 +46,23 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="bg-[var(--color-navy)] text-white">
-        <Container className="grid gap-12 py-20 sm:py-28 md:grid-cols-[1.4fr_1fr]">
+      <section className="relative isolate overflow-hidden bg-[var(--color-navy)] text-white">
+        <Image
+          src="/images/vessel-seven-borealis.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-30"
+          aria-hidden="true"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-[var(--color-navy)] via-[var(--color-navy)]/85 to-[var(--color-navy)]/40"
+        />
+        <Container className="relative grid gap-12 py-20 sm:py-28 md:grid-cols-[1.4fr_1fr]">
           <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               Daron Namibia &middot; Since {site.founded}
             </p>
             <h1 className="font-[family-name:var(--font-poppins)] text-3xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
@@ -64,7 +78,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
               <Link
                 href="/contact"
-                className="rounded-full bg-[var(--color-orange)] px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-[var(--color-orange-deep)]"
+                className="rounded-full bg-[var(--color-accent)] px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
               >
                 Contact us for tailored solutions
               </Link>
@@ -91,7 +105,7 @@ export default function HomePage() {
           </div>
 
           <aside className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur">
-            <p className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-orange)]">
+            <p className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
               Why operators choose us
             </p>
             <ul className="mt-5 space-y-4 text-sm leading-relaxed">
@@ -105,7 +119,7 @@ export default function HomePage() {
                 <li key={item} className="flex gap-3">
                   <span
                     aria-hidden="true"
-                    className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-[var(--color-orange)]"
+                    className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-[var(--color-accent)]"
                   />
                   <span className="text-white/85">{item}</span>
                 </li>
@@ -120,7 +134,7 @@ export default function HomePage() {
         <Container>
           <div className="grid gap-10 md:grid-cols-[1fr_2fr] md:items-start">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
                 Our story
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -153,7 +167,7 @@ export default function HomePage() {
       {/* Value props */}
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
             Why Daron
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -165,7 +179,7 @@ export default function HomePage() {
                 key={vp.title}
                 className="rounded-2xl border border-[var(--color-line)] bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
               >
-                <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold tracking-wider text-[var(--color-orange)]">
+                <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold tracking-wider text-[var(--color-accent)]">
                   0{idx + 1}
                 </p>
                 <h3 className="mt-2 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--color-navy)]">
@@ -185,7 +199,7 @@ export default function HomePage() {
         <Container>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-orange)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
                 Services
               </p>
               <h2 className="mt-3 max-w-2xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -203,7 +217,7 @@ export default function HomePage() {
             {serviceLinks.map((s) => (
               <li
                 key={s.title}
-                className="rounded-2xl bg-[var(--color-sand)] p-6 transition-colors hover:bg-[var(--color-orange)] hover:text-white"
+                className="rounded-2xl bg-[var(--color-sand)] p-6 transition-colors hover:bg-[var(--color-accent)] hover:text-white"
               >
                 <Link href={s.href} className="block">
                   <p className="font-[family-name:var(--font-poppins)] text-lg font-semibold">
