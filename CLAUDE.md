@@ -3,7 +3,7 @@
 # Daron Website Rebuild — Project Brief
 
 **Owner:** Luther Mostert (MD, Daron Namibia) · **Repo:** `daron-website` · **Target domain:** daron.com.na
-**Status:** Week 0 in progress (plan proposed 2026-04-20, awaiting approval before code).
+**Status:** Week 0 infrastructure complete — placeholder landing page live at https://daron-website.vercel.app (2026-04-21). Real content build kicks off Week 1.
 
 ## Source of truth
 - `DARON-SITE-EXTRACT.md` (repo root, gitignored) — full copy/content/assets scrape from the live WordPress site, 2026-04-20. Real tagline, contact details, marketing copy, brand asset URLs all live here. **Pull from it, don't invent.**
