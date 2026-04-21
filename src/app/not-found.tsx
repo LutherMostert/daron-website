@@ -14,7 +14,7 @@ export default function NotFound() {
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
           Try the homepage, or send your question to Daron AI assistant on WhatsApp &mdash;
-          we&apos;ll route it to the right team.
+          we’ll route it to the right team.
         </p>
         <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row">
           <Link

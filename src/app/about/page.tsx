@@ -42,12 +42,12 @@ export default function AboutPage() {
           </div>
           <div className="space-y-5 text-base leading-relaxed text-[var(--color-mute)]">
             <p>
-              Starting as a ship chandler, we&apos;ve expanded into catering,
+              Starting as a ship chandler, we’ve expanded into catering,
               logistics, and industrial provisioning &mdash; always guided by
               our promise of quality, service, and excellence.
             </p>
             <p>
-              From humble beginnings, we&apos;ve grown into a trusted partner
+              From humble beginnings, we’ve grown into a trusted partner
               for companies across Africa. Our journey has been built on
               honesty, stewardship, and a commitment to long-term partnerships.
             </p>
@@ -76,10 +76,10 @@ export default function AboutPage() {
               Vision
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--color-navy)]">
-              Set on Africa&apos;s future
+              Set on Africa’s future
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[var(--color-mute)]">
-              To be Africa&apos;s leading ship chandler and provider of marine,
+              To be Africa’s leading ship chandler and provider of marine,
               engineering, and technical goods &amp; services across
               industries.
             </p>

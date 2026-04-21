@@ -16,7 +16,7 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Let&apos;s talk about your next delivery"
+        title="Let’s talk about your next delivery"
         intro="Looking for a trusted partner to simplify your supply chain? Get in touch with our team today."
         image={{ src: "/images/site/containers-row.png" }}
       />
@@ -105,7 +105,7 @@ export default function ContactPage() {
               Send us a message
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-mute)]">
-              We&apos;ll route your enquiry to the right team and reply within
+              We’ll route your enquiry to the right team and reply within
               one business day. For instant quotes, the Daron AI assistant on WhatsApp is faster.
             </p>
             <form

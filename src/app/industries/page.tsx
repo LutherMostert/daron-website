@@ -57,7 +57,7 @@ export default function IndustriesPage() {
       <PageHero
         eyebrow="Industries"
         title="One partner. Endless solutions."
-        intro="From chandlery to catering, warehousing to logistics — we manage it all across four sectors that shape Africa&apos;s economies."
+        intro="From chandlery to catering, warehousing to logistics — we manage it all across four sectors that shape Africa’s economies."
         image={{ src: "/images/site/containers-row.png" }}
       />
 

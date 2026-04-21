@@ -95,7 +95,7 @@ export default function WhyDaronPage() {
       </section>
 
       <InlineRFQ
-        heading="See if we&apos;re the right fit for your operation."
+        heading="See if we’re the right fit for your operation."
         body="Send your RFQ on WhatsApp or message us directly. A KAM will be back to you the same day."
       />
     </>

@@ -67,7 +67,7 @@ export default function HomePage() {
               Daron Namibia &middot; Since {site.founded}
             </p>
             <h1 className="font-[family-name:var(--font-poppins)] text-3xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
-              Supplying Africa&apos;s seas, shores &amp; industries with
+              Supplying Africa’s seas, shores &amp; industries with
               confidence
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
@@ -151,10 +151,7 @@ export default function HomePage() {
               </h2>
               <div className="mt-8 inline-block max-w-lg rounded-xl bg-[#f5b63c] p-6 text-[var(--color-navy)] shadow-sm">
                 <p className="text-base leading-relaxed">
-                  Founded in {site.founded} in Walvis Bay, Daron Namibia has
-                  grown from a dedicated ship chandler into a full-service
-                  provider supporting the marine, oil &amp; gas, hospitality,
-                  mining, and industrial sectors.
+                  {`Founded in ${site.founded} in Walvis Bay, Daron Namibia has grown from a dedicated ship chandler into a full-service provider supporting the marine, oil & gas, hospitality, mining, and industrial sectors.`}
                 </p>
               </div>
               <div className="mt-5 max-w-xl space-y-4 text-base leading-relaxed text-[var(--color-navy)]/85">
