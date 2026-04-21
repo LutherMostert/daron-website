@@ -167,36 +167,81 @@ export default function ServicesPage() {
           <h2 className="mt-3 max-w-2xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl">
             Brands we represent in Namibia
           </h2>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-10 grid gap-6 md:grid-cols-2">
             {partners.map((p) => (
               <li
                 key={p.name}
-                className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white p-6"
+                className="flex flex-col gap-5 rounded-2xl border border-white/15 bg-white p-6"
               >
-                <div className="flex h-16 items-center justify-start">
-                  {p.logo ? (
-                    <Image
-                      src={p.logo}
-                      alt={`${p.name} logo`}
-                      width={p.logoWidth}
-                      height={p.logoHeight}
-                      className="max-h-12 w-auto"
-                    />
-                  ) : (
-                    <span className="font-[family-name:var(--font-poppins)] text-2xl font-bold tracking-tight text-[var(--color-navy)]">
-                      {p.name}
-                    </span>
-                  )}
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex h-14 items-center">
+                    {p.logo ? (
+                      <Image
+                        src={p.logo}
+                        alt={`${p.name} logo`}
+                        width={p.logoWidth}
+                        height={p.logoHeight}
+                        className="max-h-12 w-auto"
+                      />
+                    ) : (
+                      <span className="font-[family-name:var(--font-poppins)] text-2xl font-bold tracking-tight text-[var(--color-navy)]">
+                        {p.name}
+                      </span>
+                    )}
+                  </div>
+                  <span className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-accent-deep)]">
+                    {p.category}
+                  </span>
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-deep)]">
-                    {p.category}
-                  </p>
-                  <p className="mt-1 font-[family-name:var(--font-poppins)] text-lg font-bold text-[var(--color-navy)]">
+                  <p className="font-[family-name:var(--font-poppins)] text-lg font-bold text-[var(--color-navy)]">
                     {p.name}
                   </p>
                   <p className="mt-1 text-sm text-[var(--color-mute)]">{p.note}</p>
                 </div>
+                {p.catalogues.length > 0 && (
+                  <div className="border-t border-[var(--color-line)] pt-4">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-navy)]">
+                      Product catalogues
+                    </p>
+                    <ul className="mt-3 space-y-2">
+                      {p.catalogues.map((c) => (
+                        <li key={c.file}>
+                          <a
+                            href={c.file}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex items-center justify-between gap-3 rounded-md px-2 py-1.5 text-sm text-[var(--color-ink)] transition-colors hover:bg-[var(--color-sand)]"
+                          >
+                            <span className="flex items-center gap-2">
+                              <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="text-[var(--color-accent-deep)]"
+                                aria-hidden="true"
+                              >
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                              </svg>
+                              <span className="group-hover:underline">
+                                {c.title}
+                              </span>
+                            </span>
+                            <span className="text-xs text-[var(--color-mute)]">
+                              PDF · {c.sizeMB.toFixed(1)} MB
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </li>
             ))}
           </ul>

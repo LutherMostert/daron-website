@@ -67,9 +67,16 @@ export const certifications = [
 
 /**
  * Distribution partners. `logo` is optional — when absent the card renders a
- * text-only treatment. Pending Yolande: source Honeywell + Blackline logo
- * files and confirm Daron's distributor tier (exclusive vs authorized).
+ * text-only treatment. `catalogues` lists downloadable PDFs kept in
+ * /public/catalogues/. Pending Yolande: source Honeywell + Blackline logo
+ * files and Orlichem/Hempel product catalogues; confirm distributor tier.
  */
+export type PartnerCatalogue = {
+  title: string;
+  file: string;
+  sizeMB: number;
+};
+
 export const partners = [
   {
     name: "Orlichem",
@@ -78,6 +85,7 @@ export const partners = [
     logo: "/images/partners/orlichem.png",
     logoWidth: 5500,
     logoHeight: 1872,
+    catalogues: [],
   },
   {
     name: "Hempel",
@@ -86,6 +94,7 @@ export const partners = [
     logo: "/images/partners/hempel.png",
     logoWidth: 1467,
     logoHeight: 574,
+    catalogues: [],
   },
   {
     name: "Honeywell",
@@ -94,6 +103,33 @@ export const partners = [
     logo: null,
     logoWidth: 0,
     logoHeight: 0,
+    catalogues: [
+      {
+        title: "Marine eGuide (2023)",
+        file: "/catalogues/honeywell-marine-eguide-2023.pdf",
+        sizeMB: 3.0,
+      },
+      {
+        title: "Marine infographic (2023)",
+        file: "/catalogues/honeywell-marine-infographic-2023.pdf",
+        sizeMB: 1.0,
+      },
+      {
+        title: "BW Clip single-gas detector",
+        file: "/catalogues/honeywell-bw-clip-brochure.pdf",
+        sizeMB: 8.8,
+      },
+      {
+        title: "BW Solo single-gas detector",
+        file: "/catalogues/honeywell-bw-solo-brochure.pdf",
+        sizeMB: 0.9,
+      },
+      {
+        title: "HABWFS fixed safety range",
+        file: "/catalogues/honeywell-habwfs-product-range.pdf",
+        sizeMB: 0.9,
+      },
+    ] satisfies PartnerCatalogue[],
   },
   {
     name: "Blackline Safety",
@@ -102,5 +138,22 @@ export const partners = [
     logo: null,
     logoWidth: 0,
     logoHeight: 0,
+    catalogues: [
+      {
+        title: "G7 wearable multi-gas",
+        file: "/catalogues/blackline-g7-wearable-brochure.pdf",
+        sizeMB: 0.9,
+      },
+      {
+        title: "G7c datasheet",
+        file: "/catalogues/blackline-g7c-datasheet.pdf",
+        sizeMB: 0.7,
+      },
+      {
+        title: "G7 EXO area monitor",
+        file: "/catalogues/blackline-g7-exo-brochure.pdf",
+        sizeMB: 8.6,
+      },
+    ] satisfies PartnerCatalogue[],
   },
 ] as const;
