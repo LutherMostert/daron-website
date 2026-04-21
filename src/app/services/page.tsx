@@ -203,8 +203,13 @@ export default function ServicesPage() {
                   <div className="border-t border-[var(--color-line)] pt-4">
                     <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-navy)]">
                       Product catalogues
+                      {p.catalogues.length > 4 && (
+                        <span className="ml-2 font-normal normal-case text-[var(--color-mute)]">
+                          ({p.catalogues.length} available)
+                        </span>
+                      )}
                     </p>
-                    <ul className="mt-3 space-y-2">
+                    <ul className="mt-3 max-h-72 space-y-2 overflow-y-auto pr-1">
                       {p.catalogues.map((c) => (
                         <li key={c.file}>
                           <a

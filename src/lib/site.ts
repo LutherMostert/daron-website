@@ -85,7 +85,55 @@ export const partners = [
     logo: "/images/partners/orlichem.png",
     logoWidth: 5500,
     logoHeight: 1872,
-    catalogues: [] satisfies PartnerCatalogue[],
+    // Ordered by relevance to Daron's sectors (Marine/Oil & Gas first,
+    // hospitality/institutional last). 2024 brochure set (March 2024).
+    catalogues: [
+      {
+        title: "Marine chemicals",
+        file: "/catalogues/orlichem-marine-brochure-2024.pdf",
+        sizeMB: 7.4,
+      },
+      {
+        title: "Engineering",
+        file: "/catalogues/orlichem-engineering-brochure-2024.pdf",
+        sizeMB: 5.9,
+      },
+      {
+        title: "Clean-in-place (CIP)",
+        file: "/catalogues/orlichem-cip-brochure-2024.pdf",
+        sizeMB: 5.3,
+      },
+      {
+        title: "Kitchen",
+        file: "/catalogues/orlichem-kitchen-brochure-2024.pdf",
+        sizeMB: 3.4,
+      },
+      {
+        title: "Metal treatment",
+        file: "/catalogues/orlichem-metal-treatment-brochure-2024.pdf",
+        sizeMB: 3.4,
+      },
+      {
+        title: "Laundry",
+        file: "/catalogues/orlichem-laundry-brochure-2024.pdf",
+        sizeMB: 3.8,
+      },
+      {
+        title: "Institutional",
+        file: "/catalogues/orlichem-institutional-brochure-2024.pdf",
+        sizeMB: 3.3,
+      },
+      {
+        title: "Housekeeping",
+        file: "/catalogues/orlichem-housekeeping-brochure-2024.pdf",
+        sizeMB: 2.2,
+      },
+      {
+        title: "Hand hygiene",
+        file: "/catalogues/orlichem-hand-hygiene-brochure-2024.pdf",
+        sizeMB: 2.4,
+      },
+    ] satisfies PartnerCatalogue[],
   },
   {
     name: "Hempel",
