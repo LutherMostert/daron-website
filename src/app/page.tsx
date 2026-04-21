@@ -41,7 +41,7 @@ const serviceLinks = [
   { title: "Catering & provisioning", href: "/services#catering" },
   { title: "Warehousing & logistics", href: "/services#warehousing" },
   { title: "Health & safety equipment", href: "/services#safety" },
-  { title: "Dry dock services", href: "/services#dry-dock" },
+  { title: "Dry dock services", href: "/services/dry-dock" },
 ];
 
 export default function HomePage() {

@@ -29,6 +29,15 @@ export default function AboutPage() {
         image={{ src: "/images/site/harbour-port.jpg" }}
       />
 
+      {/* Daron Group credibility band */}
+      <section className="bg-[var(--color-navy)] py-14 text-white">
+        <Container className="grid gap-8 text-center sm:grid-cols-3">
+          <GroupStat value="1959" label="Daron Group established" />
+          <GroupStat value="8" label="Countries across Africa" />
+          <GroupStat value="350+" label="Employees across the group" />
+        </Container>
+      </section>
+
       {/* Story */}
       <section className="bg-white py-20 sm:py-24">
         <Container className="grid gap-10 md:grid-cols-[1fr_2fr] md:items-start">
@@ -37,19 +46,20 @@ export default function AboutPage() {
               The story
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
-              Built in Walvis Bay. Trusted across Africa.
+              Built in Walvis Bay. Backed by the Daron Group.
             </h2>
           </div>
           <div className="space-y-5 text-base leading-relaxed text-[var(--color-mute)]">
             <p>
-              Starting as a ship chandler, we’ve expanded into catering,
-              logistics, and industrial provisioning &mdash; always guided by
-              our promise of quality, service, and excellence.
+              {`Daron Namibia was founded in ${site.founded} as the Namibian presence of the Daron Group — a family-owned marine support business that has been operating across Africa since 1959. The Group runs technical supply, provisions, food services, logistics and engineering operations through entities in Namibia, South Africa, Angola, Senegal, Mozambique, Congo and Côte d’Ivoire, with around 350 staff across the network.`}
             </p>
             <p>
-              From humble beginnings, we’ve grown into a trusted partner
-              for companies across Africa. Our journey has been built on
-              honesty, stewardship, and a commitment to long-term partnerships.
+              Starting as a ship chandler in Walvis Bay, we’ve expanded into
+              catering, warehousing, logistics, health & safety, and dry-dock
+              technical support — always guided by our promise of quality,
+              service, and excellence. From humble beginnings, we’ve grown into
+              a trusted partner for shipowners, offshore operators, hospitality
+              groups and industrial clients across Africa.
             </p>
           </div>
         </Container>
@@ -145,5 +155,16 @@ export default function AboutPage() {
 
       <InlineRFQ />
     </>
+  );
+}
+
+function GroupStat({ value, label }: { value: string; label: string }) {
+  return (
+    <div>
+      <p className="font-[family-name:var(--font-poppins)] text-5xl font-bold text-[var(--color-accent)] sm:text-6xl">
+        {value}
+      </p>
+      <p className="mt-3 text-sm leading-relaxed text-white/80">{label}</p>
+    </div>
   );
 }

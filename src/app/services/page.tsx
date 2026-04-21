@@ -1,10 +1,22 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { PageHero } from "@/components/PageHero";
 import { partners } from "@/lib/site";
+
+type Pillar = {
+  id: string;
+  eyebrow: string;
+  title: string;
+  blurb: string;
+  provide: string[];
+  why: string[];
+  href?: string;
+  cta?: string;
+};
 
 export const metadata: Metadata = {
   title: "Services",
@@ -13,7 +25,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
 };
 
-const pillars = [
+const pillars: Pillar[] = [
   {
     id: "chandlery",
     eyebrow: "01 / Ship chandlery",
@@ -92,26 +104,26 @@ const pillars = [
     id: "dry-dock",
     eyebrow: "05 / Dry dock services",
     title: "Technical dry-dock support for vessels in Walvis Bay",
-    // source: scope added 2026-04-21 at Luther's request, using his
-    // drafted copy. Positions Daron as the technical coordination,
-    // coatings, supply and logistics partner around the dock — not
-    // the yard itself. Ties to existing Hempel/Orlichem offer + Namdock.
+    // source: Daron_Drydock_Presentation 2026 + Luther's drafted copy.
+    // Full scope on dedicated page /services/dry-dock.
     blurb:
-      "Daron Namibia is the technical support partner behind efficient dry-dock execution in Walvis Bay — combining coatings expertise, project logistics, technical supply, and local coordination to keep vessels moving. We support shipowners, operators, offshore contractors, and technical managers from pre-dock planning through close-out.",
+      "Daron Namibia supports vessels at berth, afloat, and during dry dock — marine repairs, technical procurement, vessel provisions, and supply-chain coordination. Full technical team covering mechanical, electrical, structural fabrication, safety & compliance, and ship chandling.",
     provide: [
-      "Technical supply & project logistics — spares, tools, consumables, kitting, milestone delivery",
-      "Marine coatings & surface preparation — Hempel systems, blasting plans, technical oversight",
-      "Cleaning & chemical support — engine room, bilge, deck; bulk or drum supply dockside (Orlichem)",
-      "Operational planning before docking — pre-dock staging, critical-path coordination, alongside-work identification",
-      "Crew & contractor logistics — port permits, transport, accommodation, visiting technicians & inspectors",
+      "Marine repairs — mechanical, electrical, structural",
+      "Hull inspection & repairs; steel and aluminium fabrication",
+      "Electrical, navigation and sensor installations",
+      "Safety & compliance — fire systems, CO₂, gas detection, life rafts",
+      "Coatings (Hempel) and marine chemicals (Orlichem)",
     ],
     why: [
-      "Namdock hub — three floating docks with full workshop across fabrication, mechanical, electrical, coating",
-      "Hempel + Orlichem in-house — coatings and marine chemicals integrated into the dock scope",
-      "Local coordination — dockside execution, daily progress updates, close-out support",
-      "Fast sourcing into Walvis Bay via 2,500+ supplier network",
-      "Pre-staging reduces downtime and keeps critical-path items off the schedule",
+      "Multidisciplinary marine expertise — in-house technical team",
+      "Rapid response capability",
+      "Competitive procurement network (2,500+ suppliers)",
+      "Reliable project delivery — case studies on the full page",
+      "Part of the Daron Group — 1959, 8 countries, 350+ staff",
     ],
+    href: "/services/dry-dock",
+    cta: "See full dry-dock scope & case studies",
   },
 ];
 
@@ -180,6 +192,17 @@ export default function ServicesPage() {
                 </ul>
               </div>
             </div>
+
+            {pillar.href && pillar.cta && (
+              <div className="mt-8">
+                <Link
+                  href={pillar.href}
+                  className="inline-flex items-center rounded-full bg-[var(--color-navy)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-navy-soft)]"
+                >
+                  {pillar.cta} &rarr;
+                </Link>
+              </div>
+            )}
           </Container>
         </section>
       ))}

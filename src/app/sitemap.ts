@@ -12,6 +12,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: n.href === "/" ? 1.0 : 0.8,
   }));
 
+  const subPages = [
+    {
+      url: `${site.url}/services/dry-dock`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+  ];
+
   const postPages = posts.map((p) => ({
     url: `${site.url}/insights/${p.slug}`,
     lastModified: new Date(p.date),
@@ -19,5 +28,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...postPages];
+  return [...staticPages, ...subPages, ...postPages];
 }
