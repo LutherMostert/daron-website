@@ -9,7 +9,7 @@ import { partners } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Daron Namibia offers ship chandlery, offshore catering, warehousing & logistics, and health & safety equipment — all managed through one dependable provider.",
+    "Daron Namibia offers ship chandlery, offshore catering, warehousing & logistics, health & safety equipment, and dry-dock technical support in Walvis Bay — all managed through one dependable provider.",
   alternates: { canonical: "/services" },
 };
 
@@ -88,6 +88,31 @@ const pillars = [
       "Aligned with our ISO 9001 quality controls",
     ],
   },
+  {
+    id: "dry-dock",
+    eyebrow: "05 / Dry dock services",
+    title: "Technical dry-dock support for vessels in Walvis Bay",
+    // source: scope added 2026-04-21 at Luther's request, using his
+    // drafted copy. Positions Daron as the technical coordination,
+    // coatings, supply and logistics partner around the dock — not
+    // the yard itself. Ties to existing Hempel/Orlichem offer + Namdock.
+    blurb:
+      "Daron Namibia is the technical support partner behind efficient dry-dock execution in Walvis Bay — combining coatings expertise, project logistics, technical supply, and local coordination to keep vessels moving. We support shipowners, operators, offshore contractors, and technical managers from pre-dock planning through close-out.",
+    provide: [
+      "Technical supply & project logistics — spares, tools, consumables, kitting, milestone delivery",
+      "Marine coatings & surface preparation — Hempel systems, blasting plans, technical oversight",
+      "Cleaning & chemical support — engine room, bilge, deck; bulk or drum supply dockside (Orlichem)",
+      "Operational planning before docking — pre-dock staging, critical-path coordination, alongside-work identification",
+      "Crew & contractor logistics — port permits, transport, accommodation, visiting technicians & inspectors",
+    ],
+    why: [
+      "Namdock hub — three floating docks with full workshop across fabrication, mechanical, electrical, coating",
+      "Hempel + Orlichem in-house — coatings and marine chemicals integrated into the dock scope",
+      "Local coordination — dockside execution, daily progress updates, close-out support",
+      "Fast sourcing into Walvis Bay via 2,500+ supplier network",
+      "Pre-staging reduces downtime and keeps critical-path items off the schedule",
+    ],
+  },
 ];
 
 export default function ServicesPage() {
@@ -95,8 +120,8 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="Four pillars. One partner. Endless solutions."
-        intro="Procurement, catering, warehousing, logistics and health & safety — managed in-house by people who know your operation."
+        title="Five pillars. One partner. Endless solutions."
+        intro="Procurement, catering, warehousing, logistics, health & safety, and dry-dock technical support — managed in-house by people who know your operation."
         image={{ src: "/images/site/forklift-warehouse.png" }}
       />
 

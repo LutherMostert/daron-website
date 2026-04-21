@@ -41,6 +41,7 @@ const serviceLinks = [
   { title: "Catering & provisioning", href: "/services#catering" },
   { title: "Warehousing & logistics", href: "/services#warehousing" },
   { title: "Health & safety equipment", href: "/services#safety" },
+  { title: "Dry dock services", href: "/services#dry-dock" },
 ];
 
 export default function HomePage() {
@@ -230,7 +231,7 @@ export default function HomePage() {
               All services &rarr;
             </Link>
           </div>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {serviceLinks.map((s) => (
               <li
                 key={s.title}
