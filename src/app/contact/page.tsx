@@ -7,7 +7,7 @@ import { contact } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Daron Namibia in Walvis Bay for tailored supply chain solutions. WhatsApp Don for an instant quote, or message the team directly.",
+    "Get in touch with Daron Namibia in Walvis Bay for tailored supply chain solutions. WhatsApp Daron AI assistant for an instant quote, or message the team directly.",
   alternates: { canonical: "/contact" },
 };
 
@@ -24,8 +24,8 @@ export default function ContactPage() {
         <Container className="grid gap-8 md:grid-cols-3">
           <ContactCard
             eyebrow="Fastest"
-            title="WhatsApp Don"
-            body="Don is our AI quoting agent, live on WhatsApp. Drafted quotes back in minutes."
+            title="WhatsApp Daron AI assistant"
+            body="The Daron AI assistant is our AI quoting agent, live on WhatsApp. Drafted quotes back in minutes."
             href={contact.whatsapp.href}
             cta={`${contact.whatsapp.display} →`}
             external
@@ -105,7 +105,7 @@ export default function ContactPage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-mute)]">
               We&apos;ll route your enquiry to the right team and reply within
-              one business day. For instant quotes, WhatsApp Don is faster.
+              one business day. For instant quotes, the Daron AI assistant on WhatsApp is faster.
             </p>
             <form
               className="mt-6 grid gap-4"

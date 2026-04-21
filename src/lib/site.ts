@@ -33,11 +33,11 @@ export const contact = {
     href: "tel:+264833374710",
   },
   whatsapp: {
-    // Don, the AI quoting agent — front door for RFQs.
+    // Daron AI assistant, the AI quoting agent — front door for RFQs.
     e164: "+264811413840",
     display: "+264 81 141 3840",
     href: "https://wa.me/264811413840",
-    label: "Chat with Don on WhatsApp",
+    label: "Chat with Daron AI assistant on WhatsApp",
   },
   emails: {
     operations: "dnoperations@daron-group.com",
@@ -65,10 +65,16 @@ export const certifications = [
   "IMPA listed",
 ] as const;
 
+/**
+ * Distribution partners. `logo` is optional — when absent the card renders a
+ * text-only treatment. Pending Yolande: source Honeywell + Blackline logo
+ * files and confirm Daron's distributor tier (exclusive vs authorized).
+ */
 export const partners = [
   {
     name: "Orlichem",
     note: "Exclusive distributor — specialised marine chemicals",
+    category: "Marine chemicals & coatings",
     logo: "/images/partners/orlichem.png",
     logoWidth: 5500,
     logoHeight: 1872,
@@ -76,8 +82,25 @@ export const partners = [
   {
     name: "Hempel",
     note: "Exclusive distributor — marine coatings",
+    category: "Marine chemicals & coatings",
     logo: "/images/partners/hempel.png",
     logoWidth: 1467,
     logoHeight: 574,
+  },
+  {
+    name: "Honeywell",
+    note: "Distributor — gas detection & industrial safety instruments",
+    category: "Health & safety",
+    logo: null,
+    logoWidth: 0,
+    logoHeight: 0,
+  },
+  {
+    name: "Blackline Safety",
+    note: "Distributor — connected safety & lone-worker monitoring",
+    category: "Health & safety",
+    logo: null,
+    logoWidth: 0,
+    logoHeight: 0,
   },
 ] as const;

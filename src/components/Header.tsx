@@ -51,7 +51,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Chat with Don &rarr;
+            Chat with Daron AI assistant &rarr;
           </a>
         </div>
 
@@ -114,7 +114,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Chat with Don on WhatsApp &rarr;
+              Chat with Daron AI assistant on WhatsApp &rarr;
             </a>
           </Container>
         </div>

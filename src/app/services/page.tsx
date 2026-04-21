@@ -9,7 +9,7 @@ import { partners } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Daron Namibia offers expert ship chandlery, offshore catering, and comprehensive warehousing & logistics — all managed through one dependable provider.",
+    "Daron Namibia offers ship chandlery, offshore catering, warehousing & logistics, and health & safety equipment — all managed through one dependable provider.",
   alternates: { canonical: "/services" },
 };
 
@@ -67,6 +67,27 @@ const pillars = [
       "A dedicated and branded fleet",
     ],
   },
+  {
+    id: "safety",
+    eyebrow: "04 / Health & safety",
+    title: "Protecting crews and sites with trusted safety equipment",
+    blurb:
+      "Industrial health and safety supply, backed by global technology leaders trusted across oil & gas, marine and mining operations.",
+    // source: scope added 2026-04-21 at Luther's request; copy pending
+    // Yolande refinement — confirm SKU range + distributor tier.
+    provide: [
+      "Gas detection — portable and fixed (Honeywell BW, Blackline G7)",
+      "Connected safety and lone-worker monitoring (Blackline Safety)",
+      "PPE, respiratory protection and escape sets",
+      "Calibration, servicing and training support",
+    ],
+    why: [
+      "Authorized distributor for Honeywell and Blackline Safety",
+      "Equipment certified for harsh offshore and industrial environments",
+      "On-site calibration and servicing via trained technicians",
+      "Aligned with our ISO 9001 quality controls",
+    ],
+  },
 ];
 
 export default function ServicesPage() {
@@ -74,8 +95,8 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="Three pillars. One partner. Endless solutions."
-        intro="Procurement, catering, warehousing and logistics — managed in-house by people who know your operation."
+        title="Four pillars. One partner. Endless solutions."
+        intro="Procurement, catering, warehousing, logistics and health & safety — managed in-house by people who know your operation."
       />
 
       {pillars.map((pillar, idx) => (
@@ -137,32 +158,41 @@ export default function ServicesPage() {
         </section>
       ))}
 
-      {/* Exclusive partners */}
+      {/* Distribution partners */}
       <section className="bg-[var(--color-navy)] py-16 text-white">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-            Exclusive distribution partners
+            Distribution partners
           </p>
           <h2 className="mt-3 max-w-2xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl">
             Brands we represent in Namibia
           </h2>
-          <ul className="mt-10 grid gap-4 md:grid-cols-2">
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {partners.map((p) => (
               <li
                 key={p.name}
                 className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white p-6"
               >
-                <div className="flex h-20 items-center justify-start">
-                  <Image
-                    src={p.logo}
-                    alt={`${p.name} logo`}
-                    width={p.logoWidth}
-                    height={p.logoHeight}
-                    className="max-h-16 w-auto"
-                  />
+                <div className="flex h-16 items-center justify-start">
+                  {p.logo ? (
+                    <Image
+                      src={p.logo}
+                      alt={`${p.name} logo`}
+                      width={p.logoWidth}
+                      height={p.logoHeight}
+                      className="max-h-12 w-auto"
+                    />
+                  ) : (
+                    <span className="font-[family-name:var(--font-poppins)] text-2xl font-bold tracking-tight text-[var(--color-navy)]">
+                      {p.name}
+                    </span>
+                  )}
                 </div>
                 <div>
-                  <p className="font-[family-name:var(--font-poppins)] text-xl font-bold text-[var(--color-navy)]">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-deep)]">
+                    {p.category}
+                  </p>
+                  <p className="mt-1 font-[family-name:var(--font-poppins)] text-lg font-bold text-[var(--color-navy)]">
                     {p.name}
                   </p>
                   <p className="mt-1 text-sm text-[var(--color-mute)]">{p.note}</p>

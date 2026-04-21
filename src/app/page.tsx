@@ -37,9 +37,10 @@ const valueProps = [
 ];
 
 const serviceLinks = [
-  { title: "Marine specialties & chandlery", href: "/services#chandlery" },
-  { title: "Vessel management service", href: "/services#chandlery" },
+  { title: "Ship chandlery & marine specialties", href: "/services#chandlery" },
+  { title: "Catering & provisioning", href: "/services#catering" },
   { title: "Warehousing & logistics", href: "/services#warehousing" },
+  { title: "Health & safety equipment", href: "/services#safety" },
 ];
 
 export default function HomePage() {
@@ -213,7 +214,7 @@ export default function HomePage() {
               All services &rarr;
             </Link>
           </div>
-          <ul className="mt-10 grid gap-4 md:grid-cols-3">
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {serviceLinks.map((s) => (
               <li
                 key={s.title}
@@ -234,7 +235,7 @@ export default function HomePage() {
       <InlineRFQ
         variant="navy"
         heading="Tight deadline? We've reactivated rigs in 11 days."
-        body="When the cargo is moving and your supplier needs to keep up, Don drafts your quote on WhatsApp in minutes. A KAM reviews every request before it ships."
+        body="When the cargo is moving and your supplier needs to keep up, the Daron AI assistant drafts your quote on WhatsApp in minutes. A KAM reviews every request before it ships."
       />
     </>
   );

@@ -4,7 +4,7 @@ import { Container } from "./Container";
 
 /**
  * Inline RFQ section — required on every page per CLAUDE.md audit fix #9.
- * Current site has only one form site-wide; we surface Don/WhatsApp + contact
+ * Current site has only one form site-wide; we surface Daron AI assistant/WhatsApp + contact
  * routes prominently on every page.
  */
 type Props = {
@@ -15,8 +15,8 @@ type Props = {
 
 export function InlineRFQ({
   variant = "sand",
-  heading = "Need a quote? Talk to Don.",
-  body = "Don is our AI-powered quoting agent. Message on WhatsApp and a drafted quote lands in minutes — a human KAM reviews every request before it ships.",
+  heading = "Need a quote? Talk to the Daron AI assistant.",
+  body = "The Daron AI assistant is our AI-powered quoting agent. Message on WhatsApp and a drafted quote lands in minutes — a human KAM reviews every request before it ships.",
 }: Props) {
   const isNavy = variant === "navy";
   return (

@@ -13,7 +13,7 @@ export default function NotFound() {
           That page has slipped its mooring.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
-          Try the homepage, or send your question to Don on WhatsApp &mdash;
+          Try the homepage, or send your question to Daron AI assistant on WhatsApp &mdash;
           we&apos;ll route it to the right team.
         </p>
         <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row">
@@ -29,7 +29,7 @@ export default function NotFound() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Chat with Don &rarr;
+            Chat with Daron AI assistant &rarr;
           </a>
         </div>
       </Container>

@@ -40,19 +40,19 @@
 ## Real contact (from extract — do not change without source)
 - Address: No. 31 Grand Avenue, Industrial Area, Walvis Bay, Erongo Region, Namibia
 - Phone (landline): +264 83 337 4710
-- WhatsApp (Don, AI quoting agent): +264 81 141 3840 — `https://wa.me/264811413840`
+- WhatsApp (Daron AI assistant, AI quoting agent): +264 81 141 3840 — `https://wa.me/264811413840`
 - Ops email: dnoperations@daron-group.com
 - Technical email: namtechnical@daron-group.com
 - LinkedIn: https://linkedin.com/company/daron-namibia
 - Founded 2012 · GMT+2 (CAT)
 
-## About Don (reference for Week 2 chatbot build)
-- **Don** is the human-facing name for the **Hermes AI quoting agent** — one identity, multiple channels.
+## About the Daron AI assistant (reference for Week 2 chatbot build)
+- **Daron AI assistant** is the customer-facing name for the **Hermes AI quoting agent** — one identity, multiple channels. (Renamed from "Don" 2026-04-21 per Luther.)
 - Backend: Python/FastAPI at `~/projects/hermes`, Supabase (~6,600 SKUs), GPT-4o. Runs on Luther's Ubuntu/WSL.
-- WhatsApp front door already live at **+264 81 141 3840** — customers message Don, Don drafts quotes in minutes, human KAM steps in on escalation (Cheslin = technical, Yolande = ops).
-- **Week 0 usage:** `wa.me/264811413840` links only — do NOT build any Don↔Hermes integration. Hermes/WhatsApp wiring is already live on Luther's end.
-- **Week 2+:** the floating chatbot widget on the site must share Don's identity, tone, and knowledge base — same agent, different channel. Branding consistency is the point.
-- Don surfaces in Week 0 at these touch-points: Header "Chat with Don →" CTA, Footer WhatsApp link, Contact page card (equal prominence to email cards), Home hero secondary CTA, RFQ form success state ("Or chat with Don now on WhatsApp").
+- WhatsApp front door already live at **+264 81 141 3840** — customers message the Daron AI assistant, it drafts quotes in minutes, human KAM steps in on escalation (Cheslin = technical, Yolande = ops).
+- **Week 0 usage:** `wa.me/264811413840` links only — do NOT build any Daron-AI↔Hermes integration. Hermes/WhatsApp wiring is already live on Luther's end.
+- **Week 2+:** the floating chatbot widget on the site must share the Daron AI assistant's identity, tone, and knowledge base — same agent, different channel. Branding consistency is the point.
+- The Daron AI assistant surfaces in Week 0 at these touch-points: Header "Chat with Daron AI assistant →" CTA, Footer WhatsApp link, Contact page card (equal prominence to email cards), Home hero secondary CTA, RFQ form success state.
 
 ## Tagline
 "SUPPLYING AFRICA'S SEAS, SHORES & INDUSTRIES WITH CONFIDENCE"

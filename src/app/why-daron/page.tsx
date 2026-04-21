@@ -15,7 +15,7 @@ const reasons = [
   {
     eyebrow: "Speed",
     title: "Quotes in hours, not days.",
-    body: "Demurrage on a single offshore rig can run upwards of US$50,000 per day. Slow procurement is not a paperwork issue — it is a P&L event. Our AI-powered quoting desk (Don) drafts an RFQ response within minutes on WhatsApp, with a human KAM reviewing every quote before it ships.",
+    body: "Demurrage on a single offshore rig can run upwards of US$50,000 per day. Slow procurement is not a paperwork issue — it is a P&L event. Our AI-powered quoting desk (Daron AI assistant) drafts an RFQ response within minutes on WhatsApp, with a human KAM reviewing every quote before it ships.",
   },
   {
     eyebrow: "Inventory depth",

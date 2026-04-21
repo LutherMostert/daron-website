@@ -172,7 +172,7 @@ export default async function PostPage({ params }: { params: Params }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Talk to Don about your project &rarr;
+                Talk to Daron AI assistant about your project &rarr;
               </a>
             </div>
           </Container>
