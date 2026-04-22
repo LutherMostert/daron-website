@@ -112,6 +112,7 @@ export default function HomePage() {
             </p>
             <ul className="mt-5 space-y-4 text-sm leading-relaxed">
               {[
+                "Trusted to supply multiple offshore rigs simultaneously under active drilling conditions",
                 "ISO 9001:2015 + HACCP certified",
                 "ISSA / IMPA listed for international compatibility",
                 "Network of 2,500+ suppliers across Africa & Europe",
@@ -208,6 +209,83 @@ export default function HomePage() {
                 </p>
               </article>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Proven at Scale — offshore drilling credibility */}
+      <section className="bg-white py-20 sm:py-24">
+        <Container>
+          <div className="grid gap-12 md:grid-cols-[1.2fr_1fr] md:items-start">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+                Proof at scale
+              </p>
+              <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-3xl font-bold leading-[1.1] text-[var(--color-navy)] sm:text-4xl md:text-5xl">
+                Proven at scale. Trusted in critical operations.
+              </h2>
+              <div className="mt-6 max-w-xl space-y-4 text-base leading-relaxed text-[var(--color-mute)]">
+                <p>
+                  Daron Namibia has supported multiple offshore drilling
+                  campaigns simultaneously &mdash; delivering provisions and
+                  technical supply to rigs operating under pressure.
+                </p>
+                <p>
+                  From supplying the <strong className="text-[var(--color-navy)]">Deepsea Mira</strong>,{" "}
+                  <strong className="text-[var(--color-navy)]">Deepsea Bollsta</strong>,
+                  and <strong className="text-[var(--color-navy)]">Deepsea Hercules</strong>{" "}
+                  at the same time, to our early work on the{" "}
+                  <strong className="text-[var(--color-navy)]">Transocean Marianas</strong>{" "}
+                  in 2013, our track record reflects one thing:
+                </p>
+                <p className="font-[family-name:var(--font-poppins)] text-xl font-bold text-[var(--color-navy)] sm:text-2xl">
+                  When operations are critical, we deliver.
+                </p>
+              </div>
+              <Link
+                href="/industries/oil-and-gas"
+                className="mt-8 inline-flex items-center rounded-full bg-[var(--color-navy)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-navy-soft)]"
+              >
+                Our offshore drilling track record &rarr;
+              </Link>
+            </div>
+            <aside className="rounded-3xl bg-[var(--color-navy)] p-8 text-white shadow-lg">
+              <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+                Operational capability you can rely on
+              </p>
+              <ul className="mt-6 space-y-5">
+                {[
+                  "Supplied 3 offshore drilling rigs simultaneously",
+                  "Supporting high-pressure oil & gas operations",
+                  "Track record dating back to 2013 offshore campaigns",
+                  "Trusted during vessel repairs and active drilling phases",
+                ].map((item) => (
+                  <li key={item} className="flex gap-4">
+                    <span
+                      aria-hidden="true"
+                      className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)]"
+                    >
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-[var(--color-navy)]"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </span>
+                    <span className="text-base leading-relaxed text-white/90">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </aside>
           </div>
         </Container>
       </section>

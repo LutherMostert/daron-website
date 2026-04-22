@@ -20,6 +20,10 @@ export function Footer() {
               {site.tagline}. Marine chandlery, oil &amp; gas logistics,
               catering, warehousing — from Walvis Bay since {site.founded}.
             </p>
+            <p className="mt-3 max-w-md text-xs italic leading-relaxed text-[var(--color-accent)]">
+              Trusted to supply multiple offshore rigs simultaneously under
+              active drilling conditions.
+            </p>
             <a
               href={contact.whatsapp.href}
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 import { Container } from "@/components/Container";
@@ -12,7 +13,19 @@ export const metadata: Metadata = {
   alternates: { canonical: "/industries" },
 };
 
-const industries = [
+type Industry = {
+  name: string;
+  promise: string;
+  body: string;
+  image: string;
+  imageAlt: string;
+  imageWidth: number;
+  imageHeight: number;
+  href?: string;
+  cta?: string;
+};
+
+const industries: Industry[] = [
   {
     name: "Marine & offshore",
     promise: "Reliable support at every port.",
@@ -25,11 +38,13 @@ const industries = [
   {
     name: "Oil & gas",
     promise: "Provisioning for offshore rigs.",
-    body: "Provisioning and logistics solutions aligned with strict industry standards, designed for the pace and accountability that offshore operations demand.",
+    body: "Trusted to supply multiple offshore rigs simultaneously under active drilling conditions — from the Deepsea Mira, Bollsta and Hercules to the Transocean Marianas (2013).",
     image: "/images/site/offshore-catering.jpg",
     imageAlt: "Offshore oil and gas platform operations",
     imageWidth: 2560,
     imageHeight: 1128,
+    href: "/industries/oil-and-gas",
+    cta: "See our offshore drilling track record",
   },
   {
     name: "Hospitality",
@@ -82,7 +97,7 @@ export default function IndustriesPage() {
                     className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--color-navy)]/70 to-transparent"
                   />
                 </div>
-                <div className="p-7">
+                <div className="flex flex-1 flex-col p-7">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
                     {ind.name}
                   </p>
@@ -92,6 +107,14 @@ export default function IndustriesPage() {
                   <p className="mt-3 text-base leading-relaxed text-[var(--color-mute)]">
                     {ind.body}
                   </p>
+                  {ind.href && ind.cta && (
+                    <Link
+                      href={ind.href}
+                      className="mt-5 inline-flex items-center font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
+                    >
+                      {ind.cta} &rarr;
+                    </Link>
+                  )}
                 </div>
               </li>
             ))}

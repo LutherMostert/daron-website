@@ -18,7 +18,7 @@ export function Header() {
           aria-label={`${site.name} home`}
         >
           <Image
-            src="/images/logo-daron.jpg"
+            src="/images/logo-daron.png"
             alt="Daron Namibia"
             width={359}
             height={215}
