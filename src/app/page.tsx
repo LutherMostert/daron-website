@@ -62,7 +62,7 @@ export default function HomePage() {
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-r from-[var(--color-navy)]/90 via-[var(--color-navy)]/70 to-[var(--color-navy)]/40"
         />
-        <Container className="relative grid gap-12 py-20 sm:py-28 md:grid-cols-[1.4fr_1fr]">
+        <Container className="relative grid gap-12 py-20 sm:py-28 md:grid-cols-[1.4fr_1fr] md:items-center">
           <div>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               Daron Namibia &middot; Since {site.founded}
@@ -106,11 +106,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          <aside className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur">
+          <aside className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
             <p className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
               Why operators choose us
             </p>
-            <ul className="mt-5 space-y-4 text-sm leading-relaxed">
+            <ul className="mt-6 space-y-3.5 text-sm leading-snug">
               {[
                 "Trusted to supply multiple offshore rigs simultaneously under active drilling conditions",
                 "ISO 9001:2015 + HACCP certified",
