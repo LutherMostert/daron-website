@@ -46,13 +46,29 @@
 - LinkedIn: https://linkedin.com/company/daron-namibia
 - Founded 2012 · GMT+2 (CAT)
 
-## About the Daron AI assistant (reference for Week 2 chatbot build)
-- **Daron AI assistant** is the customer-facing name for the **Hermes AI quoting agent** — one identity, multiple channels. (Renamed from "Don" 2026-04-21 per Luther.)
-- Backend: Python/FastAPI at `~/projects/hermes`, Supabase (~6,600 SKUs), GPT-4o. Runs on Luther's Ubuntu/WSL.
-- WhatsApp front door already live at **+264 81 141 3840** — customers message the Daron AI assistant, it drafts quotes in minutes, human KAM steps in on escalation (Cheslin = technical, Yolande = ops).
-- **Week 0 usage:** `wa.me/264811413840` links only — do NOT build any Daron-AI↔Hermes integration. Hermes/WhatsApp wiring is already live on Luther's end.
-- **Week 2+:** the floating chatbot widget on the site must share the Daron AI assistant's identity, tone, and knowledge base — same agent, different channel. Branding consistency is the point.
-- The Daron AI assistant surfaces in Week 0 at these touch-points: Header "Chat with Daron AI assistant →" CTA, Footer WhatsApp link, Contact page card (equal prominence to email cards), Home hero secondary CTA, RFQ form success state.
+## About Don / the Daron AI assistant (reference for Week 2 chatbot build)
+
+**Dual-branding rule (locked 2026-04-22):**
+- **"Don"** = the friendly/personal name. Use in body copy, headlines, and introductions.
+  Pattern: *"Meet Don — Daron's AI operations copilot."*
+- **"Daron AI assistant"** = the formal product label. Use in CTAs, header/footer, metadata, and any place where a new visitor sees it for the first time without personal-name context.
+  Pattern: *"Chat with Daron AI assistant"* (header CTA), *"the Daron AI assistant drafts your quote…"* (body when Don hasn't been introduced on the current page yet).
+
+**What Don is (updated 2026-04-22 per OpenClaw build session):**
+- **Backend:** OpenClaw 2026.4 agent platform, powered by **Anthropic Claude Opus 4.7** (Claude Max enterprise subscription — no per-token costs). Migrated off GPT-5.4. Supabase stores the product catalog (butchery, provisions, bonded, cabin SKUs), pricing tiers, and client templates.
+- **Channels:** Single WhatsApp line at **+264 81 141 3840**. Legacy Hermes system decommissioned on that number. Voice notes transcribed by OpenAI Whisper.
+- **Access control:** 13-person allowlist on DMs; group behavior responds only when addressed as "Don" or "@don".
+- **Capabilities:** reads RFQs in Excel/PDF/Word, fuzzy-matches against live catalog, applies client-specific pricing with NAD→USD/EUR FX, produces Daron-branded Excel quotes matching IQ Enterprises templates.
+- **Team knowledge:** 51-person Daron Namibia organigram loaded; client templates recognised by email domain (MCTC, HMS Hamburg, D2S, Oceanic, Bourbon).
+- **Controls:** never sends quotes without Luther's approval, flags uncertain matches, never invents prices/SKUs.
+
+**Site placements (Week 0/1, shipped 2026-04-22):**
+- Home hero secondary CTA + footer + contact card + "Meet Don" section on home page (innovation band)
+- Dedicated `/ai` page with long-form copy + tech highlights table
+- `/about` page innovation block (medium version)
+- RFQ form success state
+
+**Week 2+:** floating web chat widget wired into the same OpenClaw backend (user hinted it's the natural next step). Will share Don's identity and knowledge base. Not shipped yet.
 
 ## Tagline
 "SUPPLYING AFRICA'S SEAS, SHORES & INDUSTRIES WITH CONFIDENCE"

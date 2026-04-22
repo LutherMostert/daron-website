@@ -212,6 +212,68 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* Meet Don — AI operations copilot */}
+      <section className="bg-[var(--color-navy)] py-20 text-white sm:py-24">
+        <Container>
+          <div className="grid items-center gap-10 md:grid-cols-[1.3fr_1fr]">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+                Innovation
+              </p>
+              <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl md:text-4xl">
+                Meet Don &mdash; Daron&rsquo;s AI operations copilot.
+              </h2>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+                Don handles RFQs, generates quotes, and keeps our team
+                connected 24/7. Powered by Anthropic&rsquo;s Claude, integrated
+                with our product catalog, and available on WhatsApp. Fast,
+                accurate, and always on &mdash; reviewed and approved by a
+                Daron specialist before every quote ships.
+              </p>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="/ai"
+                  className="rounded-full bg-[var(--color-accent)] px-6 py-3 text-center text-base font-semibold text-[var(--color-navy)] transition-colors hover:bg-[var(--color-accent-deep)]"
+                >
+                  How Don works &rarr;
+                </Link>
+                <a
+                  href={contact.whatsapp.href}
+                  className="rounded-full border border-white/30 px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Chat with Daron AI assistant
+                </a>
+              </div>
+            </div>
+            <aside className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur">
+              <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+                Powered by
+              </p>
+              <ul className="mt-4 space-y-3 text-sm">
+                <li className="flex justify-between gap-4">
+                  <span className="text-white/60">AI engine</span>
+                  <span className="text-right font-medium">Anthropic Claude Opus 4.7</span>
+                </li>
+                <li className="flex justify-between gap-4">
+                  <span className="text-white/60">Agent platform</span>
+                  <span className="text-right font-medium">OpenClaw 2026.4</span>
+                </li>
+                <li className="flex justify-between gap-4">
+                  <span className="text-white/60">Catalog &amp; pricing</span>
+                  <span className="text-right font-medium">Supabase</span>
+                </li>
+                <li className="flex justify-between gap-4">
+                  <span className="text-white/60">Channel</span>
+                  <span className="text-right font-medium">WhatsApp Business</span>
+                </li>
+              </ul>
+            </aside>
+          </div>
+        </Container>
+      </section>
+
       {/* Services teaser */}
       <section className="bg-white py-20 sm:py-24">
         <Container>

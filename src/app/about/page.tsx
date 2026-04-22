@@ -1,9 +1,10 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { PageHero } from "@/components/PageHero";
-import { certifications, site } from "@/lib/site";
+import { certifications, contact, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -124,6 +125,57 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
+        </Container>
+      </section>
+
+      {/* Innovation — Meet Don */}
+      <section className="bg-[var(--color-sand)] py-20 sm:py-24">
+        <Container>
+          <div className="grid gap-12 md:grid-cols-[1fr_1.6fr] md:items-start">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+                Innovation
+              </p>
+              <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
+                Meet Don &mdash; Daron&rsquo;s AI operations copilot
+              </h2>
+            </div>
+            <div className="space-y-5 text-base leading-relaxed text-[var(--color-mute)]">
+              <p>
+                At Daron Namibia, we&rsquo;ve built <strong>Don</strong> &mdash; an
+                AI-powered operations copilot that works alongside our ship
+                chandling team to deliver faster, more accurate quotes for
+                vessels calling at Walvis Bay.
+              </p>
+              <p>
+                Don reads incoming RFQs in any format (email, Excel, PDF,
+                Word), matches items against our full provisions, bonded,
+                cabin, and technical catalog, applies client-specific
+                pricing, and produces a ready-to-send quote in minutes. Every
+                quote is reviewed and approved by a Daron specialist before
+                it leaves our system &mdash; Don accelerates response time
+                without compromising the accuracy and accountability our
+                clients depend on.
+              </p>
+              <p className="text-sm text-[var(--color-mute)]">
+                <span className="font-semibold text-[var(--color-navy)]">
+                  Powered by:
+                </span>{" "}
+                Anthropic Claude Opus 4.7 &middot; OpenClaw &middot; Supabase{" "}
+                <br />
+                <span className="font-semibold text-[var(--color-navy)]">
+                  Available on:
+                </span>{" "}
+                WhatsApp {contact.whatsapp.display}
+              </p>
+              <Link
+                href="/ai"
+                className="inline-flex items-center font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
+              >
+                How Don works &rarr;
+              </Link>
+            </div>
+          </div>
         </Container>
       </section>
 
