@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { ChatWidget } from "@/components/ChatWidget";
 import { contact, site } from "@/lib/site";
 
 const poppins = Poppins({
@@ -136,6 +137,7 @@ export default function RootLayout({
         <Footer />
         <JsonLd id="ld-organization" data={orgJsonLd} />
         <JsonLd id="ld-localbusiness" data={localBusinessJsonLd} />
+        <ChatWidget />
       </body>
     </html>
   );

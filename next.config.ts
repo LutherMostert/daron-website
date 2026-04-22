@@ -1,6 +1,18 @@
 import type { NextConfig } from "next";
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
+
+// Pin Turbopack's root to this project directory. Without this, Next.js 16
+// infers the workspace root from the nearest lockfile — and since
+// C:\Users\LutherMostert\package-lock.json exists one level up, it was
+// resolving env files (.env.local) and tracing from the user home, not the
+// project. That made `.env.local` invisible to route handlers at runtime.
+const PROJECT_ROOT = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: PROJECT_ROOT,
+  },
   // Old WordPress URL slugs → new Next.js routes (CLAUDE.md "Site routes")
   async redirects() {
     return [
