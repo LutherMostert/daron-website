@@ -1,8 +1,23 @@
-import Link from "next/link";
-import { contact, nav, site } from "@/lib/site";
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+import { contact, site } from "@/lib/site";
 import { Container } from "./Container";
 
+const navItems = [
+  { href: "/" as const, key: "home" as const },
+  { href: "/about" as const, key: "about" as const },
+  { href: "/services" as const, key: "services" as const },
+  { href: "/industries" as const, key: "industries" as const },
+  { href: "/why-daron" as const, key: "whyDaron" as const },
+  { href: "/insights" as const, key: "insights" as const },
+  { href: "/contact" as const, key: "contact" as const },
+];
+
 export function Footer() {
+  const t = useTranslations("Footer");
+  const tNav = useTranslations("Nav");
   const year = new Date().getFullYear();
 
   return (
@@ -17,12 +32,10 @@ export function Footer() {
               </span>
             </p>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">
-              {site.tagline}. Marine chandlery, oil &amp; gas logistics,
-              catering, warehousing — from Walvis Bay since {site.founded}.
+              {t("tagline", { founded: site.founded })}
             </p>
             <p className="mt-3 max-w-md text-xs italic leading-relaxed text-[var(--color-accent)]">
-              Trusted to supply multiple offshore rigs simultaneously under
-              active drilling conditions.
+              {t("proofLine")}
             </p>
             <a
               href={contact.whatsapp.href}
@@ -30,22 +43,22 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Chat with Daron AI assistant on WhatsApp &rarr;
+              {t("chatCta")} &rarr;
             </a>
           </div>
 
           <div>
             <h2 className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
-              Sitemap
+              {t("sitemap")}
             </h2>
             <ul className="mt-4 space-y-2 text-sm">
-              {nav.map((n) => (
+              {navItems.map((n) => (
                 <li key={n.href}>
                   <Link
                     href={n.href}
                     className="text-white/75 transition-colors hover:text-white"
                   >
-                    {n.label}
+                    {tNav(n.key)}
                   </Link>
                 </li>
               ))}
@@ -54,7 +67,7 @@ export function Footer() {
 
           <div>
             <h2 className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
-              Contact
+              {t("contactHeading")}
             </h2>
             <address className="mt-4 space-y-2 text-sm not-italic text-white/75">
               <p>
@@ -95,7 +108,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  LinkedIn &rarr;
+                  {t("linkedin")} &rarr;
                 </a>
                 <a
                   href={contact.socials.facebook}
@@ -103,7 +116,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Facebook &rarr;
+                  {t("facebook")} &rarr;
                 </a>
               </p>
             </address>
@@ -114,10 +127,13 @@ export function Footer() {
       <div className="border-t border-white/10">
         <Container className="flex flex-col items-center justify-between gap-3 py-5 text-xs text-white/55 sm:flex-row">
           <p>
-            &copy; {site.founded}&ndash;{year} {site.legalName}. All rights
-            reserved.
+            {t("copyright", {
+              startYear: site.founded,
+              year,
+              legalName: site.legalName,
+            })}
           </p>
-          <p>Walvis Bay, Namibia &middot; GMT+2 (CAT)</p>
+          <p>{t("location")}</p>
         </Container>
       </div>
     </footer>

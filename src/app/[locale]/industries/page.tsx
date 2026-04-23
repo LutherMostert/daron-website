@@ -1,17 +1,25 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { PageHero } from "@/components/PageHero";
 
-export const metadata: Metadata = {
-  title: "Industries we serve",
-  description:
-    "Daron Namibia provides tailored provisioning and technical support for the marine, offshore, oil & gas, hospitality, mining, and industrial sectors.",
-  alternates: { canonical: "/industries" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Meta" });
+  return {
+    title: t("industriesTitle"),
+    description: t("industriesDescription"),
+    alternates: { canonical: "/industries" },
+  };
+}
 
 type Industry = {
   name: string;
@@ -25,54 +33,62 @@ type Industry = {
   cta?: string;
 };
 
-const industries: Industry[] = [
-  {
-    name: "Marine & offshore",
-    promise: "Reliable support at every port.",
-    body: "Tailored chandlery, catering, and technical supplies and services that keep vessels and rigs operating smoothly — from routine resupply to fast-turnaround reactivations.",
-    image: "/images/site/man-loading-ship.jpg",
-    imageAlt: "Worker loading supplies onto a vessel at Walvis Bay harbour",
-    imageWidth: 1396,
-    imageHeight: 933,
-  },
-  {
-    name: "Oil & gas",
-    promise: "Provisioning for offshore rigs.",
-    body: "Trusted to supply multiple offshore rigs simultaneously under active drilling conditions — from the Deepsea Mira, Bollsta and Hercules to the Transocean Marianas (2013).",
-    image: "/images/site/offshore-catering.jpg",
-    imageAlt: "Offshore oil and gas platform operations",
-    imageWidth: 2560,
-    imageHeight: 1128,
-    href: "/industries/oil-and-gas",
-    cta: "See our offshore drilling track record",
-  },
-  {
-    name: "Hospitality",
-    promise: "Supplying quality that guests can taste.",
-    body: "Reliable delivery of fresh produce and catering support for hotels and resorts. We bring the same supply chain discipline our marine clients rely on to your front of house.",
-    image: "/images/site/food-supply-worker.jpg",
-    imageAlt: "Daron food supply worker preparing fresh produce",
-    imageWidth: 2050,
-    imageHeight: 904,
-  },
-  {
-    name: "Mining & industrial",
-    promise: "Powering productivity on site.",
-    body: "Technical supplies, warehousing, and logistics designed for demanding environments — bonded storage, branded fleet, and the workflow to keep production lines moving.",
-    image: "/images/site/mining.jpeg",
-    imageAlt: "Industrial and mining supply operations in Namibia",
-    imageWidth: 2560,
-    imageHeight: 1474,
-  },
-];
+export default async function IndustriesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Industries");
 
-export default function IndustriesPage() {
+  const industries: Industry[] = [
+    {
+      name: t("marineName"),
+      promise: t("marinePromise"),
+      body: t("marineBody"),
+      image: "/images/site/man-loading-ship.jpg",
+      imageAlt: t("marineAlt"),
+      imageWidth: 1396,
+      imageHeight: 933,
+    },
+    {
+      name: t("oilGasName"),
+      promise: t("oilGasPromise"),
+      body: t("oilGasBody"),
+      image: "/images/site/offshore-catering.jpg",
+      imageAlt: t("oilGasAlt"),
+      imageWidth: 2560,
+      imageHeight: 1128,
+      href: "/industries/oil-and-gas",
+      cta: t("oilGasCta"),
+    },
+    {
+      name: t("hospName"),
+      promise: t("hospPromise"),
+      body: t("hospBody"),
+      image: "/images/site/food-supply-worker.jpg",
+      imageAlt: t("hospAlt"),
+      imageWidth: 2050,
+      imageHeight: 904,
+    },
+    {
+      name: t("miningName"),
+      promise: t("miningPromise"),
+      body: t("miningBody"),
+      image: "/images/site/mining.jpeg",
+      imageAlt: t("miningAlt"),
+      imageWidth: 2560,
+      imageHeight: 1474,
+    },
+  ];
+
   return (
     <>
       <PageHero
-        eyebrow="Industries"
-        title="One partner. Endless solutions."
-        intro="From chandlery to catering, warehousing to logistics — we manage it all across four sectors that shape Africa’s economies."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        intro={t("heroIntro")}
         image={{ src: "/images/site/containers-row.png" }}
       />
 
@@ -124,8 +140,8 @@ export default function IndustriesPage() {
 
       <InlineRFQ
         variant="navy"
-        heading="Talk to us about your industry needs."
-        body="One partner. Endless solutions. From chandlery to catering, warehousing to logistics — we manage it all."
+        heading={t("rfqHeading")}
+        body={t("rfqBody")}
       />
     </>
   );

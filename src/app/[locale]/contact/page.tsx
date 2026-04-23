@@ -1,48 +1,64 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
 import { contact } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Get in touch with Daron Namibia in Walvis Bay for tailored supply chain solutions. WhatsApp Daron AI assistant for an instant quote, or message the team directly.",
-  alternates: { canonical: "/contact" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Meta" });
+  return {
+    title: t("contactTitle"),
+    description: t("contactDescription"),
+    alternates: { canonical: "/contact" },
+  };
+}
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Contact");
+
   return (
     <>
       <PageHero
-        eyebrow="Contact"
-        title="Let’s talk about your next delivery"
-        intro="Looking for a trusted partner to simplify your supply chain? Get in touch with our team today."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        intro={t("heroIntro")}
         image={{ src: "/images/site/containers-row.png" }}
       />
 
       <section className="bg-white py-20 sm:py-24">
         <Container className="grid gap-8 md:grid-cols-3">
           <ContactCard
-            eyebrow="Fastest"
-            title="WhatsApp Daron AI assistant"
-            body="The Daron AI assistant is our AI quoting agent, live on WhatsApp. Drafted quotes back in minutes."
+            eyebrow={t("card1Eyebrow")}
+            title={t("card1Title")}
+            body={t("card1Body")}
             href={contact.whatsapp.href}
-            cta={`${contact.whatsapp.display} →`}
+            cta={`${contact.whatsapp.display} \u2192`}
             external
             highlight
           />
           <ContactCard
-            eyebrow="Operations"
-            title="Email ops"
-            body="For order coordination, deliveries, and account questions."
+            eyebrow={t("card2Eyebrow")}
+            title={t("card2Title")}
+            body={t("card2Body")}
             href={`mailto:${contact.emails.operations}`}
             cta={contact.emails.operations}
           />
           <ContactCard
-            eyebrow="Technical"
-            title="Email technical"
-            body="For specifications, sourcing, and technical sales support."
+            eyebrow={t("card3Eyebrow")}
+            title={t("card3Title")}
+            body={t("card3Body")}
             href={`mailto:${contact.emails.technical}`}
             cta={contact.emails.technical}
           />
@@ -53,10 +69,10 @@ export default function ContactPage() {
         <Container className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-start">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-              Head office
+              {t("officeEyebrow")}
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
-              Walvis Bay, Namibia
+              {t("officeHeading")}
             </h2>
             <address className="mt-6 space-y-4 text-base not-italic leading-relaxed text-[var(--color-ink)]">
               <p>
@@ -70,7 +86,7 @@ export default function ContactPage() {
               </p>
               <p>
                 <span className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-mute)]">
-                  Office line
+                  {t("officeLine")}
                 </span>
                 <a
                   href={contact.phone.href}
@@ -81,11 +97,11 @@ export default function ContactPage() {
               </p>
               <p>
                 <span className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-mute)]">
-                  Hours
+                  {t("hours")}
                 </span>
-                Mon&ndash;Fri 08:00&ndash;17:00 CAT (GMT+2)
+                {t("hoursValue")}
                 <br />
-                Offshore RFQs handled outside hours via WhatsApp
+                {t("hoursOffshore")}
               </p>
               <p className="flex flex-wrap gap-x-5 gap-y-2">
                 <a
@@ -94,7 +110,7 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Daron Namibia on LinkedIn &rarr;
+                  {t("linkedinLink")} &rarr;
                 </a>
                 <a
                   href={contact.socials.facebook}
@@ -102,7 +118,7 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Walvis Bay Ship Chandlers on Facebook &rarr;
+                  {t("facebookLink")} &rarr;
                 </a>
               </p>
             </address>
@@ -110,11 +126,10 @@ export default function ContactPage() {
 
           <div className="rounded-2xl border border-[var(--color-line)] bg-white p-8 shadow-sm">
             <h2 className="font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)]">
-              Send us a message
+              {t("formHeading")}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-mute)]">
-              We’ll route your enquiry to the right team and reply within
-              one business day. For instant quotes, the Daron AI assistant on WhatsApp is faster.
+              {t("formIntro")}
             </p>
             <form
               className="mt-6 grid gap-4"
@@ -122,16 +137,16 @@ export default function ContactPage() {
               method="post"
               encType="text/plain"
             >
-              <Field id="firstName" label="First name" required />
-              <Field id="surname" label="Surname" required />
-              <Field id="email" label="Contact email" type="email" required />
-              <Field id="phone" label="Telephone number" type="tel" />
+              <Field id="firstName" label={t("firstName")} required />
+              <Field id="surname" label={t("surname")} required />
+              <Field id="email" label={t("contactEmail")} type="email" required />
+              <Field id="phone" label={t("telephone")} type="tel" />
               <div className="flex flex-col gap-1.5">
                 <label
                   htmlFor="message"
                   className="text-sm font-semibold text-[var(--color-ink)]"
                 >
-                  Your message
+                  {t("yourMessage")}
                 </label>
                 <textarea
                   id="message"
@@ -145,11 +160,10 @@ export default function ContactPage() {
                 type="submit"
                 className="mt-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
               >
-                Send message
+                {t("sendMessage")}
               </button>
               <p className="text-xs text-[var(--color-mute)]">
-                This form opens your default email app for now. Hermes-backed
-                live form launches Week&nbsp;2.
+                {t("formNote")}
               </p>
             </form>
           </div>

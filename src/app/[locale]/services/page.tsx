@@ -1,9 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
+import { Link } from "@/i18n/routing";
 import { PageHero } from "@/components/PageHero";
 import { partners } from "@/lib/site";
 
@@ -18,122 +19,86 @@ type Pillar = {
   cta?: string;
 };
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Daron Namibia offers ship chandlery, offshore catering, warehousing & logistics, health & safety equipment, and dry-dock technical support in Walvis Bay — all managed through one dependable provider.",
-  alternates: { canonical: "/services" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Meta" });
+  return {
+    title: t("servicesTitle"),
+    description: t("servicesDescription"),
+    alternates: { canonical: "/services" },
+  };
+}
 
-const pillars: Pillar[] = [
-  {
-    id: "chandlery",
-    eyebrow: "01 / Ship chandlery",
-    title: "Keeping vessels equipped, safe & ready",
-    blurb:
-      "Our chandlery services keep vessels and offshore rigs fully operational, no matter the need.",
-    provide: [
-      "Deck stores, safety & survival equipment, engine parts",
-      "Provision stores, stationery, pyrotechnics, medicine",
-      "Spare parts and bonded stores",
-      "Exclusive distributor for Orlichem and Hempel",
-    ],
-    why: [
-      "One-stop supply with fast fulfilment",
-      "ISSA / IMPA listed for international compatibility",
-      "Reliable local and global sourcing backed by trusted relationships",
-    ],
-  },
-  {
-    id: "catering",
-    eyebrow: "02 / Catering",
-    title: "Fueling crews & clients with fresh, balanced meals",
-    blurb:
-      "From offshore rigs to hospitality groups, we design and deliver catering solutions that balance nutrition, cost-efficiency, and taste.",
-    provide: [
-      "Fresh produce, dry goods, vacuum-packed meats",
-      "Menus designed with dietitians for balanced nutrition",
-      "Emergency stock control to ensure consistency",
-    ],
-    why: [
-      "In-house butchery and perishables warehousing",
-      "Expert dietician collaboration",
-      "Reliable supply for demanding environments",
-    ],
-  },
-  {
-    id: "warehousing",
-    eyebrow: "03 / Warehousing & logistics",
-    title: "Smart storage, seamless delivery",
-    blurb:
-      "Our warehousing and logistics infrastructure ensures smooth operations from storage to delivery.",
-    provide: [
-      "Refrigerated, freezer, dry and bonded storage",
-      "Customs clearance, freight forwarding, permits",
-      "Visas, crew changes, and travel arrangements",
-    ],
-    why: [
-      "Large onsite warehousing capacity",
-      "Optimized workflows that reduce delays and risks",
-      "Logistics managed through trusted exclusive partners",
-      "A dedicated and branded fleet",
-    ],
-  },
-  {
-    id: "safety",
-    eyebrow: "04 / Health & safety",
-    title: "Protecting crews and sites with trusted safety equipment",
-    blurb:
-      "Industrial health and safety supply, backed by global technology leaders trusted across oil & gas, marine and mining operations.",
-    // source: scope added 2026-04-21 at Luther's request; copy pending
-    // Yolande refinement — confirm SKU range + distributor tier.
-    provide: [
-      "Gas detection — portable and fixed (Honeywell BW, Blackline G7)",
-      "Connected safety and lone-worker monitoring (Blackline Safety)",
-      "PPE, respiratory protection and escape sets",
-      "Calibration, servicing and training support",
-    ],
-    why: [
-      "Authorized distributor for Honeywell and Blackline Safety",
-      "Equipment certified for harsh offshore and industrial environments",
-      "On-site calibration and servicing via trained technicians",
-      "Aligned with our ISO 9001 quality controls",
-    ],
-  },
-  {
-    id: "dry-dock",
-    eyebrow: "05 / Dry dock services",
-    title: "Technical dry-dock support for vessels in Walvis Bay",
-    // source: Daron_Drydock_Presentation 2026 + Luther's drafted copy.
-    // Full scope on dedicated page /services/dry-dock.
-    blurb:
-      "Daron Namibia supports vessels at berth, afloat, and during dry dock — marine repairs, technical procurement, vessel provisions, and supply-chain coordination. Full technical team covering mechanical, electrical, structural fabrication, safety & compliance, and ship chandling.",
-    provide: [
-      "Marine repairs — mechanical, electrical, structural",
-      "Hull inspection & repairs; steel and aluminium fabrication",
-      "Electrical, navigation and sensor installations",
-      "Safety & compliance — fire systems, CO₂, gas detection, life rafts",
-      "Coatings (Hempel) and marine chemicals (Orlichem)",
-    ],
-    why: [
-      "Multidisciplinary marine expertise — in-house technical team",
-      "Rapid response capability",
-      "Competitive procurement network (2,500+ suppliers)",
-      "Reliable project delivery — case studies on the full page",
-      "Part of the Daron Group — 1959, 8 countries, 350+ staff",
-    ],
-    href: "/services/dry-dock",
-    cta: "See full dry-dock scope & case studies",
-  },
-];
+export default async function ServicesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Services");
 
-export default function ServicesPage() {
+  const pillars: Pillar[] = [
+    {
+      id: "chandlery",
+      eyebrow: t("p1Eyebrow"),
+      title: t("p1Title"),
+      blurb: t("p1Blurb"),
+      provide: [t("p1Provide1"), t("p1Provide2"), t("p1Provide3"), t("p1Provide4")],
+      why: [t("p1Why1"), t("p1Why2"), t("p1Why3")],
+    },
+    {
+      id: "catering",
+      eyebrow: t("p2Eyebrow"),
+      title: t("p2Title"),
+      blurb: t("p2Blurb"),
+      provide: [t("p2Provide1"), t("p2Provide2"), t("p2Provide3")],
+      why: [t("p2Why1"), t("p2Why2"), t("p2Why3")],
+    },
+    {
+      id: "warehousing",
+      eyebrow: t("p3Eyebrow"),
+      title: t("p3Title"),
+      blurb: t("p3Blurb"),
+      provide: [t("p3Provide1"), t("p3Provide2"), t("p3Provide3")],
+      why: [t("p3Why1"), t("p3Why2"), t("p3Why3"), t("p3Why4")],
+    },
+    {
+      id: "safety",
+      eyebrow: t("p4Eyebrow"),
+      title: t("p4Title"),
+      blurb: t("p4Blurb"),
+      provide: [t("p4Provide1"), t("p4Provide2"), t("p4Provide3"), t("p4Provide4")],
+      why: [t("p4Why1"), t("p4Why2"), t("p4Why3"), t("p4Why4")],
+    },
+    {
+      id: "dry-dock",
+      eyebrow: t("p5Eyebrow"),
+      title: t("p5Title"),
+      blurb: t("p5Blurb"),
+      provide: [
+        t("p5Provide1"),
+        t("p5Provide2"),
+        t("p5Provide3"),
+        t("p5Provide4"),
+        t("p5Provide5"),
+      ],
+      why: [t("p5Why1"), t("p5Why2"), t("p5Why3"), t("p5Why4"), t("p5Why5")],
+      href: "/services/dry-dock",
+      cta: t("p5Cta"),
+    },
+  ];
+
   return (
     <>
       <PageHero
-        eyebrow="Services"
-        title="Five pillars. One partner. Endless solutions."
-        intro="Procurement, catering, warehousing, logistics, health & safety, and dry-dock technical support — managed in-house by people who know your operation."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        intro={t("heroIntro")}
         image={{ src: "/images/site/forklift-warehouse.png" }}
       />
 
@@ -161,7 +126,7 @@ export default function ServicesPage() {
             <div className="mt-10 grid gap-8 md:grid-cols-2">
               <div className="rounded-2xl border border-[var(--color-line)] bg-white p-6 shadow-sm">
                 <h3 className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-navy)]">
-                  What we provide
+                  {t("whatWeProvide")}
                 </h3>
                 <ul className="mt-4 space-y-3 text-sm leading-relaxed text-[var(--color-ink)]">
                   {pillar.provide.map((p) => (
@@ -177,7 +142,7 @@ export default function ServicesPage() {
               </div>
               <div className="rounded-2xl border border-[var(--color-line)] bg-white p-6 shadow-sm">
                 <h3 className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-navy)]">
-                  Why choose us
+                  {t("whyChooseUs")}
                 </h3>
                 <ul className="mt-4 space-y-3 text-sm leading-relaxed text-[var(--color-ink)]">
                   {pillar.why.map((w) => (
@@ -211,10 +176,10 @@ export default function ServicesPage() {
       <section className="bg-[var(--color-navy)] py-16 text-white">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-            Distribution partners
+            {t("partnersEyebrow")}
           </p>
           <h2 className="mt-3 max-w-2xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl">
-            Brands we represent in Namibia
+            {t("partnersHeading")}
           </h2>
           <ul className="mt-10 grid gap-6 md:grid-cols-2">
             {partners.map((p) => (
@@ -251,10 +216,10 @@ export default function ServicesPage() {
                 {p.catalogues.length > 0 && (
                   <div className="border-t border-[var(--color-line)] pt-4">
                     <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-navy)]">
-                      Product catalogues
+                      {t("productCatalogues")}
                       {p.catalogues.length > 4 && (
                         <span className="ml-2 font-normal normal-case text-[var(--color-mute)]">
-                          ({p.catalogues.length} available)
+                          ({t("available", { count: p.catalogues.length })})
                         </span>
                       )}
                     </p>

@@ -1,50 +1,67 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
+import { Link } from "@/i18n/routing";
 import { contact, site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: `${site.name} | Marine, oil & gas, logistics — Walvis Bay`,
-  description:
-    "From ship chandlery to catering and logistics, Daron Namibia delivers comprehensive, compliant, and dependable supply chain solutions across industries from Walvis Bay.",
-  alternates: { canonical: "/" },
-};
-
-const valueProps = [
-  {
-    title: "Everything you need, one trusted partner",
-    body: "Procurement, logistics, catering, staffing, technical supplies — all managed through one dependable provider.",
-  },
-  {
-    title: "Infrastructure built for reliability",
-    body: "Modern warehousing with refrigerated, frozen, and dry storage ensures consistent quality and supply.",
-  },
-  {
-    title: "Certified to global standards",
-    body: "ISO 9001:2015, HACCP compliance, ISSA & IMPA listings guarantee international credibility.",
-  },
-  {
-    title: "Rooted in Namibian integrity",
-    body: "Guided by honesty, stewardship, and a commitment to long-term partnerships.",
-  },
-  {
-    title: "A network that reaches across Africa",
-    body: "Through the Daron Group network, we serve ports and industries across the continent.",
-  },
-];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Meta" });
+  return {
+    title: t("homeTitle"),
+    description: t("homeDescription"),
+    alternates: { canonical: "/" },
+  };
+}
 
 const serviceLinks = [
-  { title: "Ship chandlery & marine specialties", href: "/services#chandlery" },
-  { title: "Catering & provisioning", href: "/services#catering" },
-  { title: "Warehousing & logistics", href: "/services#warehousing" },
-  { title: "Health & safety equipment", href: "/services#safety" },
-  { title: "Dry dock services", href: "/services/dry-dock" },
+  { key: "svc1" as const, href: "/services#chandlery" },
+  { key: "svc2" as const, href: "/services#catering" },
+  { key: "svc3" as const, href: "/services#warehousing" },
+  { key: "svc4" as const, href: "/services#safety" },
+  { key: "svc5" as const, href: "/services/dry-dock" },
 ];
 
-export default function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Home");
+
+  const asideBullets = [
+    t("asideBullet1"),
+    t("asideBullet2"),
+    t("asideBullet3"),
+    t("asideBullet4"),
+    t("asideBullet5"),
+    t("asideBullet6"),
+  ];
+
+  const valueProps = [
+    { title: t("vp1Title"), body: t("vp1Body") },
+    { title: t("vp2Title"), body: t("vp2Body") },
+    { title: t("vp3Title"), body: t("vp3Body") },
+    { title: t("vp4Title"), body: t("vp4Body") },
+    { title: t("vp5Title"), body: t("vp5Body") },
+  ];
+
+  const proofBullets = [
+    t("proofAsideBullet1"),
+    t("proofAsideBullet2"),
+    t("proofAsideBullet3"),
+    t("proofAsideBullet4"),
+  ];
+
   return (
     <>
       {/* HERO — Skeleton Coast road (desert meets Atlantic) */}
@@ -65,16 +82,13 @@ export default function HomePage() {
         <Container className="relative grid gap-12 py-20 sm:py-28 md:grid-cols-[1.4fr_1fr] md:items-center">
           <div>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-              Daron Namibia &middot; Since {site.founded}
+              {t("heroEyebrow", { founded: site.founded })}
             </p>
             <h1 className="font-[family-name:var(--font-poppins)] text-3xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
-              Supplying Africa’s seas, shores &amp; industries with
-              confidence
+              {t("heroHeading")}
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
-              From ship chandlery to catering and logistics, Daron Namibia
-              delivers comprehensive, compliant, and dependable supply chain
-              solutions across industries.
+              {t("heroIntro")}
             </p>
 
             <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
@@ -82,7 +96,7 @@ export default function HomePage() {
                 href="/contact"
                 className="rounded-full bg-[var(--color-accent)] px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
               >
-                Contact us for tailored solutions
+                {t("heroCta")}
               </Link>
               <a
                 href={contact.whatsapp.href}
@@ -90,35 +104,21 @@ export default function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Request a quote &rarr;
+                {t("heroQuoteCta")} &rarr;
               </a>
             </div>
 
             <p className="mt-5 text-xs text-white/55">
-              Or call{" "}
-              <a
-                href={contact.phone.href}
-                className="font-semibold text-white/80 hover:text-white"
-              >
-                {contact.phone.display}
-              </a>{" "}
-              &middot; Walvis Bay &middot; GMT+2 (CAT)
+              {t("heroCallLine", { phone: contact.phone.display })}
             </p>
           </div>
 
           <aside className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
             <p className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
-              Why operators choose us
+              {t("asideTitle")}
             </p>
             <ul className="mt-6 space-y-3.5 text-sm leading-snug">
-              {[
-                "Trusted to supply multiple offshore rigs simultaneously under active drilling conditions",
-                "ISO 9001:2015 + HACCP certified",
-                "ISSA / IMPA listed for international compatibility",
-                "Network of 2,500+ suppliers across Africa & Europe",
-                "In-house warehousing — refrigerated, frozen, dry, bonded",
-                "Branded fleet + trusted logistics partners",
-              ].map((item) => (
+              {asideBullets.map((item) => (
                 <li key={item} className="flex gap-3">
                   <span
                     aria-hidden="true"
@@ -132,7 +132,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* From Walvis Bay to the World — branded container + topographic bg */}
+      {/* From Walvis Bay to the World */}
       <section className="relative isolate overflow-hidden bg-[#e8f7f2] py-20 sm:py-24">
         <Image
           src="/images/site/topographic-lines.png"
@@ -146,34 +146,30 @@ export default function HomePage() {
           <div className="grid items-center gap-10 md:grid-cols-[1.2fr_1fr]">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
-                Our story
+                {t("storyEyebrow")}
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
-                From Walvis Bay to the world: your one-stop supply partner
+                {t("storyHeading")}
               </h2>
               <div className="mt-8 inline-block max-w-lg rounded-xl bg-[#f5b63c] p-6 text-[var(--color-navy)] shadow-sm">
                 <p className="text-base leading-relaxed">
-                  {`Founded in ${site.founded} in Walvis Bay, Daron Namibia has grown from a dedicated ship chandler into a full-service provider supporting the marine, oil & gas, hospitality, mining, and industrial sectors.`}
+                  {t("storyBox", { founded: site.founded })}
                 </p>
               </div>
               <div className="mt-5 max-w-xl space-y-4 text-base leading-relaxed text-[var(--color-navy)]/85">
-                <p>
-                  We streamline procurement, logistics, and catering through
-                  our in-house infrastructure and expert teams, so you can
-                  focus on your operations while we take care of the rest.
-                </p>
+                <p>{t("storyBody")}</p>
                 <Link
                   href="/about"
                   className="inline-flex items-center font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
                 >
-                  Read our story &rarr;
+                  {t("storyLink")} &rarr;
                 </Link>
               </div>
             </div>
             <div className="relative mx-auto w-full max-w-sm">
               <Image
                 src="/images/site/container-lifted.png"
-                alt="A navy Daron Namibia branded shipping container being lowered by a crane"
+                alt={t("containerAlt")}
                 width={924}
                 height={1603}
                 className="h-auto w-full"
@@ -187,15 +183,15 @@ export default function HomePage() {
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-            Why Daron
+            {t("vpEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
-            Five reasons operators across Africa work with us
+            {t("vpHeading")}
           </h2>
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {valueProps.map((vp, idx) => (
               <article
-                key={vp.title}
+                key={idx}
                 className="rounded-2xl border border-[var(--color-line)] bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
               >
                 <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold tracking-wider text-[var(--color-accent)]">
@@ -213,53 +209,39 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Proven at Scale — offshore drilling credibility */}
+      {/* Proven at Scale */}
       <section className="bg-white py-20 sm:py-24">
         <Container>
           <div className="grid gap-12 md:grid-cols-[1.2fr_1fr] md:items-start">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
-                Proof at scale
+                {t("proofEyebrow")}
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-3xl font-bold leading-[1.1] text-[var(--color-navy)] sm:text-4xl md:text-5xl">
-                Proven at scale. Trusted in critical operations.
+                {t("proofHeading")}
               </h2>
               <div className="mt-6 max-w-xl space-y-4 text-base leading-relaxed text-[var(--color-mute)]">
+                <p>{t("proofBody1")}</p>
                 <p>
-                  Daron Namibia has supported multiple offshore drilling
-                  campaigns simultaneously &mdash; delivering provisions and
-                  technical supply to rigs operating under pressure.
-                </p>
-                <p>
-                  From supplying the <strong className="text-[var(--color-navy)]">Deepsea Mira</strong>,{" "}
-                  <strong className="text-[var(--color-navy)]">Deepsea Bollsta</strong>,
-                  and <strong className="text-[var(--color-navy)]">Deepsea Hercules</strong>{" "}
-                  at the same time, to our early work on the{" "}
-                  <strong className="text-[var(--color-navy)]">Transocean Marianas</strong>{" "}
-                  in 2013, our track record reflects one thing:
+                  {t("proofBody2")}
                 </p>
                 <p className="font-[family-name:var(--font-poppins)] text-xl font-bold text-[var(--color-navy)] sm:text-2xl">
-                  When operations are critical, we deliver.
+                  {t("proofPunchline")}
                 </p>
               </div>
               <Link
                 href="/industries/oil-and-gas"
                 className="mt-8 inline-flex items-center rounded-full bg-[var(--color-navy)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-navy-soft)]"
               >
-                Our offshore drilling track record &rarr;
+                {t("proofCta")} &rarr;
               </Link>
             </div>
             <aside className="rounded-3xl bg-[var(--color-navy)] p-8 text-white shadow-lg">
               <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)]">
-                Operational capability you can rely on
+                {t("proofAsideTitle")}
               </p>
               <ul className="mt-6 space-y-5">
-                {[
-                  "Supplied 3 offshore drilling rigs simultaneously",
-                  "Supporting high-pressure oil & gas operations",
-                  "Track record dating back to 2013 offshore campaigns",
-                  "Trusted during vessel repairs and active drilling phases",
-                ].map((item) => (
+                {proofBullets.map((item) => (
                   <li key={item} className="flex gap-4">
                     <span
                       aria-hidden="true"
@@ -296,24 +278,20 @@ export default function HomePage() {
           <div className="grid items-center gap-10 md:grid-cols-[1.3fr_1fr]">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                Innovation
+                {t("innovEyebrow")}
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl md:text-4xl">
-                Meet Don &mdash; Daron&rsquo;s AI operations copilot.
+                {t("innovHeading")}
               </h2>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
-                Don handles RFQs, generates quotes, and keeps our team
-                connected 24/7. Powered by Anthropic&rsquo;s Claude, integrated
-                with our product catalog, and available on WhatsApp. Fast,
-                accurate, and always on &mdash; reviewed and approved by a
-                Daron specialist before every quote ships.
+                {t("innovBody")}
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/ai"
                   className="rounded-full bg-[var(--color-accent)] px-6 py-3 text-center text-base font-semibold text-[var(--color-navy)] transition-colors hover:bg-[var(--color-accent-deep)]"
                 >
-                  How Don works &rarr;
+                  {t("innovHowCta")} &rarr;
                 </Link>
                 <a
                   href={contact.whatsapp.href}
@@ -321,30 +299,30 @@ export default function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Chat with Daron AI assistant
+                  {t("innovChatCta")}
                 </a>
               </div>
             </div>
             <aside className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur">
               <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)]">
-                Powered by
+                {t("innovAsideTitle")}
               </p>
               <ul className="mt-4 space-y-3 text-sm">
                 <li className="flex justify-between gap-4">
-                  <span className="text-white/60">AI engine</span>
-                  <span className="text-right font-medium">Anthropic Claude Opus 4.7</span>
+                  <span className="text-white/60">{t("innovAiEngine")}</span>
+                  <span className="text-right font-medium">{t("innovAiEngineVal")}</span>
                 </li>
                 <li className="flex justify-between gap-4">
-                  <span className="text-white/60">Agent platform</span>
-                  <span className="text-right font-medium">OpenClaw 2026.4</span>
+                  <span className="text-white/60">{t("innovPlatform")}</span>
+                  <span className="text-right font-medium">{t("innovPlatformVal")}</span>
                 </li>
                 <li className="flex justify-between gap-4">
-                  <span className="text-white/60">Catalog &amp; pricing</span>
-                  <span className="text-right font-medium">Supabase</span>
+                  <span className="text-white/60">{t("innovCatalog")}</span>
+                  <span className="text-right font-medium">{t("innovCatalogVal")}</span>
                 </li>
                 <li className="flex justify-between gap-4">
-                  <span className="text-white/60">Channel</span>
-                  <span className="text-right font-medium">WhatsApp Business</span>
+                  <span className="text-white/60">{t("innovChannel")}</span>
+                  <span className="text-right font-medium">{t("innovChannelVal")}</span>
                 </li>
               </ul>
             </aside>
@@ -358,30 +336,30 @@ export default function HomePage() {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                Services
+                {t("svcEyebrow")}
               </p>
               <h2 className="mt-3 max-w-2xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
-                Explore how we keep operations moving
+                {t("svcHeading")}
               </h2>
             </div>
             <Link
               href="/services"
               className="inline-flex items-center font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
             >
-              All services &rarr;
+              {t("svcAllLink")} &rarr;
             </Link>
           </div>
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {serviceLinks.map((s) => (
               <li
-                key={s.title}
+                key={s.key}
                 className="rounded-2xl bg-[var(--color-sand)] p-6 transition-colors hover:bg-[var(--color-accent)] hover:text-white"
               >
                 <Link href={s.href} className="block">
                   <p className="font-[family-name:var(--font-poppins)] text-lg font-semibold">
-                    {s.title}
+                    {t(s.key)}
                   </p>
-                  <p className="mt-2 text-sm opacity-80">Learn more &rarr;</p>
+                  <p className="mt-2 text-sm opacity-80">{t("svcLearnMore")} &rarr;</p>
                 </Link>
               </li>
             ))}
@@ -391,8 +369,8 @@ export default function HomePage() {
 
       <InlineRFQ
         variant="navy"
-        heading="Tight deadline? We've reactivated rigs in 11 days."
-        body="When the cargo is moving and your supplier needs to keep up, the Daron AI assistant drafts your quote on WhatsApp in minutes. A KAM reviews every request before it ships."
+        heading={t("rfqHeading")}
+        body={t("rfqBody")}
       />
     </>
   );

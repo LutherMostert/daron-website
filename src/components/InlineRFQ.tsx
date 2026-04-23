@@ -1,4 +1,7 @@
-import Link from "next/link";
+"use client";
+
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { contact } from "@/lib/site";
 import { Container } from "./Container";
 
@@ -15,9 +18,12 @@ type Props = {
 
 export function InlineRFQ({
   variant = "sand",
-  heading = "Need a quote? Talk to the Daron AI assistant.",
-  body = "The Daron AI assistant is our AI-powered quoting agent. Message on WhatsApp and a drafted quote lands in minutes — a human KAM reviews every request before it ships.",
+  heading,
+  body,
 }: Props) {
+  const t = useTranslations("InlineRFQ");
+  const resolvedHeading = heading ?? t("defaultHeading");
+  const resolvedBody = body ?? t("defaultBody");
   const isNavy = variant === "navy";
   return (
     <section
@@ -36,20 +42,20 @@ export function InlineRFQ({
                 isNavy ? "text-[var(--color-accent)]" : "text-[var(--color-accent)]"
               }`}
             >
-              Inline RFQ
+              {t("eyebrow")}
             </p>
             <h2
               id="rfq-heading"
               className="font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl"
             >
-              {heading}
+              {resolvedHeading}
             </h2>
             <p
               className={`mt-3 max-w-2xl text-base leading-relaxed ${
                 isNavy ? "text-white/80" : "text-[var(--color-mute)]"
               }`}
             >
-              {body}
+              {resolvedBody}
             </p>
           </div>
           <div className="flex flex-col items-stretch gap-3">
@@ -59,7 +65,7 @@ export function InlineRFQ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              {contact.whatsapp.label} &rarr;
+              {t("whatsappCta")} &rarr;
             </a>
             <Link
               href="/contact"
@@ -69,20 +75,24 @@ export function InlineRFQ({
                   : "border-[var(--color-navy)] text-[var(--color-navy)] hover:bg-[var(--color-navy)] hover:text-white"
               }`}
             >
-              Send a message
+              {t("contactCta")}
             </Link>
             <p
               className={`mt-1 text-center text-xs ${
                 isNavy ? "text-white/60" : "text-[var(--color-mute)]"
               }`}
             >
-              Or call{" "}
-              <a
-                href={contact.phone.href}
-                className="font-semibold underline-offset-4 hover:underline"
-              >
-                {contact.phone.display}
-              </a>
+              {t.rich("orCall", {
+                phone: contact.phone.display,
+                phoneLink: (chunks) => (
+                  <a
+                    href={contact.phone.href}
+                    className="font-semibold underline-offset-4 hover:underline"
+                  >
+                    {chunks}
+                  </a>
+                ),
+              })}
             </p>
           </div>
         </div>

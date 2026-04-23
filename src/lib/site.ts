@@ -9,8 +9,7 @@ export const site = {
   legalName: "Daron Trading Namibia (Pty) Ltd",
   founded: 2012,
   tagline: "Supplying Africa's seas, shores & industries with confidence",
-  url: "https://daron-website.vercel.app",
-  // Once daron.com.na DNS cuts over (Week 4), update url + canonicals.
+  url: "https://daron.com.na",
   description:
     "Daron Namibia supplies Africa's seas, shores and industries with confidence. Marine chandlery, oil and gas logistics, catering, warehousing — from Walvis Bay since 2012.",
   ogImage: "/og.png",
