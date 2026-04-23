@@ -17,6 +17,7 @@
  */
 
 import { classifyIntent, CATEGORY_OWNER_FIRST_NAME } from "@/lib/routing";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -46,6 +47,23 @@ function isValidLeadBody(x: unknown): x is LeadBody {
 }
 
 export async function POST(request: Request) {
+  // Per-IP lead-capture limit: 5 per hour. A real visitor starts one chat;
+  // this blocks form-spam loops without ever annoying a human.
+  const ip = getClientIp(request);
+  const limit = checkRateLimit(`chat-lead:${ip}`, {
+    windowMs: 60 * 60 * 1000,
+    max: 5,
+  });
+  if (!limit.allowed) {
+    return Response.json(
+      { error: "Too many chat starts — try again later." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(limit.retryAfterSeconds) },
+      },
+    );
+  }
+
   let body: LeadBody;
   try {
     body = (await request.json()) as LeadBody;

@@ -26,6 +26,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { buildDonSystemPrompt, type DonLead } from "@/lib/don-prompt";
 import { redactInternalIdentifiers } from "@/lib/routing";
 import { contact } from "@/lib/site";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -88,6 +89,25 @@ function isValidMessages(x: unknown): x is IncomingMessage[] {
 }
 
 export async function POST(request: Request) {
+  // Per-IP rate limit: 20 messages per hour. Legit visitors never hit it;
+  // a scraper/bot does in seconds. Soft-fail with a clear retry hint.
+  const ip = getClientIp(request);
+  const limit = checkRateLimit(`chat:${ip}`, {
+    windowMs: 60 * 60 * 1000,
+    max: 20,
+  });
+  if (!limit.allowed) {
+    return Response.json(
+      {
+        error: `Too many messages from this IP. Try again in ${Math.ceil(limit.retryAfterSeconds / 60)} min — or reach Don on WhatsApp at ${contact.whatsapp.display}.`,
+      },
+      {
+        status: 429,
+        headers: { "Retry-After": String(limit.retryAfterSeconds) },
+      },
+    );
+  }
+
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return Response.json(
