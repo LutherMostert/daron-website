@@ -1,63 +1,79 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { PageHero } from "@/components/PageHero";
 import { contact } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Oil & Gas — Proven in Offshore Drilling",
-  description:
-    "Daron Namibia has supplied multiple offshore drilling rigs simultaneously, under active drilling conditions. Deepsea Mira, Deepsea Bollsta, Deepsea Hercules, and Transocean Marianas (2013) — our offshore track record.",
-  alternates: { canonical: "/industries/oil-and-gas" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Meta" });
+  return {
+    title: t("oilGasTitle"),
+    description: t("oilGasDescription"),
+    alternates: { canonical: "/industries/oil-and-gas" },
+  };
+}
 
-const supported = [
-  {
-    name: "Deepsea Mira",
-    note: "Semi-submersible drilling rig — active offshore campaign",
-  },
-  {
-    name: "Deepsea Bollsta",
-    note: "Semi-submersible drilling rig — supplied simultaneously",
-  },
-  {
-    name: "Deepsea Hercules",
-    note: "Semi-submersible drilling rig — supplied simultaneously",
-  },
-  {
-    name: "Transocean Marianas",
-    note: "Semi-submersible — our first major offshore engagement (2013)",
-  },
-];
+export default async function OilAndGasPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("OilGas");
 
-const whatWeDo = [
-  {
-    title: "Provisions & catering",
-    body: "Fresh produce, dry goods, butchery, bonded stores, and dietitian-designed menus — staged, kitted, and delivered to rig on schedule.",
-  },
-  {
-    title: "Technical supply",
-    body: "Spares, tools, consumables, and critical-path items sourced locally and through our 2,500+ supplier network across Africa and Europe.",
-  },
-  {
-    title: "Marine chemicals & coatings",
-    body: "Exclusive distribution of Orlichem specialised marine chemicals and Hempel marine coatings — integrated into rig maintenance and dry-dock scopes.",
-  },
-  {
-    title: "Logistics & clearance",
-    body: "Customs clearance, freight forwarding, permits, branded fleet, and dockside staging — the handoff to the rig is our problem, not yours.",
-  },
-];
+  const supported = [
+    {
+      name: "Deepsea Mira",
+      note: t("rig1Note"),
+    },
+    {
+      name: "Deepsea Bollsta",
+      note: t("rig2Note"),
+    },
+    {
+      name: "Deepsea Hercules",
+      note: t("rig3Note"),
+    },
+    {
+      name: "Transocean Marianas",
+      note: t("rig4Note"),
+    },
+  ];
 
-export default function OilAndGasPage() {
+  const whatWeDo = [
+    {
+      title: t("supply1Title"),
+      body: t("supply1Body"),
+    },
+    {
+      title: t("supply2Title"),
+      body: t("supply2Body"),
+    },
+    {
+      title: t("supply3Title"),
+      body: t("supply3Body"),
+    },
+    {
+      title: t("supply4Title"),
+      body: t("supply4Body"),
+    },
+  ];
+
   return (
     <>
       <PageHero
-        eyebrow="Oil & Gas"
-        title="Proven in offshore drilling environments"
-        intro="Trusted to supply multiple offshore rigs simultaneously under active drilling conditions. Our offshore track record runs from the Transocean Marianas (2013) to the Deepsea Mira, Deepsea Bollsta, and Deepsea Hercules — all supplied at the same time, under real operational pressure."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        intro={t("heroIntro")}
         image={{ src: "/images/site/offshore-catering.jpg" }}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
@@ -67,13 +83,13 @@ export default function OilAndGasPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Send offshore RFQ &rarr;
+            {t("sendRfq")} &rarr;
           </a>
           <Link
             href="/contact"
             className="rounded-full border border-white/30 px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
           >
-            Talk to our oil & gas team
+            {t("talkToTeam")}
           </Link>
         </div>
       </PageHero>
@@ -82,15 +98,13 @@ export default function OilAndGasPage() {
       <section className="bg-white py-20 sm:py-24">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
-            Rigs we have supplied
+            {t("rigsEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
-            Multiple offshore campaigns. One supply partner.
+            {t("rigsHeading")}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-[var(--color-mute)] sm:text-lg">
-            Daron Namibia has successfully supported multiple offshore rigs
-            during active drilling operations — supplied simultaneously, under
-            real operational pressure.
+            {t("rigsBody")}
           </p>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2">
             {supported.map((rig) => (
@@ -114,11 +128,10 @@ export default function OilAndGasPage() {
       <section className="bg-[var(--color-navy)] py-16 text-white sm:py-20">
         <Container>
           <blockquote className="mx-auto max-w-4xl text-center font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl md:text-4xl">
-            &ldquo;Trusted to supply multiple offshore rigs simultaneously
-            under active drilling conditions.&rdquo;
+            &ldquo;{t("quote")}&rdquo;
           </blockquote>
           <p className="mt-6 text-center text-sm uppercase tracking-[0.2em] text-[var(--color-accent)]">
-            Daron Namibia &middot; Walvis Bay
+            {t("quoteAttribution")}
           </p>
         </Container>
       </section>
@@ -127,10 +140,10 @@ export default function OilAndGasPage() {
       <section className="bg-white py-20 sm:py-24">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
-            What we supply offshore
+            {t("supplyEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
-            Full-service offshore supply from Walvis Bay
+            {t("supplyHeading")}
           </h2>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             {whatWeDo.map((item) => (
@@ -156,30 +169,24 @@ export default function OilAndGasPage() {
           <div className="grid gap-10 md:grid-cols-[1fr_1.6fr] md:items-start">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
-                Why this matters
+                {t("whyEyebrow")}
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
-                Three things oil & gas operators ask for
+                {t("whyHeading")}
               </h2>
             </div>
             <div className="space-y-5 text-base leading-relaxed text-[var(--color-mute)]">
               <p>
-                <strong className="text-[var(--color-navy)]">Scale.</strong>{" "}
-                Handling multiple rigs at once means our workflow, inventory,
-                and team are sized for real campaign load — not a single
-                one-off.
+                <strong className="text-[var(--color-navy)]">{t("whyScale")}</strong>{" "}
+                {t("whyScaleBody")}
               </p>
               <p>
-                <strong className="text-[var(--color-navy)]">Pressure.</strong>{" "}
-                Active drilling is demurrage territory. Slow procurement is
-                a P&amp;L event. Our supply posture is built around the pace
-                offshore operations demand.
+                <strong className="text-[var(--color-navy)]">{t("whyPressure")}</strong>{" "}
+                {t("whyPressureBody")}
               </p>
               <p>
-                <strong className="text-[var(--color-navy)]">Track record.</strong>{" "}
-                Our first offshore engagement was in 2013. We&rsquo;ve been
-                learning rig supply for over a decade — the lessons are baked
-                into how we operate today.
+                <strong className="text-[var(--color-navy)]">{t("whyTrack")}</strong>{" "}
+                {t("whyTrackBody")}
               </p>
             </div>
           </div>
@@ -188,8 +195,8 @@ export default function OilAndGasPage() {
 
       <InlineRFQ
         variant="navy"
-        heading="Offshore campaign coming up?"
-        body="Send us your rig roster and provisioning schedule. The Daron AI assistant drafts a response on WhatsApp within minutes — a technical KAM reviews every scope before it ships."
+        heading={t("rfqHeading")}
+        body={t("rfqBody")}
       />
     </>
   );

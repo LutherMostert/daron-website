@@ -1,126 +1,118 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
+import { Link } from "@/i18n/routing";
 import { PageHero } from "@/components/PageHero";
 import { contact } from "@/lib/site";
-
-export const metadata: Metadata = {
-  title: "Dry Docking & Vessel Support",
-  description:
-    "Daron Namibia's technical dry-dock support in Walvis Bay: marine repairs, structural fabrication, mechanical & electrical services, safety & compliance, and ship chandling for vessels at berth, afloat, and in dry dock.",
-  alternates: { canonical: "/services/dry-dock" },
-};
 
 // Source: Daron_Drydock_Presentation 2026.pdf (18 slides).
 // All copy lifted from the presentation; flagged for Yolande refinement.
 
-const walvisOps = [
-  { title: "Marine Repairs", blurb: "Hull, mechanical, electrical, and structural repair work at berth, afloat, or during dry dock." },
-  { title: "Technical Procurement", blurb: "Fast sourcing of spares, parts, tools, and consumables — local and global network of 2,500+ suppliers." },
-  { title: "Vessel Provisions", blurb: "Deck and engine stores, provisions, consumables, bonded stores — ISSA & IMPA listed." },
-  { title: "Logistics & Supply Chain Support", blurb: "Freight, customs, permits, kitting, milestone-based delivery, and dockside staging." },
-];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Meta" });
+  return {
+    title: t("dryDockTitle"),
+    description: t("dryDockDescription"),
+    alternates: { canonical: "/services/dry-dock" },
+  };
+}
 
-const drydockCapabilities = [
-  "Hull Inspection & Repairs",
-  "Steel Fabrication",
-  "Electrical Repairs",
-  "Deck Equipment Servicing",
-  "Safety Inspections",
-];
+export default async function DryDockPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("DryDock");
 
-const serviceSections = [
-  {
-    id: "mechanical",
-    title: "Mechanical & Electrical Services",
-    items: [
-      "Engine and generator repairs",
-      "Electric motor overhauls",
-      "Compressor and air dryer repairs",
-      "AC servicing and regassing",
-      "Electrical diagnostics and repairs",
-    ],
-  },
-  {
-    id: "structural",
-    title: "Structural & Fabrication Services",
-    items: [
-      "Steel and aluminium fabrication",
-      "Structural repairs",
-      "Battery box fabrication",
-      "Floor plate installation",
-      "Lashing and securing equipment fabrication",
-    ],
-  },
-  {
-    id: "safety",
-    title: "Safety & Compliance Services",
-    items: [
-      "Fire fighting equipment servicing",
-      "CO₂ system inspections",
-      "Gas detection systems",
-      "Life raft inspections",
-      "Safety certifications",
-    ],
-  },
-  {
-    id: "chandling",
-    title: "Ship Chandling & Technical Supplies",
-    items: [
-      "Deck and engine stores",
-      "Marine chemicals & lubricants",
-      "Technical spares",
-      "Vessel provisions",
-      "Consumables and safety equipment",
-    ],
-  },
-];
+  const walvisOps = [
+    { title: t("op1Title"), blurb: t("op1Body") },
+    { title: t("op2Title"), blurb: t("op2Body") },
+    { title: t("op3Title"), blurb: t("op3Body") },
+    { title: t("op4Title"), blurb: t("op4Body") },
+  ];
 
-const caseStudies = [
-  {
-    title: "Deck cleaning with Orlichem chemicals",
-    body: "Before-and-after of specialised chemical cleaning on a working deck. Demonstrates the Orlichem chemical offer integrated into our dock scope.",
-    image: "/images/site/drydock/case-study-orlichem-deck.jpg",
-    alt: "Before and after photos of deck cleaning using Orlichem marine chemicals",
-  },
-  {
-    title: "Hull coating refurbishment with Hempel",
-    body: "Severe rust and marine fouling on a vessel bow, prepped and coated using Hempel marine systems. Daron is an official Hempel Group distributor.",
-    image: "/images/site/drydock/case-study-hempel-bow.jpg",
-    alt: "Before and after photos of vessel bow refurbishment using Hempel coatings",
-  },
-  {
-    title: "SL Africa Vessel Project",
-    body: "Completed ahead of schedule — fire safety system new install, mechanical & electrical repairs, navigation equipment repairs, fabrication & structural work, technical supplies and provisions.",
-    image: "/images/site/drydock/case-study-sl-africa.jpg",
-    alt: "SL Africa vessel project summary of works completed",
-  },
-  {
-    title: "Winch & mechanical refurbishment",
-    body: "Motor overhauls, compressor repairs, and mechanical maintenance on deck equipment — real work delivered by the Daron technical team.",
-    image: "/images/site/drydock/case-study-winch-refurbishment.jpg",
-    alt: "Before and after of winch mechanical refurbishment on a vessel",
-  },
-];
+  const drydockCapabilities = [
+    t("cap1"),
+    t("cap2"),
+    t("cap3"),
+    t("cap4"),
+    t("cap5"),
+  ];
 
-const whyDaron = [
-  "Multidisciplinary marine expertise",
-  "Rapid response capability",
-  "Competitive procurement network",
-  "Reliable project delivery",
-  "Trusted partner for vessel readiness",
-];
+  const serviceSections = [
+    {
+      id: "mechanical",
+      title: t("mechTitle"),
+      items: [t("mech1"), t("mech2"), t("mech3"), t("mech4"), t("mech5")],
+    },
+    {
+      id: "structural",
+      title: t("structTitle"),
+      items: [t("struct1"), t("struct2"), t("struct3"), t("struct4"), t("struct5")],
+    },
+    {
+      id: "safety",
+      title: t("safetyTitle"),
+      items: [t("safety1"), t("safety2"), t("safety3"), t("safety4"), t("safety5")],
+    },
+    {
+      id: "chandling",
+      title: t("chandTitle"),
+      items: [t("chand1"), t("chand2"), t("chand3"), t("chand4"), t("chand5")],
+    },
+  ];
 
-export default function DryDockPage() {
+  const caseStudies = [
+    {
+      title: t("case1Title"),
+      body: t("case1Body"),
+      image: "/images/site/drydock/case-study-orlichem-deck.jpg",
+      alt: t("case1Alt"),
+    },
+    {
+      title: t("case2Title"),
+      body: t("case2Body"),
+      image: "/images/site/drydock/case-study-hempel-bow.jpg",
+      alt: t("case2Alt"),
+    },
+    {
+      title: t("case3Title"),
+      body: t("case3Body"),
+      image: "/images/site/drydock/case-study-sl-africa.jpg",
+      alt: t("case3Alt"),
+    },
+    {
+      title: t("case4Title"),
+      body: t("case4Body"),
+      image: "/images/site/drydock/case-study-winch-refurbishment.jpg",
+      alt: t("case4Alt"),
+    },
+  ];
+
+  const whyDaron = [
+    t("why1"),
+    t("why2"),
+    t("why3"),
+    t("why4"),
+    t("why5"),
+  ];
+
   return (
     <>
       <PageHero
-        eyebrow="Dry Docking & Vessel Support"
-        title="Technical dry-dock support for vessels in Walvis Bay"
-        intro="Daron Namibia supports vessels at berth, afloat, and during dry dock — marine repairs, technical procurement, vessel provisions, and supply-chain coordination from a family-owned Namibian business inside the wider Daron Group."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        intro={t("heroIntro")}
         image={{ src: "/images/site/man-loading-ship.jpg" }}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
@@ -130,13 +122,13 @@ export default function DryDockPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Send docking schedule &rarr;
+            {t("sendSchedule")} &rarr;
           </a>
           <Link
             href="/contact"
             className="rounded-full border border-white/30 px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
           >
-            Contact technical team
+            {t("contactTeam")}
           </Link>
         </div>
       </PageHero>
@@ -145,10 +137,10 @@ export default function DryDockPage() {
       <section className="bg-white py-20 sm:py-24">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
-            Walvis Bay Operations
+            {t("opsEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
-            Supporting vessels at berth, afloat, and during dry dock
+            {t("opsHeading")}
           </h2>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {walvisOps.map((op) => (
@@ -172,10 +164,10 @@ export default function DryDockPage() {
       <section className="bg-[var(--color-navy)] py-20 text-white sm:py-24">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-            Dry Dock Support Services
+            {t("supportEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl md:text-4xl">
-            Typical scope during a dry docking
+            {t("supportHeading")}
           </h2>
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {drydockCapabilities.map((cap) => (
@@ -196,10 +188,10 @@ export default function DryDockPage() {
       <section className="bg-white py-20 sm:py-24">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
-            Detailed Scope
+            {t("scopeEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
-            What our technical team delivers
+            {t("scopeHeading")}
           </h2>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             {serviceSections.map((section) => (
@@ -232,10 +224,10 @@ export default function DryDockPage() {
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
-            Project Portfolio
+            {t("caseEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
-            Real work, delivered by the Daron technical team
+            {t("caseHeading")}
           </h2>
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {caseStudies.map((study) => (
@@ -272,10 +264,10 @@ export default function DryDockPage() {
           <div className="grid gap-10 md:grid-cols-[1fr_2fr] md:items-start">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
-                Why Daron Namibia
+                {t("whyEyebrow")}
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
-                A trusted partner for vessel readiness
+                {t("whyHeading")}
               </h2>
             </div>
             <ul className="space-y-5">
@@ -299,8 +291,8 @@ export default function DryDockPage() {
 
       <InlineRFQ
         variant="navy"
-        heading="Send your docking schedule or scope of work."
-        body="The Daron AI assistant drafts a response on WhatsApp within minutes. A technical KAM reviews every scope before it ships."
+        heading={t("rfqHeading")}
+        body={t("rfqBody")}
       />
     </>
   );

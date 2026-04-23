@@ -21,6 +21,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { contact } from "@/lib/site";
 
 type Role = "user" | "assistant";
@@ -64,6 +65,7 @@ function saveStored(state: StoredState) {
 }
 
 export function ChatWidget() {
+  const t = useTranslations("ChatWidget");
   const [open, setOpen] = useState(false);
   // Use lazy initial state so sessionStorage restoration happens during the
   // first client render (not in an effect) — avoids React Compiler "cascading
@@ -157,7 +159,7 @@ export function ChatWidget() {
           const next = prev.slice();
           next[assistantIndex] = {
             role: "assistant",
-            content: `Sorry — I'm offline right now. You can still reach us on WhatsApp: ${contact.whatsapp.display} or email ${contact.emails.operations}.`,
+            content: t("offlineError", { whatsapp: contact.whatsapp.display, email: contact.emails.operations }),
           };
           return next;
         });
@@ -165,7 +167,7 @@ export function ChatWidget() {
         setStreaming(false);
       }
     },
-    [],
+    [t],
   );
 
   const handleGateSubmit = useCallback(
@@ -181,7 +183,7 @@ export function ChatWidget() {
       const whatsapp = String(fd.get("whatsapp") || "").trim() || undefined;
 
       if (!name || !email || !email.includes("@")) {
-        setError("Please enter a valid name and email.");
+        setError(t("validationError"));
         return;
       }
 
@@ -207,7 +209,7 @@ export function ChatWidget() {
       setMessages([opener]);
       void sendToServer(newLead, [opener]);
     },
-    [sendToServer],
+    [sendToServer, t],
   );
 
   const handleSend = useCallback(() => {
@@ -245,7 +247,7 @@ export function ChatWidget() {
       {!open && (
         <button
           type="button"
-          aria-label="Open chat with Daron AI assistant"
+          aria-label={t("openChat")}
           onClick={() => setOpen(true)}
           className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-accent)] text-white shadow-lg transition-all hover:scale-105 hover:bg-[var(--color-accent-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:bottom-8 sm:right-8"
         >
@@ -262,7 +264,7 @@ export function ChatWidget() {
           >
             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
           </svg>
-          <span className="sr-only">Open chat</span>
+          <span className="sr-only">{t("openChatSrOnly")}</span>
           <span
             aria-hidden="true"
             className="absolute -top-1 -right-1 flex h-3 w-3"
@@ -295,10 +297,10 @@ export function ChatWidget() {
                   id="chat-widget-title"
                   className="font-[family-name:var(--font-poppins)] text-sm font-semibold leading-none"
                 >
-                  Daron AI assistant
+                  {t("title")}
                 </p>
                 <p className="mt-0.5 text-xs text-white/70">
-                  Don · usually replies in seconds
+                  {t("subtitle")}
                 </p>
               </div>
             </div>
@@ -307,16 +309,16 @@ export function ChatWidget() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  aria-label="Start a new conversation"
+                  aria-label={t("resetLabel")}
                   className="rounded-md px-2 py-1 text-xs text-white/70 transition-colors hover:bg-white/10 hover:text-white"
                 >
-                  Reset
+                  {t("reset")}
                 </button>
               )}
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                aria-label="Close chat"
+                aria-label={t("closeChat")}
                 className="rounded-md p-1.5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
               >
                 <svg
@@ -346,17 +348,16 @@ export function ChatWidget() {
             >
               <div>
                 <p className="font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--color-ink)]">
-                  Hi — I&rsquo;m Don.
+                  {t("gateHeading")}
                 </p>
                 <p className="mt-1 text-sm leading-relaxed text-[var(--color-mute)]">
-                  Daron&rsquo;s AI operations copilot. Tell me who you are and I&rsquo;ll take it
-                  from there — a human KAM reviews every quote before it ships.
+                  {t("gateIntro")}
                 </p>
               </div>
 
               <label className="block text-sm">
                 <span className="mb-1 inline-block font-medium text-[var(--color-ink)]">
-                  Name <span className="text-[var(--color-accent)]">*</span>
+                  {t("nameLabel")} <span className="text-[var(--color-accent)]">*</span>
                 </span>
                 <input
                   ref={firstFieldRef}
@@ -371,7 +372,7 @@ export function ChatWidget() {
 
               <label className="block text-sm">
                 <span className="mb-1 inline-block font-medium text-[var(--color-ink)]">
-                  Email <span className="text-[var(--color-accent)]">*</span>
+                  {t("emailLabel")} <span className="text-[var(--color-accent)]">*</span>
                 </span>
                 <input
                   type="email"
@@ -386,7 +387,7 @@ export function ChatWidget() {
               <div className="grid grid-cols-2 gap-3">
                 <label className="block text-sm">
                   <span className="mb-1 inline-block font-medium text-[var(--color-ink)]">
-                    Company
+                    {t("companyLabel")}
                   </span>
                   <input
                     type="text"
@@ -399,13 +400,13 @@ export function ChatWidget() {
 
                 <label className="block text-sm">
                   <span className="mb-1 inline-block font-medium text-[var(--color-ink)]">
-                    Vessel
+                    {t("vesselLabel")}
                   </span>
                   <input
                     type="text"
                     name="vessel"
                     maxLength={120}
-                    placeholder="If applicable"
+                    placeholder={t("vesselPlaceholder")}
                     className="w-full rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-sm text-[var(--color-ink)] placeholder:text-[var(--color-mute)]/60 outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/30"
                   />
                 </label>
@@ -413,14 +414,14 @@ export function ChatWidget() {
 
               <label className="block text-sm">
                 <span className="mb-1 inline-block font-medium text-[var(--color-ink)]">
-                  WhatsApp <span className="text-xs font-normal text-[var(--color-mute)]">(optional — fastest route)</span>
+                  {t("whatsappLabel")} <span className="text-xs font-normal text-[var(--color-mute)]">({t("whatsappHint")})</span>
                 </span>
                 <input
                   type="tel"
                   name="whatsapp"
                   autoComplete="tel"
                   maxLength={30}
-                  placeholder="+264 ..."
+                  placeholder={t("whatsappPlaceholder")}
                   className="w-full rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-sm text-[var(--color-ink)] placeholder:text-[var(--color-mute)]/60 outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/30"
                 />
               </label>
@@ -435,13 +436,11 @@ export function ChatWidget() {
                 type="submit"
                 className="mt-1 rounded-full bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
               >
-                Start chat with Don &rarr;
+                {t("startChat")} &rarr;
               </button>
 
               <p className="text-xs leading-relaxed text-[var(--color-mute)]">
-                By starting the chat you agree Don can use what you share to
-                respond and to pass your enquiry to the Daron team. No prices are
-                quoted here — the team reviews every RFQ.
+                {t("legalText")}
               </p>
             </form>
           ) : (
@@ -473,15 +472,15 @@ export function ChatWidget() {
                     onKeyDown={handleKeyDown}
                     rows={1}
                     maxLength={2000}
-                    placeholder="Ask Don about an RFQ, a vessel, a product…"
-                    aria-label="Message Don"
+                    placeholder={t("inputPlaceholder")}
+                    aria-label={t("inputLabel")}
                     className="flex-1 resize-none rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-sm text-[var(--color-ink)] outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/30"
                   />
                   <button
                     type="button"
                     onClick={handleSend}
                     disabled={streaming || !input.trim()}
-                    aria-label="Send message"
+                    aria-label={t("sendLabel")}
                     className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-accent)] text-white transition-colors hover:bg-[var(--color-accent-deep)] disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <svg
@@ -501,16 +500,7 @@ export function ChatWidget() {
                   </button>
                 </div>
                 <p className="mt-2 text-[11px] leading-tight text-[var(--color-mute)]">
-                  Prefer WhatsApp? Reach Don at{" "}
-                  <a
-                    href={contact.whatsapp.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium underline-offset-2 hover:underline"
-                  >
-                    {contact.whatsapp.display}
-                  </a>
-                  .
+                  {t("whatsappFooter", { phone: contact.whatsapp.display })}
                 </p>
               </div>
             </>

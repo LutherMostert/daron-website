@@ -1,33 +1,49 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { PageHero } from "@/components/PageHero";
 import { getPostsSorted } from "@/lib/posts";
 
-export const metadata: Metadata = {
-  title: "Insights",
-  description:
-    "Articles and updates from Daron Namibia: case studies, market commentary, and the operating reality of marine, oil & gas, and logistics in southern Africa.",
-  alternates: { canonical: "/insights" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Meta" });
+  return {
+    title: t("insightsTitle"),
+    description: t("insightsDescription"),
+    alternates: { canonical: "/insights" },
+  };
+}
 
-const formatter = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
+export default async function InsightsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Insights");
 
-export default function InsightsPage() {
   const posts = getPostsSorted();
+
+  const formatter = new Intl.DateTimeFormat(locale, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   return (
     <>
       <PageHero
-        eyebrow="Insights"
-        title="From Africa’s supply chain frontline"
-        intro="Articles and updates designed to keep you informed — operating reality, market shifts, and the partnerships behind the work."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        intro={t("heroIntro")}
         image={{ src: "/images/site/offshore-catering.jpg" }}
       />
 
@@ -54,9 +70,9 @@ export default function InsightsPage() {
                 <Link
                   href={`/insights/${post.slug}`}
                   className="mt-5 inline-flex items-center font-semibold text-[var(--color-navy)] underline-offset-4 group-hover:text-[var(--color-accent)] group-hover:underline"
-                  aria-label={`Read: ${post.title}`}
+                  aria-label={t("readLabel", { title: post.title })}
                 >
-                  Read article &rarr;
+                  {t("readArticle")} &rarr;
                 </Link>
               </li>
             ))}

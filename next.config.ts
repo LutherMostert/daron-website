@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 // Pin Turbopack's root to this project directory. Without this, Next.js 16
 // infers the workspace root from the nearest lockfile — and since
@@ -44,4 +47,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

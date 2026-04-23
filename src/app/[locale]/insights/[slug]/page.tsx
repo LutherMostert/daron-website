@@ -1,23 +1,21 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { Link } from "@/i18n/routing";
+import { routing } from "@/i18n/routing";
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { JsonLd } from "@/components/JsonLd";
 import { getPost, posts } from "@/lib/posts";
 import { contact, site } from "@/lib/site";
 
-type Params = Promise<{ slug: string }>;
-
-const formatter = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
+type Params = Promise<{ locale: string; slug: string }>;
 
 export async function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+  return routing.locales.flatMap((locale) =>
+    posts.map((p) => ({ locale, slug: p.slug }))
+  );
 }
 
 export async function generateMetadata({
@@ -89,11 +87,20 @@ function formatInline(s: string): string {
 }
 
 export default async function PostPage({ params }: { params: Params }) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Insights");
+
   const post = getPost(slug);
   if (!post) notFound();
 
   const html = renderBody(post.body);
+
+  const formatter = new Intl.DateTimeFormat(locale, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -120,7 +127,7 @@ export default async function PostPage({ params }: { params: Params }) {
               href="/insights"
               className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)] hover:underline"
             >
-              &larr; Back to insights
+              &larr; {t("backToInsights")}
             </Link>
             <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               {post.category} &middot;{" "}
@@ -147,12 +154,12 @@ export default async function PostPage({ params }: { params: Params }) {
 
             {post.tags && post.tags.length > 0 && (
               <div className="mt-10 flex flex-wrap gap-2">
-                {post.tags.map((t) => (
+                {post.tags.map((tag) => (
                   <span
-                    key={t}
+                    key={tag}
                     className="rounded-full bg-[var(--color-sand)] px-3 py-1 text-xs font-medium text-[var(--color-mute)]"
                   >
-                    #{t}
+                    #{tag}
                   </span>
                 ))}
               </div>
@@ -163,7 +170,7 @@ export default async function PostPage({ params }: { params: Params }) {
                 href="/insights"
                 className="font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
               >
-                &larr; All insights
+                &larr; {t("allInsights")}
               </Link>
               <span className="text-[var(--color-mute)]">&middot;</span>
               <a
@@ -172,7 +179,7 @@ export default async function PostPage({ params }: { params: Params }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Talk to Daron AI assistant about your project &rarr;
+                {t("talkCta")} &rarr;
               </a>
             </div>
           </Container>
