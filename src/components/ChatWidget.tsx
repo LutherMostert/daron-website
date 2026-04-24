@@ -440,7 +440,18 @@ export function ChatWidget() {
               </button>
 
               <p className="text-xs leading-relaxed text-[var(--color-mute)]">
-                {t("legalText")}
+                {t.rich("legalText", {
+                  privacyLink: (chunks) => (
+                    <a
+                      href="/privacy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-[var(--color-accent)]"
+                    >
+                      {chunks}
+                    </a>
+                  ),
+                })}
               </p>
             </form>
           ) : (

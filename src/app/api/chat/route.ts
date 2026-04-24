@@ -24,7 +24,9 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { buildDonSystemPrompt, type DonLead } from "@/lib/don-prompt";
+import { redactInternalIdentifiers } from "@/lib/routing";
 import { contact } from "@/lib/site";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -87,6 +89,25 @@ function isValidMessages(x: unknown): x is IncomingMessage[] {
 }
 
 export async function POST(request: Request) {
+  // Per-IP rate limit: 20 messages per hour. Legit visitors never hit it;
+  // a scraper/bot does in seconds. Soft-fail with a clear retry hint.
+  const ip = getClientIp(request);
+  const limit = checkRateLimit(`chat:${ip}`, {
+    windowMs: 60 * 60 * 1000,
+    max: 20,
+  });
+  if (!limit.allowed) {
+    return Response.json(
+      {
+        error: `Too many messages from this IP. Try again in ${Math.ceil(limit.retryAfterSeconds / 60)} min — or reach Don on WhatsApp at ${contact.whatsapp.display}.`,
+      },
+      {
+        status: 429,
+        headers: { "Retry-After": String(limit.retryAfterSeconds) },
+      },
+    );
+  }
+
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return Response.json(
@@ -136,6 +157,27 @@ export async function POST(request: Request) {
   const encoder = new TextEncoder();
   const readable = new ReadableStream<Uint8Array>({
     async start(controller) {
+      // We buffer a small rolling window so the output filter can catch
+      // identifier patterns that span token boundaries before emitting them
+      // to the visitor. 128 chars is more than enough for any known pattern
+      // (longest WBSC doc number is ~15 chars, longest supplier name ~25).
+      const TAIL_BUFFER = 128;
+      let tail = "";
+      let totalRedactions = 0;
+
+      const emit = (text: string) => {
+        const combined = tail + text;
+        // Emit everything except the last TAIL_BUFFER chars (keep for next pass)
+        const safeLen = Math.max(0, combined.length - TAIL_BUFFER);
+        const toEmit = combined.slice(0, safeLen);
+        tail = combined.slice(safeLen);
+        if (toEmit) {
+          const { clean, redactionCount } = redactInternalIdentifiers(toEmit);
+          totalRedactions += redactionCount;
+          controller.enqueue(encoder.encode(clean));
+        }
+      };
+
       try {
         for await (const chunk of stream) {
           if (
@@ -143,8 +185,19 @@ export async function POST(request: Request) {
             chunk.delta.type === "text_delta" &&
             chunk.delta.text
           ) {
-            controller.enqueue(encoder.encode(chunk.delta.text));
+            emit(chunk.delta.text);
           }
+        }
+        // Flush the tail buffer
+        if (tail) {
+          const { clean, redactionCount } = redactInternalIdentifiers(tail);
+          totalRedactions += redactionCount;
+          controller.enqueue(encoder.encode(clean));
+        }
+        if (totalRedactions > 0) {
+          console.warn(
+            `[chat] redacted ${totalRedactions} internal identifier(s) from outgoing stream. Review prompt.`,
+          );
         }
       } catch (err) {
         // Mid-stream failure — write the friendly fallback, log the real cause.

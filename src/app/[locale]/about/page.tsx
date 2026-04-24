@@ -38,7 +38,7 @@ export default async function AboutPage({
         eyebrow={t("heroEyebrow")}
         title={t("heroTitle")}
         intro={t("heroIntro", { founded: site.founded })}
-        image={{ src: "/images/site/harbour-port.jpg" }}
+        image={{ src: "/images/site/operations/daron-fleet-orange-vessel.jpg" }}
       />
 
       {/* Daron Group credibility band */}

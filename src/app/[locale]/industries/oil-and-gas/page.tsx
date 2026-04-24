@@ -74,7 +74,7 @@ export default async function OilAndGasPage({
         eyebrow={t("heroEyebrow")}
         title={t("heroTitle")}
         intro={t("heroIntro")}
-        image={{ src: "/images/site/offshore-catering.jpg" }}
+        image={{ src: "/images/site/operations/daron-fleet-normand-energy.jpg" }}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <a

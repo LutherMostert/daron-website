@@ -2,19 +2,22 @@
  * POST /api/chat-lead
  *
  * Captures a gated-chat lead at the moment the visitor opens a conversation.
- * Current behaviour (Week 0 shipping): log to server output + forward to an
- * optional webhook for quick visibility (Slack/Discord/Google Chat incoming
- * webhook URL via CHAT_LEAD_WEBHOOK_URL). In Week 2+, migrate to Supabase
- * `leads` table per CLAUDE.md roadmap.
+ * Now enriched (2026-04-23) with category classification from the training
+ * pack routing table — each lead is tagged with a service_category and the
+ * notification payload calls out the target KAM (from tags.yaml) so it can
+ * be fanned out to the right person downstream.
  *
- * Body: { name, email, company?, vessel?, whatsapp?, referrer?, userAgent? }
+ * Behaviour:
+ *   - Always log to server output (Vercel captures; Luther can grep [chat-lead])
+ *   - Optional webhook forward (CHAT_LEAD_WEBHOOK_URL) for Slack/Discord/GChat
+ *   - Future: Supabase `leads` table + per-category webhook routing
  *
+ * Body: { name, email, company?, vessel?, whatsapp?, firstMessage?, referrer?, userAgent? }
  * Response: 204 on success, 400 on malformed body.
- *
- * This endpoint intentionally does NOT block the chat from starting if the
- * lead-capture sink (webhook) is unavailable — logging-to-console is always
- * attempted so Luther can retrieve leads from Vercel logs even if webhooks fail.
  */
+
+import { classifyIntent, CATEGORY_OWNER_FIRST_NAME } from "@/lib/routing";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -25,6 +28,7 @@ type LeadBody = {
   company?: string;
   vessel?: string;
   whatsapp?: string;
+  firstMessage?: string;
   referrer?: string;
   userAgent?: string;
 };
@@ -43,6 +47,23 @@ function isValidLeadBody(x: unknown): x is LeadBody {
 }
 
 export async function POST(request: Request) {
+  // Per-IP lead-capture limit: 5 per hour. A real visitor starts one chat;
+  // this blocks form-spam loops without ever annoying a human.
+  const ip = getClientIp(request);
+  const limit = checkRateLimit(`chat-lead:${ip}`, {
+    windowMs: 60 * 60 * 1000,
+    max: 5,
+  });
+  if (!limit.allowed) {
+    return Response.json(
+      { error: "Too many chat starts — try again later." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(limit.retryAfterSeconds) },
+      },
+    );
+  }
+
   let body: LeadBody;
   try {
     body = (await request.json()) as LeadBody;
@@ -55,9 +76,18 @@ export async function POST(request: Request) {
   }
 
   const timestamp = new Date().toISOString();
+  const category = classifyIntent({
+    message: body.firstMessage,
+    company: body.company,
+    vessel: body.vessel,
+  });
+  const owner = CATEGORY_OWNER_FIRST_NAME[category];
+
   const entry = {
     timestamp,
     source: "daron-website:chat-widget",
+    category,
+    target_owner: owner,
     ...body,
     ip:
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
@@ -65,22 +95,23 @@ export async function POST(request: Request) {
       "unknown",
   };
 
-  // Always log — Vercel captures this so Luther can grep leads from the log.
+  // Always log — Vercel captures, grep for [chat-lead]
   console.log("[chat-lead]", JSON.stringify(entry));
 
-  // Optional webhook forward (Slack/Discord/Google Chat). Fire-and-forget —
-  // we do NOT block the chat start on webhook success.
+  // Optional webhook forward
   const webhookUrl = process.env.CHAT_LEAD_WEBHOOK_URL;
   if (webhookUrl) {
     const text =
-      `💬 New chat on daron.com.na\n` +
+      `💬 *New chat on daron.com.na*\n` +
+      `Category: *${category}* → routing to *${owner}*\n` +
+      `\n` +
       `*${entry.name}* <${entry.email}>\n` +
       (entry.company ? `Company: ${entry.company}\n` : "") +
       (entry.vessel ? `Vessel: ${entry.vessel}\n` : "") +
       (entry.whatsapp ? `WhatsApp: ${entry.whatsapp}\n` : "") +
-      (entry.referrer ? `Referrer: ${entry.referrer}\n` : "");
+      (entry.firstMessage ? `\nFirst message: ${entry.firstMessage.slice(0, 300)}\n` : "") +
+      (entry.referrer ? `\nReferrer: ${entry.referrer}\n` : "");
 
-    // Slack/Discord-compatible payload (both accept { text }).
     fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

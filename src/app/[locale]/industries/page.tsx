@@ -89,7 +89,7 @@ export default async function IndustriesPage({
         eyebrow={t("heroEyebrow")}
         title={t("heroTitle")}
         intro={t("heroIntro")}
-        image={{ src: "/images/site/containers-row.png" }}
+        image={{ src: "/images/site/operations/normand-energy-wide.jpg" }}
       />
 
       <section className="bg-white py-20 sm:py-24">

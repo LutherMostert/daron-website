@@ -62,6 +62,39 @@ export default async function HomePage({
     t("proofAsideBullet4"),
   ];
 
+  const operations = [
+    {
+      src: "/images/site/operations/container-lift-subsea7.jpg",
+      alt: t("ops1Alt"),
+      caption: t("ops1Caption"),
+    },
+    {
+      src: "/images/site/operations/seven-borealis-dock.jpg",
+      alt: t("ops2Alt"),
+      caption: t("ops2Caption"),
+    },
+    {
+      src: "/images/site/operations/daron-truck-normand-energy.jpg",
+      alt: t("ops3Alt"),
+      caption: t("ops3Caption"),
+    },
+    {
+      src: "/images/site/operations/daron-ranger-quayside.jpg",
+      alt: t("ops4Alt"),
+      caption: t("ops4Caption"),
+    },
+    {
+      src: "/images/site/operations/daron-truck-cruise-ship.jpg",
+      alt: t("ops5Alt"),
+      caption: t("ops5Caption"),
+    },
+    {
+      src: "/images/site/operations/truck-fleet-night.jpg",
+      alt: t("ops6Alt"),
+      caption: t("ops6Caption"),
+    },
+  ];
+
   return (
     <>
       {/* HERO — Skeleton Coast road (desert meets Atlantic) */}
@@ -92,20 +125,20 @@ export default async function HomePage({
             </p>
 
             <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-              <Link
-                href="/contact"
-                className="rounded-full bg-[var(--color-accent)] px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
-              >
-                {t("heroCta")}
-              </Link>
               <a
                 href={contact.whatsapp.href}
-                className="rounded-full border border-white/30 px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
+                className="rounded-full bg-[var(--color-accent)] px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {t("heroQuoteCta")} &rarr;
               </a>
+              <Link
+                href="/contact"
+                className="rounded-full border border-white/30 px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
+              >
+                {t("heroCta")}
+              </Link>
             </div>
 
             <p className="mt-5 text-xs text-white/55">
@@ -269,6 +302,44 @@ export default async function HomePage({
               </ul>
             </aside>
           </div>
+        </Container>
+      </section>
+
+      {/* Operations in action — visual proof band */}
+      <section className="bg-[var(--color-sand)] py-20 sm:py-24">
+        <Container>
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+              {t("opsEyebrow")}
+            </p>
+            <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
+              {t("opsHeading")}
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-[var(--color-mute)]">
+              {t("opsIntro")}
+            </p>
+          </div>
+          <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {operations.map((op) => (
+              <li
+                key={op.src}
+                className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md"
+              >
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--color-navy)]">
+                  <Image
+                    src={op.src}
+                    alt={op.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <p className="p-5 text-sm font-medium leading-snug text-[var(--color-navy)]">
+                  {op.caption}
+                </p>
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
 

@@ -133,7 +133,18 @@ export function Footer() {
               legalName: site.legalName,
             })}
           </p>
-          <p>{t("location")}</p>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-white"
+            >
+              {t("privacyLink")}
+            </Link>
+            <span aria-hidden className="text-white/30">
+              ·
+            </span>
+            <p>{t("location")}</p>
+          </div>
         </Container>
       </div>
     </footer>

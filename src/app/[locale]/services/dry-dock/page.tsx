@@ -113,7 +113,7 @@ export default async function DryDockPage({
         eyebrow={t("heroEyebrow")}
         title={t("heroTitle")}
         intro={t("heroIntro")}
-        image={{ src: "/images/site/man-loading-ship.jpg" }}
+        image={{ src: "/images/site/operations/daron-team-hempel-launch.jpg" }}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <a
