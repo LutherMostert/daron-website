@@ -125,20 +125,20 @@ export default async function HomePage({
             </p>
 
             <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-              <Link
-                href="/contact"
-                className="rounded-full bg-[var(--color-accent)] px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
-              >
-                {t("heroCta")}
-              </Link>
               <a
                 href={contact.whatsapp.href}
-                className="rounded-full border border-white/30 px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
+                className="rounded-full bg-[var(--color-accent)] px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {t("heroQuoteCta")} &rarr;
               </a>
+              <Link
+                href="/contact"
+                className="rounded-full border border-white/30 px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
+              >
+                {t("heroCta")}
+              </Link>
             </div>
 
             <p className="mt-5 text-xs text-white/55">
