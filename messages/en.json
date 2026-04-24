@@ -198,7 +198,22 @@
     "svc5": "Dry dock services",
     "rfqHeading": "Tight deadline? We've reactivated rigs in 11 days.",
     "rfqBody": "When the cargo is moving and your supplier needs to keep up, the Daron AI assistant drafts your quote on WhatsApp in minutes. A KAM reviews every request before it ships.",
-    "containerAlt": "A navy Daron Namibia branded shipping container being lowered by a crane"
+    "containerAlt": "A navy Daron Namibia branded shipping container being lowered by a crane",
+    "opsEyebrow": "Scenes from the coast",
+    "opsHeading": "Real work. Real partners. Real scale.",
+    "opsIntro": "Not stock photography. Not renderings. Real operations from Walvis Bay.",
+    "ops1Caption": "Heavy-lift support for Subsea7.",
+    "ops1Alt": "Container being lifted onto Subsea7 vessel at Walvis Bay",
+    "ops2Caption": "Seven Borealis alongside, Walvis Bay.",
+    "ops2Alt": "Seven Borealis pipelay vessel docked at Walvis Bay at dusk",
+    "ops3Caption": "Truck-to-rig: Normand Energy.",
+    "ops3Alt": "Daron truck delivering to the Normand Energy rig",
+    "ops4Caption": "Quayside operations, Walvis Bay.",
+    "ops4Alt": "Daron operations at Walvis Bay quayside",
+    "ops5Caption": "Cruise provisioning, dock to gangway.",
+    "ops5Alt": "Daron truck delivering provisions to a cruise ship",
+    "ops6Caption": "24/7 — rigs don't wait.",
+    "ops6Alt": "Daron truck fleet operating at night"
   },
   "About": {
     "heroEyebrow": "Our journey",

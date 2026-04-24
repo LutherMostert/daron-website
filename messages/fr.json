@@ -198,7 +198,22 @@
     "svc5": "Services en cale sèche",
     "rfqHeading": "Délai serré ? Nous avons réactivé des plateformes en 11 jours.",
     "rfqBody": "Quand la cargaison avance et que votre fournisseur doit suivre le rythme, Daron AI assistant rédige votre devis sur WhatsApp en quelques minutes. Un responsable commercial vérifie chaque demande avant envoi.",
-    "containerAlt": "Un conteneur maritime bleu marine aux couleurs de Daron Namibia descendu par une grue"
+    "containerAlt": "Un conteneur maritime bleu marine aux couleurs de Daron Namibia descendu par une grue",
+    "opsEyebrow": "Scènes de la côte",
+    "opsHeading": "Travail réel. Partenaires réels. Échelle réelle.",
+    "opsIntro": "Pas de photographie de stock. Pas de rendus. Des opérations réelles à Walvis Bay.",
+    "ops1Caption": "Soutien aux charges lourdes pour Subsea7.",
+    "ops1Alt": "Conteneur hissé sur le navire de Subsea7 à Walvis Bay",
+    "ops2Caption": "Seven Borealis à quai, Walvis Bay.",
+    "ops2Alt": "Navire de pose de conduites Seven Borealis à quai à Walvis Bay au crépuscule",
+    "ops3Caption": "Camion vers plateforme : Normand Energy.",
+    "ops3Alt": "Camion Daron livrant à la plateforme Normand Energy",
+    "ops4Caption": "Opérations à quai, Walvis Bay.",
+    "ops4Alt": "Opérations Daron au quai de Walvis Bay",
+    "ops5Caption": "Provisionnement de paquebots, du quai à la passerelle.",
+    "ops5Alt": "Camion Daron livrant des provisions à un paquebot",
+    "ops6Caption": "24/7 — les plateformes n'attendent pas.",
+    "ops6Alt": "Flotte de camions Daron en service de nuit"
   },
   "About": {
     "heroEyebrow": "Notre parcours",
