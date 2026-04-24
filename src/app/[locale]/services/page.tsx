@@ -99,7 +99,7 @@ export default async function ServicesPage({
         eyebrow={t("heroEyebrow")}
         title={t("heroTitle")}
         intro={t("heroIntro")}
-        image={{ src: "/images/site/forklift-warehouse.png" }}
+        image={{ src: "/images/site/operations/crew-lifting-pallet.jpg" }}
       />
 
       {pillars.map((pillar, idx) => (

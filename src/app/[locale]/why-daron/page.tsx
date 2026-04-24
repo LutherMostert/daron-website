@@ -43,7 +43,7 @@ export default async function WhyDaronPage({
         eyebrow={t("heroEyebrow")}
         title={t("heroTitle")}
         intro={t("heroIntro")}
-        image={{ src: "/images/site/man-loading-ship.jpg" }}
+        image={{ src: "/images/site/operations/seven-borealis-dusk.jpg" }}
       />
 
       <section className="bg-white py-20 sm:py-24">
