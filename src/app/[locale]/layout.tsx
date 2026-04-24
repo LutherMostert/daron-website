@@ -61,11 +61,18 @@ export async function generateMetadata({
       description: t("homeDescription"),
       locale: locale === "en" ? "en_NA" : locale,
       url: site.url,
+      images: [
+        {
+          url: "/images/site/operations/normand-energy-wide.jpg",
+          alt: `${site.name} — operations in Walvis Bay`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: site.name,
       description: t("homeDescription"),
+      images: ["/images/site/operations/normand-energy-wide.jpg"],
     },
     robots: {
       index: true,
@@ -111,7 +118,7 @@ const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: site.name,
-  image: `${site.url}/og.png`,
+  image: `${site.url}/images/site/operations/normand-energy-wide.jpg`,
   url: site.url,
   telephone: contact.phone.e164,
   email: contact.emails.operations,
