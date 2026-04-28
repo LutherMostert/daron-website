@@ -94,6 +94,20 @@ export const viewport: Viewport = {
   // by blocking pinch-zoom; we must not inherit that. (CLAUDE.md audit fix #6)
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  url: site.url,
+  description: site.description,
+  inLanguage: ["en", "pt", "fr"],
+  publisher: {
+    "@type": "Organization",
+    name: site.name,
+    url: site.url,
+  },
+};
+
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -178,6 +192,7 @@ export default async function LocaleLayout({
             {children}
           </main>
           <Footer />
+          <JsonLd id="ld-website" data={websiteJsonLd} />
           <JsonLd id="ld-organization" data={orgJsonLd} />
           <JsonLd id="ld-localbusiness" data={localBusinessJsonLd} />
           <ChatWidget />
