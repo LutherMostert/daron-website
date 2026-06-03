@@ -112,7 +112,7 @@ export default async function HomePage({
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-r from-[var(--color-navy)]/90 via-[var(--color-navy)]/70 to-[var(--color-navy)]/40"
         />
-        <Container className="relative grid gap-12 py-20 sm:py-28 md:grid-cols-[1.4fr_1fr] md:items-center">
+        <Container className="relative grid gap-10 py-16 sm:py-24 md:grid-cols-[1.4fr_1fr] md:items-center md:gap-12 md:py-28">
           <div>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               {t("heroEyebrow", { founded: site.founded })}
@@ -146,7 +146,7 @@ export default async function HomePage({
             </p>
           </div>
 
-          <aside className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
+          <aside className="rounded-3xl border border-white/15 bg-[var(--color-navy)]/55 p-6 shadow-2xl shadow-[var(--color-navy)]/30 backdrop-blur sm:p-8">
             <p className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
               {t("asideTitle")}
             </p>
@@ -166,17 +166,17 @@ export default async function HomePage({
       </section>
 
       {/* From Walvis Bay to the World */}
-      <section className="relative isolate overflow-hidden bg-[#e8f7f2] py-20 sm:py-24">
+      <section className="relative isolate overflow-hidden bg-[#e8f7f2] py-16 sm:py-24">
         <Image
           src="/images/site/topographic-lines.png"
           alt=""
           aria-hidden="true"
           width={1667}
           height={1609}
-          className="pointer-events-none absolute -right-24 top-0 h-full w-auto opacity-30"
+          className="pointer-events-none absolute right-0 top-0 h-full w-auto translate-x-1/4 opacity-25"
         />
         <Container className="relative">
-          <div className="grid items-center gap-10 md:grid-cols-[1.2fr_1fr]">
+          <div className="grid items-center gap-10 md:grid-cols-[1.15fr_0.85fr]">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
                 {t("storyEyebrow")}
@@ -184,7 +184,7 @@ export default async function HomePage({
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
                 {t("storyHeading")}
               </h2>
-              <div className="mt-8 inline-block max-w-lg rounded-xl bg-[#f5b63c] p-6 text-[var(--color-navy)] shadow-sm">
+              <div className="mt-8 max-w-lg rounded-2xl border-l-4 border-[var(--color-accent)] bg-white/95 p-6 text-[var(--color-navy)] shadow-sm">
                 <p className="text-base leading-relaxed">
                   {t("storyBox", { founded: site.founded })}
                 </p>
@@ -199,7 +199,7 @@ export default async function HomePage({
                 </Link>
               </div>
             </div>
-            <div className="relative mx-auto w-full max-w-sm">
+            <div className="relative mx-auto w-full max-w-[17rem] drop-shadow-2xl sm:max-w-sm md:justify-self-end">
               <Image
                 src="/images/site/container-lifted.png"
                 alt={t("containerAlt")}
