@@ -22,18 +22,23 @@ const PROJECT_ROOT = dirname(fileURLToPath(import.meta.url));
  * optimise images from during asset migration.
  * Tighten to a nonce/hash strategy once the app moves off static export.
  */
+// Dev needs 'unsafe-eval' (React/Turbopack HMR) and ws:/http: (HMR socket),
+// and must NOT upgrade-insecure-requests (would break http://localhost).
+// Production stays strict.
+const isDev = process.env.NODE_ENV !== "production";
+
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://plausible.io",
+  `script-src 'self' 'unsafe-inline' https://plausible.io${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://www.daron.com.na",
   "font-src 'self' data:",
-  "connect-src 'self' https://plausible.io",
+  `connect-src 'self' https://plausible.io${isDev ? " ws: http:" : ""}`,
   "frame-ancestors 'self'",
   "form-action 'self' mailto:",
   "base-uri 'self'",
   "object-src 'none'",
-  "upgrade-insecure-requests",
+  ...(isDev ? [] : ["upgrade-insecure-requests"]),
 ].join("; ");
 
 const securityHeaders = [

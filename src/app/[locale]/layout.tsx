@@ -176,6 +176,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
+      suppressHydrationWarning
       className={`${poppins.variable} ${openSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white text-[var(--color-ink)]">
