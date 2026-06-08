@@ -12,6 +12,7 @@ const navItems = [
   { href: "/why-daron" as const, key: "whyDaron" as const },
   { href: "/ai" as const, key: "ai" as const },
   { href: "/insights" as const, key: "insights" as const },
+  { href: "/faq" as const, key: "faq" as const },
   { href: "/contact" as const, key: "contact" as const },
 ];
 

@@ -25,10 +25,17 @@
     "rfqBody": "Send your requirement on WhatsApp — the Daron AI assistant drafts a response in minutes and a KAM reviews every quote before it ships.",
     "distributorOf": "Authorised distributor"
   },
+  "Faq": {
+    "heroEyebrow": "FAQ",
+    "heroTitle": "Frequently asked questions",
+    "heroIntro": "Quick answers on what we supply, how fast we quote, the brands we carry, and how to send an RFQ. Still stuck? Talk to the Daron AI assistant.",
+    "talkCta": "Ask the Daron AI assistant"
+  },
   "Nav": {
     "home": "Home",
     "brands": "Brands",
     "ai": "Daron AI",
+    "faq": "FAQ",
     "about": "About",
     "services": "Services",
     "industries": "Industries",

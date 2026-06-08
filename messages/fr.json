@@ -25,10 +25,17 @@
     "rfqBody": "Envoyez votre demande par WhatsApp — l'assistant IA de Daron rédige une réponse en quelques minutes et un KAM vérifie chaque devis avant son envoi.",
     "distributorOf": "Distributeur agréé"
   },
+  "Faq": {
+    "heroEyebrow": "FAQ",
+    "heroTitle": "Questions fréquentes",
+    "heroIntro": "Des réponses rapides sur ce que nous fournissons, la rapidité de nos devis, les marques que nous représentons et comment envoyer une demande. Encore une question ? Parlez à l'assistant IA de Daron.",
+    "talkCta": "Demander à l'assistant IA de Daron"
+  },
   "Nav": {
     "home": "Accueil",
     "brands": "Marques",
     "ai": "IA Daron",
+    "faq": "FAQ",
     "about": "À propos",
     "services": "Services",
     "industries": "Industries",

@@ -113,7 +113,8 @@ export function Header() {
             alt="Daron Namibia"
             width={359}
             height={215}
-            priority
+            loading="eager"
+            sizes="120px"
             className="h-14 w-auto"
           />
         </Link>

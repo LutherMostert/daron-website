@@ -35,16 +35,17 @@ export function CountUp({
     const reduce = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    if (reduce) {
-      setVal(to);
-      return;
-    }
 
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting && !started.current) {
             started.current = true;
+            io.disconnect();
+            if (reduce) {
+              setVal(to);
+              return;
+            }
             const start = performance.now();
             const tick = (now: number) => {
               const p = Math.min(1, (now - start) / durationMs);
@@ -53,7 +54,6 @@ export function CountUp({
               if (p < 1) requestAnimationFrame(tick);
             };
             requestAnimationFrame(tick);
-            io.disconnect();
           }
         });
       },

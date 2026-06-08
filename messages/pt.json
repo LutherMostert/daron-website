@@ -25,10 +25,17 @@
     "rfqBody": "Envie o seu pedido por WhatsApp — o assistente de IA da Daron prepara uma resposta em minutos e um KAM revê cada cotação antes de ser enviada.",
     "distributorOf": "Distribuidor autorizado"
   },
+  "Faq": {
+    "heroEyebrow": "FAQ",
+    "heroTitle": "Perguntas frequentes",
+    "heroIntro": "Respostas rápidas sobre o que fornecemos, a rapidez dos orçamentos, as marcas que representamos e como enviar um pedido de cotação. Ainda com dúvidas? Fale com o assistente de IA da Daron.",
+    "talkCta": "Pergunte ao assistente de IA da Daron"
+  },
   "Nav": {
     "home": "Início",
     "brands": "Marcas",
     "ai": "IA Daron",
+    "faq": "FAQ",
     "about": "Sobre",
     "services": "Serviços",
     "industries": "Indústrias",
