@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { Link } from "@/i18n/routing";
+import { buildMetadata } from "@/lib/seo";
 import { contact, site } from "@/lib/site";
 
 export async function generateMetadata({
@@ -14,11 +15,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
+  return buildMetadata({
+    locale,
+    path: "/",
     title: t("homeTitle"),
     description: t("homeDescription"),
-    alternates: { canonical: "/" },
-  };
+    titleAbsolute: true,
+  });
 }
 
 const serviceLinks = [
@@ -127,7 +130,7 @@ export default async function HomePage({
             <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
               <a
                 href={contact.whatsapp.href}
-                className="rounded-full bg-[var(--color-accent)] px-8 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
+                className="rounded-full bg-[var(--color-cta)] px-8 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -178,7 +181,7 @@ export default async function HomePage({
         <Container className="relative">
           <div className="grid items-center gap-10 md:grid-cols-[1.15fr_0.85fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
                 {t("storyEyebrow")}
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -215,7 +218,7 @@ export default async function HomePage({
       {/* Value props */}
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
             {t("vpEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -227,7 +230,7 @@ export default async function HomePage({
                 key={idx}
                 className="rounded-2xl border border-[var(--color-line)] bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
               >
-                <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold tracking-wider text-[var(--color-accent)]">
+                <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold tracking-wider text-[var(--color-accent-text)]">
                   0{idx + 1}
                 </p>
                 <h3 className="mt-2 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--color-navy)]">
@@ -247,7 +250,7 @@ export default async function HomePage({
         <Container>
           <div className="grid gap-12 md:grid-cols-[1.2fr_1fr] md:items-start">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
                 {t("proofEyebrow")}
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-3xl font-bold leading-[1.1] text-[var(--color-navy)] sm:text-4xl md:text-5xl">
@@ -309,7 +312,7 @@ export default async function HomePage({
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container>
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
               {t("opsEyebrow")}
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -406,7 +409,7 @@ export default async function HomePage({
         <Container>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
                 {t("svcEyebrow")}
               </p>
               <h2 className="mt-3 max-w-2xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">

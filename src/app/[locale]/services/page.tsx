@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildMetadata } from "@/lib/seo";
 
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
@@ -26,11 +27,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
+  return buildMetadata({
+    locale,
+    path: "/services",
     title: t("servicesTitle"),
     description: t("servicesDescription"),
-    alternates: { canonical: "/services" },
-  };
+  });
 }
 
 export default async function ServicesPage({
@@ -113,7 +115,7 @@ export default async function ServicesPage({
           }
         >
           <Container>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
               {pillar.eyebrow}
             </p>
             <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -203,7 +205,7 @@ export default async function ServicesPage({
                       </span>
                     )}
                   </div>
-                  <span className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-accent-deep)]">
+                  <span className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-accent-text)]">
                     {p.category}
                   </span>
                 </div>
@@ -242,7 +244,7 @@ export default async function ServicesPage({
                                 strokeWidth="2"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                className="text-[var(--color-accent-deep)]"
+                                className="text-[var(--color-accent-text)]"
                                 aria-hidden="true"
                               >
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />

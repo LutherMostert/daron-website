@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildMetadata } from "@/lib/seo";
 
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
@@ -14,11 +15,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
+  return buildMetadata({
+    locale,
+    path: "/ai",
     title: t("aiTitle"),
     description: t("aiDescription"),
-    alternates: { canonical: "/ai" },
-  };
+  });
 }
 
 // Source: OpenClaw build session summary, 2026-04-22. Dual branding rule:
@@ -70,7 +72,7 @@ export default async function AiPage({
         <div className="flex flex-col gap-3 sm:flex-row">
           <a
             href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-accent)] px-6 py-3 text-center text-base font-semibold text-[var(--color-navy)] transition-colors hover:bg-[var(--color-accent-deep)]"
+            className="rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -90,7 +92,7 @@ export default async function AiPage({
         <Container>
           <div className="grid gap-12 md:grid-cols-[1fr_2fr] md:items-start">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
                 {t("enterpriseEyebrow")}
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -109,7 +111,7 @@ export default async function AiPage({
       {/* What Don does — 6 capability cards */}
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
             {t("capEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -121,7 +123,7 @@ export default async function AiPage({
                 key={cap.title}
                 className="rounded-2xl border border-[var(--color-line)] bg-white p-6 shadow-sm"
               >
-                <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold tracking-wider text-[var(--color-accent-deep)]">
+                <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold tracking-wider text-[var(--color-accent-text)]">
                   0{idx + 1}
                 </p>
                 <h3 className="mt-2 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--color-navy)]">
@@ -170,7 +172,7 @@ export default async function AiPage({
       {/* Technology stack */}
       <section className="bg-white py-20 sm:py-24">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
             {t("techEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">

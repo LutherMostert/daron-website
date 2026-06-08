@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildMetadata } from "@/lib/seo";
 
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
@@ -13,9 +14,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
   return {
-    title: t("privacyTitle"),
-    description: t("privacyDescription"),
-    alternates: { canonical: "/privacy" },
+    ...buildMetadata({
+      locale,
+      path: "/privacy",
+      title: t("privacyTitle"),
+      description: t("privacyDescription"),
+    }),
     robots: { index: true, follow: true },
   };
 }
@@ -109,7 +113,7 @@ export default async function PrivacyPage({
                 {t("sec6Body")}{" "}
                 <a
                   href={`mailto:${contact.emails.operations}`}
-                  className="font-semibold text-[var(--color-accent)] hover:underline"
+                  className="font-semibold text-[var(--color-accent-text)] hover:underline"
                 >
                   {contact.emails.operations}
                 </a>

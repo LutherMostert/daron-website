@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildMetadata } from "@/lib/seo";
 
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
@@ -12,11 +13,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
+  return buildMetadata({
+    locale,
+    path: "/why-daron",
     title: t("whyDaronTitle"),
     description: t("whyDaronDescription"),
-    alternates: { canonical: "/why-daron" },
-  };
+  });
 }
 
 export default async function WhyDaronPage({
@@ -55,7 +57,7 @@ export default async function WhyDaronPage({
                 className="flex flex-col rounded-2xl border border-[var(--color-line)] bg-[var(--color-sand)] p-7"
               >
                 <div className="flex items-center justify-between">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
                     {r.eyebrow}
                   </p>
                   <span

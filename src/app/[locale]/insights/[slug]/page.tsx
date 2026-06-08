@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 
 import { Link } from "@/i18n/routing";
@@ -23,27 +24,24 @@ export async function generateMetadata({
 }: {
   params: Params;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  const url = `${site.url}/insights/${post.slug}`;
-  return {
+  const meta = buildMetadata({
+    locale,
+    path: `/insights/${post.slug}`,
     title: post.title,
     description: post.excerpt,
-    alternates: { canonical: `/insights/${post.slug}` },
+    type: "article",
+  });
+  return {
+    ...meta,
     openGraph: {
+      ...meta.openGraph,
       type: "article",
-      title: post.title,
-      description: post.excerpt,
-      url,
       publishedTime: post.date,
       authors: [site.name],
       tags: post.tags,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
     },
   };
 }
@@ -175,7 +173,7 @@ export default async function PostPage({ params }: { params: Params }) {
               <span className="text-[var(--color-mute)]">&middot;</span>
               <a
                 href={contact.whatsapp.href}
-                className="font-semibold text-[var(--color-accent)] underline-offset-4 hover:underline"
+                className="font-semibold text-[var(--color-accent-text)] underline-offset-4 hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >

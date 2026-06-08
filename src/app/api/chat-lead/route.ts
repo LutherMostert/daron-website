@@ -16,11 +16,23 @@
  * Response: 204 on success, 400 on malformed body.
  */
 
+import { createHmac } from "node:crypto";
 import { classifyIntent, CATEGORY_OWNER_FIRST_NAME } from "@/lib/routing";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+/**
+ * Normalise free-text the visitor controls before it touches logs or a webhook:
+ * strip CR/LF (defeats log-injection / forged log lines) and hard-cap length so
+ * an attacker can't bloat our log stream or the Slack payload.
+ */
+function clean(value: unknown, max: number): string | undefined {
+  if (typeof value !== "string") return undefined;
+  const v = value.replace(/[\r\n\t]+/g, " ").trim().slice(0, max);
+  return v.length ? v : undefined;
+}
 
 type LeadBody = {
   name: string;
@@ -83,16 +95,21 @@ export async function POST(request: Request) {
   });
   const owner = CATEGORY_OWNER_FIRST_NAME[category];
 
+  // Sanitise + length-cap everything before it reaches logs / webhook.
   const entry = {
     timestamp,
     source: "daron-website:chat-widget",
     category,
     target_owner: owner,
-    ...body,
-    ip:
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      request.headers.get("x-real-ip") ||
-      "unknown",
+    name: clean(body.name, 120) ?? "",
+    email: clean(body.email, 160) ?? "",
+    company: clean(body.company, 120),
+    vessel: clean(body.vessel, 120),
+    whatsapp: clean(body.whatsapp, 40),
+    firstMessage: clean(body.firstMessage, 1000),
+    referrer: clean(body.referrer, 300),
+    userAgent: clean(body.userAgent, 300),
+    ip: getClientIp(request),
   };
 
   // Always log — Vercel captures, grep for [chat-lead]
@@ -112,11 +129,23 @@ export async function POST(request: Request) {
       (entry.firstMessage ? `\nFirst message: ${entry.firstMessage.slice(0, 300)}\n` : "") +
       (entry.referrer ? `\nReferrer: ${entry.referrer}\n` : "");
 
-    fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    }).catch((err) => console.warn("[chat-lead] webhook failed:", err));
+    const payload = JSON.stringify({ text });
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+
+    // If a signing secret is configured, HMAC-sign the body so the receiver can
+    // verify the notification genuinely came from this site (prevents a leaked
+    // webhook URL from being abused to inject fake leads).
+    const signingSecret = process.env.CHAT_LEAD_WEBHOOK_SECRET;
+    if (signingSecret) {
+      const signature = createHmac("sha256", signingSecret)
+        .update(payload)
+        .digest("hex");
+      headers["X-Daron-Signature"] = `sha256=${signature}`;
+    }
+
+    fetch(webhookUrl, { method: "POST", headers, body: payload }).catch((err) =>
+      console.warn("[chat-lead] webhook failed:", err),
+    );
   }
 
   return new Response(null, { status: 204 });

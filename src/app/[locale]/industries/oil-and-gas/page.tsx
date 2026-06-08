@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildMetadata } from "@/lib/seo";
 
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
@@ -14,11 +15,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
+  return buildMetadata({
+    locale,
+    path: "/industries/oil-and-gas",
     title: t("oilGasTitle"),
     description: t("oilGasDescription"),
-    alternates: { canonical: "/industries/oil-and-gas" },
-  };
+  });
 }
 
 export default async function OilAndGasPage({
@@ -79,7 +81,7 @@ export default async function OilAndGasPage({
         <div className="flex flex-col gap-3 sm:flex-row">
           <a
             href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-accent)] px-6 py-3 text-center text-base font-semibold text-[var(--color-navy)] transition-colors hover:bg-[var(--color-accent-deep)]"
+            className="rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -97,7 +99,7 @@ export default async function OilAndGasPage({
       {/* Rigs supported */}
       <section className="bg-white py-20 sm:py-24">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
             {t("rigsEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -139,7 +141,7 @@ export default async function OilAndGasPage({
       {/* What we supply offshore */}
       <section className="bg-white py-20 sm:py-24">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
             {t("supplyEyebrow")}
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">
@@ -168,7 +170,7 @@ export default async function OilAndGasPage({
         <Container>
           <div className="grid gap-10 md:grid-cols-[1fr_1.6fr] md:items-start">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
                 {t("whyEyebrow")}
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">

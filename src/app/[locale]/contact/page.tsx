@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildMetadata } from "@/lib/seo";
 
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
@@ -12,11 +13,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
+  return buildMetadata({
+    locale,
+    path: "/contact",
     title: t("contactTitle"),
     description: t("contactDescription"),
-    alternates: { canonical: "/contact" },
-  };
+  });
 }
 
 export default async function ContactPage({
@@ -68,7 +70,7 @@ export default async function ContactPage({
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
               {t("officeEyebrow")}
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
@@ -90,7 +92,7 @@ export default async function ContactPage({
                 </span>
                 <a
                   href={contact.phone.href}
-                  className="text-lg font-semibold text-[var(--color-navy)] hover:text-[var(--color-accent)]"
+                  className="text-lg font-semibold text-[var(--color-navy)] hover:text-[var(--color-accent-text)]"
                 >
                   {contact.phone.display}
                 </a>
@@ -158,7 +160,7 @@ export default async function ContactPage({
               </div>
               <button
                 type="submit"
-                className="mt-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
+                className="mt-2 rounded-full bg-[var(--color-cta)] px-6 py-3 text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
               >
                 {t("sendMessage")}
               </button>
@@ -194,13 +196,13 @@ function ContactCard({
     <article
       className={
         highlight
-          ? "rounded-2xl bg-[var(--color-accent)] p-7 text-white shadow-md"
+          ? "rounded-2xl bg-[var(--color-navy)] p-7 text-white shadow-md"
           : "rounded-2xl border border-[var(--color-line)] bg-white p-7 shadow-sm"
       }
     >
       <p
         className={`text-xs font-semibold uppercase tracking-[0.2em] ${
-          highlight ? "text-white/85" : "text-[var(--color-accent)]"
+          highlight ? "text-white/85" : "text-[var(--color-accent-text)]"
         }`}
       >
         {eyebrow}
@@ -253,7 +255,7 @@ function Field({
       >
         {label}
         {required && (
-          <span className="ml-0.5 text-[var(--color-accent)]" aria-hidden="true">
+          <span className="ml-0.5 text-[var(--color-accent-text)]" aria-hidden="true">
             *
           </span>
         )}

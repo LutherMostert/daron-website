@@ -1,3 +1,8 @@
+// Server-only: this module carries internal KAM names + a supplier blocklist
+// that must never be shipped in a client bundle. Importing it from a Client
+// Component will now fail the build instead of silently leaking.
+import "server-only";
+
 /**
  * Daron service-category → KAM email routing.
  * Extracted from the training pack tags.yaml routing table (2026-04-23).

@@ -54,7 +54,7 @@ function LanguageSwitcher() {
         aria-expanded={open}
         aria-haspopup="listbox"
         aria-label={`${t("label")}: ${t(locale)}`}
-        className="flex items-center gap-1 rounded-md border border-[var(--color-line)] px-2.5 py-1.5 text-xs font-semibold text-[var(--color-navy)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] disabled:opacity-50"
+        className="flex items-center gap-1 rounded-md border border-[var(--color-line)] px-2.5 py-1.5 text-xs font-semibold text-[var(--color-navy)] transition-colors hover:border-[var(--color-accent-text)] hover:text-[var(--color-accent-text)] disabled:opacity-50"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="10" />
@@ -79,7 +79,7 @@ function LanguageSwitcher() {
                 onClick={() => select(loc)}
                 className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors hover:bg-[var(--color-sand)] ${
                   loc === locale
-                    ? "font-semibold text-[var(--color-accent)]"
+                    ? "font-semibold text-[var(--color-accent-text)]"
                     : "text-[var(--color-ink)]"
                 }`}
               >
@@ -123,7 +123,7 @@ export function Header() {
               <li key={n.href}>
                 <Link
                   href={n.href}
-                  className="text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent)]"
+                  className="text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent-text)]"
                 >
                   {tNav(n.key)}
                 </Link>
@@ -136,7 +136,7 @@ export function Header() {
           <LanguageSwitcher />
           <a
             href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-accent)] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
+            className="rounded-full bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -188,7 +188,7 @@ export function Header() {
                 <Link
                   href="/"
                   onClick={() => setOpen(false)}
-                  className="block rounded-md px-2 py-2 text-[var(--color-ink)] transition-colors hover:bg-[var(--color-sand)] hover:text-[var(--color-accent)]"
+                  className="block rounded-md px-2 py-2 text-[var(--color-ink)] transition-colors hover:bg-[var(--color-sand)] hover:text-[var(--color-accent-text)]"
                 >
                   {tNav("home")}
                 </Link>
@@ -198,7 +198,7 @@ export function Header() {
                   <Link
                     href={n.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-md px-2 py-2 text-[var(--color-ink)] transition-colors hover:bg-[var(--color-sand)] hover:text-[var(--color-accent)]"
+                    className="block rounded-md px-2 py-2 text-[var(--color-ink)] transition-colors hover:bg-[var(--color-sand)] hover:text-[var(--color-accent-text)]"
                   >
                     {tNav(n.key)}
                   </Link>
@@ -210,7 +210,7 @@ export function Header() {
               <a
                 href={contact.whatsapp.href}
                 onClick={() => setOpen(false)}
-                className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-white"
+                className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--color-cta)] px-5 py-3 text-sm font-semibold text-[var(--color-cta-ink)]"
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -39,7 +39,7 @@ export function Footer() {
             </p>
             <a
               href={contact.whatsapp.href}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-cta)] px-5 py-2.5 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
               target="_blank"
               rel="noopener noreferrer"
             >
