@@ -31,6 +31,16 @@
     "heroIntro": "Des réponses rapides sur ce que nous fournissons, la rapidité de nos devis, les marques que nous représentons et comment envoyer une demande. Encore une question ? Parlez à l'assistant IA de Daron.",
     "talkCta": "Demander à l'assistant IA de Daron"
   },
+  "ShipChandlery": {
+    "heroEyebrow": "Avitaillement maritime · Walvis Bay",
+    "heroTitle": "Avitaillement maritime à Walvis Bay",
+    "heroIntro": "Daron Namibia est un avitailleur maritime complet à Walvis Bay — magasins de pont et de machine, provisions, magasins sous douane, équipements de sécurité et fournitures techniques, livrés aux navires et plateformes dans les délais. Membre ISSA et IMPA.",
+    "provideHeading": "Ce que couvre notre avitaillement",
+    "areaHeading": "Au service de Walvis Bay et du littoral namibien",
+    "areaBody": "Depuis nos entrepôts au n° 31 Grand Avenue, dans la zone industrielle de Walvis Bay, nous approvisionnons les navires faisant escale à Walvis Bay et soutenons les opérations le long de la côte namibienne — avec notre propre flotte, un stockage réfrigéré et sous douane, et le dédouanement géré en interne.",
+    "whyHeading": "Pourquoi les navires choisissent Daron à Walvis Bay",
+    "mapCta": "Voir notre emplacement sur Google Maps"
+  },
   "Nav": {
     "home": "Accueil",
     "brands": "Marques",

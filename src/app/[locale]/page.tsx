@@ -26,7 +26,7 @@ export async function generateMetadata({
 }
 
 const serviceLinks = [
-  { key: "svc1" as const, href: "/services#chandlery" },
+  { key: "svc1" as const, href: "/services/ship-chandlery" },
   { key: "svc2" as const, href: "/services#catering" },
   { key: "svc3" as const, href: "/services#warehousing" },
   { key: "svc4" as const, href: "/services#safety" },

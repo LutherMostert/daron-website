@@ -31,6 +31,16 @@
     "heroIntro": "Quick answers on what we supply, how fast we quote, the brands we carry, and how to send an RFQ. Still stuck? Talk to the Daron AI assistant.",
     "talkCta": "Ask the Daron AI assistant"
   },
+  "ShipChandlery": {
+    "heroEyebrow": "Ship Chandlery · Walvis Bay",
+    "heroTitle": "Ship Chandlery in Walvis Bay",
+    "heroIntro": "Daron Namibia is a full-service ship chandler in Walvis Bay — deck and engine stores, provisions, bonded stores, safety equipment and technical supplies, delivered to vessels and rigs on schedule. ISSA and IMPA listed.",
+    "provideHeading": "What our chandlery covers",
+    "areaHeading": "Serving Walvis Bay and the Namibian coast",
+    "areaBody": "From our warehousing at No. 31 Grand Avenue in the Walvis Bay Industrial Area, we supply vessels calling at Walvis Bay and support operations along the Namibian coast — with our own branded fleet, refrigerated and bonded storage, and customs clearance handled in-house.",
+    "whyHeading": "Why vessels choose Daron in Walvis Bay",
+    "mapCta": "View our location on Google Maps"
+  },
   "Nav": {
     "home": "Home",
     "brands": "Brands",

@@ -31,6 +31,16 @@
     "heroIntro": "Respostas rápidas sobre o que fornecemos, a rapidez dos orçamentos, as marcas que representamos e como enviar um pedido de cotação. Ainda com dúvidas? Fale com o assistente de IA da Daron.",
     "talkCta": "Pergunte ao assistente de IA da Daron"
   },
+  "ShipChandlery": {
+    "heroEyebrow": "Aprovisionamento naval · Walvis Bay",
+    "heroTitle": "Aprovisionamento naval em Walvis Bay",
+    "heroIntro": "A Daron Namibia é um fornecedor naval completo em Walvis Bay — lojas de convés e de máquinas, provisões, lojas alfandegadas, equipamento de segurança e abastecimentos técnicos, entregues a navios e plataformas dentro do prazo. Membro ISSA e IMPA.",
+    "provideHeading": "O que o nosso aprovisionamento abrange",
+    "areaHeading": "Ao serviço de Walvis Bay e da costa da Namíbia",
+    "areaBody": "A partir dos nossos armazéns no n.º 31 Grand Avenue, na zona industrial de Walvis Bay, abastecemos navios que escalam em Walvis Bay e apoiamos operações ao longo da costa namibiana — com frota própria, armazenagem refrigerada e alfandegada, e desembaraço aduaneiro tratado internamente.",
+    "whyHeading": "Porque é que os navios escolhem a Daron em Walvis Bay",
+    "mapCta": "Ver a nossa localização no Google Maps"
+  },
   "Nav": {
     "home": "Início",
     "brands": "Marcas",
