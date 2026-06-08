@@ -3,6 +3,7 @@ import { Poppins, Open_Sans } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 
 import { Header } from "@/components/Header";
@@ -197,6 +198,7 @@ export default async function LocaleLayout({
           <JsonLd id="ld-localbusiness" data={localBusinessJsonLd} />
           <ChatWidget />
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
