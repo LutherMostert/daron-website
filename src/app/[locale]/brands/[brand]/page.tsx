@@ -190,6 +190,24 @@ export default async function BrandPage({ params }: { params: Params }) {
               </li>
             ))}
           </ul>
+
+          {b.keyProducts && b.keyProducts.length > 0 && (
+            <div data-reveal className="mt-14">
+              <h3 className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-accent-text)]">
+                {t("keyProductsHeading")}
+              </h3>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {b.keyProducts.map((p) => (
+                  <li
+                    key={p}
+                    className="rounded-full border border-[var(--color-line)] bg-white px-4 py-2 text-sm font-medium text-[var(--color-navy)]"
+                  >
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </Container>
       </section>
 
