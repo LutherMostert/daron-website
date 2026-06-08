@@ -147,7 +147,7 @@
     "sec3Item2": "Operar, proteger e melhorar o website (incluindo prevenção de abusos e monitorização de erros).",
     "sec3Item3": "Cumprir as nossas obrigações ao abrigo da legislação namibiana e, quando aplicável, da legislação da sua jurisdição.",
     "sec4Heading": "4. Quem processa os seus dados em nosso nome",
-    "sec4Body": "As mensagens enviadas ao nosso assistente de IA (Don) são processadas pela Anthropic (Claude) ao abrigo dos seus termos empresariais — não treinam modelos com os seus dados. As notificações de leads podem ser reencaminhadas para o nosso canal interno Slack ou equivalente. O alojamento e a análise do website são geridos pela Vercel (regiões UE/EUA). Todos os subcontratantes estão obrigados a deveres de confidencialidade e protecção de dados.",
+    "sec4Body": "As mensagens que envia ao nosso assistente de IA (Don) são processadas pela Anthropic (Claude) ao abrigo dos seus termos comerciais de API para gerar uma resposta. As notificações de leads podem ser reencaminhadas para o nosso canal interno Slack ou equivalente. O alojamento do website é assegurado pela Vercel (regiões UE/EUA). A análise do website utiliza o Plausible — um serviço respeitador da privacidade, sem cookies, que não recolhe dados pessoais nem define cookies de rastreio. Todos os subcontratantes estão obrigados a deveres de confidencialidade e protecção de dados.",
     "sec5Heading": "5. Os seus direitos",
     "sec5Body": "Dependendo do local onde reside, poderá ter direito a:",
     "sec5Item1": "Aceder aos dados pessoais que temos sobre si.",
@@ -606,6 +606,11 @@
     "telephone": "Número de telefone",
     "yourMessage": "A sua mensagem",
     "sendMessage": "Enviar mensagem",
-    "formNote": "Este formulário abre a sua aplicação de email predefinida por enquanto. O formulário integrado com Hermes será lançado na Semana 2."
+    "formSending": "A enviar…",
+    "formSuccessTitle": "Mensagem enviada — obrigado.",
+    "formSuccessBody": "Encaminharemos o seu pedido para a equipa certa e responderemos no prazo de um dia útil. Para um orçamento imediato, o assistente de IA da Daron no WhatsApp é mais rápido.",
+    "formAnother": "Enviar outra mensagem",
+    "formErrorBody": "Lamentamos — ocorreu um erro ao enviar a sua mensagem. Tente novamente ou contacte-nos por WhatsApp.",
+    "formNote": "Respondemos no prazo de um dia útil. Os seus dados são tratados de acordo com a nossa Política de Privacidade e nunca são vendidos."
   }
 }

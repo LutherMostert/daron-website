@@ -4,6 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
+import { ContactForm } from "@/components/ContactForm";
 import { contact } from "@/lib/site";
 
 export async function generateMetadata({
@@ -133,41 +134,7 @@ export default async function ContactPage({
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-mute)]">
               {t("formIntro")}
             </p>
-            <form
-              className="mt-6 grid gap-4"
-              action={`mailto:${contact.emails.operations}`}
-              method="post"
-              encType="text/plain"
-            >
-              <Field id="firstName" label={t("firstName")} required />
-              <Field id="surname" label={t("surname")} required />
-              <Field id="email" label={t("contactEmail")} type="email" required />
-              <Field id="phone" label={t("telephone")} type="tel" />
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="message"
-                  className="text-sm font-semibold text-[var(--color-ink)]"
-                >
-                  {t("yourMessage")}
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
-                  className="rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-base text-[var(--color-ink)] focus:border-[var(--color-accent)] focus:outline-none"
-                />
-              </div>
-              <button
-                type="submit"
-                className="mt-2 rounded-full bg-[var(--color-cta)] px-6 py-3 text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
-              >
-                {t("sendMessage")}
-              </button>
-              <p className="text-xs text-[var(--color-mute)]">
-                {t("formNote")}
-              </p>
-            </form>
+            <ContactForm />
           </div>
         </Container>
       </section>
@@ -233,51 +200,5 @@ function ContactCard({
         {cta}
       </a>
     </article>
-  );
-}
-
-function Field({
-  id,
-  label,
-  type = "text",
-  required,
-}: {
-  id: string;
-  label: string;
-  type?: string;
-  required?: boolean;
-}) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label
-        htmlFor={id}
-        className="text-sm font-semibold text-[var(--color-ink)]"
-      >
-        {label}
-        {required && (
-          <span className="ml-0.5 text-[var(--color-accent-text)]" aria-hidden="true">
-            *
-          </span>
-        )}
-      </label>
-      <input
-        id={id}
-        name={id}
-        type={type}
-        required={required}
-        autoComplete={
-          id === "email"
-            ? "email"
-            : id === "phone"
-              ? "tel"
-              : id === "firstName"
-                ? "given-name"
-                : id === "surname"
-                  ? "family-name"
-                  : undefined
-        }
-        className="rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-base text-[var(--color-ink)] focus:border-[var(--color-accent)] focus:outline-none"
-      />
-    </div>
   );
 }

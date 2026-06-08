@@ -147,7 +147,7 @@
     "sec3Item2": "Exploiter, sécuriser et améliorer le site (y compris la prévention des abus et le suivi des erreurs).",
     "sec3Item3": "Respecter nos obligations en vertu du droit namibien et, le cas échéant, des lois de votre propre juridiction.",
     "sec4Heading": "4. Qui traite vos données pour notre compte",
-    "sec4Body": "Les messages envoyés à notre assistant IA (Don) sont traités par Anthropic (Claude) selon ses conditions entreprise — elle n'entraîne pas ses modèles sur vos données. Les notifications de leads peuvent être transférées vers notre canal d'équipe Slack ou équivalent. L'hébergement et l'analyse du site sont assurés par Vercel (régions UE/États-Unis). Tous les sous-traitants sont tenus à des obligations de confidentialité et de protection des données.",
+    "sec4Body": "Les messages que vous envoyez à notre assistant IA (Don) sont traités par Anthropic (Claude) selon ses conditions commerciales d'API afin de générer une réponse. Les notifications de leads peuvent être transférées vers notre canal d'équipe Slack ou équivalent. L'hébergement du site est assuré par Vercel (régions UE/États-Unis). L'analyse du site utilise Plausible — un service respectueux de la vie privée, sans cookies, qui ne collecte aucune donnée personnelle et ne dépose aucun cookie de suivi. Tous les sous-traitants sont tenus à des obligations de confidentialité et de protection des données.",
     "sec5Heading": "5. Vos droits",
     "sec5Body": "Selon votre lieu de résidence, vous pouvez avoir le droit de :",
     "sec5Item1": "Accéder aux données personnelles que nous détenons à votre sujet.",
@@ -606,6 +606,11 @@
     "telephone": "Numéro de téléphone",
     "yourMessage": "Votre message",
     "sendMessage": "Envoyer le message",
-    "formNote": "Ce formulaire ouvre votre application e-mail par défaut pour le moment. Le formulaire en direct via Hermes sera lancé en Semaine 2."
+    "formSending": "Envoi…",
+    "formSuccessTitle": "Message envoyé — merci.",
+    "formSuccessBody": "Nous transmettrons votre demande à la bonne équipe et répondrons sous un jour ouvré. Pour un devis immédiat, l'assistant IA de Daron sur WhatsApp est plus rapide.",
+    "formAnother": "Envoyer un autre message",
+    "formErrorBody": "Désolé — une erreur s'est produite lors de l'envoi de votre message. Réessayez ou contactez-nous sur WhatsApp.",
+    "formNote": "Nous répondons sous un jour ouvré. Vos données sont traitées conformément à notre politique de confidentialité et ne sont jamais vendues."
   }
 }

@@ -61,7 +61,7 @@ export function InlineRFQ({
           <div className="flex flex-col items-stretch gap-3">
             <a
               href={contact.whatsapp.href}
-              className="rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
+              className="plausible-event-name=RFQ_WhatsApp rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
               target="_blank"
               rel="noopener noreferrer"
             >

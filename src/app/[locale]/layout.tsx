@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Poppins, Open_Sans } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -203,6 +204,16 @@ export default async function LocaleLayout({
           <ChatWidget />
           <RevealController />
         </NextIntlClientProvider>
+        {/* Plausible — cookieless, privacy-friendly analytics (no consent banner
+            needed). Tagged-events variant powers conversion events via CSS
+            classes (plausible-event-name=…). No-op until the daron.com.na site
+            is created in the Plausible account. */}
+        <Script
+          defer
+          data-domain="daron.com.na"
+          src="https://plausible.io/js/script.tagged-events.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

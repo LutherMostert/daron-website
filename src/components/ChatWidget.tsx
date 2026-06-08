@@ -21,7 +21,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { contact } from "@/lib/site";
 
 type Role = "user" | "assistant";
@@ -66,6 +66,7 @@ function saveStored(state: StoredState) {
 
 export function ChatWidget() {
   const t = useTranslations("ChatWidget");
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   // Use lazy initial state so sessionStorage restoration happens during the
   // first client render (not in an effect) — avoids React Compiler "cascading
@@ -165,7 +166,7 @@ export function ChatWidget() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ lead: leadForSend, messages: history }),
+          body: JSON.stringify({ lead: leadForSend, messages: history, locale }),
         });
 
         if (!res.ok) {
@@ -204,7 +205,7 @@ export function ChatWidget() {
         setStreaming(false);
       }
     },
-    [t],
+    [t, locale],
   );
 
   const handleGateSubmit = useCallback(
@@ -287,7 +288,7 @@ export function ChatWidget() {
           type="button"
           aria-label={t("openChat")}
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-cta)] text-[var(--color-cta-ink)] shadow-lg transition-all hover:scale-105 hover:bg-[var(--color-cta-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:bottom-8 sm:right-8"
+          className="plausible-event-name=Chat_Open fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-cta)] text-[var(--color-cta-ink)] shadow-lg transition-all hover:scale-105 hover:bg-[var(--color-cta-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:bottom-8 sm:right-8"
         >
           <svg
             width="24"
