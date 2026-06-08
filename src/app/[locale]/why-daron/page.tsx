@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
 
 import { Container } from "@/components/Container";
+import { CountUp } from "@/components/CountUp";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { PageHero } from "@/components/PageHero";
 
@@ -82,9 +83,9 @@ export default async function WhyDaronPage({
       {/* Proof block */}
       <section className="bg-[var(--color-navy)] py-20 text-white">
         <Container className="grid gap-8 md:grid-cols-3 md:gap-12">
-          <Stat value={t("stat1Value")} suffix={t("stat1Suffix")} label={t("stat1Label")} />
-          <Stat value={t("stat2Value")} label={t("stat2Label")} />
-          <Stat value={t("stat3Value")} suffix={t("stat3Suffix")} label={t("stat3Label")} />
+          <Stat to={11} wordSuffix={t("stat1Suffix")} label={t("stat1Label")} delay={0} />
+          <Stat to={2500} numberSuffix="+" label={t("stat2Label")} delay={90} />
+          <Stat to={10} prefix=">" wordSuffix={t("stat3Suffix")} label={t("stat3Label")} delay={180} />
         </Container>
       </section>
 
@@ -97,21 +98,30 @@ export default async function WhyDaronPage({
 }
 
 function Stat({
-  value,
-  suffix,
+  to,
+  prefix,
+  numberSuffix,
+  wordSuffix,
   label,
+  delay = 0,
 }: {
-  value: string;
-  suffix?: string;
+  to: number;
+  prefix?: string;
+  numberSuffix?: string;
+  wordSuffix?: string;
   label: string;
+  delay?: number;
 }) {
   return (
-    <div>
+    <div
+      data-reveal
+      style={{ "--reveal-delay": `${delay}ms` } as React.CSSProperties}
+    >
       <p className="font-[family-name:var(--font-poppins)] text-5xl font-bold text-[var(--color-accent)] sm:text-6xl">
-        {value}
-        {suffix && (
+        <CountUp to={to} prefix={prefix} suffix={numberSuffix} />
+        {wordSuffix && (
           <span className="ml-1 text-2xl font-semibold text-white sm:text-3xl">
-            {suffix}
+            {wordSuffix}
           </span>
         )}
       </p>

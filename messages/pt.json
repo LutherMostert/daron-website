@@ -1,4 +1,7 @@
 {
+  "A11y": {
+    "skipToContent": "Saltar para o conteúdo"
+  },
   "Nav": {
     "home": "Início",
     "about": "Sobre",

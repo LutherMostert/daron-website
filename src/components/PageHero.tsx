@@ -24,7 +24,7 @@ export function PageHero({ eyebrow, title, intro, image, children }: Props) {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-center kenburns"
             aria-hidden={image.alt ? undefined : true}
           />
           <div

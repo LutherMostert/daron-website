@@ -108,7 +108,7 @@ export default async function HomePage({
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-center kenburns"
           aria-hidden="true"
         />
         <div
@@ -228,6 +228,8 @@ export default async function HomePage({
             {valueProps.map((vp, idx) => (
               <article
                 key={idx}
+                data-reveal
+                style={{ "--reveal-delay": `${idx * 70}ms` } as React.CSSProperties}
                 className="rounded-2xl border border-[var(--color-line)] bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
               >
                 <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold tracking-wider text-[var(--color-accent-text)]">
@@ -323,9 +325,11 @@ export default async function HomePage({
             </p>
           </div>
           <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {operations.map((op) => (
+            {operations.map((op, idx) => (
               <li
                 key={op.src}
+                data-reveal
+                style={{ "--reveal-delay": `${idx * 60}ms` } as React.CSSProperties}
                 className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--color-navy)]">
@@ -424,10 +428,12 @@ export default async function HomePage({
             </Link>
           </div>
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {serviceLinks.map((s) => (
+            {serviceLinks.map((s, idx) => (
               <li
                 key={s.key}
-                className="rounded-2xl bg-[var(--color-sand)] p-6 transition-colors hover:bg-[var(--color-accent)] hover:text-white"
+                data-reveal
+                style={{ "--reveal-delay": `${idx * 60}ms` } as React.CSSProperties}
+                className="rounded-2xl bg-[var(--color-sand)] p-6 transition-colors hover:bg-[var(--color-navy)] hover:text-white"
               >
                 <Link href={s.href} className="block">
                   <p className="font-[family-name:var(--font-poppins)] text-lg font-semibold">

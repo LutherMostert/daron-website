@@ -80,6 +80,9 @@ export function ChatWidget() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const firstFieldRef = useRef<HTMLInputElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const launcherRef = useRef<HTMLButtonElement | null>(null);
+  const interacted = useRef(false);
 
   // Persist whenever lead or messages change
   useEffect(() => {
@@ -114,6 +117,40 @@ export function ChatWidget() {
     }, 50);
     return () => clearTimeout(t);
   }, [open, lead]);
+
+  // Restore focus to the launcher when the dialog closes (a11y) — but never
+  // steal focus on first page load (only after the user has opened it once).
+  useEffect(() => {
+    if (open) {
+      interacted.current = true;
+    } else if (interacted.current) {
+      launcherRef.current?.focus();
+    }
+  }, [open]);
+
+  // Trap Tab focus inside the open dialog (WCAG 2.4.3 / dialog pattern).
+  const handlePanelKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key !== "Tab") return;
+      const root = panelRef.current;
+      if (!root) return;
+      const focusables = root.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    },
+    [],
+  );
 
   const sendToServer = useCallback(
     async (leadForSend: Lead, history: Message[]) => {
@@ -246,6 +283,7 @@ export function ChatWidget() {
       {/* Floating launcher */}
       {!open && (
         <button
+          ref={launcherRef}
           type="button"
           aria-label={t("openChat")}
           onClick={() => setOpen(true)}
@@ -278,6 +316,8 @@ export function ChatWidget() {
       {/* Panel */}
       {open && (
         <div
+          ref={panelRef}
+          onKeyDown={handlePanelKeyDown}
           role="dialog"
           aria-modal="true"
           aria-labelledby="chat-widget-title"
@@ -288,9 +328,24 @@ export function ChatWidget() {
             <div className="flex items-center gap-3">
               <div
                 aria-hidden="true"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-accent)] text-base font-bold"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-accent)] text-[var(--color-navy)]"
               >
-                ⚓
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="5" r="2.5" />
+                  <line x1="12" y1="7.5" x2="12" y2="22" />
+                  <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+                  <line x1="8" y1="10" x2="16" y2="10" />
+                </svg>
               </div>
               <div>
                 <p
@@ -467,9 +522,6 @@ export function ChatWidget() {
                   {messages.map((m, i) => (
                     <MessageBubble key={i} role={m.role} content={m.content} />
                   ))}
-                  {streaming && messages[messages.length - 1]?.content === "" && (
-                    <MessageBubble role="assistant" content="…" />
-                  )}
                 </div>
               </div>
 
@@ -533,8 +585,19 @@ function MessageBubble({ role, content }: { role: Role; content: string }) {
             : "rounded-bl-sm bg-white text-[var(--color-ink)] shadow-sm ring-1 ring-[var(--color-line)]"
         }`}
       >
-        {content || <span className="inline-block animate-pulse">…</span>}
+        {content || <TypingDots />}
       </div>
     </div>
+  );
+}
+
+/** Three-dot "Don is typing" indicator. Bounce is killed by reduced-motion. */
+function TypingDots() {
+  return (
+    <span className="inline-flex items-center gap-1 py-1" aria-label="Don is typing">
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--color-mute)] [animation-delay:-0.3s]" />
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--color-mute)] [animation-delay:-0.15s]" />
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--color-mute)]" />
+    </span>
   );
 }

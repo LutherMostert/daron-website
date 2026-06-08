@@ -94,6 +94,19 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
     transform: none;
   }
+
+  /* Slow cinematic drift on full-bleed hero imagery. */
+  @keyframes daron-kenburns {
+    from {
+      transform: scale(1.03);
+    }
+    to {
+      transform: scale(1.12);
+    }
+  }
+  .kenburns {
+    animation: daron-kenburns 24s ease-in-out infinite alternate;
+  }
 }
 
 /* Respect reduced-motion globally: kill smooth-scroll, transitions, the chat

@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { ChatWidget } from "@/components/ChatWidget";
+import { RevealController } from "@/components/RevealController";
 import { contact, site } from "@/lib/site";
 import { routing } from "@/i18n/routing";
 
@@ -169,6 +170,7 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(locale);
+  const tA11y = await getTranslations("A11y");
 
   return (
     <html
@@ -176,9 +178,22 @@ export default async function LocaleLayout({
       className={`${poppins.variable} ${openSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white text-[var(--color-ink)]">
+        {/* Set .js before paint so the scroll-reveal CSS only hides content
+            when JS can reveal it again (no-JS / reduced-motion stay visible). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[var(--color-navy)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          {tA11y("skipToContent")}
+        </a>
         <NextIntlClientProvider>
           <Header />
-          <main id="main" className="flex-1">
+          <main id="main" tabIndex={-1} className="flex-1 outline-none">
             {children}
           </main>
           <Footer />
@@ -186,6 +201,7 @@ export default async function LocaleLayout({
           <JsonLd id="ld-organization" data={orgJsonLd} />
           <JsonLd id="ld-localbusiness" data={localBusinessJsonLd} />
           <ChatWidget />
+          <RevealController />
         </NextIntlClientProvider>
       </body>
     </html>
