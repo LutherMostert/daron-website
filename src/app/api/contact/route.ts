@@ -9,6 +9,7 @@
  * Response: 200 { ok: true } | 400 | 429
  */
 
+import { after } from "next/server";
 import { createHmac } from "node:crypto";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
@@ -95,8 +96,12 @@ export async function POST(request: Request) {
       headers["X-Daron-Signature"] =
         "sha256=" + createHmac("sha256", secret).update(payload).digest("hex");
     }
-    fetch(webhookUrl, { method: "POST", headers, body: payload }).catch((err) =>
-      console.warn("[contact-lead] webhook failed:", err),
+    // Run after the response is sent, but keep the function alive until the
+    // webhook resolves (Vercel can otherwise freeze the instance mid-flight).
+    after(() =>
+      fetch(webhookUrl, { method: "POST", headers, body: payload }).catch((err) =>
+        console.warn("[contact-lead] webhook failed:", err),
+      ),
     );
   }
 

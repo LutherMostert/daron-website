@@ -16,6 +16,7 @@
  * Response: 204 on success, 400 on malformed body.
  */
 
+import { after } from "next/server";
 import { createHmac } from "node:crypto";
 import { classifyIntent, CATEGORY_OWNER_FIRST_NAME } from "@/lib/routing";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
@@ -143,8 +144,11 @@ export async function POST(request: Request) {
       headers["X-Daron-Signature"] = `sha256=${signature}`;
     }
 
-    fetch(webhookUrl, { method: "POST", headers, body: payload }).catch((err) =>
-      console.warn("[chat-lead] webhook failed:", err),
+    // Post-response, but keep the instance alive until the webhook resolves.
+    after(() =>
+      fetch(webhookUrl, { method: "POST", headers, body: payload }).catch((err) =>
+        console.warn("[chat-lead] webhook failed:", err),
+      ),
     );
   }
 
