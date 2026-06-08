@@ -246,3 +246,142 @@ export const partners = [
     ] satisfies PartnerCatalogue[],
   },
 ] as const;
+
+/**
+ * Per-brand landing-page content. Keyed by `slug` → `/brands/[slug]`.
+ * `partnerName` links back to the `partners` array for the logo + catalogues.
+ * Prose is English for launch (PT/FR via Sanity, Week 2) but each page still
+ * ships locale-correct title/description/canonical/hreflang.
+ */
+export type Brand = {
+  slug: string;
+  partnerName: string;
+  name: string;
+  tagline: string;
+  distributorTier: string;
+  sectors: string[];
+  intro: string[];
+  ranges: { title: string; body: string }[];
+  heroImage: string;
+};
+
+export const brands: Brand[] = [
+  {
+    slug: "hempel",
+    partnerName: "Hempel",
+    name: "Hempel",
+    tagline: "Marine, protective, mining & oil-and-gas coatings",
+    distributorTier: "Authorised Hempel distributor — Namibia",
+    sectors: ["Marine & fleet", "Oil & gas", "Mineral & mining"],
+    intro: [
+      "Daron Namibia is an authorised distributor for Hempel, one of the world's leading suppliers of marine and protective coatings. From our base in Walvis Bay we supply Hempel systems for hull maintenance, newbuild and dry-dock projects across Namibia and the wider Southern African coast.",
+      "Hempel coatings are specified by ship owners and operators worldwide for antifouling, corrosion protection and fouling control. We integrate them directly into our dry-dock and ship-chandlery scopes, so the right system, primer and topcoat are on the quay when the vessel is — backed by technical support and our 2,500+ supplier network for everything around the can.",
+    ],
+    ranges: [
+      { title: "Marine & fleet coatings", body: "Antifouling, fouling-release, anticorrosive and tank-coating systems for vessels in service and at dry dock." },
+      { title: "Oil & gas coatings", body: "High-performance protective coatings for offshore structures, rigs and topside assets operating in harsh marine environments." },
+      { title: "Mineral & mining coatings", body: "Heavy-duty protective systems for mining plant, structural steel and industrial assets inland." },
+    ],
+    heroImage: "/images/site/drydock/case-study-hempel-bow.jpg",
+  },
+  {
+    slug: "orlichem",
+    partnerName: "Orlichem",
+    name: "Orlichem",
+    tagline: "Specialised marine & industrial chemicals",
+    distributorTier: "Exclusive Orlichem distributor — Namibia",
+    sectors: ["Marine", "Catering & galley", "Industrial & institutional"],
+    intro: [
+      "Daron Namibia is the exclusive distributor for Orlichem specialised marine and industrial chemicals. Orlichem's range covers the full cleaning and treatment cycle a working vessel or facility needs — from engine-room and tank chemicals to galley, laundry and hand-hygiene products.",
+      "Because we hold the Orlichem line locally, we can pull the right chemical into a dry-dock scope, a deck-cleaning job or a routine resupply without waiting on import — the same chemicals our technical team used to bring the Sapura Berani back to life in 11 days.",
+    ],
+    ranges: [
+      { title: "Marine & engineering chemicals", body: "Degreasers, descalers, fuel and water treatments, and tank-cleaning chemicals for engine room and deck." },
+      { title: "Clean-in-place (CIP) & metal treatment", body: "Process-line cleaning and metal-treatment chemistry for industrial and food-grade applications." },
+      { title: "Galley, kitchen & laundry", body: "Warewash, kitchen hygiene and laundry systems for catering operations on rig, vessel and shore." },
+      { title: "Housekeeping & hand hygiene", body: "Institutional housekeeping, surface and hand-hygiene ranges for accommodation and facilities." },
+    ],
+    heroImage: "/images/site/drydock/case-study-orlichem-deck.jpg",
+  },
+  {
+    slug: "honeywell",
+    partnerName: "Honeywell",
+    name: "Honeywell Gas Detection",
+    tagline: "Portable & fixed gas detection and industrial safety",
+    distributorTier: "Honeywell distributor — gas detection & safety instruments",
+    sectors: ["Oil & gas", "Marine", "Mining & industrial"],
+    intro: [
+      "Daron Namibia distributes Honeywell gas detection and industrial safety instruments — the portable and fixed detection that keeps crews safe in confined spaces, on deck and across industrial sites.",
+      "We supply, and arrange calibration and servicing for, Honeywell's BW range and fixed safety systems, aligned to the ISO 9001 quality controls our oil & gas, marine and mining clients audit against.",
+    ],
+    ranges: [
+      { title: "BW Clip & BW Solo single-gas detectors", body: "Maintenance-free and serviceable single-gas monitors for confined-space entry and personal protection." },
+      { title: "HABWFS fixed safety range", body: "Fixed gas detection for permanent installation on industrial and marine assets." },
+      { title: "Marine gas detection", body: "Detection specified for shipboard and offshore use, with marine eGuide support." },
+      { title: "Calibration & servicing", body: "On-site calibration, bump-testing and servicing via trained technicians." },
+    ],
+    heroImage: "/images/site/operations/seven-borealis-dock.jpg",
+  },
+  {
+    slug: "blackline-safety",
+    partnerName: "Blackline Safety",
+    name: "Blackline Safety",
+    tagline: "Connected safety & lone-worker monitoring",
+    distributorTier: "Blackline Safety distributor — Namibia",
+    sectors: ["Lone-worker monitoring", "Connected gas detection", "Oil & gas"],
+    intro: [
+      "Daron Namibia distributes Blackline Safety connected-safety devices — wearable gas detection and lone-worker monitoring that streams live location and gas readings back to a monitoring console.",
+      "For operations where a worker may be alone, in a confined space, or far from help, Blackline's G7 range turns gas detection into a connected safety net — supplied and supported locally from Walvis Bay.",
+    ],
+    ranges: [
+      { title: "G7 wearable multi-gas", body: "Connected wearable multi-gas detection with live alerts and two-way communication." },
+      { title: "G7c cellular-connected", body: "Cellular-connected personal monitor for lone workers across dispersed sites." },
+      { title: "G7 EXO area monitor", body: "Rapid-deploy connected area monitor for site-wide and perimeter gas detection." },
+    ],
+    heroImage: "/images/site/operations/truck-fleet-night.jpg",
+  },
+  {
+    slug: "hammelmann",
+    partnerName: "Hammelmann",
+    name: "Hammelmann",
+    tagline: "High-pressure plunger pumps & water-jetting systems",
+    distributorTier: "Exclusive Hammelmann distributor — Namibia",
+    sectors: ["Industrial cleaning", "Petrochemical, oil & gas", "Surface preparation"],
+    intro: [
+      "Daron Namibia is the exclusive Namibian distributor for Hammelmann high-pressure plunger pumps and water-jetting systems — German-engineered equipment for industrial cleaning, surface preparation and cutting.",
+      "From tube and heat-exchanger cleaning in petrochemical plants to surface prep ahead of coating, Hammelmann systems handle the high-pressure work that keeps industrial and oil-and-gas assets in service. We supply the equipment and back it with our technical and procurement network.",
+    ],
+    ranges: [
+      { title: "Industrial cleaning systems", body: "High-pressure water-jetting for tube bundles, heat exchangers, tanks and process equipment." },
+      { title: "Petrochemical, oil & gas", body: "Plunger-pump systems specified for petrochemical and oil-and-gas maintenance and turnarounds." },
+      { title: "Surface preparation & cutting", body: "Hydro-blasting and water-jet cutting for surface prep ahead of coating and for precision removal work." },
+    ],
+    heroImage: "/images/site/operations/container-lift-subsea7.jpg",
+  },
+];
+
+export function getBrand(slug: string): Brand | undefined {
+  return brands.find((b) => b.slug === slug);
+}
+
+export function getPartnerByName(name: string) {
+  return partners.find((p) => p.name === name);
+}
+
+/**
+ * Operators, vessels and partners Daron has supplied — all already named in
+ * existing site copy / project history. Used for the "trusted by" wall.
+ * (Names, not logos, to avoid trademark-usage questions; Luther to confirm he's
+ * comfortable naming each publicly — most already appear on the live site.)
+ */
+export const clients = [
+  { name: "Subsea7", note: "Offshore construction — heavy-lift support" },
+  { name: "Pellegrini", note: "Offshore catering partner — Sapura Berani, Saipem Santorini" },
+  { name: "Saipem", note: "Saipem Santorini project" },
+  { name: "Bourbon", note: "Offshore marine services" },
+  { name: "Odfjell Drilling", note: "Deepsea Mira · Bollsta · Hercules" },
+  { name: "Transocean", note: "Transocean Marianas (2013)" },
+  { name: "MCTC", note: "Marine catering" },
+  { name: "Oceanic", note: "Offshore operations" },
+] as const;
+

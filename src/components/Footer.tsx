@@ -7,8 +7,10 @@ const navItems = [
   { href: "/" as const, key: "home" as const },
   { href: "/about" as const, key: "about" as const },
   { href: "/services" as const, key: "services" as const },
+  { href: "/brands" as const, key: "brands" as const },
   { href: "/industries" as const, key: "industries" as const },
   { href: "/why-daron" as const, key: "whyDaron" as const },
+  { href: "/ai" as const, key: "ai" as const },
   { href: "/insights" as const, key: "insights" as const },
   { href: "/contact" as const, key: "contact" as const },
 ];

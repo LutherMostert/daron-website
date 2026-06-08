@@ -2,8 +2,33 @@
   "A11y": {
     "skipToContent": "Skip to content"
   },
+  "Proof": {
+    "eyebrow": "Trusted in the field",
+    "heading": "Operators, vessels and partners we supply",
+    "intro": "Real names from our offshore, dry-dock and provisioning work — not stock logos."
+  },
+  "Brands": {
+    "heroEyebrow": "Brands we represent",
+    "heroTitle": "The brands we represent in Namibia",
+    "heroIntro": "Daron Namibia is the authorised local distributor for a focused set of world-class marine, safety and industrial brands — supplied, stocked and supported from Walvis Bay.",
+    "cardCta": "View brand",
+    "sectorsLabel": "Sectors",
+    "rangesHeading": "What we supply",
+    "cataloguesHeading": "Product catalogues",
+    "cataloguesNote": "Download the manufacturer brochures below. For pricing or availability, send an RFQ — a KAM replies the same day.",
+    "available": "({count} available)",
+    "backToBrands": "All brands",
+    "exploreAll": "Explore all brands",
+    "talkCta": "Talk to our team",
+    "sendRfq": "Send your RFQ",
+    "rfqHeading": "Need {brand} products or a quote?",
+    "rfqBody": "Send your requirement on WhatsApp — the Daron AI assistant drafts a response in minutes and a KAM reviews every quote before it ships.",
+    "distributorOf": "Authorised distributor"
+  },
   "Nav": {
     "home": "Home",
+    "brands": "Brands",
+    "ai": "Daron AI",
     "about": "About",
     "services": "Services",
     "industries": "Industries",

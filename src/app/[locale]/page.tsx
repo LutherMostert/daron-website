@@ -4,9 +4,10 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
+import { ClientWall } from "@/components/ClientWall";
 import { Link } from "@/i18n/routing";
 import { buildMetadata } from "@/lib/seo";
-import { contact, site } from "@/lib/site";
+import { brands, contact, getPartnerByName, site } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -40,6 +41,7 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Home");
+  const tBrands = await getTranslations("Brands");
 
   const asideBullets = [
     t("asideBullet1"),
@@ -350,6 +352,9 @@ export default async function HomePage({
         </Container>
       </section>
 
+      {/* Trusted-by wall — real operators & partners */}
+      <ClientWall variant="white" />
+
       {/* Meet Don — AI operations copilot */}
       <section className="bg-[var(--color-navy)] py-20 text-white sm:py-24">
         <Container>
@@ -443,6 +448,61 @@ export default async function HomePage({
                 </Link>
               </li>
             ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* Brands we represent */}
+      <section className="bg-[var(--color-sand)] py-16 sm:py-20">
+        <Container>
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
+                {tBrands("heroEyebrow")}
+              </p>
+              <h2 className="mt-3 max-w-2xl font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
+                {tBrands("heroTitle")}
+              </h2>
+            </div>
+            <Link
+              href="/brands"
+              className="inline-flex items-center font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
+            >
+              {tBrands("exploreAll")} &rarr;
+            </Link>
+          </div>
+          <ul className="mt-10 grid grid-cols-2 items-stretch gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {brands.map((b, idx) => {
+              const partner = getPartnerByName(b.partnerName);
+              return (
+                <li
+                  key={b.slug}
+                  data-reveal
+                  style={
+                    { "--reveal-delay": `${idx * 50}ms` } as React.CSSProperties
+                  }
+                >
+                  <Link
+                    href={`/brands/${b.slug}`}
+                    className="flex h-24 items-center justify-center rounded-xl border border-[var(--color-line)] bg-white px-4 py-4 text-center transition-shadow hover:shadow-md"
+                  >
+                    {partner?.logo ? (
+                      <Image
+                        src={partner.logo}
+                        alt={`${b.name} logo`}
+                        width={partner.logoWidth}
+                        height={partner.logoHeight}
+                        className="max-h-9 w-auto max-w-[140px] object-contain"
+                      />
+                    ) : (
+                      <span className="font-[family-name:var(--font-poppins)] text-base font-bold text-[var(--color-navy)]">
+                        {b.name}
+                      </span>
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </Container>
       </section>

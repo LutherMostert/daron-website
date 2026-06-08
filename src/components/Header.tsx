@@ -11,6 +11,7 @@ import { Container } from "./Container";
 const navItems = [
   { href: "/about" as const, key: "about" as const },
   { href: "/services" as const, key: "services" as const },
+  { href: "/brands" as const, key: "brands" as const },
   { href: "/industries" as const, key: "industries" as const },
   { href: "/why-daron" as const, key: "whyDaron" as const },
   { href: "/insights" as const, key: "insights" as const },
@@ -117,8 +118,8 @@ export function Header() {
           />
         </Link>
 
-        <nav aria-label="Primary" className="hidden md:block">
-          <ul className="flex items-center gap-6 text-sm font-medium">
+        <nav aria-label="Primary" className="hidden lg:block">
+          <ul className="flex items-center gap-5 text-sm font-medium xl:gap-6">
             {navItems.map((n) => (
               <li key={n.href}>
                 <Link
@@ -132,7 +133,7 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <LanguageSwitcher />
           <a
             href={contact.whatsapp.href}
@@ -150,7 +151,7 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[var(--color-line)] text-[var(--color-navy)] md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[var(--color-line)] text-[var(--color-navy)] lg:hidden"
         >
           <span className="sr-only">{open ? tHeader("closeMenu") : tHeader("openMenu")}</span>
           <svg

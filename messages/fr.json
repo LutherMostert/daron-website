@@ -2,8 +2,33 @@
   "A11y": {
     "skipToContent": "Aller au contenu"
   },
+  "Proof": {
+    "eyebrow": "Éprouvé sur le terrain",
+    "heading": "Opérateurs, navires et partenaires que nous approvisionnons",
+    "intro": "Des noms réels issus de nos opérations offshore, de cale sèche et d'avitaillement — pas des logos génériques."
+  },
+  "Brands": {
+    "heroEyebrow": "Les marques que nous représentons",
+    "heroTitle": "Les marques que nous représentons en Namibie",
+    "heroIntro": "Daron Namibia est le distributeur local agréé d'un ensemble ciblé de marques maritimes, de sécurité et industrielles de classe mondiale — fournies, stockées et soutenues depuis Walvis Bay.",
+    "cardCta": "Voir la marque",
+    "sectorsLabel": "Secteurs",
+    "rangesHeading": "Ce que nous fournissons",
+    "cataloguesHeading": "Catalogues de produits",
+    "cataloguesNote": "Téléchargez les brochures du fabricant ci-dessous. Pour les prix ou la disponibilité, envoyez une demande de devis — un KAM répond le jour même.",
+    "available": "({count} disponibles)",
+    "backToBrands": "Toutes les marques",
+    "exploreAll": "Découvrir toutes les marques",
+    "talkCta": "Parler à notre équipe",
+    "sendRfq": "Envoyer votre demande",
+    "rfqHeading": "Besoin de produits {brand} ou d'un devis ?",
+    "rfqBody": "Envoyez votre demande par WhatsApp — l'assistant IA de Daron rédige une réponse en quelques minutes et un KAM vérifie chaque devis avant son envoi.",
+    "distributorOf": "Distributeur agréé"
+  },
   "Nav": {
     "home": "Accueil",
+    "brands": "Marques",
+    "ai": "IA Daron",
     "about": "À propos",
     "services": "Services",
     "industries": "Industries",
