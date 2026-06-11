@@ -5,6 +5,15 @@ import { useTranslations } from "next-intl";
 
 type Status = "idle" | "sending" | "success" | "error";
 
+const MAX_FILE_BYTES = 4 * 1024 * 1024; // 4 MB
+const ACCEPTED_EXTENSIONS = [".xlsx", ".xls", ".csv", ".pdf", ".doc", ".docx", ".txt"];
+const ACCEPT_ATTR = ACCEPTED_EXTENSIONS.join(",");
+
+function isAcceptedFile(name: string): boolean {
+  const lower = name.toLowerCase();
+  return ACCEPTED_EXTENSIONS.some((ext) => lower.endsWith(ext));
+}
+
 export function ContactForm() {
   const t = useTranslations("Contact");
   const [status, setStatus] = useState<Status>("idle");
@@ -14,22 +23,29 @@ export function ContactForm() {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
-    const payload = {
-      firstName: String(fd.get("firstName") || ""),
-      surname: String(fd.get("surname") || ""),
-      email: String(fd.get("email") || ""),
-      phone: String(fd.get("phone") || ""),
-      message: String(fd.get("message") || ""),
-    };
+    const file = fd.get("rfqFile");
+
+    // Client-side file guardrails (the API re-validates).
+    if (file instanceof File && file.size > 0) {
+      if (file.size > MAX_FILE_BYTES) {
+        setErrorMsg(t("fileTooLarge"));
+        setStatus("error");
+        return;
+      }
+      if (!isAcceptedFile(file.name)) {
+        setErrorMsg(t("fileWrongType"));
+        setStatus("error");
+        return;
+      }
+    } else {
+      fd.delete("rfqFile");
+    }
 
     setStatus("sending");
     setErrorMsg("");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      // Multipart — lets the visitor attach an RFQ file (Excel/PDF/Word/CSV).
+      const res = await fetch("/api/contact", { method: "POST", body: fd });
       if (!res.ok) {
         const j = (await res.json().catch(() => ({}))) as { error?: string };
         throw new Error(j.error || "");
@@ -90,6 +106,20 @@ export function ContactForm() {
           required
           className="rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-base text-[var(--color-ink)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30"
         />
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="rfqFile" className="text-sm font-semibold text-[var(--color-ink)]">
+          {t("fileLabel")}
+        </label>
+        <input
+          id="rfqFile"
+          name="rfqFile"
+          type="file"
+          accept={ACCEPT_ATTR}
+          className="rounded-md border border-dashed border-[var(--color-line)] bg-white px-3 py-2.5 text-sm text-[var(--color-mute)] file:mr-3 file:rounded-full file:border-0 file:bg-[var(--color-sand)] file:px-4 file:py-1.5 file:text-sm file:font-semibold file:text-[var(--color-navy)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30"
+        />
+        <p className="text-xs text-[var(--color-mute)]">{t("fileHint")}</p>
       </div>
 
       <div aria-live="polite" className="min-h-[1.25rem]">

@@ -6,6 +6,7 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { PageHero } from "@/components/PageHero";
+import { RfqPipeline } from "@/components/RfqPipeline";
 import { contact } from "@/lib/site";
 
 export async function generateMetadata({
@@ -105,6 +106,8 @@ export default async function AiPage({
               <p>{t("enterpriseP3")}</p>
             </div>
           </div>
+
+          <RfqPipeline />
         </Container>
       </section>
 

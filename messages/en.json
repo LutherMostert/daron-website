@@ -2,6 +2,42 @@
   "A11y": {
     "skipToContent": "Skip to content"
   },
+  "Sticky": {
+    "rfq": "Send RFQ",
+    "call": "Call ops"
+  },
+  "ProofBar": {
+    "l1": "Founded in Walvis Bay",
+    "l2": "Suppliers across Africa & Europe",
+    "l3": "Operational response",
+    "l4": "+ HACCP · ISSA · IMPA — audit-ready",
+    "l5": "Rigs supplied concurrently"
+  },
+  "Pipeline": {
+    "eyebrow": "How an RFQ moves",
+    "heading": "AI-assisted speed. Human-reviewed accountability.",
+    "s1Title": "Received",
+    "s1Body": "Your RFQ lands by WhatsApp, email, Excel, PDF, Word or voice note.",
+    "s2Title": "Matched",
+    "s2Body": "Don reads and structures every line, matching it against our live catalog and 2,500+ suppliers.",
+    "s3Title": "Quoted",
+    "s3Body": "A Daron-branded draft quote is generated in minutes, with client-specific pricing.",
+    "s4Title": "Reviewed",
+    "s4Body": "A human KAM checks and approves every quote before it ships. No exceptions.",
+    "s5Title": "Delivered",
+    "s5Body": "The ops team coordinates fulfilment — warehouse, fleet, customs, quayside."
+  },
+  "TrackRecord": {
+    "heroEyebrow": "Track record",
+    "heroTitle": "Proven where operations can't stop",
+    "heroIntro": "Rig reactivations, concurrent drilling campaigns, dry-dock scopes and cruise provisioning — delivered from Walvis Bay. Real work, with the photos and numbers to back it.",
+    "sapuraEyebrow": "Featured operation",
+    "sapuraTitle": "Sapura Berani — full rig reactivation in 11 days",
+    "sapuraBody": "Cold-stacked for 13 months, reactivated in 11 days with catering partner Pellegrini: kitchen and laundry rebuilt, mold remediation with Orlichem chemicals, and parts manufactured on-site when none existed in Namibia. Supplies reached the rig within an hour of request.",
+    "sapuraCta": "Read the full story",
+    "casesHeading": "Delivered by the Daron technical team",
+    "rigsCta": "Our offshore drilling track record"
+  },
   "Proof": {
     "eyebrow": "Trusted in the field",
     "heading": "Operators, vessels and partners we supply",
@@ -47,6 +83,7 @@
     "brands": "Brands",
     "ai": "Daron AI",
     "faq": "FAQ",
+    "trackRecord": "Track record",
     "about": "About",
     "services": "Services",
     "industries": "Industries",
@@ -55,7 +92,7 @@
     "contact": "Contact"
   },
   "Header": {
-    "chatCta": "Chat with Daron AI assistant",
+    "chatCta": "Send your RFQ",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "chatCtaMobile": "Chat with Daron AI assistant on WhatsApp"
@@ -214,6 +251,7 @@
     "proofBody2": "From supplying the Deepsea Mira, Deepsea Bollsta, and Deepsea Hercules at the same time, to our early work on the Transocean Marianas in 2013, our track record reflects one thing:",
     "proofPunchline": "When operations are critical, we deliver.",
     "proofCta": "Our offshore drilling track record",
+    "proofMoreCta": "Full track record",
     "proofAsideTitle": "Operational capability you can rely on",
     "proofAsideBullet1": "Supplied 3 offshore drilling rigs simultaneously",
     "proofAsideBullet2": "Supporting high-pressure oil & gas operations",
@@ -624,6 +662,10 @@
     "telephone": "Telephone number",
     "yourMessage": "Your message",
     "sendMessage": "Send message",
+    "fileLabel": "Attach your RFQ (optional)",
+    "fileHint": "Excel, PDF, Word or CSV — max 4 MB",
+    "fileTooLarge": "File is too large — 4 MB max. For bigger files, send via WhatsApp.",
+    "fileWrongType": "Unsupported file type. Use Excel, PDF, Word or CSV.",
     "formSending": "Sending…",
     "formSuccessTitle": "Message sent — thank you.",
     "formSuccessBody": "We'll route your enquiry to the right team and reply within one business day. For an instant quote, the Daron AI assistant on WhatsApp is faster.",

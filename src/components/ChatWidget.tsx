@@ -288,7 +288,7 @@ export function ChatWidget() {
           type="button"
           aria-label={t("openChat")}
           onClick={() => setOpen(true)}
-          className="plausible-event-name=Chat_Open fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-cta)] text-[var(--color-cta-ink)] shadow-lg transition-all hover:scale-105 hover:bg-[var(--color-cta-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:bottom-8 sm:right-8"
+          className="plausible-event-name=Chat_Open fixed bottom-20 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-cta)] text-[var(--color-cta-ink)] shadow-lg transition-all hover:scale-105 hover:bg-[var(--color-cta-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 lg:bottom-8 lg:right-8"
         >
           <svg
             width="24"
@@ -322,7 +322,7 @@ export function ChatWidget() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="chat-widget-title"
-          className="fixed bottom-0 right-0 z-40 flex h-[min(640px,100dvh)] w-full flex-col border border-[var(--color-line)] bg-white shadow-2xl sm:bottom-6 sm:right-6 sm:h-[640px] sm:max-h-[calc(100dvh-3rem)] sm:w-[400px] sm:rounded-2xl"
+          className="fixed bottom-0 right-0 z-50 flex h-[min(640px,100dvh)] w-full flex-col border border-[var(--color-line)] bg-white shadow-2xl sm:bottom-6 sm:right-6 sm:h-[640px] sm:max-h-[calc(100dvh-3rem)] sm:w-[400px] sm:rounded-2xl"
         >
           {/* Header */}
           <div className="flex items-center justify-between gap-3 border-b border-[var(--color-line)] bg-[var(--color-navy)] px-4 py-3 text-white sm:rounded-t-2xl">

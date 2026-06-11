@@ -3,8 +3,10 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Container } from "@/components/Container";
+import { CountUp } from "@/components/CountUp";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { ClientWall } from "@/components/ClientWall";
+import { RfqPipeline } from "@/components/RfqPipeline";
 import { Link } from "@/i18n/routing";
 import { buildMetadata } from "@/lib/seo";
 import { brands, contact, getPartnerByName, site } from "@/lib/site";
@@ -42,6 +44,7 @@ export default async function HomePage({
   setRequestLocale(locale);
   const t = await getTranslations("Home");
   const tBrands = await getTranslations("Brands");
+  const tProofBar = await getTranslations("ProofBar");
 
   const asideBullets = [
     t("asideBullet1"),
@@ -146,8 +149,15 @@ export default async function HomePage({
               </Link>
             </div>
 
-            <p className="mt-5 text-xs text-white/55">
+            <p className="mt-5 flex flex-wrap items-center gap-2 text-xs text-white/55">
+              <span aria-hidden="true" className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
+              </span>
               {t("heroCallLine", { phone: contact.phone.display })}
+              <span aria-hidden="true" className="font-mono tracking-tight text-white/40">
+                22.95°S · 14.50°E
+              </span>
             </p>
           </div>
 
@@ -167,6 +177,73 @@ export default async function HomePage({
               ))}
             </ul>
           </aside>
+        </Container>
+      </section>
+
+      {/* Operational proof bar */}
+      <section
+        aria-label="Operational proof"
+        className="border-b border-white/10 bg-[var(--color-navy-deep)] py-8 text-white"
+      >
+        <Container>
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-7 text-center sm:grid-cols-3 lg:grid-cols-5">
+            <div data-reveal className="flex flex-col">
+              <dt className="order-last mt-1.5 text-[11px] font-medium uppercase tracking-wider text-white/55">
+                {tProofBar("l1")}
+              </dt>
+              <dd className="font-[family-name:var(--font-poppins)] text-2xl font-bold text-white sm:text-3xl">
+                2012
+              </dd>
+            </div>
+            <div
+              data-reveal
+              style={{ "--reveal-delay": "60ms" } as React.CSSProperties}
+              className="flex flex-col"
+            >
+              <dt className="order-last mt-1.5 text-[11px] font-medium uppercase tracking-wider text-white/55">
+                {tProofBar("l2")}
+              </dt>
+              <dd className="font-[family-name:var(--font-poppins)] text-2xl font-bold text-[var(--color-accent)] sm:text-3xl">
+                <CountUp to={2500} suffix="+" />
+              </dd>
+            </div>
+            <div
+              data-reveal
+              style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
+              className="flex flex-col"
+            >
+              <dt className="order-last mt-1.5 text-[11px] font-medium uppercase tracking-wider text-white/55">
+                {tProofBar("l3")}
+              </dt>
+              <dd className="font-[family-name:var(--font-poppins)] text-2xl font-bold text-white sm:text-3xl">
+                24/7
+              </dd>
+            </div>
+            <div
+              data-reveal
+              style={{ "--reveal-delay": "180ms" } as React.CSSProperties}
+              className="flex flex-col"
+            >
+              <dt className="order-last mt-1.5 text-[11px] font-medium uppercase tracking-wider text-white/55">
+                {tProofBar("l4")}
+              </dt>
+              <dd className="font-[family-name:var(--font-poppins)] text-2xl font-bold text-white sm:text-3xl">
+                ISO 9001
+              </dd>
+            </div>
+            <div
+              data-reveal
+              style={{ "--reveal-delay": "240ms" } as React.CSSProperties}
+              className="col-span-2 flex flex-col sm:col-span-1"
+            >
+              <dt className="order-last mt-1.5 text-[11px] font-medium uppercase tracking-wider text-white/55">
+                {tProofBar("l5")}
+              </dt>
+              <dd className="font-[family-name:var(--font-poppins)] text-2xl font-bold text-[var(--color-accent)] sm:text-3xl">
+                <CountUp to={3} separator={false} />
+              </dd>
+            </div>
+          </dl>
         </Container>
       </section>
 
@@ -269,12 +346,20 @@ export default async function HomePage({
                   {t("proofPunchline")}
                 </p>
               </div>
-              <Link
-                href="/industries/oil-and-gas"
-                className="mt-8 inline-flex items-center rounded-full bg-[var(--color-navy)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-navy-soft)]"
-              >
-                {t("proofCta")} &rarr;
-              </Link>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <Link
+                  href="/industries/oil-and-gas"
+                  className="inline-flex items-center rounded-full bg-[var(--color-navy)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-navy-soft)]"
+                >
+                  {t("proofCta")} &rarr;
+                </Link>
+                <Link
+                  href="/track-record"
+                  className="inline-flex items-center font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
+                >
+                  {t("proofMoreCta")} &rarr;
+                </Link>
+              </div>
             </div>
             <aside className="rounded-3xl bg-[var(--color-navy)] p-8 text-white shadow-lg">
               <p className="font-[family-name:var(--font-poppins)] text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)]">
@@ -410,6 +495,8 @@ export default async function HomePage({
               </ul>
             </aside>
           </div>
+
+          <RfqPipeline onDark />
         </Container>
       </section>
 

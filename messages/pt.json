@@ -2,6 +2,42 @@
   "A11y": {
     "skipToContent": "Saltar para o conteúdo"
   },
+  "Sticky": {
+    "rfq": "Enviar RFQ",
+    "call": "Ligar"
+  },
+  "ProofBar": {
+    "l1": "Fundada em Walvis Bay",
+    "l2": "Fornecedores em África e na Europa",
+    "l3": "Resposta operacional",
+    "l4": "+ HACCP · ISSA · IMPA — pronta para auditoria",
+    "l5": "Plataformas abastecidas em simultâneo"
+  },
+  "Pipeline": {
+    "eyebrow": "O percurso de um RFQ",
+    "heading": "Rapidez assistida por IA. Responsabilidade com revisão humana.",
+    "s1Title": "Recebido",
+    "s1Body": "O seu RFQ chega por WhatsApp, email, Excel, PDF, Word ou nota de voz.",
+    "s2Title": "Correspondido",
+    "s2Body": "O Don lê e estrutura cada linha, cruzando-a com o nosso catálogo em tempo real e 2.500+ fornecedores.",
+    "s3Title": "Cotado",
+    "s3Body": "Uma proposta com a marca Daron é gerada em minutos, com preços específicos do cliente.",
+    "s4Title": "Revisto",
+    "s4Body": "Um KAM humano verifica e aprova cada cotação antes do envio. Sem exceções.",
+    "s5Title": "Entregue",
+    "s5Body": "A equipa de operações coordena a execução — armazém, frota, alfândega, cais."
+  },
+  "TrackRecord": {
+    "heroEyebrow": "Histórico",
+    "heroTitle": "Comprovado onde as operações não podem parar",
+    "heroIntro": "Reativações de plataformas, campanhas de perfuração simultâneas, trabalhos de doca seca e aprovisionamento de cruzeiros — entregues a partir de Walvis Bay. Trabalho real, com as fotos e os números que o comprovam.",
+    "sapuraEyebrow": "Operação em destaque",
+    "sapuraTitle": "Sapura Berani — reativação completa da plataforma em 11 dias",
+    "sapuraBody": "Parada durante 13 meses, foi reativada em 11 dias com o parceiro de catering Pellegrini: cozinha e lavandaria reconstruídas, remediação de bolor com químicos Orlichem e peças fabricadas no local quando não existiam na Namíbia. Os abastecimentos chegavam à plataforma menos de uma hora após o pedido.",
+    "sapuraCta": "Ler a história completa",
+    "casesHeading": "Entregue pela equipa técnica da Daron",
+    "rigsCta": "O nosso histórico em perfuração offshore"
+  },
   "Proof": {
     "eyebrow": "Confiança no terreno",
     "heading": "Operadores, navios e parceiros que abastecemos",
@@ -47,6 +83,7 @@
     "brands": "Marcas",
     "ai": "IA Daron",
     "faq": "FAQ",
+    "trackRecord": "Histórico",
     "about": "Sobre",
     "services": "Serviços",
     "industries": "Indústrias",
@@ -55,7 +92,7 @@
     "contact": "Contacto"
   },
   "Header": {
-    "chatCta": "Fale com o Daron AI assistant",
+    "chatCta": "Envie o seu RFQ",
     "openMenu": "Abrir menu",
     "closeMenu": "Fechar menu",
     "chatCtaMobile": "Fale com o Daron AI assistant no WhatsApp"
@@ -214,6 +251,7 @@
     "proofBody2": "Desde o fornecimento simultâneo da Deepsea Mira, Deepsea Bollsta e Deepsea Hercules, até ao nosso trabalho inicial na Transocean Marianas em 2013, o nosso historial reflecte uma coisa:",
     "proofPunchline": "Quando as operações são críticas, nós entregamos.",
     "proofCta": "O nosso historial em perfuração offshore",
+    "proofMoreCta": "Histórico completo",
     "proofAsideTitle": "Capacidade operacional em que pode confiar",
     "proofAsideBullet1": "Fornecimento de 3 plataformas de perfuração offshore em simultâneo",
     "proofAsideBullet2": "Apoio a operações de petróleo e gás sob alta pressão",
@@ -624,6 +662,10 @@
     "telephone": "Número de telefone",
     "yourMessage": "A sua mensagem",
     "sendMessage": "Enviar mensagem",
+    "fileLabel": "Anexe o seu RFQ (opcional)",
+    "fileHint": "Excel, PDF, Word ou CSV — máx. 4 MB",
+    "fileTooLarge": "Ficheiro demasiado grande — máx. 4 MB. Para ficheiros maiores, envie por WhatsApp.",
+    "fileWrongType": "Tipo de ficheiro não suportado. Use Excel, PDF, Word ou CSV.",
     "formSending": "A enviar…",
     "formSuccessTitle": "Mensagem enviada — obrigado.",
     "formSuccessBody": "Encaminharemos o seu pedido para a equipa certa e responderemos no prazo de um dia útil. Para um orçamento imediato, o assistente de IA da Daron no WhatsApp é mais rápido.",

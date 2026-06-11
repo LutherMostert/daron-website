@@ -10,6 +10,7 @@ const navItems = [
   { href: "/brands" as const, key: "brands" as const },
   { href: "/industries" as const, key: "industries" as const },
   { href: "/why-daron" as const, key: "whyDaron" as const },
+  { href: "/track-record" as const, key: "trackRecord" as const },
   { href: "/ai" as const, key: "ai" as const },
   { href: "/insights" as const, key: "insights" as const },
   { href: "/faq" as const, key: "faq" as const },

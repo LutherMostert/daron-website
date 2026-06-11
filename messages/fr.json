@@ -2,6 +2,42 @@
   "A11y": {
     "skipToContent": "Aller au contenu"
   },
+  "Sticky": {
+    "rfq": "Envoyer RFQ",
+    "call": "Appeler"
+  },
+  "ProofBar": {
+    "l1": "Fondée à Walvis Bay",
+    "l2": "Fournisseurs en Afrique et en Europe",
+    "l3": "Réponse opérationnelle",
+    "l4": "+ HACCP · ISSA · IMPA — prêt pour audit",
+    "l5": "Plateformes approvisionnées simultanément"
+  },
+  "Pipeline": {
+    "eyebrow": "Le parcours d'un RFQ",
+    "heading": "Vitesse assistée par IA. Responsabilité avec contrôle humain.",
+    "s1Title": "Reçu",
+    "s1Body": "Votre RFQ arrive par WhatsApp, e-mail, Excel, PDF, Word ou note vocale.",
+    "s2Title": "Apparié",
+    "s2Body": "Don lit et structure chaque ligne, en la croisant avec notre catalogue en direct et 2 500+ fournisseurs.",
+    "s3Title": "Chiffré",
+    "s3Body": "Un devis aux couleurs de Daron est généré en quelques minutes, avec la tarification propre au client.",
+    "s4Title": "Vérifié",
+    "s4Body": "Un KAM humain contrôle et approuve chaque devis avant l'envoi. Sans exception.",
+    "s5Title": "Livré",
+    "s5Body": "L'équipe des opérations coordonne l'exécution — entrepôt, flotte, douane, quai."
+  },
+  "TrackRecord": {
+    "heroEyebrow": "Références",
+    "heroTitle": "Éprouvé là où les opérations ne peuvent pas s'arrêter",
+    "heroIntro": "Réactivations de plateformes, campagnes de forage simultanées, chantiers de cale sèche et avitaillement de croisières — livrés depuis Walvis Bay. Du travail réel, avec les photos et les chiffres à l'appui.",
+    "sapuraEyebrow": "Opération phare",
+    "sapuraTitle": "Sapura Berani — réactivation complète de la plateforme en 11 jours",
+    "sapuraBody": "Désarmée pendant 13 mois, elle a été réactivée en 11 jours avec le partenaire de restauration Pellegrini : cuisine et blanchisserie reconstruites, traitement des moisissures avec les produits Orlichem et pièces fabriquées sur place lorsqu'elles n'existaient pas en Namibie. Les fournitures atteignaient la plateforme moins d'une heure après la demande.",
+    "sapuraCta": "Lire l'histoire complète",
+    "casesHeading": "Réalisé par l'équipe technique Daron",
+    "rigsCta": "Notre bilan en forage offshore"
+  },
   "Proof": {
     "eyebrow": "Éprouvé sur le terrain",
     "heading": "Opérateurs, navires et partenaires que nous approvisionnons",
@@ -47,6 +83,7 @@
     "brands": "Marques",
     "ai": "IA Daron",
     "faq": "FAQ",
+    "trackRecord": "Références",
     "about": "À propos",
     "services": "Services",
     "industries": "Industries",
@@ -55,7 +92,7 @@
     "contact": "Contact"
   },
   "Header": {
-    "chatCta": "Contacter Daron AI assistant",
+    "chatCta": "Envoyer votre RFQ",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu",
     "chatCtaMobile": "Contacter Daron AI assistant sur WhatsApp"
@@ -214,6 +251,7 @@
     "proofBody2": "De l'approvisionnement simultané des Deepsea Mira, Deepsea Bollsta et Deepsea Hercules à nos premiers travaux sur le Transocean Marianas en 2013, notre bilan reflète une réalité :",
     "proofPunchline": "Quand les opérations sont critiques, nous livrons.",
     "proofCta": "Notre bilan offshore",
+    "proofMoreCta": "Toutes nos références",
     "proofAsideTitle": "Une capacité opérationnelle sur laquelle compter",
     "proofAsideBullet1": "3 plateformes de forage offshore approvisionnées simultanément",
     "proofAsideBullet2": "Support aux opérations pétrolières et gazières sous haute pression",
@@ -624,6 +662,10 @@
     "telephone": "Numéro de téléphone",
     "yourMessage": "Votre message",
     "sendMessage": "Envoyer le message",
+    "fileLabel": "Joindre votre RFQ (facultatif)",
+    "fileHint": "Excel, PDF, Word ou CSV — 4 Mo max",
+    "fileTooLarge": "Fichier trop volumineux — 4 Mo max. Pour les fichiers plus lourds, envoyez par WhatsApp.",
+    "fileWrongType": "Type de fichier non pris en charge. Utilisez Excel, PDF, Word ou CSV.",
     "formSending": "Envoi…",
     "formSuccessTitle": "Message envoyé — merci.",
     "formSuccessBody": "Nous transmettrons votre demande à la bonne équipe et répondrons sous un jour ouvré. Pour un devis immédiat, l'assistant IA de Daron sur WhatsApp est plus rapide.",

@@ -11,6 +11,7 @@ import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { ChatWidget } from "@/components/ChatWidget";
 import { RevealController } from "@/components/RevealController";
+import { StickyActions } from "@/components/StickyActions";
 import { contact, site } from "@/lib/site";
 import { routing } from "@/i18n/routing";
 
@@ -199,6 +200,7 @@ export default async function LocaleLayout({
             {children}
           </main>
           <Footer />
+          <StickyActions />
           <JsonLd id="ld-website" data={websiteJsonLd} />
           <JsonLd id="ld-organization" data={orgJsonLd} />
           <JsonLd id="ld-localbusiness" data={localBusinessJsonLd} />
