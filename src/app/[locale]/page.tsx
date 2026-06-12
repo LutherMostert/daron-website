@@ -6,6 +6,8 @@ import { Container } from "@/components/Container";
 import { CountUp } from "@/components/CountUp";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { ClientWall } from "@/components/ClientWall";
+import { HeroTimeline } from "@/components/HeroTimeline";
+import { ReachMap, type ReachNode } from "@/components/ReachMap";
 import { RfqPipeline } from "@/components/RfqPipeline";
 import { Link } from "@/i18n/routing";
 import { buildMetadata } from "@/lib/seo";
@@ -45,6 +47,19 @@ export default async function HomePage({
   const t = await getTranslations("Home");
   const tBrands = await getTranslations("Brands");
   const tProofBar = await getTranslations("ProofBar");
+  const tReach = await getTranslations("Reach");
+
+  // Stylised network positions (ReachMap viewBox 0 0 800 620) — Daron Group
+  // operating countries from the About copy, arcs from the Walvis Bay hub.
+  const reachNodes: ReachNode[] = [
+    { label: tReach("n1"), x: 410, y: 554, arc: "M368,472 Q400,520 410,554" },
+    { label: tReach("n2"), x: 354, y: 366, arc: "M368,472 Q330,420 354,366" },
+    { label: tReach("n3"), x: 60, y: 190, arc: "M368,472 Q140,360 60,190" },
+    { label: tReach("n4"), x: 561, y: 494, arc: "M368,472 Q480,500 561,494" },
+    { label: tReach("n5"), x: 340, y: 336, arc: "M368,472 Q310,400 340,336", anchor: "end" },
+    { label: tReach("n6"), x: 171, y: 260, arc: "M368,472 Q220,390 171,260", anchor: "end" },
+    { label: tReach("n7"), x: 270, y: 40, arc: "M368,472 Q250,250 270,40", dashed: true },
+  ];
 
   const asideBullets = [
     t("asideBullet1"),
@@ -122,17 +137,29 @@ export default async function HomePage({
         />
         <Container className="relative grid gap-10 py-16 sm:py-24 md:grid-cols-[1.4fr_1fr] md:items-center md:gap-12 md:py-28">
           <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+            <p
+              data-hero-seq
+              className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]"
+            >
               {t("heroEyebrow", { founded: site.founded })}
             </p>
-            <h1 className="font-[family-name:var(--font-poppins)] text-3xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
+            <h1
+              data-hero-seq
+              className="font-[family-name:var(--font-poppins)] text-3xl font-bold leading-[1.05] sm:text-5xl md:text-6xl"
+            >
               {t("heroHeading")}
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
+            <p
+              data-hero-seq
+              className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg"
+            >
               {t("heroIntro")}
             </p>
 
-            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+            <div
+              data-hero-seq
+              className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center"
+            >
               <a
                 href={contact.whatsapp.href}
                 className="rounded-full bg-[var(--color-cta)] px-8 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
@@ -149,7 +176,10 @@ export default async function HomePage({
               </Link>
             </div>
 
-            <p className="mt-5 flex flex-wrap items-center gap-2 text-xs text-white/55">
+            <p
+              data-hero-seq
+              className="mt-5 flex flex-wrap items-center gap-2 text-xs text-white/55"
+            >
               <span aria-hidden="true" className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
@@ -161,7 +191,10 @@ export default async function HomePage({
             </p>
           </div>
 
-          <aside className="rounded-3xl border border-white/15 bg-[var(--color-navy)]/55 p-6 shadow-2xl shadow-[var(--color-navy)]/30 backdrop-blur sm:p-8">
+          <aside
+            data-hero-seq
+            className="rounded-3xl border border-white/15 bg-[var(--color-navy)]/55 p-6 shadow-2xl shadow-[var(--color-navy)]/30 backdrop-blur sm:p-8"
+          >
             <p className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
               {t("asideTitle")}
             </p>
@@ -177,6 +210,7 @@ export default async function HomePage({
               ))}
             </ul>
           </aside>
+          <HeroTimeline />
         </Container>
       </section>
 
@@ -434,6 +468,26 @@ export default async function HomePage({
               </li>
             ))}
           </ul>
+        </Container>
+      </section>
+
+      {/* African reach — animated network map */}
+      <section className="relative isolate overflow-hidden bg-[var(--color-navy-deep)] py-20 text-white sm:py-24">
+        <Container>
+          <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.2fr]">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+                {tReach("eyebrow")}
+              </p>
+              <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl md:text-4xl">
+                {tReach("heading")}
+              </h2>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80">
+                {tReach("intro")}
+              </p>
+            </div>
+            <ReachMap nodes={reachNodes} hubLabel={tReach("hub")} />
+          </div>
         </Container>
       </section>
 

@@ -20,6 +20,7 @@
  * `--color-navy`, `--color-ink`, `--color-sand`, `--color-line`, `--color-mute`.
  */
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { contact } from "@/lib/site";
@@ -327,27 +328,15 @@ export function ChatWidget() {
           {/* Header */}
           <div className="flex items-center justify-between gap-3 border-b border-[var(--color-line)] bg-[var(--color-navy)] px-4 py-3 text-white sm:rounded-t-2xl">
             <div className="flex items-center gap-3">
-              <div
+              <Image
+                src="/images/don-avatar.svg"
+                alt=""
                 aria-hidden="true"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-accent)] text-[var(--color-navy)]"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="5" r="2.5" />
-                  <line x1="12" y1="7.5" x2="12" y2="22" />
-                  <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
-                  <line x1="8" y1="10" x2="16" y2="10" />
-                </svg>
-              </div>
+                width={36}
+                height={36}
+                unoptimized
+                className="h-9 w-9 rounded-full"
+              />
               <div>
                 <p
                   id="chat-widget-title"
