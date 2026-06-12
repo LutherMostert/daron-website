@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { contact, site } from "@/lib/site";
@@ -27,12 +28,13 @@ export function Footer() {
       <Container className="py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <p className="font-[family-name:var(--font-poppins)] text-2xl font-bold">
-              DARON<span className="text-[var(--color-accent)]">.</span>
-              <span className="ml-2 text-xs font-normal uppercase tracking-[0.2em] text-white/60">
-                Namibia
-              </span>
-            </p>
+            <Image
+              src="/images/logo-daron-white.png"
+              alt={`${site.name} logo`}
+              width={195}
+              height={175}
+              className="h-20 w-auto"
+            />
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">
               {t("tagline", { founded: site.founded })}
             </p>

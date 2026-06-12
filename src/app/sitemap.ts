@@ -46,6 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/brands/honeywell", priority: 0.7, cf: "monthly" },
     { path: "/brands/blackline-safety", priority: 0.7, cf: "monthly" },
     { path: "/brands/hammelmann", priority: 0.7, cf: "monthly" },
+    { path: "/brands/industrial-scientific", priority: 0.7, cf: "monthly" },
     { path: "/why-daron", priority: 0.8, cf: "monthly" },
     { path: "/track-record", priority: 0.8, cf: "monthly" },
     { path: "/ai", priority: 0.7, cf: "monthly" },

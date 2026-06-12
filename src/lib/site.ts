@@ -229,6 +229,26 @@ export const partners: Partner[] = [
         file: "/catalogues/blackline-g7-exo-brochure.pdf",
         sizeMB: 8.6,
       },
+      {
+        title: "EXO 8 area monitor",
+        file: "/catalogues/blackline-exo8-area-monitor-brochure.pdf",
+        sizeMB: 0.5,
+      },
+      {
+        title: "G6 single-gas detector",
+        file: "/catalogues/blackline-g6-brochure.pdf",
+        sizeMB: 0.5,
+      },
+      {
+        title: "G8 connected wearable",
+        file: "/catalogues/blackline-g8-datasheet.pdf",
+        sizeMB: 0.7,
+      },
+      {
+        title: "Gas detection overview",
+        file: "/catalogues/blackline-gas-detection-brochure.pdf",
+        sizeMB: 4.7,
+      },
     ] satisfies PartnerCatalogue[],
   },
   {
@@ -255,6 +275,46 @@ export const partners: Partner[] = [
         title: "Petrochemical, oil & gas",
         file: "/catalogues/hammelmann-petrochemical-oil-gas-brochure.pdf",
         sizeMB: 13.6,
+      },
+      {
+        title: "Shipping industry",
+        file: "/catalogues/hammelmann-shipping-industry-brochure.pdf",
+        sizeMB: 14.4,
+      },
+    ] satisfies PartnerCatalogue[],
+  },
+  {
+    name: "Industrial Scientific",
+    note: "Distributor — portable gas detection & docking systems",
+    category: "Health & safety",
+    logo: "/images/partners/industrial-scientific.svg",
+    logoWidth: 239,
+    logoHeight: 48,
+    catalogues: [
+      {
+        title: "Ventis Pro5 five-gas monitor",
+        file: "/catalogues/industrial-scientific-ventis-pro5-brochure.pdf",
+        sizeMB: 2.4,
+      },
+      {
+        title: "Ventis MX4 four-gas monitor",
+        file: "/catalogues/industrial-scientific-ventis-mx4-brochure.pdf",
+        sizeMB: 4.4,
+      },
+      {
+        title: "MX6 iBrid six-gas monitor",
+        file: "/catalogues/industrial-scientific-mx6-ibrid-brochure.pdf",
+        sizeMB: 3.2,
+      },
+      {
+        title: "Tango TX2 two-gas spec sheet",
+        file: "/catalogues/industrial-scientific-tango-tx2-spec.pdf",
+        sizeMB: 0.8,
+      },
+      {
+        title: "Sensors by monitor — gas chart (2025)",
+        file: "/catalogues/industrial-scientific-gas-chart-2025.pdf",
+        sizeMB: 0.1,
       },
     ] satisfies PartnerCatalogue[],
   },
@@ -357,13 +417,15 @@ export const brands: Brand[] = [
       "Blackline combines wearable gas detectors, area monitors and the Blackline Live cloud platform to give safety teams real-time worker location and gas-exposure data, automatic fall and no-motion alerts, and optional 24/7 live monitoring — so lone workers and whole sites stay accounted for.",
     ],
     ranges: [
+      { title: "G6 connected single-gas detector", body: "Direct-to-cloud single-gas detection for H₂S, CO, O₂ or SO₂ with emergency SOS, GPS location, up to one-year battery life and automatic over-the-air updates — connected safety at single-gas cost." },
       { title: "G7 wearable multi-gas detector", body: "Intrinsically-safe personal monitor detecting up to five gases from 20+ cartridge options, with built-in 4G (optional satellite), live streaming to Blackline Live, and automatic fall, no-motion, SOS and missed-check-in alerts." },
       { title: "G7c cellular connected wearable", body: "Adds 4G/3G cellular with assisted-GPS speakerphone for two-way voice between worker and monitoring staff; gas, bump-test and calibration data stream automatically to Blackline Analytics. ATEX/IECEx and Class I Div 1 certified." },
-      { title: "G7 EXO area monitor", body: "Direct-to-cloud area monitor detecting up to five gases via 360° diffusion or optional pump, with 4G + optional Iridium satellite and 100+ days' battery — integrates with G7 wearables and can trigger external alarms or gates." },
+      { title: "G8 — the most connected safety wearable", body: "One device for gas detection (up to 5 gases via swappable cartridges, diffusion or pumped), lone-worker protection and team communication — IP67, intrinsically safe, real-time data sharing." },
+      { title: "EXO 8 area monitor", body: "The world's only direct-to-cloud portable area monitor detecting up to eight gases plus optional gamma radiation, with AlertLink proximity alerts, cellular or satellite connectivity and up to 100 days' battery." },
       { title: "Blackline Live monitoring platform", body: "Cloud portal giving real-time visibility of every worker's location, gas status and alerts; your team or Blackline's 24/7 Safety Operations Centre can mobilise responders to an exact GPS location." },
       { title: "Blackline Analytics & compliance", body: "Automatically time- and location-stamps every reading, bump test and calibration, surfacing gas-exposure trends and compliance gaps with no manual data collection." },
     ],
-    keyProducts: ["G7 wearable", "G7c cellular", "G7 EXO area monitor", "Blackline Live", "Blackline Analytics"],
+    keyProducts: ["G6 single-gas", "G7 wearable", "G7c cellular", "G8 wearable", "G7 EXO", "EXO 8 area monitor", "Blackline Live", "Blackline Analytics"],
     heroImage: "/images/site/operations/truck-fleet-night.jpg",
   },
   {
@@ -380,9 +442,32 @@ export const brands: Brand[] = [
     ranges: [
       { title: "Industrial cleaning systems", body: "High-pressure water-jetting for tube bundles, heat exchangers, tanks and process equipment." },
       { title: "Petrochemical, oil & gas", body: "Plunger-pump systems specified for petrochemical and oil-and-gas maintenance and turnarounds." },
+      { title: "Ship & dock cleaning systems", body: "Hull, deck and dock cleaning with Hammelmann's robotic water-jetting units — including the Dockboy dock cleaner and Spiderjet hull-cleaning robot — for shipyard and dry-dock work." },
       { title: "Surface preparation & cutting", body: "Hydro-blasting and water-jet cutting for surface prep ahead of coating and for precision removal work." },
     ],
+    keyProducts: ["Dockboy", "Spiderjet"],
     heroImage: "/images/site/operations/container-lift-subsea7.jpg",
+  },
+  {
+    slug: "industrial-scientific",
+    partnerName: "Industrial Scientific",
+    name: "Industrial Scientific",
+    tagline: "Portable gas detection & docking systems",
+    distributorTier: "Industrial Scientific distributor — Namibia",
+    sectors: ["Oil & gas", "Petrochemical", "Mining & metals", "Confined-space entry"],
+    intro: [
+      "Daron Namibia distributes Industrial Scientific portable gas detection — rugged personal and multi-gas monitors, backed by the Guaranteed for Life™ warranty, trusted across oil & gas, petrochemical and metal-production sites worldwide.",
+      "From the two-gas Tango TX2 to the six-gas MX6 iBrid with hundreds of field-changeable sensor combinations, the range covers personal monitoring, confined-space entry and remote sampling — with DSX docking stations automating bump tests, calibration and compliance reporting.",
+    ],
+    ranges: [
+      { title: "Ventis Pro5 five-gas monitor", body: "Detects up to five gases simultaneously in one rugged wireless monitor — personal monitoring and confined-space entry in a single device, with team alarm sharing, programmable alarm-action messages and remote monitoring." },
+      { title: "Ventis MX4 four-gas monitor", body: "Compact, rugged four-gas monitor for everyday personal protection and confined-space entry." },
+      { title: "MX6 iBrid six-gas monitor", body: "Up to six gases with hundreds of field-changeable sensor combinations, an internal motorised pump for remote sampling and an optional benzene-detection kit — built for oil & gas, petrochemical and metal production." },
+      { title: "Tango TX2 two-gas monitor", body: "The most accurate two-gas monitor, with individual DualSense® sensors, a two-year runtime and a replaceable battery — no charging infrastructure needed." },
+      { title: "DSX docking & fleet management", body: "DSX docking stations (standalone, cloud-connected or local-server) automate bump testing, calibration and record-keeping across the detector fleet." },
+    ],
+    keyProducts: ["Ventis Pro5", "Ventis MX4", "MX6 iBrid", "Tango TX2", "DSX Docking Station"],
+    heroImage: "/images/site/operations/crew-lifting-pallet.jpg",
   },
 ];
 
