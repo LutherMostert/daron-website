@@ -77,7 +77,18 @@ export type PartnerCatalogue = {
   sizeMB: number;
 };
 
-export const partners = [
+export type Partner = {
+  name: string;
+  note: string;
+  category: string;
+  /** null → text-only card (no logo sourced yet). */
+  logo: string | null;
+  logoWidth: number;
+  logoHeight: number;
+  catalogues: PartnerCatalogue[];
+};
+
+export const partners: Partner[] = [
   {
     name: "Orlichem",
     note: "Exclusive distributor — specialised marine chemicals",
@@ -164,9 +175,9 @@ export const partners = [
     name: "Honeywell",
     note: "Distributor — gas detection & industrial safety instruments",
     category: "Health & safety",
-    logo: null,
-    logoWidth: 0,
-    logoHeight: 0,
+    logo: "/images/partners/honeywell.svg",
+    logoWidth: 678,
+    logoHeight: 120,
     catalogues: [
       {
         title: "Marine eGuide (2023)",
@@ -199,9 +210,9 @@ export const partners = [
     name: "Blackline Safety",
     note: "Distributor — connected safety & lone-worker monitoring",
     category: "Health & safety",
-    logo: null,
-    logoWidth: 0,
-    logoHeight: 0,
+    logo: "/images/partners/blackline-safety.svg",
+    logoWidth: 356,
+    logoHeight: 55,
     catalogues: [
       {
         title: "G7 wearable multi-gas",
@@ -224,9 +235,11 @@ export const partners = [
     name: "Hammelmann",
     note: "Exclusive distributor (Namibia) — high-pressure plunger pumps & water-jetting systems",
     category: "Industrial pumps & water jetting",
-    logo: null,
-    logoWidth: 0,
-    logoHeight: 0,
+    // Official header logo — largest transparent raster available (don't
+    // display wider than ~175px).
+    logo: "/images/partners/hammelmann.png",
+    logoWidth: 175,
+    logoHeight: 39,
     catalogues: [
       {
         title: "Company presentation (2023)",
@@ -245,7 +258,7 @@ export const partners = [
       },
     ] satisfies PartnerCatalogue[],
   },
-] as const;
+];
 
 /**
  * Per-brand landing-page content. Keyed by `slug` → `/brands/[slug]`.
@@ -384,17 +397,74 @@ export function getPartnerByName(name: string) {
 /**
  * Operators, vessels and partners Daron has supplied — all already named in
  * existing site copy / project history. Used for the "trusted by" wall.
- * (Names, not logos, to avoid trademark-usage questions; Luther to confirm he's
- * comfortable naming each publicly — most already appear on the live site.)
+ * Official logos displayed where sourced (usage approved by Luther, 2026-06-12);
+ * entries without a logo render as a text card.
  */
-export const clients = [
-  { name: "Subsea7", note: "Offshore construction — heavy-lift support" },
-  { name: "Pellegrini", note: "Offshore catering partner — Sapura Berani, Saipem Santorini" },
-  { name: "Saipem", note: "Saipem Santorini project" },
-  { name: "Bourbon", note: "Offshore marine services" },
-  { name: "Odfjell Drilling", note: "Deepsea Mira · Bollsta · Hercules" },
-  { name: "Transocean", note: "Transocean Marianas (2013)" },
-  { name: "MCTC", note: "Marine catering" },
-  { name: "Oceanic", note: "Offshore operations" },
-] as const;
+export type Client = {
+  name: string;
+  note: string;
+  logo?: string;
+  logoWidth?: number;
+  logoHeight?: number;
+};
+
+export const clients: Client[] = [
+  {
+    name: "Subsea7",
+    note: "Offshore construction — heavy-lift support",
+    logo: "/images/clients/subsea7.svg",
+    logoWidth: 253,
+    logoHeight: 31,
+  },
+  {
+    name: "Pellegrini",
+    note: "Offshore catering partner — Sapura Berani, Saipem Santorini",
+    logo: "/images/clients/pellegrini.png",
+    logoWidth: 1181,
+    logoHeight: 240,
+  },
+  {
+    name: "Saipem",
+    note: "Saipem Santorini project",
+    // Stacked/portrait lockup — ClientWall gives portrait logos a taller box.
+    logo: "/images/clients/saipem.svg",
+    logoWidth: 932,
+    logoHeight: 1213,
+  },
+  {
+    name: "Bourbon",
+    note: "Offshore marine services",
+    logo: "/images/clients/bourbon.png",
+    logoWidth: 235,
+    logoHeight: 90,
+  },
+  {
+    name: "Odfjell Drilling",
+    note: "Deepsea Mira · Bollsta · Hercules",
+    logo: "/images/clients/odfjell-drilling.svg",
+    logoWidth: 874,
+    logoHeight: 347,
+  },
+  {
+    name: "Transocean",
+    note: "Transocean Marianas (2013)",
+    logo: "/images/clients/transocean.svg",
+    logoWidth: 1024,
+    logoHeight: 233,
+  },
+  {
+    name: "MCTC",
+    note: "Marine catering",
+    logo: "/images/clients/mctc.png",
+    logoWidth: 1500,
+    logoHeight: 637,
+  },
+  {
+    name: "Oceanic",
+    note: "Offshore operations",
+    logo: "/images/clients/oceanic.svg",
+    logoWidth: 832,
+    logoHeight: 144,
+  },
+];
 

@@ -86,6 +86,12 @@ const nextConfig: NextConfig = {
   images: {
     // Serve modern formats first — AVIF typically 20-30% smaller than WebP.
     formats: ["image/avif", "image/webp"],
+    // Self-hosted brand-logo SVGs (partners/clients walls). Safe because we
+    // only serve our own checked-in files, and the sandboxed CSP below blocks
+    // any script execution inside an SVG response.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     // Allow next/image to optimise the WordPress media library while we
     // migrate assets; remove once everything lives in /public.
     remotePatterns: [

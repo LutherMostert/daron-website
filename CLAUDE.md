@@ -54,8 +54,8 @@
 - **"Daron AI assistant"** = the formal product label. Use in CTAs, header/footer, metadata, and any place where a new visitor sees it for the first time without personal-name context.
   Pattern: *"Chat with Daron AI assistant"* (header CTA), *"the Daron AI assistant drafts your quote…"* (body when Don hasn't been introduced on the current page yet).
 
-**What Don is (updated 2026-04-22 per OpenClaw build session):**
-- **Backend:** OpenClaw 2026.4 agent platform, powered by **Anthropic Claude Opus 4.7** (Claude Max enterprise subscription — no per-token costs). Migrated off GPT-5.4. Supabase stores the product catalog (butchery, provisions, bonded, cabin SKUs), pricing tiers, and client templates.
+**What Don is (updated 2026-04-22; platform name corrected to Nous Hermes per Luther 2026-06-12):**
+- **Backend:** Nous Hermes agent platform, powered by **Anthropic Claude Opus 4.7** (Claude Max enterprise subscription — no per-token costs). Migrated off GPT-5.4. Supabase stores the product catalog (butchery, provisions, bonded, cabin SKUs), pricing tiers, and client templates.
 - **Channels:** Single WhatsApp line at **+264 81 141 3840**. Legacy Hermes system decommissioned on that number. Voice notes transcribed by OpenAI Whisper.
 - **Access control:** 13-person allowlist on DMs; group behavior responds only when addressed as "Don" or "@don".
 - **Capabilities:** reads RFQs in Excel/PDF/Word, fuzzy-matches against live catalog, applies client-specific pricing with NAD→USD/EUR FX, produces Daron-branded Excel quotes matching IQ Enterprises templates.
@@ -68,7 +68,7 @@
 - `/about` page innovation block (medium version)
 - RFQ form success state
 
-**Week 2+:** floating web chat widget wired into the same OpenClaw backend (user hinted it's the natural next step). Will share Don's identity and knowledge base. Not shipped yet.
+**Week 2+:** floating web chat widget wired into the same Nous Hermes backend (user hinted it's the natural next step). Will share Don's identity and knowledge base. Not shipped yet.
 
 ## Tagline
 "SUPPLYING AFRICA'S SEAS, SHORES & INDUSTRIES WITH CONFIDENCE"
