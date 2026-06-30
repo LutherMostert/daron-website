@@ -12,27 +12,30 @@ import { Container } from "./Container";
 export async function ClientWall({
   variant = "white",
 }: {
-  variant?: "white" | "sand";
+  variant?: "white" | "sand" | "navy";
 }) {
   const t = await getTranslations("Proof");
+  const isNavy = variant === "navy";
 
   return (
     <section
       className={
-        variant === "sand"
+        isNavy
+          ? "dark-section border-y border-white/10 py-16 text-white sm:py-20"
+          : variant === "sand"
           ? "bg-[var(--color-sand)] py-16 sm:py-20"
           : "bg-white py-16 sm:py-20"
       }
     >
       <Container>
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
+          <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${isNavy ? "text-[var(--color-accent)]" : "text-[var(--color-accent-text)]"}`}>
             {t("eyebrow")}
           </p>
-          <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
+          <h2 className={`mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight sm:text-3xl ${isNavy ? "text-white" : "text-[var(--color-navy)]"}`}>
             {t("heading")}
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[var(--color-mute)]">
+          <p className={`mt-3 text-sm leading-relaxed ${isNavy ? "text-white/62" : "text-[var(--color-mute)]"}`}>
             {t("intro")}
           </p>
         </div>
@@ -44,7 +47,11 @@ export async function ClientWall({
               style={
                 { "--reveal-delay": `${Math.min(idx, 8) * 45}ms` } as React.CSSProperties
               }
-              className="group flex flex-col items-center justify-center rounded-xl border border-[var(--color-line)] bg-white px-5 py-4 text-center shadow-sm"
+              className={`group flex flex-col items-center justify-center rounded-xl px-5 py-4 text-center shadow-sm ${
+                isNavy
+                  ? "border border-white/10 bg-white/[0.05] shadow-black/20"
+                  : "border border-[var(--color-line)] bg-white"
+              }`}
             >
               {c.logo ? (
                 <span className="flex h-14 items-center justify-center">
@@ -61,11 +68,11 @@ export async function ClientWall({
                   />
                 </span>
               ) : (
-                <p className="font-[family-name:var(--font-poppins)] text-base font-bold text-[var(--color-navy)]">
+                <p className={`font-[family-name:var(--font-poppins)] text-base font-bold ${isNavy ? "text-white" : "text-[var(--color-navy)]"}`}>
                   {c.name}
                 </p>
               )}
-              <p className="mt-1.5 text-[11px] leading-tight text-[var(--color-mute)]">
+              <p className={`mt-1.5 text-[11px] leading-tight ${isNavy ? "text-white/52" : "text-[var(--color-mute)]"}`}>
                 {c.note}
               </p>
             </li>

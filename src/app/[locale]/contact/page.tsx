@@ -34,10 +34,10 @@ export default async function ContactPage({
   return (
     <>
       <PageHero
-        eyebrow={t("heroEyebrow")}
-        title={t("heroTitle")}
-        intro={t("heroIntro")}
-        image={{ src: "/images/site/containers-row.png" }}
+        eyebrow="Contact / RFQ"
+        title="Send your RFQ to the operations desk"
+        intro="Upload the requirement, add the vessel or project details, and route it straight to Daron Namibia. For urgent vessel supply, WhatsApp or call the operations team now."
+        image={{ src: "/images/site/operations/daron-truck-normand-energy.jpg" }}
       />
 
       <section className="bg-white py-20 sm:py-24">
@@ -129,10 +129,10 @@ export default async function ContactPage({
 
           <div className="rounded-2xl border border-[var(--color-line)] bg-white p-8 shadow-sm">
             <h2 className="font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)]">
-              {t("formHeading")}
+              Send Your RFQ
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-mute)]">
-              {t("formIntro")}
+              Add the company, vessel or project, urgency, delivery point and attach the RFQ file. Excel, PDF, Word and CSV uploads are supported.
             </p>
             <ContactForm />
           </div>

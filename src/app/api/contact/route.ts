@@ -35,8 +35,14 @@ const ACCEPTED_EXTENSIONS = [
 type ContactFields = {
   firstName: string;
   surname: string;
+  company: string;
+  vessel: string;
   email: string;
   phone: string;
+  deliveryPoint: string;
+  urgency: string;
+  category: string;
+  preferredContact: string;
   message: string;
 };
 
@@ -89,8 +95,14 @@ export async function POST(request: Request) {
     raw = {
       firstName: fd.get("firstName"),
       surname: fd.get("surname"),
+      company: fd.get("company"),
+      vessel: fd.get("vessel"),
       email: fd.get("email"),
       phone: fd.get("phone"),
+      deliveryPoint: fd.get("deliveryPoint"),
+      urgency: fd.get("urgency"),
+      category: fd.get("category"),
+      preferredContact: fd.get("preferredContact"),
       message: fd.get("message"),
     };
     const f = fd.get("rfqFile");
@@ -129,14 +141,20 @@ export async function POST(request: Request) {
   const fields: ContactFields = {
     firstName: clean(raw.firstName, 80),
     surname: clean(raw.surname, 80),
+    company: clean(raw.company, 120),
+    vessel: clean(raw.vessel, 120),
     email: clean(raw.email, 160),
     phone: clean(raw.phone, 40),
+    deliveryPoint: clean(raw.deliveryPoint, 140),
+    urgency: clean(raw.urgency, 120),
+    category: clean(raw.category, 120),
+    preferredContact: clean(raw.preferredContact, 80),
     message: cleanMultiline(raw.message, 4000),
   };
 
-  if (!fields.firstName || !fields.email.includes("@") || fields.message.length < 2) {
+  if (!fields.firstName || !fields.company || !fields.email.includes("@") || fields.message.length < 2) {
     return Response.json(
-      { error: "Please provide your name, a valid email, and a message." },
+      { error: "Please provide your name, company, a valid email, and the RFQ details." },
       { status: 400 },
     );
   }
@@ -158,9 +176,15 @@ export async function POST(request: Request) {
     process.env.CONTACT_WEBHOOK_URL || process.env.CHAT_LEAD_WEBHOOK_URL;
   if (webhookUrl) {
     const text =
-      `✉️ *New contact-form message — daron.com.na*\n` +
-      `*${fields.firstName} ${fields.surname}* <${fields.email}>\n` +
-      (fields.phone ? `Phone: ${fields.phone}\n` : "") +
+      `✉️ *New website RFQ — daron.com.na*\n` +
+      `*${fields.firstName} ${fields.surname}* — ${fields.company}\n` +
+      `<${fields.email}>\n` +
+      (fields.phone ? `Phone/WhatsApp: ${fields.phone}\n` : "") +
+      (fields.vessel ? `Vessel/project: ${fields.vessel}\n` : "") +
+      (fields.deliveryPoint ? `Delivery point: ${fields.deliveryPoint}\n` : "") +
+      (fields.urgency ? `Urgency/ETA: ${fields.urgency}\n` : "") +
+      (fields.category ? `Category: ${fields.category}\n` : "") +
+      (fields.preferredContact ? `Preferred response: ${fields.preferredContact}\n` : "") +
       (attachment
         ? `📎 Attachment: ${attachment.name} (${Math.ceil(attachment.size / 1024)} KB)${attachment.base64 ? "" : " — too large to forward, ask the client to resend via WhatsApp/email"}\n`
         : "") +

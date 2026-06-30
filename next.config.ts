@@ -81,6 +81,14 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       { source: "/coming-soon", destination: "/", permanent: true },
+      // Legacy WordPress pages still indexed by Google + getting real traffic
+      // (GA Jun 2026 showed visits to /chandlery and /products that now 404).
+      { source: "/chandlery", destination: "/services/ship-chandlery", permanent: true },
+      { source: "/products", destination: "/brands", permanent: true },
+      { source: "/company", destination: "/about", permanent: true },
+      { source: "/home", destination: "/", permanent: true },
+      { source: "/contact-us", destination: "/contact", permanent: true },
+      { source: "/our-services", destination: "/services", permanent: true },
     ];
   },
   images: {
