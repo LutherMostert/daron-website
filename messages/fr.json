@@ -1,6 +1,102 @@
 {
+  "A11y": {
+    "skipToContent": "Aller au contenu"
+  },
+  "Sticky": {
+    "rfq": "Envoyer RFQ",
+    "call": "Appeler"
+  },
+  "ProofBar": {
+    "l1": "Fondée à Walvis Bay",
+    "l2": "Fournisseurs en Afrique et en Europe",
+    "l3": "Réponse opérationnelle",
+    "l4": "+ HACCP · ISSA · IMPA — prêt pour audit",
+    "l5": "Plateformes approvisionnées simultanément"
+  },
+  "Reach": {
+    "eyebrow": "Rayonnement africain",
+    "heading": "Réponse depuis Walvis Bay. Rayonnement africain.",
+    "intro": "Daron Namibia est la branche namibienne du Daron Group, entreprise familiale présente en Afrique depuis 1959 — avec des entités de l'Afrique du Sud au Sénégal, environ 350 collaborateurs et un réseau de 2 500+ fournisseurs en Afrique et en Europe.",
+    "hub": "Walvis Bay — Siège",
+    "n1": "Afrique du Sud",
+    "n2": "Angola",
+    "n3": "Sénégal",
+    "n4": "Mozambique",
+    "n5": "Congo",
+    "n6": "Côte d'Ivoire",
+    "n7": "Europe — réseau de fournisseurs"
+  },
+  "Pipeline": {
+    "eyebrow": "Le parcours d'un RFQ",
+    "heading": "Vitesse assistée par IA. Responsabilité avec contrôle humain.",
+    "s1Title": "Reçu",
+    "s1Body": "Votre RFQ arrive par WhatsApp, e-mail, Excel, PDF, Word ou note vocale.",
+    "s2Title": "Apparié",
+    "s2Body": "Don lit et structure chaque ligne, en la croisant avec notre catalogue en direct et 2 500+ fournisseurs.",
+    "s3Title": "Chiffré",
+    "s3Body": "Un devis aux couleurs de Daron est généré en quelques minutes, avec la tarification propre au client.",
+    "s4Title": "Vérifié",
+    "s4Body": "Un KAM humain contrôle et approuve chaque devis avant l'envoi. Sans exception.",
+    "s5Title": "Livré",
+    "s5Body": "L'équipe des opérations coordonne l'exécution — entrepôt, flotte, douane, quai."
+  },
+  "TrackRecord": {
+    "heroEyebrow": "Références",
+    "heroTitle": "Éprouvé là où les opérations ne peuvent pas s'arrêter",
+    "heroIntro": "Réactivations de plateformes, campagnes de forage simultanées, chantiers de cale sèche et avitaillement de croisières — livrés depuis Walvis Bay. Du travail réel, avec les photos et les chiffres à l'appui.",
+    "sapuraEyebrow": "Opération phare",
+    "sapuraTitle": "Sapura Berani — réactivation complète de la plateforme en 11 jours",
+    "sapuraBody": "Désarmée pendant 13 mois, elle a été réactivée en 11 jours avec le partenaire de restauration Pellegrini : cuisine et blanchisserie reconstruites, traitement des moisissures avec les produits Orlichem et pièces fabriquées sur place lorsqu'elles n'existaient pas en Namibie. Les fournitures atteignaient la plateforme moins d'une heure après la demande.",
+    "sapuraCta": "Lire l'histoire complète",
+    "casesHeading": "Réalisé par l'équipe technique Daron",
+    "rigsCta": "Notre bilan en forage offshore"
+  },
+  "Proof": {
+    "eyebrow": "Éprouvé sur le terrain",
+    "heading": "Opérateurs, navires et partenaires que nous approvisionnons",
+    "intro": "Des noms réels issus de nos opérations offshore, de cale sèche et d'avitaillement — pas des logos génériques."
+  },
+  "Brands": {
+    "heroEyebrow": "Les marques que nous représentons",
+    "heroTitle": "Les marques que nous représentons en Namibie",
+    "heroIntro": "Daron Namibia est le distributeur local agréé d'un ensemble ciblé de marques maritimes, de sécurité et industrielles de classe mondiale — fournies, stockées et soutenues depuis Walvis Bay.",
+    "cardCta": "Voir la marque",
+    "sectorsLabel": "Secteurs",
+    "rangesHeading": "Ce que nous fournissons",
+    "keyProductsHeading": "Produits clés",
+    "cataloguesHeading": "Catalogues de produits",
+    "cataloguesNote": "Téléchargez les brochures du fabricant ci-dessous. Pour les prix ou la disponibilité, envoyez une demande de devis — un KAM répond le jour même.",
+    "available": "({count} disponibles)",
+    "backToBrands": "Toutes les marques",
+    "exploreAll": "Découvrir toutes les marques",
+    "talkCta": "Parler à notre équipe",
+    "sendRfq": "Envoyer votre demande",
+    "rfqHeading": "Besoin de produits {brand} ou d'un devis ?",
+    "rfqBody": "Envoyez votre demande par WhatsApp — l'assistant IA de Daron rédige une réponse en quelques minutes et un KAM vérifie chaque devis avant son envoi.",
+    "distributorOf": "Distributeur agréé"
+  },
+  "Faq": {
+    "heroEyebrow": "FAQ",
+    "heroTitle": "Questions fréquentes",
+    "heroIntro": "Des réponses rapides sur ce que nous fournissons, la rapidité de nos devis, les marques que nous représentons et comment envoyer une demande. Encore une question ? Parlez à l'assistant IA de Daron.",
+    "talkCta": "Demander à l'assistant IA de Daron"
+  },
+  "ShipChandlery": {
+    "heroEyebrow": "Avitaillement maritime · Walvis Bay",
+    "heroTitle": "Avitaillement maritime à Walvis Bay",
+    "heroIntro": "Daron Namibia est un avitailleur maritime complet à Walvis Bay — magasins de pont et de machine, provisions, magasins sous douane, équipements de sécurité et fournitures techniques, livrés aux navires et plateformes dans les délais. Membre ISSA et IMPA.",
+    "provideHeading": "Ce que couvre notre avitaillement",
+    "areaHeading": "Au service de Walvis Bay et du littoral namibien",
+    "areaBody": "Depuis nos entrepôts au n° 31 Grand Avenue, dans la zone industrielle de Walvis Bay, nous approvisionnons les navires faisant escale à Walvis Bay et soutenons les opérations le long de la côte namibienne — avec notre propre flotte, un stockage réfrigéré et sous douane, et le dédouanement géré en interne.",
+    "whyHeading": "Pourquoi les navires choisissent Daron à Walvis Bay",
+    "mapCta": "Voir notre emplacement sur Google Maps"
+  },
   "Nav": {
     "home": "Accueil",
+    "brands": "Marques",
+    "ai": "IA Daron",
+    "faq": "FAQ",
+    "trackRecord": "Références",
     "about": "À propos",
     "services": "Services",
     "industries": "Industries",
@@ -9,7 +105,7 @@
     "contact": "Contact"
   },
   "Header": {
-    "chatCta": "Contacter Daron AI assistant",
+    "chatCta": "Envoyer votre RFQ",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu",
     "chatCtaMobile": "Contacter Daron AI assistant sur WhatsApp"
@@ -119,7 +215,7 @@
     "sec3Item2": "Exploiter, sécuriser et améliorer le site (y compris la prévention des abus et le suivi des erreurs).",
     "sec3Item3": "Respecter nos obligations en vertu du droit namibien et, le cas échéant, des lois de votre propre juridiction.",
     "sec4Heading": "4. Qui traite vos données pour notre compte",
-    "sec4Body": "Les messages envoyés à notre assistant IA (Don) sont traités par Anthropic (Claude) selon ses conditions entreprise — elle n'entraîne pas ses modèles sur vos données. Les notifications de leads peuvent être transférées vers notre canal d'équipe Slack ou équivalent. L'hébergement et l'analyse du site sont assurés par Vercel (régions UE/États-Unis). Tous les sous-traitants sont tenus à des obligations de confidentialité et de protection des données.",
+    "sec4Body": "Les messages que vous envoyez à notre assistant IA (Don) sont traités par Anthropic (Claude) selon ses conditions commerciales d'API afin de générer une réponse. Les notifications de leads peuvent être transférées vers notre canal d'équipe Slack ou équivalent. L'hébergement du site est assuré par Vercel (régions UE/États-Unis). L'analyse du site utilise Plausible — un service respectueux de la vie privée, sans cookies, qui ne collecte aucune donnée personnelle et ne dépose aucun cookie de suivi. Tous les sous-traitants sont tenus à des obligations de confidentialité et de protection des données.",
     "sec5Heading": "5. Vos droits",
     "sec5Body": "Selon votre lieu de résidence, vous pouvez avoir le droit de :",
     "sec5Item1": "Accéder aux données personnelles que nous détenons à votre sujet.",
@@ -168,6 +264,7 @@
     "proofBody2": "De l'approvisionnement simultané des Deepsea Mira, Deepsea Bollsta et Deepsea Hercules à nos premiers travaux sur le Transocean Marianas en 2013, notre bilan reflète une réalité :",
     "proofPunchline": "Quand les opérations sont critiques, nous livrons.",
     "proofCta": "Notre bilan offshore",
+    "proofMoreCta": "Toutes nos références",
     "proofAsideTitle": "Une capacité opérationnelle sur laquelle compter",
     "proofAsideBullet1": "3 plateformes de forage offshore approvisionnées simultanément",
     "proofAsideBullet2": "Support aux opérations pétrolières et gazières sous haute pression",
@@ -182,7 +279,7 @@
     "innovAiEngine": "Moteur IA",
     "innovAiEngineVal": "Anthropic Claude Opus 4.7",
     "innovPlatform": "Plateforme agent",
-    "innovPlatformVal": "OpenClaw 2026.4",
+    "innovPlatformVal": "Nous Hermes",
     "innovCatalog": "Catalogue et tarifs",
     "innovCatalogVal": "Supabase",
     "innovChannel": "Canal",
@@ -246,7 +343,7 @@
     "innovP1": "Chez Daron Namibia, nous avons développé Don — un copilote IA des opérations qui travaille aux côtés de notre équipe de shipchandling pour fournir des devis plus rapides et plus précis aux navires faisant escale à Walvis Bay.",
     "innovP2": "Don lit les demandes de devis entrantes dans tous les formats (e-mail, Excel, PDF, Word), associe chaque article à notre catalogue complet de provisions, marchandises sous douane, fournitures cabine et techniques, applique la tarification spécifique au client et produit un devis prêt à envoyer en quelques minutes. Chaque devis est vérifié et approuvé par un spécialiste Daron avant de quitter notre système — Don accélère le temps de réponse sans compromettre la précision et la responsabilité dont nos clients dépendent.",
     "innovPowered": "Propulsé par :",
-    "innovPoweredVal": "Anthropic Claude Opus 4.7 · OpenClaw · Supabase",
+    "innovPoweredVal": "Anthropic Claude Opus 4.7 · Nous Hermes · Supabase",
     "innovAvailable": "Disponible sur :",
     "innovAvailableVal": "WhatsApp {phone}",
     "innovCta": "Comment Don fonctionne",
@@ -502,7 +599,7 @@
     "howItWorks": "Comment ça fonctionne",
     "enterpriseEyebrow": "Construit sur une IA de grade entreprise",
     "enterpriseHeading": "Un collègue IA toujours disponible — pas un chatbot.",
-    "enterpriseP1": "Don est propulsé par Anthropic Claude Opus 4.7, l'un des modèles de langage les plus performants disponibles. Il fonctionne sur la plateforme agent OpenClaw et s'intègre directement à notre catalogue produits, moteur de tarification et base de données clients dans Supabase.",
+    "enterpriseP1": "Don est propulsé par Anthropic Claude Opus 4.7, l'un des modèles de langage les plus performants disponibles. Il fonctionne sur la plateforme agent Nous Hermes et s'intègre directement à notre catalogue produits, moteur de tarification et base de données clients dans Supabase.",
     "enterpriseP2": "Quand un appel d'offres arrive — qu'il s'agisse d'un e-mail d'un compte clé, d'un tableur Excel d'un navire au port ou d'un message vocal sur WhatsApp — Don le lit, associe chaque ligne à notre catalogue en temps réel, applique le bon niveau de tarification client et rédige un devis prêt à envoyer en quelques minutes.",
     "enterpriseP3": "Un spécialiste Daron vérifie et approuve chaque devis avant qu'il ne quitte notre système. Don accélère le temps de réponse ; il ne remplace ni la confiance, ni le jugement, ni la responsabilité dont nos clients dépendent.",
     "capEyebrow": "Ce que Don fait",
@@ -534,7 +631,7 @@
     "tech1Cap": "IA en langage naturel",
     "tech1Tech": "Anthropic Claude Opus 4.7",
     "tech2Cap": "Plateforme agent",
-    "tech2Tech": "OpenClaw 2026.4",
+    "tech2Tech": "Nous Hermes",
     "tech3Cap": "Catalogue produits et tarification",
     "tech3Tech": "Supabase",
     "tech4Cap": "Analyse de documents",
@@ -578,6 +675,15 @@
     "telephone": "Numéro de téléphone",
     "yourMessage": "Votre message",
     "sendMessage": "Envoyer le message",
-    "formNote": "Ce formulaire ouvre votre application e-mail par défaut pour le moment. Le formulaire en direct via Hermes sera lancé en Semaine 2."
+    "fileLabel": "Joindre votre RFQ (facultatif)",
+    "fileHint": "Excel, PDF, Word ou CSV — 4 Mo max",
+    "fileTooLarge": "Fichier trop volumineux — 4 Mo max. Pour les fichiers plus lourds, envoyez par WhatsApp.",
+    "fileWrongType": "Type de fichier non pris en charge. Utilisez Excel, PDF, Word ou CSV.",
+    "formSending": "Envoi…",
+    "formSuccessTitle": "Message envoyé — merci.",
+    "formSuccessBody": "Nous transmettrons votre demande à la bonne équipe et répondrons sous un jour ouvré. Pour un devis immédiat, l'assistant IA de Daron sur WhatsApp est plus rapide.",
+    "formAnother": "Envoyer un autre message",
+    "formErrorBody": "Désolé — une erreur s'est produite lors de l'envoi de votre message. Réessayez ou contactez-nous sur WhatsApp.",
+    "formNote": "Nous répondons sous un jour ouvré. Vos données sont traitées conformément à notre politique de confidentialité et ne sont jamais vendues."
   }
 }

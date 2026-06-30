@@ -56,7 +56,18 @@ type IncomingMessage = { role: "user" | "assistant"; content: string };
 type ChatPayload = {
   lead: DonLead;
   messages: IncomingMessage[];
+  locale?: string;
 };
+
+/** Nudge Don to answer in the visitor's site language (he still mirrors the
+ *  language the visitor actually writes in). */
+function localeInstruction(locale: unknown): string {
+  if (locale === "pt")
+    return "\n\nThe visitor is browsing the site in Portuguese. Reply in Portuguese unless they clearly write to you in another language.";
+  if (locale === "fr")
+    return "\n\nThe visitor is browsing the site in French. Reply in French unless they clearly write to you in another language.";
+  return "";
+}
 
 function isValidLead(x: unknown): x is DonLead {
   if (!x || typeof x !== "object") return false;
@@ -142,7 +153,7 @@ export async function POST(request: Request) {
     stream = await client.messages.stream({
       model: MODEL,
       max_tokens: MAX_OUTPUT_TOKENS,
-      system: buildDonSystemPrompt(body.lead),
+      system: buildDonSystemPrompt(body.lead) + localeInstruction(body.locale),
       messages: body.messages.map((m) => ({ role: m.role, content: m.content })),
     });
   } catch (err) {

@@ -13,7 +13,9 @@ const navItems = [
   { href: "/services" as const, key: "services" as const },
   { href: "/industries" as const, key: "industries" as const },
   { href: "/why-daron" as const, key: "whyDaron" as const },
-  { href: "/insights" as const, key: "insights" as const },
+  { href: "/ai" as const, key: "ai" as const },
+  { href: "/track-record" as const, key: "trackRecord" as const },
+  { href: "/brands" as const, key: "brands" as const },
   { href: "/contact" as const, key: "contact" as const },
 ];
 
@@ -54,7 +56,7 @@ function LanguageSwitcher() {
         aria-expanded={open}
         aria-haspopup="listbox"
         aria-label={`${t("label")}: ${t(locale)}`}
-        className="flex items-center gap-1 rounded-md border border-[var(--color-line)] px-2.5 py-1.5 text-xs font-semibold text-[var(--color-navy)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] disabled:opacity-50"
+        className="flex items-center gap-1 rounded-md border border-white/15 bg-white/[0.04] px-2.5 py-1.5 text-xs font-semibold text-white/82 transition-colors hover:border-[var(--color-accent)] hover:text-white disabled:opacity-50"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="10" />
@@ -70,7 +72,7 @@ function LanguageSwitcher() {
         <ul
           role="listbox"
           aria-label={t("label")}
-          className="absolute right-0 top-full mt-1 min-w-[120px] overflow-hidden rounded-md border border-[var(--color-line)] bg-white shadow-lg"
+          className="absolute right-0 top-full mt-1 min-w-[120px] overflow-hidden rounded-md border border-white/10 bg-[#0b1828] shadow-lg"
         >
           {routing.locales.map((loc) => (
             <li key={loc} role="option" aria-selected={loc === locale}>
@@ -80,7 +82,7 @@ function LanguageSwitcher() {
                 className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors hover:bg-[var(--color-sand)] ${
                   loc === locale
                     ? "font-semibold text-[var(--color-accent)]"
-                    : "text-[var(--color-ink)]"
+                    : "text-white/78"
                 }`}
               >
                 <span className="text-xs font-bold">{labels[loc]}</span>
@@ -100,11 +102,11 @@ export function Header() {
   const tHeader = useTranslations("Header");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--color-line)] bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#07111f]/92 text-white shadow-[0_1px_0_rgba(255,255,255,.04)] backdrop-blur-xl supports-[backdrop-filter]:bg-[#07111f]/82">
       <Container className="flex h-20 items-center justify-between gap-4">
         <Link
           href="/"
-          className="flex items-center"
+          className="flex items-center rounded-2xl bg-white px-2 py-1 shadow-[0_8px_30px_rgba(0,0,0,.18)]"
           aria-label={`${site.name} home`}
         >
           <Image
@@ -112,18 +114,19 @@ export function Header() {
             alt="Daron Namibia"
             width={359}
             height={215}
-            priority
+            loading="eager"
+            sizes="120px"
             className="h-14 w-auto"
           />
         </Link>
 
-        <nav aria-label="Primary" className="hidden md:block">
-          <ul className="flex items-center gap-6 text-sm font-medium">
+        <nav aria-label="Primary" className="hidden lg:block">
+          <ul className="flex items-center gap-5 text-sm font-medium xl:gap-6">
             {navItems.map((n) => (
               <li key={n.href}>
                 <Link
                   href={n.href}
-                  className="text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent)]"
+                  className="text-white/72 transition-colors hover:text-white"
                 >
                   {tNav(n.key)}
                 </Link>
@@ -132,11 +135,11 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <LanguageSwitcher />
           <a
             href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-accent)] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
+            className="rounded-full bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -150,7 +153,7 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[var(--color-line)] text-[var(--color-navy)] md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/15 text-white lg:hidden"
         >
           <span className="sr-only">{open ? tHeader("closeMenu") : tHeader("openMenu")}</span>
           <svg
@@ -181,14 +184,14 @@ export function Header() {
       </Container>
 
       {open && (
-        <div id="mobile-nav" className="border-t border-[var(--color-line)] bg-white md:hidden">
+        <div id="mobile-nav" className="border-t border-white/10 bg-[#07111f] md:hidden">
           <Container className="flex flex-col py-4">
             <ul className="flex flex-col gap-1 text-base font-medium">
               <li>
                 <Link
                   href="/"
                   onClick={() => setOpen(false)}
-                  className="block rounded-md px-2 py-2 text-[var(--color-ink)] transition-colors hover:bg-[var(--color-sand)] hover:text-[var(--color-accent)]"
+                  className="block rounded-md px-2 py-2 text-white/78 transition-colors hover:bg-white/10 hover:text-white"
                 >
                   {tNav("home")}
                 </Link>
@@ -198,7 +201,7 @@ export function Header() {
                   <Link
                     href={n.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-md px-2 py-2 text-[var(--color-ink)] transition-colors hover:bg-[var(--color-sand)] hover:text-[var(--color-accent)]"
+                    className="block rounded-md px-2 py-2 text-white/78 transition-colors hover:bg-white/10 hover:text-white"
                   >
                     {tNav(n.key)}
                   </Link>
@@ -210,7 +213,7 @@ export function Header() {
               <a
                 href={contact.whatsapp.href}
                 onClick={() => setOpen(false)}
-                className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-white"
+                className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--color-cta)] px-5 py-3 text-sm font-semibold text-[var(--color-cta-ink)]"
                 target="_blank"
                 rel="noopener noreferrer"
               >

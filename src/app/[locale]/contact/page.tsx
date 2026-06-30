@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildMetadata } from "@/lib/seo";
 
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
+import { ContactForm } from "@/components/ContactForm";
 import { contact } from "@/lib/site";
 
 export async function generateMetadata({
@@ -12,11 +14,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
+  return buildMetadata({
+    locale,
+    path: "/contact",
     title: t("contactTitle"),
     description: t("contactDescription"),
-    alternates: { canonical: "/contact" },
-  };
+  });
 }
 
 export default async function ContactPage({
@@ -31,10 +34,10 @@ export default async function ContactPage({
   return (
     <>
       <PageHero
-        eyebrow={t("heroEyebrow")}
-        title={t("heroTitle")}
-        intro={t("heroIntro")}
-        image={{ src: "/images/site/containers-row.png" }}
+        eyebrow="Contact / RFQ"
+        title="Send your RFQ to the operations desk"
+        intro="Upload the requirement, add the vessel or project details, and route it straight to Daron Namibia. For urgent vessel supply, WhatsApp or call the operations team now."
+        image={{ src: "/images/site/operations/daron-truck-normand-energy.jpg" }}
       />
 
       <section className="bg-white py-20 sm:py-24">
@@ -68,7 +71,7 @@ export default async function ContactPage({
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
               {t("officeEyebrow")}
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
@@ -90,7 +93,7 @@ export default async function ContactPage({
                 </span>
                 <a
                   href={contact.phone.href}
-                  className="text-lg font-semibold text-[var(--color-navy)] hover:text-[var(--color-accent)]"
+                  className="text-lg font-semibold text-[var(--color-navy)] hover:text-[var(--color-accent-text)]"
                 >
                   {contact.phone.display}
                 </a>
@@ -126,46 +129,12 @@ export default async function ContactPage({
 
           <div className="rounded-2xl border border-[var(--color-line)] bg-white p-8 shadow-sm">
             <h2 className="font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)]">
-              {t("formHeading")}
+              Send Your RFQ
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-mute)]">
-              {t("formIntro")}
+              Add the company, vessel or project, urgency, delivery point and attach the RFQ file. Excel, PDF, Word and CSV uploads are supported.
             </p>
-            <form
-              className="mt-6 grid gap-4"
-              action={`mailto:${contact.emails.operations}`}
-              method="post"
-              encType="text/plain"
-            >
-              <Field id="firstName" label={t("firstName")} required />
-              <Field id="surname" label={t("surname")} required />
-              <Field id="email" label={t("contactEmail")} type="email" required />
-              <Field id="phone" label={t("telephone")} type="tel" />
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="message"
-                  className="text-sm font-semibold text-[var(--color-ink)]"
-                >
-                  {t("yourMessage")}
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
-                  className="rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-base text-[var(--color-ink)] focus:border-[var(--color-accent)] focus:outline-none"
-                />
-              </div>
-              <button
-                type="submit"
-                className="mt-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
-              >
-                {t("sendMessage")}
-              </button>
-              <p className="text-xs text-[var(--color-mute)]">
-                {t("formNote")}
-              </p>
-            </form>
+            <ContactForm />
           </div>
         </Container>
       </section>
@@ -194,13 +163,13 @@ function ContactCard({
     <article
       className={
         highlight
-          ? "rounded-2xl bg-[var(--color-accent)] p-7 text-white shadow-md"
+          ? "rounded-2xl bg-[var(--color-navy)] p-7 text-white shadow-md"
           : "rounded-2xl border border-[var(--color-line)] bg-white p-7 shadow-sm"
       }
     >
       <p
         className={`text-xs font-semibold uppercase tracking-[0.2em] ${
-          highlight ? "text-white/85" : "text-[var(--color-accent)]"
+          highlight ? "text-white/85" : "text-[var(--color-accent-text)]"
         }`}
       >
         {eyebrow}
@@ -231,51 +200,5 @@ function ContactCard({
         {cta}
       </a>
     </article>
-  );
-}
-
-function Field({
-  id,
-  label,
-  type = "text",
-  required,
-}: {
-  id: string;
-  label: string;
-  type?: string;
-  required?: boolean;
-}) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label
-        htmlFor={id}
-        className="text-sm font-semibold text-[var(--color-ink)]"
-      >
-        {label}
-        {required && (
-          <span className="ml-0.5 text-[var(--color-accent)]" aria-hidden="true">
-            *
-          </span>
-        )}
-      </label>
-      <input
-        id={id}
-        name={id}
-        type={type}
-        required={required}
-        autoComplete={
-          id === "email"
-            ? "email"
-            : id === "phone"
-              ? "tel"
-              : id === "firstName"
-                ? "given-name"
-                : id === "surname"
-                  ? "family-name"
-                  : undefined
-        }
-        className="rounded-md border border-[var(--color-line)] bg-white px-3 py-2 text-base text-[var(--color-ink)] focus:border-[var(--color-accent)] focus:outline-none"
-      />
-    </div>
   );
 }

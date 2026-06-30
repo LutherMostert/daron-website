@@ -20,8 +20,9 @@
  * `--color-navy`, `--color-ink`, `--color-sand`, `--color-line`, `--color-mute`.
  */
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { contact } from "@/lib/site";
 
 type Role = "user" | "assistant";
@@ -66,6 +67,7 @@ function saveStored(state: StoredState) {
 
 export function ChatWidget() {
   const t = useTranslations("ChatWidget");
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   // Use lazy initial state so sessionStorage restoration happens during the
   // first client render (not in an effect) — avoids React Compiler "cascading
@@ -80,6 +82,9 @@ export function ChatWidget() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const firstFieldRef = useRef<HTMLInputElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const launcherRef = useRef<HTMLButtonElement | null>(null);
+  const interacted = useRef(false);
 
   // Persist whenever lead or messages change
   useEffect(() => {
@@ -115,6 +120,40 @@ export function ChatWidget() {
     return () => clearTimeout(t);
   }, [open, lead]);
 
+  // Restore focus to the launcher when the dialog closes (a11y) — but never
+  // steal focus on first page load (only after the user has opened it once).
+  useEffect(() => {
+    if (open) {
+      interacted.current = true;
+    } else if (interacted.current) {
+      launcherRef.current?.focus();
+    }
+  }, [open]);
+
+  // Trap Tab focus inside the open dialog (WCAG 2.4.3 / dialog pattern).
+  const handlePanelKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key !== "Tab") return;
+      const root = panelRef.current;
+      if (!root) return;
+      const focusables = root.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    },
+    [],
+  );
+
   const sendToServer = useCallback(
     async (leadForSend: Lead, history: Message[]) => {
       setStreaming(true);
@@ -128,7 +167,7 @@ export function ChatWidget() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ lead: leadForSend, messages: history }),
+          body: JSON.stringify({ lead: leadForSend, messages: history, locale }),
         });
 
         if (!res.ok) {
@@ -167,7 +206,7 @@ export function ChatWidget() {
         setStreaming(false);
       }
     },
-    [t],
+    [t, locale],
   );
 
   const handleGateSubmit = useCallback(
@@ -246,10 +285,11 @@ export function ChatWidget() {
       {/* Floating launcher */}
       {!open && (
         <button
+          ref={launcherRef}
           type="button"
           aria-label={t("openChat")}
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-accent)] text-white shadow-lg transition-all hover:scale-105 hover:bg-[var(--color-accent-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:bottom-8 sm:right-8"
+          className="plausible-event-name=Chat_Open fixed bottom-28 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-cta)] text-[var(--color-cta-ink)] shadow-lg transition-all hover:scale-105 hover:bg-[var(--color-cta-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 lg:bottom-8 lg:right-8"
         >
           <svg
             width="24"
@@ -278,20 +318,25 @@ export function ChatWidget() {
       {/* Panel */}
       {open && (
         <div
+          ref={panelRef}
+          onKeyDown={handlePanelKeyDown}
           role="dialog"
           aria-modal="true"
           aria-labelledby="chat-widget-title"
-          className="fixed bottom-0 right-0 z-40 flex h-[min(640px,100dvh)] w-full flex-col border border-[var(--color-line)] bg-white shadow-2xl sm:bottom-6 sm:right-6 sm:h-[640px] sm:max-h-[calc(100dvh-3rem)] sm:w-[400px] sm:rounded-2xl"
+          className="fixed bottom-0 right-0 z-50 flex h-[min(640px,100dvh)] w-full flex-col border border-[var(--color-line)] bg-white shadow-2xl sm:bottom-6 sm:right-6 sm:h-[640px] sm:max-h-[calc(100dvh-3rem)] sm:w-[400px] sm:rounded-2xl"
         >
           {/* Header */}
           <div className="flex items-center justify-between gap-3 border-b border-[var(--color-line)] bg-[var(--color-navy)] px-4 py-3 text-white sm:rounded-t-2xl">
             <div className="flex items-center gap-3">
-              <div
+              <Image
+                src="/images/don-avatar.svg"
+                alt=""
                 aria-hidden="true"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-accent)] text-base font-bold"
-              >
-                ⚓
-              </div>
+                width={36}
+                height={36}
+                unoptimized
+                className="h-9 w-9 rounded-full"
+              />
               <div>
                 <p
                   id="chat-widget-title"
@@ -357,7 +402,7 @@ export function ChatWidget() {
 
               <label className="block text-sm">
                 <span className="mb-1 inline-block font-medium text-[var(--color-ink)]">
-                  {t("nameLabel")} <span className="text-[var(--color-accent)]">*</span>
+                  {t("nameLabel")} <span className="text-[var(--color-accent-text)]">*</span>
                 </span>
                 <input
                   ref={firstFieldRef}
@@ -372,7 +417,7 @@ export function ChatWidget() {
 
               <label className="block text-sm">
                 <span className="mb-1 inline-block font-medium text-[var(--color-ink)]">
-                  {t("emailLabel")} <span className="text-[var(--color-accent)]">*</span>
+                  {t("emailLabel")} <span className="text-[var(--color-accent-text)]">*</span>
                 </span>
                 <input
                   type="email"
@@ -434,7 +479,7 @@ export function ChatWidget() {
 
               <button
                 type="submit"
-                className="mt-1 rounded-full bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+                className="mt-1 rounded-full bg-[var(--color-cta)] px-5 py-3 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
               >
                 {t("startChat")} &rarr;
               </button>
@@ -446,7 +491,7 @@ export function ChatWidget() {
                       href="/privacy"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="underline hover:text-[var(--color-accent)]"
+                      className="underline hover:text-[var(--color-accent-text)]"
                     >
                       {chunks}
                     </a>
@@ -467,9 +512,6 @@ export function ChatWidget() {
                   {messages.map((m, i) => (
                     <MessageBubble key={i} role={m.role} content={m.content} />
                   ))}
-                  {streaming && messages[messages.length - 1]?.content === "" && (
-                    <MessageBubble role="assistant" content="…" />
-                  )}
                 </div>
               </div>
 
@@ -492,7 +534,7 @@ export function ChatWidget() {
                     onClick={handleSend}
                     disabled={streaming || !input.trim()}
                     aria-label={t("sendLabel")}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-accent)] text-white transition-colors hover:bg-[var(--color-accent-deep)] disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-cta)] text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)] disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <svg
                       width="18"
@@ -533,8 +575,19 @@ function MessageBubble({ role, content }: { role: Role; content: string }) {
             : "rounded-bl-sm bg-white text-[var(--color-ink)] shadow-sm ring-1 ring-[var(--color-line)]"
         }`}
       >
-        {content || <span className="inline-block animate-pulse">…</span>}
+        {content || <TypingDots />}
       </div>
     </div>
+  );
+}
+
+/** Three-dot "Don is typing" indicator. Bounce is killed by reduced-motion. */
+function TypingDots() {
+  return (
+    <span className="inline-flex items-center gap-1 py-1" aria-label="Don is typing">
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--color-mute)] [animation-delay:-0.3s]" />
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--color-mute)] [animation-delay:-0.15s]" />
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--color-mute)]" />
+    </span>
   );
 }

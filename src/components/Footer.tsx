@@ -1,5 +1,4 @@
-"use client";
-
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { contact, site } from "@/lib/site";
@@ -9,9 +8,13 @@ const navItems = [
   { href: "/" as const, key: "home" as const },
   { href: "/about" as const, key: "about" as const },
   { href: "/services" as const, key: "services" as const },
+  { href: "/brands" as const, key: "brands" as const },
   { href: "/industries" as const, key: "industries" as const },
   { href: "/why-daron" as const, key: "whyDaron" as const },
+  { href: "/track-record" as const, key: "trackRecord" as const },
+  { href: "/ai" as const, key: "ai" as const },
   { href: "/insights" as const, key: "insights" as const },
+  { href: "/faq" as const, key: "faq" as const },
   { href: "/contact" as const, key: "contact" as const },
 ];
 
@@ -25,12 +28,13 @@ export function Footer() {
       <Container className="py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <p className="font-[family-name:var(--font-poppins)] text-2xl font-bold">
-              DARON<span className="text-[var(--color-accent)]">.</span>
-              <span className="ml-2 text-xs font-normal uppercase tracking-[0.2em] text-white/60">
-                Namibia
-              </span>
-            </p>
+            <Image
+              src="/images/logo-daron-white.png"
+              alt={`${site.name} logo`}
+              width={195}
+              height={175}
+              className="h-20 w-auto"
+            />
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">
               {t("tagline", { founded: site.founded })}
             </p>
@@ -39,7 +43,7 @@ export function Footer() {
             </p>
             <a
               href={contact.whatsapp.href}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-cta)] px-5 py-2.5 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
               target="_blank"
               rel="noopener noreferrer"
             >

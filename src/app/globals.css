@@ -1,15 +1,32 @@
 @import "tailwindcss";
 
 /*
-  Brand tokens — pulled from the real Daron Namibia logo (navy + emerald/teal).
-  Pending Firecracker/Lisa refinement (Week 1); to re-theme, change hex below.
+  Brand tokens — Daron Namibia.
+  System (locked 2026-06-08, Luther sign-off):
+    • Navy  = the anchor / structure colour.
+    • Teal  = the cool brand accent, pulled from the real Daron truck livery
+              (eyebrows, links, decorative, secondary). Two shades so it stays
+              AA-readable on BOTH navy and white backgrounds.
+    • Orange (safety) = reserved for the PRIMARY action only (RFQ / WhatsApp /
+              Send) so the conversion moment is unmistakable. Navy ink on orange
+              keeps it WCAG-AA (5.5:1).
+  Contrast (WCAG 2.2 AA) verified for every text/CTA pairing below.
 */
 @theme inline {
   --color-navy: #0a2540;
   --color-navy-deep: #081d33;
   --color-navy-soft: #122e4f;
-  --color-accent: #22d3a7;
-  --color-accent-deep: #10b98a;
+
+  /* Maritime teal — cool brand accent */
+  --color-accent: #15b4c7;        /* bright teal — on NAVY/dark + decorative (6.3:1 on navy) */
+  --color-accent-deep: #0e8a99;   /* deeper teal — hovers / secondary on dark */
+  --color-accent-text: #0c7d8c;   /* dark teal — teal TEXT on light bg + focus ring (4.9:1 on white, 3.2:1 on navy) */
+
+  /* Safety orange — primary action only */
+  --color-cta: #f97316;
+  --color-cta-deep: #ea580c;
+  --color-cta-ink: #0a2540;       /* navy ink on orange (5.5:1) */
+
   --color-sand: #f7f3ec;
   --color-ink: #0f172a;
   --color-mute: #475569;
@@ -17,11 +34,18 @@
 
   --font-sans: var(--font-open-sans);
   --font-display: var(--font-poppins);
+
+  /* Fluid type scale — clamp(min, preferred, max). Used via var(--text-*). */
+  --text-display: clamp(2.5rem, 1.55rem + 4.2vw, 4.25rem);
+  --text-h1: clamp(2rem, 1.45rem + 2.6vw, 3.25rem);
+  --text-h2: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  --text-h3: clamp(1.125rem, 1.02rem + 0.5vw, 1.375rem);
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #07111f;
+  --foreground: #f8fafc;
 }
 
 html {
@@ -37,17 +61,176 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.industrial-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, transparent, black 14%, black 82%, transparent);
+}
+
+.liquid-panel,
+.ops-panel {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035)),
+    rgba(8, 23, 38, 0.62);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 24px 80px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(18px);
+}
+
+.ops-panel {
+  border-radius: 0;
+  background:
+    linear-gradient(180deg, rgba(12, 34, 54, 0.86), rgba(3, 10, 18, 0.78)),
+    rgba(6, 17, 29, 0.84);
+}
+
+.service-card,
+.rfq-console {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.radar-pulse {
+  animation: radar-pulse 5.8s ease-in-out infinite;
+}
+
+.radar-pulse-delay {
+  animation-delay: 1.6s;
+}
+
+.dark-section {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(21, 180, 199, 0.1), transparent 28rem),
+    radial-gradient(circle at 84% 20%, rgba(249, 115, 22, 0.08), transparent 28rem),
+    #07111f;
+}
+
+.field-line {
+  background: linear-gradient(90deg, transparent, rgba(21, 180, 199, 0.76), transparent);
+}
+
+.kinetic-band {
+  display: flex;
+  width: max-content;
+  animation: kinetic-band 34s linear infinite;
+}
+
+.hero-media {
+  transform: scale(calc(1.02 + (var(--hero-progress, 0) * 0.05)));
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-poppins), system-ui, -apple-system, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
-/* Focus visibility for keyboard nav (a11y) */
+/* Focus visibility for keyboard nav (a11y) — dark teal passes ≥3:1 on both
+   white (4.9:1) and navy (3.2:1) backgrounds, so one ring works everywhere. */
 :focus-visible {
-  outline: 2px solid #22d3a7;
+  outline: 2px solid var(--color-accent-text);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Motion system — scroll reveals + count-ups.
+   Hidden state applies ONLY when (a) JS is active (html.js, set before paint)
+   AND (b) the user has not requested reduced motion. So no-JS and
+   reduced-motion users always see fully-rendered content (no hidden flashes).
+   ─────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+  html.js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Slow cinematic drift on full-bleed hero imagery. */
+  @keyframes daron-kenburns {
+    from {
+      transform: scale(1.03);
+    }
+    to {
+      transform: scale(1.12);
+    }
+  }
+  .kenburns {
+    animation: daron-kenburns 24s ease-in-out infinite alternate;
+  }
+
+  @keyframes scanline-pass {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    12% {
+      opacity: 0.75;
+    }
+    100% {
+      transform: translateY(100dvh);
+      opacity: 0;
+    }
+  }
+
+  .scanline {
+    animation: scanline-pass 8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  @keyframes radar-pulse {
+    0%, 100% {
+      transform: scale(0.96);
+      opacity: 0.24;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.58;
+    }
+  }
+
+  @keyframes kinetic-band {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .magnetic-action:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+/* Respect reduced-motion globally: kill smooth-scroll, transitions, the chat
+   launcher ping, and any reveal offsets. (WCAG 2.3.3 / 2.2 craft.) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Tiny prose system for blog posts (insights/[slug]).
@@ -71,6 +254,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 .prose-daron p {
   color: var(--color-ink);
+}
+.prose-daron a {
+  color: var(--color-accent-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-daron a:hover {
+  color: var(--color-navy);
 }
 .prose-daron strong {
   color: var(--color-navy);

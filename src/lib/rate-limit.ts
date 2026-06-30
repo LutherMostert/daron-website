@@ -60,11 +60,31 @@ export function checkRateLimit(
   return { allowed: true, remaining: opts.max - timestamps.length };
 }
 
-/** Extract the client IP from a request, falling back gracefully. */
+/**
+ * Extract the client IP from a request, preferring headers the platform sets
+ * and a client CANNOT spoof.
+ *
+ * The naive `x-forwarded-for[0]` is attacker-controlled (a client can send its
+ * own `X-Forwarded-For: 1.2.3.4` and Vercel appends the real hop after it), so
+ * trusting the *first* value lets an attacker rotate the value to defeat
+ * per-IP limits and poison lead logs. We therefore prefer, in order:
+ *   1. `x-vercel-forwarded-for` — set by Vercel's edge, inbound copies stripped.
+ *   2. `x-real-ip` — the connecting IP as seen by the platform.
+ *   3. the LAST hop in `x-forwarded-for` — the one added by the trusted proxy
+ *      nearest us, rather than the client-supplied leftmost value.
+ */
 export function getClientIp(request: Request): string {
-  return (
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    request.headers.get("x-real-ip") ||
-    "unknown"
-  );
+  const vercel = request.headers.get("x-vercel-forwarded-for")?.trim();
+  if (vercel) return vercel.split(",")[0]!.trim();
+
+  const realIp = request.headers.get("x-real-ip")?.trim();
+  if (realIp) return realIp;
+
+  const xff = request.headers.get("x-forwarded-for");
+  if (xff) {
+    const hops = xff.split(",").map((h) => h.trim()).filter(Boolean);
+    if (hops.length > 0) return hops[hops.length - 1]!;
+  }
+
+  return "unknown";
 }

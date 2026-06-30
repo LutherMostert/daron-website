@@ -29,7 +29,7 @@ export default function NotFound() {
           </Link>
           <a
             href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-accent)] px-7 py-3 text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-deep)]"
+            className="rounded-full bg-[var(--color-cta)] px-7 py-3 text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildMetadata } from "@/lib/seo";
 
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
@@ -14,11 +15,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
+  return buildMetadata({
+    locale,
+    path: "/about",
     title: t("aboutTitle"),
     description: t("aboutDescription"),
-    alternates: { canonical: "/about" },
-  };
+  });
 }
 
 export default async function AboutPage({
@@ -54,7 +56,7 @@ export default async function AboutPage({
       <section className="bg-white py-20 sm:py-24">
         <Container className="grid gap-10 md:grid-cols-[1fr_2fr] md:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
               {t("storyEyebrow")}
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
@@ -72,7 +74,7 @@ export default async function AboutPage({
       <section className="bg-[var(--color-sand)] py-20 sm:py-24">
         <Container className="grid gap-6 md:grid-cols-2">
           <article className="rounded-2xl bg-white p-8 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
               {t("missionEyebrow")}
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--color-navy)]">
@@ -83,7 +85,7 @@ export default async function AboutPage({
             </p>
           </article>
           <article className="rounded-2xl bg-white p-8 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
               {t("visionEyebrow")}
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--color-navy)]">
@@ -99,7 +101,7 @@ export default async function AboutPage({
       {/* Values */}
       <section className="bg-white py-20 sm:py-24">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
             {t("valuesEyebrow")}
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
@@ -113,7 +115,7 @@ export default async function AboutPage({
               >
                 <span
                   aria-hidden="true"
-                  className="font-[family-name:var(--font-poppins)] text-2xl font-bold text-[var(--color-accent)]"
+                  className="font-[family-name:var(--font-poppins)] text-2xl font-bold text-[var(--color-accent-text)]"
                 >
                   0{idx + 1}
                 </span>
@@ -131,7 +133,7 @@ export default async function AboutPage({
         <Container>
           <div className="grid gap-12 md:grid-cols-[1fr_1.6fr] md:items-start">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
                 {t("innovEyebrow")}
               </p>
               <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl md:text-4xl">

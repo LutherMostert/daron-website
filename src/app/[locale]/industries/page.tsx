@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildMetadata } from "@/lib/seo";
 
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
@@ -14,11 +15,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
+  return buildMetadata({
+    locale,
+    path: "/industries",
     title: t("industriesTitle"),
     description: t("industriesDescription"),
-    alternates: { canonical: "/industries" },
-  };
+  });
 }
 
 type Industry = {
@@ -114,7 +116,7 @@ export default async function IndustriesPage({
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-7">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
                     {ind.name}
                   </p>
                   <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-xl font-bold leading-snug text-[var(--color-navy)] sm:text-2xl">
