@@ -9,7 +9,10 @@ export const site = {
   legalName: "Daron Trading Namibia (Pty) Ltd",
   founded: 2012,
   tagline: "Supplying Africa's seas, shores & industries with confidence",
-  url: "https://daron.com.na",
+  // Canonical host MUST match where the site actually serves: the apex
+  // (daron.com.na) 308-redirects to www, so www is canonical. Drives canonical
+  // tags, og:url, JSON-LD and the sitemap — keep them all on www.
+  url: "https://www.daron.com.na",
   description:
     "Daron Namibia supplies Africa's seas, shores and industries with confidence. Marine chandlery, oil and gas logistics, catering, warehousing — from Walvis Bay since 2012.",
   ogImage: "/og.png",
