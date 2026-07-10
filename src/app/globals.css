@@ -20,12 +20,13 @@
   /* Maritime teal — cool brand accent */
   --color-accent: #15b4c7;        /* bright teal — on NAVY/dark + decorative (6.3:1 on navy) */
   --color-accent-deep: #0e8a99;   /* deeper teal — hovers / secondary on dark */
-  --color-accent-text: #0c7d8c;   /* dark teal — teal TEXT on light bg + focus ring (4.9:1 on white, 3.2:1 on navy) */
+  --color-accent-text: #0a7180;   /* dark teal — AA text on light bg + 3:1 focus ring on navy */
 
   /* Safety orange — primary action only */
   --color-cta: #f97316;
   --color-cta-deep: #ea580c;
   --color-cta-ink: #0a2540;       /* navy ink on orange (5.5:1) */
+  --color-cta-text: #9a3412;      /* orange-family text on light backgrounds (7.1:1 on white) */
 
   --color-sand: #f7f3ec;
   --color-ink: #0f172a;
@@ -46,10 +47,13 @@
 :root {
   --background: #07111f;
   --foreground: #f8fafc;
+  --font-poppins: "Poppins";
+  --font-open-sans: "Open Sans";
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -59,6 +63,13 @@ body {
     Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+@media (max-width: 767px) {
+  .radar-pulse {
+    animation: none;
+  }
 }
 
 .industrial-grid {

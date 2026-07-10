@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 // Branded 1200×630 social card, generated at build for every [locale] route.
 // Replaces the dead `/og.png` reference and gives every page a proper card.
-export const alt = `${site.name} — supplying Africa's seas, shores & industries`;
+export const alt = `${site.name} — when operations cannot wait`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -48,7 +48,7 @@ export default function OpengraphImage() {
             style={{
               width: 96,
               height: 6,
-              background: "#15b4c7",
+              background: "#f97316",
               borderRadius: 4,
               marginBottom: 28,
             }}
@@ -62,13 +62,13 @@ export default function OpengraphImage() {
               maxWidth: 880,
             }}
           >
-            Supplying Africa&apos;s seas, shores &amp; industries with confidence.
+            When operations cannot wait, Daron moves.
           </span>
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <span style={{ color: "rgba(255,255,255,0.75)", fontSize: 26 }}>
-            Marine chandlery · Oil &amp; gas · Logistics · Walvis Bay
+            Marine supply · Offshore support · Logistics · Walvis Bay
           </span>
           <span style={{ color: "#f97316", fontSize: 26, fontWeight: 600 }}>
             Since 2012

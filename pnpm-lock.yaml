@@ -11,6 +11,12 @@ importers:
       '@anthropic-ai/sdk':
         specifier: ^0.90.0
         version: 0.90.0(zod@4.3.6)
+      '@fontsource/open-sans':
+        specifier: ^5.2.7
+        version: 5.2.7
+      '@fontsource/poppins':
+        specifier: ^5.2.7
+        version: 5.2.7
       gsap:
         specifier: ^3.15.0
         version: 3.15.0
@@ -184,6 +190,12 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@fontsource/open-sans@5.2.7':
+    resolution: {integrity: sha512-8yfgDYjE5O0vmTPdrcjV35y4yMnctsokmi9gN49Gcsr0sjzkMkR97AnKDe6OqZh2SFkYlR28fxOvi21bYEgMSw==}
+
+  '@fontsource/poppins@5.2.7':
+    resolution: {integrity: sha512-6uQyPmseo4FgI97WIhA4yWRlNaoLk4vSDK/PyRwdqqZb5zAEuc+Kunt8JTMcsHYUEGYBtN15SNkMajMdqUSUmg==}
 
   '@formatjs/fast-memoize@3.1.2':
     resolution: {integrity: sha512-vPnriihkfK0lzoQGaXq+qXH23VsYyansRTkTgo2aTG0k1NjLFyZimFVdfj4C9JkSE5dm7CEngcQ5TTc1yAyBfQ==}
@@ -2389,6 +2401,10 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
+
+  '@fontsource/open-sans@5.2.7': {}
+
+  '@fontsource/poppins@5.2.7': {}
 
   '@formatjs/fast-memoize@3.1.2': {}
 

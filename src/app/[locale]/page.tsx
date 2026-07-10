@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ClientWall } from "@/components/ClientWall";
 import { Container } from "@/components/Container";
 import { CountUp } from "@/components/CountUp";
+import { DeferredHeroVideo } from "@/components/DeferredHeroVideo";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { OperationsNetworkCanvas } from "@/components/OperationsNetworkCanvas";
 import { Link } from "@/i18n/routing";
@@ -99,24 +100,15 @@ const rfqWorkflow = [
 ];
 
 const trackRecord = [
-  { title: "Concurrent offshore rig support", body: "Deepsea Mira, Deepsea Bollsta and Deepsea Hercules supported during active offshore campaign pressure." },
-  { title: "Sapura Berani reactivation", body: "Rig reactivation support under severe time pressure, including catering, cleaning, technical sourcing and rapid release." },
-  { title: "Subsea7 / Seven Borealis", body: "Quayside heavy-lift and offshore construction support from Walvis Bay." },
-  { title: "Cruise provisioning", body: "Dock-to-gangway provisioning, cold-chain handling and fast turnaround for passenger vessel requirements." },
+  { title: "Concurrent offshore rig support", image: "/generated/daron/hero-offshore-poster.jpg", body: "Deepsea Mira, Deepsea Bollsta and Deepsea Hercules supported during active offshore campaign pressure." },
+  { title: "Sapura Berani reactivation", image: "/generated/daron/high-pressure-maintenance.jpg", body: "Rig reactivation support under severe time pressure, including catering, cleaning, technical sourcing and rapid release." },
+  { title: "Subsea7 / Seven Borealis", image: "/images/site/operations/container-lift-subsea7.jpg", body: "Quayside heavy-lift and offshore construction support from Walvis Bay." },
+  { title: "Cruise provisioning", image: "/images/site/operations/daron-truck-cruise-ship.jpg", body: "Dock-to-gangway provisioning, cold-chain handling and fast turnaround for passenger vessel requirements." },
 ];
 
 const partners = ["Hempel", "Orlichem", "Honeywell", "ISSA", "IMPA", "Marine safety", "Lubricants", "Technical catalogues"];
 
 const certifications = ["ISO 9001:2015", "HACCP", "ISSA listed", "IMPA listed", "Supplier QA", "Human-reviewed RFQs"];
-
-const gallery = [
-  { title: "Normand Energy supply", image: "/images/site/operations/daron-truck-normand-energy.jpg" },
-  { title: "Seven Borealis alongside", image: "/images/site/operations/seven-borealis-dusk.jpg" },
-  { title: "Quayside readiness", image: "/images/site/operations/daron-ranger-quayside.jpg" },
-  { title: "Cruise provisioning", image: "/images/site/operations/daron-truck-cruise-ship.jpg" },
-  { title: "Container logistics", image: "/images/site/operations/container-lift-subsea7.jpg" },
-  { title: "Warehouse execution", image: "/images/site/forklift-warehouse.png" },
-];
 
 const primaryCta = contact.whatsapp.href;
 
@@ -139,35 +131,24 @@ export default async function HomePage({
           sizes="100vw"
           className="hero-media object-cover opacity-62"
         />
-        <video
-          className="hero-media absolute inset-0 h-full w-full object-cover opacity-42 mix-blend-screen"
-          muted
-          autoPlay
-          loop
-          playsInline
-          preload="metadata"
-          poster="/generated/daron/hero-offshore-poster.jpg"
-          aria-hidden="true"
-        >
-          <source src="/generated/daron/hero-offshore-operations.mp4" type="video/mp4" />
-        </video>
+        <DeferredHeroVideo />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,#030a12_0%,rgba(3,10,18,.90)_36%,rgba(3,10,18,.42)_100%)]" />
         <div className="absolute inset-0 industrial-grid opacity-45" />
         <div className="absolute right-[-18rem] top-[10%] h-[48rem] w-[48rem] rounded-full border border-cyan-300/18 radar-pulse" />
         <div className="absolute right-[8%] top-[22%] hidden h-[22rem] w-[22rem] rounded-full border border-cyan-300/12 lg:block radar-pulse radar-pulse-delay" />
-        <Container className="relative flex min-h-[calc(100svh-5rem)] items-end py-10 sm:py-16">
-          <div className="grid w-full gap-10 lg:grid-cols-[1.06fr_.94fr] lg:items-end">
-            <div data-gsap="hero-copy" className="max-w-5xl pb-4">
+        <Container className="relative flex min-h-[calc(100svh-5rem)] items-center py-8 sm:py-10">
+          <div className="grid w-full gap-8 lg:grid-cols-[1.25fr_.75fr] lg:items-center">
+            <div data-gsap="hero-copy" className="max-w-5xl">
               <p className="font-mono text-xs uppercase tracking-[0.28em] text-[var(--color-cta)]">
                 Walvis Bay command · Africa supply reach · Marine operations since {site.founded}
               </p>
-              <h1 className="mt-5 max-w-5xl text-balance font-[family-name:var(--font-poppins)] text-[clamp(3.1rem,9vw,8.6rem)] font-black uppercase leading-[0.78] tracking-[-0.08em]">
+              <h1 className="mt-5 max-w-5xl text-balance font-[family-name:var(--font-poppins)] text-[clamp(3.1rem,6.6vw,7.2rem)] font-black uppercase leading-[0.82] tracking-[-0.06em]">
                 When operations cannot wait.
               </h1>
-              <p className="mt-7 max-w-2xl text-lg leading-8 text-white/76 sm:text-xl">
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/86 sm:text-xl">
                 Daron Namibia supplies vessels, rigs, ports, mines, dry docks and industrial sites with fast RFQ response, serious procurement control and real infrastructure on the ground.
               </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <a href={primaryCta} target="_blank" rel="noopener noreferrer" className="magnetic-action plausible-event-name=Hero+RFQ inline-flex min-h-12 items-center justify-center bg-[var(--color-cta)] px-7 py-4 text-sm font-black uppercase tracking-[0.16em] text-[var(--color-cta-ink)] transition hover:bg-[var(--color-cta-deep)]">
                   Send Your RFQ
                 </a>
@@ -175,17 +156,17 @@ export default async function HomePage({
                   Talk to the Operations Team
                 </a>
               </div>
-              <a href={contact.phone.href} className="mt-5 inline-flex font-mono text-xs uppercase tracking-[0.18em] text-white/64 underline decoration-[var(--color-cta)] underline-offset-4 hover:text-white">
+              <a href={contact.phone.href} className="mt-4 inline-flex font-mono text-xs uppercase tracking-[0.18em] text-white/72 underline decoration-[var(--color-cta)] underline-offset-4 hover:text-white">
                 Need urgent supply? Call Daron now: {contact.phone.display}
               </a>
             </div>
-            <aside data-gsap="hero-panel" className="ops-panel p-5 sm:p-6">
+            <aside data-gsap="hero-panel" className="ops-panel hidden p-5 lg:block">
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/44">Live RFQ posture</p>
               <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden border border-white/10 bg-white/10">
                 {heroStats.map((stat) => (
                   <div key={stat.label} className="bg-[#06111d]/90 p-4">
                     <p className="font-[family-name:var(--font-poppins)] text-3xl font-black text-white sm:text-4xl">
-                      <CountUp to={stat.value} separator={stat.value > 999} suffix={stat.suffix} />
+                      <CountUp to={stat.value} separator={stat.value > 999} suffix={stat.suffix} animate={false} />
                     </p>
                     <p className="mt-2 text-xs leading-5 text-white/54">{stat.label}</p>
                   </div>
@@ -201,7 +182,7 @@ export default async function HomePage({
       </section>
 
       <section className="overflow-hidden border-y border-white/10 bg-[#06111d] py-4 text-white">
-        <div className="kinetic-band gap-12 whitespace-nowrap font-mono text-xs uppercase tracking-[0.24em] text-white/42">
+        <div className="kinetic-band gap-12 whitespace-nowrap font-mono text-xs uppercase tracking-[0.24em] text-white/64">
           {["Marine", "Oil & gas", "Logistics", "Catering", "Warehousing", "Safety", "Dry dock", "Mining", "Industrial", "Emergency supply", "AI-assisted RFQs", "Walvis Bay", "African reach", "Marine", "Oil & gas", "Logistics"].map((item, idx) => (
             <span key={`${item}-${idx}`} className="inline-flex items-center gap-4">
               <span className="h-1.5 w-1.5 bg-[var(--color-cta)]" />
@@ -211,15 +192,30 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section id="services" className="dark-section py-20 text-white sm:py-28">
+      <section className="border-b border-white/10 bg-[#071521] py-6 text-white lg:hidden">
         <Container>
-          <SectionIntro eyebrow="Service command" title="One operating platform for serious marine, offshore and industrial supply." body="The new Daron experience is built around how procurement teams actually buy under pressure: clear scopes, fast RFQs, evidence of capability and one path to a human operations desk." />
-          <div className="mt-12 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-px overflow-hidden border border-white/10 bg-white/10">
+            {heroStats.map((stat) => (
+              <div key={stat.label} className="bg-[#06111d] p-4">
+                <p className="font-[family-name:var(--font-poppins)] text-3xl font-black">
+                  <CountUp to={stat.value} separator={stat.value > 999} suffix={stat.suffix} animate={false} />
+                </p>
+                <p className="mt-1 text-xs leading-5 text-white/68">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section id="services" className="dark-section py-16 text-white sm:py-20">
+        <Container>
+          <SectionIntro eyebrow="Service command" title="One operating platform for serious marine, offshore and industrial supply." body="Six capability lanes connect urgent vessel demand, controlled sourcing, staging and delivery to one accountable operations desk." />
+          <div className="mt-10 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, idx) => (
-              <Link key={service.title} href={service.href} data-gsap="service-card" style={{ "--reveal-delay": `${idx * 55}ms` } as CSSProperties} className="service-card group min-h-[310px] bg-[#071521] p-6 transition hover:bg-[#0b2133] sm:p-8">
+              <Link key={service.title} href={service.href} data-gsap="service-card" style={{ "--reveal-delay": `${idx * 55}ms` } as CSSProperties} className="service-card group min-h-[220px] bg-[#071521] p-6 transition hover:bg-[#0b2133] md:min-h-[270px] sm:p-7">
                 <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-accent)]">{service.kicker}</p>
                 <h3 className="mt-6 font-[family-name:var(--font-poppins)] text-3xl font-black leading-none tracking-[-0.04em] text-white">{service.title}</h3>
-                <p className="mt-5 text-sm leading-7 text-white/62">{service.body}</p>
+                <p className="mt-5 text-sm leading-7 text-white/74">{service.body}</p>
                 <span className="mt-8 inline-flex font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-cta)] group-hover:text-white">Open capability →</span>
               </Link>
             ))}
@@ -227,18 +223,19 @@ export default async function HomePage({
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-[#e9edf2] py-20 text-[#08111f] sm:py-28">
+      <section className="relative overflow-hidden bg-[#e9edf2] py-16 text-[#08111f] sm:py-20">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
             <div data-gsap="fade-up">
               <p className="font-mono text-xs uppercase tracking-[0.24em] text-[var(--color-accent-text)]">African supplier network</p>
               <h2 className="mt-4 font-[family-name:var(--font-poppins)] text-4xl font-black uppercase leading-none tracking-[-0.06em] sm:text-6xl">Walvis Bay control. Continental reach.</h2>
               <p className="mt-6 max-w-xl text-base leading-8 text-slate-600">Daron combines Namibian port presence with Daron Group supplier depth, giving procurement teams a single accountable desk for local execution and regional sourcing.</p>
-              <div className="mt-8 grid grid-cols-2 gap-px border border-slate-300 bg-slate-300">
-                {whyDaron.map(([n, title]) => (
+              <div className="mt-8 grid gap-px border border-slate-300 bg-slate-300 sm:grid-cols-2">
+                {whyDaron.map(([n, title, body]) => (
                   <div key={title} className="bg-white p-4">
-                    <p className="font-mono text-xs text-[var(--color-cta)]">{n}</p>
+                    <p className="font-mono text-xs text-[var(--color-cta-text)]">{n}</p>
                     <p className="mt-2 text-sm font-bold uppercase tracking-[0.08em]">{title}</p>
+                    <p className="mt-2 hidden text-xs leading-5 text-slate-600 sm:block">{body}</p>
                   </div>
                 ))}
               </div>
@@ -250,18 +247,18 @@ export default async function HomePage({
         </Container>
       </section>
 
-      <section className="dark-section py-20 text-white sm:py-28">
+      <section className="dark-section py-16 text-white sm:py-20">
         <Container>
-          <SectionIntro eyebrow="Industries" title="Built for sectors where delay has a real cost." body="This is not generic logistics copy. Each vertical routes visitors into the operational proof and RFQ path that matters to them." />
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <SectionIntro eyebrow="Industries" title="Built for sectors where delay has a real cost." body="Direct capability routes for vessel managers, offshore teams, industrial buyers, ports and remote operations." />
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry, idx) => (
-              <article key={industry.title} data-gsap="image-card" style={{ "--reveal-delay": `${idx * 60}ms` } as CSSProperties} className="group relative min-h-[430px] overflow-hidden border border-white/10 bg-[#081726]">
+              <article key={industry.title} data-gsap="image-card" style={{ "--reveal-delay": `${idx * 60}ms` } as CSSProperties} className="group relative min-h-[320px] overflow-hidden border border-white/10 bg-[#081726] md:min-h-[370px]">
                 <Image src={industry.image} alt="" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-62 transition duration-700 group-hover:scale-[1.045] group-hover:opacity-78" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#040b13] via-[#040b13]/44 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-cta)]">Industry 0{idx + 1}</p>
                   <h3 className="mt-3 font-[family-name:var(--font-poppins)] text-3xl font-black leading-none tracking-[-0.04em]">{industry.title}</h3>
-                  <p className="mt-4 max-w-sm text-sm leading-6 text-white/66">{industry.body}</p>
+                  <p className="mt-4 max-w-sm text-sm leading-6 text-white/76">{industry.body}</p>
                 </div>
               </article>
             ))}
@@ -269,38 +266,14 @@ export default async function HomePage({
         </Container>
       </section>
 
-      <section className="bg-[#06111d] py-20 text-white sm:py-28">
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
-            <div className="lg:sticky lg:top-28" data-gsap="fade-up">
-              <p className="font-mono text-xs uppercase tracking-[0.24em] text-[var(--color-cta)]">Why Daron</p>
-              <h2 className="mt-4 font-[family-name:var(--font-poppins)] text-4xl font-black uppercase leading-none tracking-[-0.06em] sm:text-6xl">Confidence under pressure.</h2>
-              <p className="mt-6 text-base leading-8 text-white/66">Buyers do not need slogans. They need a supplier who answers, sources, stages, documents, delivers and follows up.</p>
-              <Link href="/why-daron" className="mt-8 inline-flex border border-white/18 px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-white hover:border-[var(--color-cta)]">Read why Daron →</Link>
-            </div>
-            <div className="grid gap-px border border-white/10 bg-white/10">
-              {whyDaron.map(([n, title, body], idx) => (
-                <article key={title} data-gsap="fade-up" style={{ "--reveal-delay": `${idx * 70}ms` } as CSSProperties} className="grid gap-6 bg-[#0a1a29] p-6 sm:grid-cols-[110px_1fr] sm:p-8">
-                  <p className="font-mono text-4xl text-[var(--color-accent)]">{n}</p>
-                  <div>
-                    <h3 className="font-[family-name:var(--font-poppins)] text-2xl font-black tracking-[-0.04em]">{title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-white/62">{body}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="relative overflow-hidden bg-[#071521] py-20 text-white sm:py-28">
+      <section className="relative overflow-hidden bg-[#071521] py-16 text-white sm:py-20">
         <div className="absolute inset-0 industrial-grid opacity-30" />
         <Container className="relative">
           <div className="grid gap-12 lg:grid-cols-[.92fr_1.08fr] lg:items-center">
             <div data-gsap="fade-up">
               <p className="font-mono text-xs uppercase tracking-[0.24em] text-[var(--color-accent)]">Don AI RFQ workflow</p>
               <h2 className="mt-4 font-[family-name:var(--font-poppins)] text-4xl font-black uppercase leading-none tracking-[-0.06em] sm:text-6xl">AI speed. Human accountability.</h2>
-              <p className="mt-6 max-w-xl text-base leading-8 text-white/68">Don is Daron&apos;s RFQ operations layer. It helps structure messy client requests, accelerates quote drafting and keeps the human KAM in control before anything is sent.</p>
+              <p className="mt-6 max-w-xl text-base leading-8 text-white/78">Don is Daron&apos;s RFQ operations layer. It structures complex client requests, accelerates quote drafting and keeps the human KAM in control before anything is sent.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link href="/ai" className="bg-[var(--color-cta)] px-6 py-3 text-center text-sm font-black uppercase tracking-[0.16em] text-[var(--color-cta-ink)]">View Don AI</Link>
                 <a href={contact.whatsapp.href} target="_blank" rel="noopener noreferrer" className="border border-white/18 px-6 py-3 text-center text-sm font-bold uppercase tracking-[0.16em] text-white">WhatsApp RFQ</a>
@@ -318,7 +291,7 @@ export default async function HomePage({
                     <div className="z-10 flex h-12 w-12 items-center justify-center border border-white/16 bg-[#071521] font-mono text-xs text-[var(--color-cta)]">{n}</div>
                     <div className="border border-white/10 bg-white/[0.035] p-4">
                       <h3 className="font-[family-name:var(--font-poppins)] text-xl font-black">{title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-white/60">{body}</p>
+                      <p className="mt-2 text-sm leading-6 text-white/72">{body}</p>
                     </div>
                   </article>
                 ))}
@@ -328,15 +301,21 @@ export default async function HomePage({
         </Container>
       </section>
 
-      <section className="bg-white py-20 text-[#08111f] sm:py-28">
+      <section className="bg-white py-16 text-[#08111f] sm:py-20">
         <Container>
-          <SectionIntro light eyebrow="Track record" title="Proof that belongs in the procurement room." body="The site brings real operations forward: names, contexts, vessels, photos and categories that make Daron feel like a working platform, not a brochure." />
-          <div className="mt-12 grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-2 lg:grid-cols-4">
+          <SectionIntro light eyebrow="Track record" title="Proof that belongs in the procurement room." body="Named vessels, campaign context and operational imagery show where Daron has already delivered under pressure." />
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
             {trackRecord.map((item, idx) => (
-              <article key={item.title} data-gsap="fade-up" style={{ "--reveal-delay": `${idx * 65}ms` } as CSSProperties} className="bg-white p-6 transition hover:bg-slate-50">
-                <p className="font-mono text-xs text-[var(--color-cta)]">0{idx + 1}</p>
-                <h3 className="mt-8 font-[family-name:var(--font-poppins)] text-2xl font-black leading-none tracking-[-0.04em]">{item.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-slate-600">{item.body}</p>
+              <article key={item.title} data-gsap="image-card" style={{ "--reveal-delay": `${idx * 65}ms` } as CSSProperties} className="group relative min-h-[340px] overflow-hidden border border-slate-300 bg-[#08111f] text-white sm:grid sm:min-h-[300px] sm:grid-cols-[.92fr_1.08fr]">
+                <div className="absolute inset-0 overflow-hidden sm:relative">
+                  <Image src={item.image} alt="" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover opacity-78 transition duration-700 group-hover:scale-[1.04] group-hover:opacity-90" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#08111f] via-[#08111f]/32 to-transparent sm:bg-gradient-to-r sm:from-transparent sm:to-[#08111f]/45" />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end p-6 sm:relative">
+                  <p className="font-mono text-xs text-[var(--color-cta)]">OPERATION 0{idx + 1}</p>
+                  <h3 className="mt-5 font-[family-name:var(--font-poppins)] text-2xl font-black leading-none tracking-[-0.04em]">{item.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-white/76">{item.body}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -347,112 +326,44 @@ export default async function HomePage({
         </Container>
       </section>
 
-      <section className="dark-section py-20 text-white sm:py-28">
+      <section className="bg-[#e9edf2] py-16 text-[#08111f] sm:py-20">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
-            <SectionIntro eyebrow="Partners & catalogues" title="Supplier depth buyers can actually use." body="Product ranges, represented brands, specialist catalogues and trusted supplier paths are positioned as procurement assets — with RFQ conversion always close by." />
-            <div className="grid grid-cols-2 gap-px border border-white/10 bg-white/10 sm:grid-cols-4">
-              {partners.map((partner) => (
-                <div key={partner} className="bg-[#091726] p-5 text-center font-mono text-xs uppercase tracking-[0.16em] text-white/68">{partner}</div>
-              ))}
-            </div>
-          </div>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Link href="/brands" className="inline-flex bg-[var(--color-cta)] px-6 py-3 text-center text-sm font-black uppercase tracking-[0.14em] text-[var(--color-cta-ink)]">Open partners / catalogues</Link>
-            <a href={contact.whatsapp.href} target="_blank" rel="noopener noreferrer" className="inline-flex border border-white/18 px-6 py-3 text-center text-sm font-bold uppercase tracking-[0.14em] text-white">Ask for availability</a>
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-[#e9edf2] py-20 text-[#08111f] sm:py-28">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
             <div data-gsap="fade-up">
-              <p className="font-mono text-xs uppercase tracking-[0.24em] text-[var(--color-accent-text)]">Compliance</p>
-              <h2 className="mt-4 font-[family-name:var(--font-poppins)] text-4xl font-black uppercase leading-none tracking-[-0.06em] sm:text-6xl">High-trust signals, above the fold and throughout.</h2>
-              <p className="mt-6 text-base leading-8 text-slate-600">Certifications and operating standards are treated as conversion assets for procurement teams, agents, vessel managers and offshore buyers.</p>
+              <p className="font-mono text-xs uppercase tracking-[0.24em] text-[var(--color-accent-text)]">Procurement confidence</p>
+              <h2 className="mt-4 font-[family-name:var(--font-poppins)] text-4xl font-black uppercase leading-none tracking-[-0.06em] sm:text-6xl">Supplier depth. Documented control.</h2>
+              <p className="mt-6 text-base leading-8 text-slate-600">Compliance, catalogue access and specialist supplier paths give buyers a faster route from requirement to defensible purchase.</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col">
+                <Link href="/brands" className="inline-flex justify-center bg-[#08111f] px-6 py-3 text-center text-sm font-bold uppercase tracking-[0.14em] text-white">Open catalogues</Link>
+                <a href={contact.whatsapp.href} target="_blank" rel="noopener noreferrer" className="inline-flex justify-center border border-slate-400 px-6 py-3 text-center text-sm font-bold uppercase tracking-[0.14em] text-[#08111f]">Ask for availability</a>
+              </div>
             </div>
-            <div className="grid gap-px border border-slate-300 bg-slate-300 sm:grid-cols-2 lg:grid-cols-3">
-              {certifications.map((cert) => (
-                <div key={cert} className="bg-white p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-cta)]">Verified</p>
-                  <p className="mt-5 font-[family-name:var(--font-poppins)] text-2xl font-black tracking-[-0.04em]">{cert}</p>
+            <div className="grid gap-6">
+              <div>
+                <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-600">Standards & controls</p>
+                <div className="grid grid-cols-2 gap-px border border-slate-300 bg-slate-300 lg:grid-cols-3">
+                  {certifications.map((cert) => (
+                    <div key={cert} className="bg-white p-4 sm:p-5">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-cta-text)]">Verified</p>
+                      <p className="mt-3 font-[family-name:var(--font-poppins)] text-base font-black tracking-[-0.04em] sm:mt-4 sm:text-xl">{cert}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-[#06111d] py-20 text-white sm:py-28">
-        <Container>
-          <SectionIntro eyebrow="Real operations gallery" title="No generic stock feeling. Real Daron movement." body="The visual system is built around actual vessels, trucks, quayside scenes, warehouse work and offshore support — supported by subtle grids, route lines and radar motion." />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {gallery.map((item, idx) => (
-              <article key={item.title} data-gsap="image-card" style={{ "--reveal-delay": `${idx * 55}ms` } as CSSProperties} className="group relative min-h-[320px] overflow-hidden border border-white/10 bg-[#091726]">
-                <Image src={item.image} alt={item.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-76 transition duration-700 group-hover:scale-[1.05]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030a12] via-transparent to-transparent" />
-                <h3 className="absolute bottom-5 left-5 right-5 font-[family-name:var(--font-poppins)] text-2xl font-black tracking-[-0.04em]">{item.title}</h3>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="relative isolate overflow-hidden bg-[#030a12] py-20 text-white sm:py-28">
-        <Image src="/images/site/bg-desert-daron.png" alt="" fill sizes="100vw" className="object-cover opacity-28" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#030a12] via-[#030a12]/90 to-[#030a12]/52" />
-        <Container className="relative">
-          <div className="grid gap-12 lg:grid-cols-[.92fr_1.08fr] lg:items-end">
-            <div data-gsap="fade-up">
-              <p className="font-mono text-xs uppercase tracking-[0.24em] text-[var(--color-cta)]">About Daron Namibia</p>
-              <h2 className="mt-4 font-[family-name:var(--font-poppins)] text-4xl font-black uppercase leading-none tracking-[-0.06em] sm:text-6xl">A Namibian operator backed by Daron Group depth.</h2>
-            </div>
-            <div data-gsap="fade-up" className="max-w-2xl text-base leading-8 text-white/70">
-              <p>Founded in Walvis Bay in {site.founded}, Daron Namibia has grown into a marine, offshore, logistics, catering, warehousing, health and safety, and dry-dock support partner for clients who need fast answers and dependable execution.</p>
-              <p className="mt-5">The digital platform now reflects that posture: sharper RFQ flow, more proof, better vertical routing, real operation visuals and a premium industrial interface built for conversion.</p>
+              </div>
+              <div>
+                <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-600">Partners & catalogue routes</p>
+                <div className="grid grid-cols-2 gap-px border border-slate-300 bg-slate-300 sm:grid-cols-4">
+                  {partners.map((partner) => (
+                    <div key={partner} className="bg-white p-4 text-center font-mono text-xs uppercase tracking-[0.12em] text-slate-700">{partner}</div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
       <ClientWall variant="navy" />
-
-      <section id="rfq" className="relative overflow-hidden bg-white py-20 text-[#08111f] sm:py-28">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-[.82fr_1.18fr] lg:items-start">
-            <div data-gsap="fade-up">
-              <p className="font-mono text-xs uppercase tracking-[0.24em] text-[var(--color-accent-text)]">Contact / RFQ</p>
-              <h2 className="mt-4 font-[family-name:var(--font-poppins)] text-4xl font-black uppercase leading-none tracking-[-0.06em] sm:text-6xl">Send the file. We&apos;ll move the requirement.</h2>
-              <p className="mt-6 text-base leading-8 text-slate-600">The RFQ page supports structured intake and file upload for Excel, PDF, Word and CSV requirements. WhatsApp remains the fastest route for urgent vessel supply.</p>
-              <div className="mt-8 flex flex-col gap-3">
-                <a href={contact.whatsapp.href} target="_blank" rel="noopener noreferrer" className="inline-flex bg-[var(--color-cta)] px-6 py-3 text-center text-sm font-black uppercase tracking-[0.14em] text-[var(--color-cta-ink)]">Send Your RFQ</a>
-                <a href={contact.phone.href} className="inline-flex border border-slate-300 px-6 py-3 text-center text-sm font-bold uppercase tracking-[0.14em] text-[#08111f]">Need urgent supply? Call Daron now</a>
-              </div>
-            </div>
-            <div data-gsap="fade-up" className="border border-slate-300 bg-[#f5f7fa] p-5 sm:p-7">
-              <div className="grid gap-4 sm:grid-cols-2">
-                {[
-                  "Company name",
-                  "Vessel / project",
-                  "Port / delivery point",
-                  "Urgency / ETA",
-                ].map((field) => (
-                  <div key={field} className="bg-white p-4">
-                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500">{field}</p>
-                    <div className="mt-8 h-px bg-slate-300" />
-                  </div>
-                ))}
-                <div className="border border-dashed border-slate-400 bg-white p-8 text-center sm:col-span-2">
-                  <p className="font-[family-name:var(--font-poppins)] text-2xl font-black tracking-[-0.04em]">RFQ file upload</p>
-                  <p className="mt-3 text-sm text-slate-600">Excel · PDF · Word · CSV · photos via WhatsApp</p>
-                </div>
-              </div>
-              <Link href="/contact" className="mt-5 inline-flex w-full justify-center bg-[#08111f] px-6 py-4 text-sm font-black uppercase tracking-[0.16em] text-white">Open full RFQ form</Link>
-            </div>
-          </div>
-        </Container>
-      </section>
 
       <InlineRFQ
         variant="navy"

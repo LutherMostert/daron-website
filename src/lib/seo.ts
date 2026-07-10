@@ -33,6 +33,14 @@ const OG_LOCALE: Record<string, string> = {
   fr: "fr_FR",
 };
 
+function clampMetadataText(value: string, maxLength: number) {
+  if (value.length <= maxLength) return value;
+  const candidate = value.slice(0, maxLength - 3);
+  const wordBoundary = candidate.lastIndexOf(" ");
+  const trimmed = wordBoundary > maxLength * 0.65 ? candidate.slice(0, wordBoundary) : candidate;
+  return `${trimmed.trimEnd()}...`;
+}
+
 export function buildMetadata({
   locale,
   path,
@@ -57,21 +65,24 @@ export function buildMetadata({
     locale: routing.defaultLocale,
   });
 
+  const metadataTitle = titleAbsolute ? title : clampMetadataText(title, 46);
+  const metadataDescription = clampMetadataText(description, 160);
+
   return {
-    title: titleAbsolute ? { absolute: title } : title,
-    description,
+    title: titleAbsolute ? { absolute: metadataTitle } : metadataTitle,
+    description: metadataDescription,
     alternates: { canonical, languages },
     openGraph: {
       type,
       url: canonical,
       title: ogTitle ?? title,
-      description,
+      description: metadataDescription,
       locale: OG_LOCALE[loc] ?? loc,
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle ?? title,
-      description,
+      description: metadataDescription,
     },
   };
 }
