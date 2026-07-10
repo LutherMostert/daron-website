@@ -103,10 +103,10 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#07111f]/92 text-white shadow-[0_1px_0_rgba(255,255,255,.04)] backdrop-blur-xl supports-[backdrop-filter]:bg-[#07111f]/82">
-      <Container className="flex h-20 items-center justify-between gap-4">
+      <Container className="flex h-20 max-w-[1320px] items-center justify-between gap-4">
         <Link
           href="/"
-          className="flex items-center rounded-2xl bg-white px-2 py-1 shadow-[0_8px_30px_rgba(0,0,0,.18)]"
+          className="flex shrink-0 items-center rounded-md bg-white px-2 py-1 shadow-[0_8px_30px_rgba(0,0,0,.18)]"
           aria-label={`${site.name} home`}
         >
           <Image
@@ -120,13 +120,13 @@ export function Header() {
           />
         </Link>
 
-        <nav aria-label="Primary" className="hidden lg:block">
-          <ul className="flex items-center gap-5 text-sm font-medium xl:gap-6">
+        <nav aria-label="Primary" className="hidden xl:block">
+          <ul className="flex items-center gap-4 text-sm font-medium xl:gap-5">
             {navItems.map((n) => (
               <li key={n.href}>
                 <Link
                   href={n.href}
-                  className="text-white/72 transition-colors hover:text-white"
+                  className="whitespace-nowrap text-white/72 transition-colors hover:text-white"
                 >
                   {tNav(n.key)}
                 </Link>
@@ -135,11 +135,11 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden shrink-0 items-center gap-3 xl:flex">
           <LanguageSwitcher />
           <a
             href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
+            className="shrink-0 whitespace-nowrap rounded-md bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -153,7 +153,7 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/15 text-white lg:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/15 text-white xl:hidden"
         >
           <span className="sr-only">{open ? tHeader("closeMenu") : tHeader("openMenu")}</span>
           <svg
@@ -184,7 +184,7 @@ export function Header() {
       </Container>
 
       {open && (
-        <div id="mobile-nav" className="border-t border-white/10 bg-[#07111f] md:hidden">
+        <div id="mobile-nav" className="border-t border-white/10 bg-[#07111f] xl:hidden">
           <Container className="flex flex-col py-4">
             <ul className="flex flex-col gap-1 text-base font-medium">
               <li>

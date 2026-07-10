@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Poppins, Open_Sans } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -15,19 +14,12 @@ import { StickyActions } from "@/components/StickyActions";
 import { contact, site } from "@/lib/site";
 import { routing } from "@/i18n/routing";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "900"],
-  display: "swap",
-});
-
-const openSans = Open_Sans({
-  variable: "--font-open-sans",
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  display: "swap",
-});
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/900.css";
+import "@fontsource/open-sans/400.css";
+import "@fontsource/open-sans/600.css";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -178,7 +170,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       suppressHydrationWarning
-      className={`${poppins.variable} ${openSans.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <body className="flex min-h-full flex-col bg-white text-[var(--color-ink)]">
         {/* Set .js before paint so the scroll-reveal CSS only hides content

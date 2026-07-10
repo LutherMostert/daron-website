@@ -100,6 +100,7 @@ export function OperationsNetworkCanvas() {
     let width = 0;
     let height = 0;
     let alive = true;
+    let visible = false;
     const hub = nodes[0];
     const routes = nodes.slice(1).map((node) => route(hub, node));
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -247,7 +248,23 @@ export function OperationsNetworkCanvas() {
         ctx.restore();
       });
 
-      if (!reduced) frame = requestAnimationFrame(draw);
+    }
+
+    function tick(time: number) {
+      draw(time);
+      frame = visible && !reduced ? requestAnimationFrame(tick) : 0;
+    }
+
+    function startAnimation() {
+      if (!reduced && visible && frame === 0) {
+        frame = requestAnimationFrame(tick);
+      }
+    }
+
+    function stopAnimation() {
+      if (frame !== 0) cancelAnimationFrame(frame);
+      frame = 0;
+      draw(performance.now());
     }
 
     resize();
@@ -262,27 +279,38 @@ export function OperationsNetworkCanvas() {
         if (!alive) return;
         mapDataRef.current = data;
         draw(performance.now());
+        startAnimation();
       })
       .catch(() => {
         mapDataRef.current = null;
       });
 
-    const observer = new ResizeObserver(() => {
+    const resizeObserver = new ResizeObserver(() => {
       resize();
       draw(performance.now());
     });
-    observer.observe(surface);
-    if (!reduced) frame = requestAnimationFrame(draw);
+    resizeObserver.observe(surface);
+
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible) startAnimation();
+        else stopAnimation();
+      },
+      { rootMargin: "120px 0px", threshold: 0.01 },
+    );
+    visibilityObserver.observe(surface);
 
     return () => {
       alive = false;
-      observer.disconnect();
-      cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
+      if (frame !== 0) cancelAnimationFrame(frame);
     };
   }, []);
 
   return (
-    <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] border border-white/10 bg-[#07111f] shadow-[inset_0_1px_0_rgba(255,255,255,.08)]">
+    <div className="relative min-h-[420px] overflow-hidden rounded-md border border-white/10 bg-[#07111f] shadow-[inset_0_1px_0_rgba(255,255,255,.08)]">
       <canvas
         ref={canvasRef}
         className="h-[420px] w-full"

@@ -9,6 +9,8 @@ type Props = {
   durationMs?: number;
   /** Use a thousands separator (e.g. 2,500). */
   separator?: boolean;
+  /** Disable animation when the final value must remain in rendered HTML. */
+  animate?: boolean;
   className?: string;
 };
 
@@ -22,13 +24,16 @@ export function CountUp({
   suffix = "",
   durationMs = 1500,
   separator = true,
+  animate = true,
   className,
 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState(to);
 
   useEffect(() => {
+    if (!animate) return;
+
     const el = ref.current;
     if (!el) return;
 
@@ -46,6 +51,7 @@ export function CountUp({
               setVal(to);
               return;
             }
+            setVal(0);
             const start = performance.now();
             const tick = (now: number) => {
               const p = Math.min(1, (now - start) / durationMs);
@@ -62,9 +68,10 @@ export function CountUp({
 
     io.observe(el);
     return () => io.disconnect();
-  }, [to, durationMs]);
+  }, [to, durationMs, animate]);
 
-  const formatted = separator ? val.toLocaleString("en-US") : String(val);
+  const displayValue = animate ? val : to;
+  const formatted = separator ? displayValue.toLocaleString("en-US") : String(displayValue);
 
   return (
     <span ref={ref} className={className}>
