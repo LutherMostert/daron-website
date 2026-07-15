@@ -1,28 +1,5 @@
-/**
- * POST /api/chat
- *
- * Streaming chat endpoint that powers the Don widget.
- * Server-Sent Events over a Fetch streaming response (Next 16 App Router).
- *
- * Body: {
- *   lead: { name, email, company?, vessel?, whatsapp? },
- *   messages: [{ role: "user"|"assistant", content: string }]
- * }
- *
- * Response: text/plain stream of raw token deltas. Client appends as they arrive.
- *
- * Safety / abuse guards built-in:
- *   - Require ANTHROPIC_API_KEY env var (fails fast if missing).
- *   - Reject malformed body with 400.
- *   - Cap single message length at 2000 chars.
- *   - Cap total conversation history at 20 messages.
- *   - Cap total prompt tokens indirectly via `max_tokens` output cap.
- *   - No durable rate limit yet — TODO hook Upstash / Vercel KV pre-launch.
- *
- * Source of Don's identity: src/lib/don-prompt.ts
- */
-
 import Anthropic from "@anthropic-ai/sdk";
+import { generateText } from "ai";
 import { buildDonSystemPrompt, type DonLead } from "@/lib/don-prompt";
 import { redactInternalIdentifiers } from "@/lib/routing";
 import { contact } from "@/lib/site";
@@ -31,102 +8,158 @@ import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const MODEL = "claude-sonnet-4-5";
 const MAX_OUTPUT_TOKENS = 1024;
 const MAX_MESSAGE_CHARS = 2000;
 const MAX_HISTORY = 20;
+const PROVIDER_COOLDOWN_MS = 5 * 60 * 1000;
 
-const OFFLINE_FALLBACK = `Sorry — I'm offline right now. You can still reach us directly on WhatsApp at ${contact.whatsapp.display} or email ${contact.emails.operations}, and the Daron team will pick it up.`;
+const OFFLINE_FALLBACK = `Sorry - I'm temporarily offline. You can still reach us directly on WhatsApp at ${contact.whatsapp.display} or email ${contact.emails.operations}, and the Daron team will pick it up.`;
 
-/**
- * Produce a visitor-safe message from any thrown error.
- * Real error details go to the server log (Vercel log stream) for Luther.
- */
-function userFacingFallback(err: unknown): string {
-  const code = (err as { status?: number })?.status;
-  // Don't reveal "invalid api key" or internals to a visitor.
-  if (code === 401 || code === 403) return OFFLINE_FALLBACK;
-  if (code === 429) return "Don's handling a lot of conversations right now — try again in a minute.";
-  if (code === 529) return "Daron AI is briefly overloaded. Please try again shortly.";
-  return OFFLINE_FALLBACK;
-}
-
+type Provider = "gateway" | "anthropic" | "openai";
 type IncomingMessage = { role: "user" | "assistant"; content: string };
+type ChatPayload = { lead: DonLead; messages: IncomingMessage[]; locale?: string };
 
-type ChatPayload = {
-  lead: DonLead;
-  messages: IncomingMessage[];
-  locale?: string;
-};
+const unavailableUntil = new Map<Provider, number>();
 
-/** Nudge Don to answer in the visitor's site language (he still mirrors the
- *  language the visitor actually writes in). */
 function localeInstruction(locale: unknown): string {
   if (locale === "pt")
-    return "\n\nThe visitor is browsing the site in Portuguese. Reply in Portuguese unless they clearly write to you in another language.";
+    return "\n\nThe visitor is browsing in Portuguese. Reply in Portuguese unless they clearly write in another language.";
   if (locale === "fr")
-    return "\n\nThe visitor is browsing the site in French. Reply in French unless they clearly write to you in another language.";
+    return "\n\nThe visitor is browsing in French. Reply in French unless they clearly write in another language.";
   return "";
 }
 
-function isValidLead(x: unknown): x is DonLead {
-  if (!x || typeof x !== "object") return false;
-  const l = x as Record<string, unknown>;
+function isValidLead(value: unknown): value is DonLead {
+  if (!value || typeof value !== "object") return false;
+  const lead = value as Record<string, unknown>;
   return (
-    typeof l.name === "string" &&
-    l.name.trim().length > 0 &&
-    l.name.length < 200 &&
-    typeof l.email === "string" &&
-    l.email.includes("@") &&
-    l.email.length < 200 &&
-    (l.company === undefined || (typeof l.company === "string" && l.company.length < 200)) &&
-    (l.vessel === undefined || (typeof l.vessel === "string" && l.vessel.length < 200)) &&
-    (l.whatsapp === undefined || (typeof l.whatsapp === "string" && l.whatsapp.length < 50))
+    typeof lead.name === "string" &&
+    lead.name.trim().length > 0 &&
+    lead.name.length < 200 &&
+    typeof lead.email === "string" &&
+    lead.email.includes("@") &&
+    lead.email.length < 200 &&
+    (lead.company === undefined || (typeof lead.company === "string" && lead.company.length < 200)) &&
+    (lead.vessel === undefined || (typeof lead.vessel === "string" && lead.vessel.length < 200)) &&
+    (lead.whatsapp === undefined || (typeof lead.whatsapp === "string" && lead.whatsapp.length < 50))
   );
 }
 
-function isValidMessages(x: unknown): x is IncomingMessage[] {
-  if (!Array.isArray(x)) return false;
-  if (x.length === 0 || x.length > MAX_HISTORY) return false;
-  return x.every(
-    (m) =>
-      m &&
-      typeof m === "object" &&
-      (m.role === "user" || m.role === "assistant") &&
-      typeof m.content === "string" &&
-      m.content.length > 0 &&
-      m.content.length <= MAX_MESSAGE_CHARS,
+function isValidMessages(value: unknown): value is IncomingMessage[] {
+  if (!Array.isArray(value) || value.length === 0 || value.length > MAX_HISTORY) return false;
+  return value.every(
+    (message) =>
+      message &&
+      typeof message === "object" &&
+      (message.role === "user" || message.role === "assistant") &&
+      typeof message.content === "string" &&
+      message.content.length > 0 &&
+      message.content.length <= MAX_MESSAGE_CHARS,
+  );
+}
+
+function isConfigured(provider: Provider) {
+  if (provider === "gateway") {
+    return Boolean(process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN || process.env.VERCEL);
+  }
+  return provider === "anthropic"
+    ? Boolean(process.env.ANTHROPIC_API_KEY)
+    : Boolean(process.env.OPENAI_API_KEY);
+}
+
+function isSuppressed(provider: Provider) {
+  return (unavailableUntil.get(provider) ?? 0) > Date.now();
+}
+
+function providerOrder(): Provider[] {
+  if (process.env.AI_PRIMARY_PROVIDER === "anthropic") return ["anthropic", "gateway", "openai"];
+  if (process.env.AI_PRIMARY_PROVIDER === "openai") return ["openai", "gateway", "anthropic"];
+  return ["gateway", "openai", "anthropic"];
+}
+
+async function askGateway(system: string, messages: IncomingMessage[]): Promise<string> {
+  const result = await generateText({
+    model: process.env.AI_GATEWAY_MODEL || "google/gemini-2.5-flash-lite",
+    system,
+    messages,
+    maxOutputTokens: MAX_OUTPUT_TOKENS,
+    abortSignal: AbortSignal.timeout(25000),
+  });
+  return result.text.trim();
+}
+
+async function askAnthropic(system: string, messages: IncomingMessage[]): Promise<string> {
+  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const response = await client.messages.create({
+    model: process.env.ANTHROPIC_CHAT_MODEL || "claude-sonnet-4-5",
+    max_tokens: MAX_OUTPUT_TOKENS,
+    system,
+    messages,
+  });
+  return response.content
+    .filter((block) => block.type === "text")
+    .map((block) => block.text)
+    .join("")
+    .trim();
+}
+
+type OpenAIResponse = {
+  output_text?: string;
+  output?: Array<{ content?: Array<{ type?: string; text?: string }> }>;
+  error?: { message?: string };
+};
+
+async function askOpenAI(system: string, messages: IncomingMessage[]): Promise<string> {
+  const response = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: process.env.OPENAI_CHAT_MODEL || "gpt-5-mini",
+      instructions: system,
+      input: messages,
+      max_output_tokens: MAX_OUTPUT_TOKENS,
+    }),
+    signal: AbortSignal.timeout(25000),
+  });
+
+  const body = (await response.json().catch(() => ({}))) as OpenAIResponse;
+  if (!response.ok) throw new Error(`OpenAI ${response.status}: ${body.error?.message || "request failed"}`);
+
+  const text =
+    body.output_text ||
+    body.output
+      ?.flatMap((item) => item.content ?? [])
+      .filter((item) => item.type === "output_text" && item.text)
+      .map((item) => item.text)
+      .join("") ||
+    "";
+  return text.trim();
+}
+
+export function GET() {
+  const configured = providerOrder().filter(isConfigured);
+  const available = configured.filter((provider) => !isSuppressed(provider));
+  return Response.json(
+    {
+      available: available.length > 0,
+      status: available.length > 0 ? (available.length < configured.length ? "degraded" : "operational") : "offline",
+    },
+    { headers: { "Cache-Control": "no-store" } },
   );
 }
 
 export async function POST(request: Request) {
-  // Per-IP rate limit: 20 messages per hour. Legit visitors never hit it;
-  // a scraper/bot does in seconds. Soft-fail with a clear retry hint.
   const ip = getClientIp(request);
-  const limit = checkRateLimit(`chat:${ip}`, {
-    windowMs: 60 * 60 * 1000,
-    max: 20,
-  });
+  const limit = await checkRateLimit(`chat:${ip}`, { windowMs: 60 * 60 * 1000, max: 20 });
   if (!limit.allowed) {
     return Response.json(
       {
-        error: `Too many messages from this IP. Try again in ${Math.ceil(limit.retryAfterSeconds / 60)} min — or reach Don on WhatsApp at ${contact.whatsapp.display}.`,
+        error: `Too many messages from this connection. Try again in ${Math.ceil(limit.retryAfterSeconds / 60)} minutes, or use WhatsApp at ${contact.whatsapp.display}.`,
       },
-      {
-        status: 429,
-        headers: { "Retry-After": String(limit.retryAfterSeconds) },
-      },
-    );
-  }
-
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    return Response.json(
-      {
-        error:
-          "Don is offline right now. (Server missing ANTHROPIC_API_KEY — please add one in Vercel env and redeploy.)",
-      },
-      { status: 503 },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
     );
   }
 
@@ -144,88 +177,40 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid message history." }, { status: 400 });
   }
 
-  const client = new Anthropic({ apiKey });
+  const system = buildDonSystemPrompt(body.lead) + localeInstruction(body.locale);
+  const failures: string[] = [];
 
-  // Open the stream outside the ReadableStream so we can catch initial auth /
-  // config errors before returning the response and render a clean fallback.
-  let stream;
-  try {
-    stream = await client.messages.stream({
-      model: MODEL,
-      max_tokens: MAX_OUTPUT_TOKENS,
-      system: buildDonSystemPrompt(body.lead) + localeInstruction(body.locale),
-      messages: body.messages.map((m) => ({ role: m.role, content: m.content })),
-    });
-  } catch (err) {
-    // Log full detail server-side for Luther; return a friendly body to the visitor.
-    console.error("[chat] stream open failed:", err);
-    return new Response(userFacingFallback(err), {
-      status: 200,
-      headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" },
-    });
+  for (const provider of providerOrder()) {
+    if (!isConfigured(provider) || isSuppressed(provider)) continue;
+    try {
+      const raw = provider === "gateway"
+        ? await askGateway(system, body.messages)
+        : provider === "openai"
+          ? await askOpenAI(system, body.messages)
+          : await askAnthropic(system, body.messages);
+      if (!raw) throw new Error("Provider returned an empty response.");
+
+      unavailableUntil.delete(provider);
+      const { clean, redactionCount } = redactInternalIdentifiers(raw);
+      if (redactionCount > 0) {
+        console.warn(`[chat] redacted ${redactionCount} internal identifier(s) from ${provider} output`);
+      }
+
+      return new Response(clean, {
+        status: 200,
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "Cache-Control": "no-store",
+          "X-Daron-AI-Provider": provider,
+        },
+      });
+    } catch (error) {
+      unavailableUntil.set(provider, Date.now() + PROVIDER_COOLDOWN_MS);
+      failures.push(provider);
+      console.error(`[chat] ${provider} failed`, error);
+    }
   }
 
-  const encoder = new TextEncoder();
-  const readable = new ReadableStream<Uint8Array>({
-    async start(controller) {
-      // We buffer a small rolling window so the output filter can catch
-      // identifier patterns that span token boundaries before emitting them
-      // to the visitor. 128 chars is more than enough for any known pattern
-      // (longest WBSC doc number is ~15 chars, longest supplier name ~25).
-      const TAIL_BUFFER = 128;
-      let tail = "";
-      let totalRedactions = 0;
-
-      const emit = (text: string) => {
-        const combined = tail + text;
-        // Emit everything except the last TAIL_BUFFER chars (keep for next pass)
-        const safeLen = Math.max(0, combined.length - TAIL_BUFFER);
-        const toEmit = combined.slice(0, safeLen);
-        tail = combined.slice(safeLen);
-        if (toEmit) {
-          const { clean, redactionCount } = redactInternalIdentifiers(toEmit);
-          totalRedactions += redactionCount;
-          controller.enqueue(encoder.encode(clean));
-        }
-      };
-
-      try {
-        for await (const chunk of stream) {
-          if (
-            chunk.type === "content_block_delta" &&
-            chunk.delta.type === "text_delta" &&
-            chunk.delta.text
-          ) {
-            emit(chunk.delta.text);
-          }
-        }
-        // Flush the tail buffer
-        if (tail) {
-          const { clean, redactionCount } = redactInternalIdentifiers(tail);
-          totalRedactions += redactionCount;
-          controller.enqueue(encoder.encode(clean));
-        }
-        if (totalRedactions > 0) {
-          console.warn(
-            `[chat] redacted ${totalRedactions} internal identifier(s) from outgoing stream. Review prompt.`,
-          );
-        }
-      } catch (err) {
-        // Mid-stream failure — write the friendly fallback, log the real cause.
-        console.error("[chat] mid-stream failure:", err);
-        controller.enqueue(encoder.encode(`\n\n${userFacingFallback(err)}`));
-      } finally {
-        controller.close();
-      }
-    },
-  });
-
-  return new Response(readable, {
-    status: 200,
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "no-store",
-      "X-Accel-Buffering": "no",
-    },
-  });
+  console.error(`[chat] no provider available; attempted: ${failures.join(", ") || "none"}`);
+  return Response.json({ error: OFFLINE_FALLBACK }, { status: 503 });
 }

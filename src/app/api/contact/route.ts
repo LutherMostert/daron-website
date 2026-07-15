@@ -1,36 +1,15 @@
-/**
- * POST /api/contact
- *
- * Real endpoint for the contact-page form (replaces the old mailto: POST).
- * Accepts JSON or multipart/form-data — multipart allows an optional RFQ file
- * attachment (Excel / PDF / Word / CSV, ≤ 4 MB). Mirrors the hardened
- * /api/chat-lead pattern: rate-limit → validate → sanitise → log + optional
- * signed webhook. Week 2: forward to Hermes (the webhook payload already
- * carries the attachment base64 for it to consume).
- *
- * Body (JSON): { firstName, surname, email, phone?, message }
- * Body (multipart): same fields + rfqFile?: File
- * Response: 200 { ok: true } | 400 | 413 | 429
- */
-
-import { after } from "next/server";
 import { createHmac } from "node:crypto";
+import { persistLead } from "@/lib/lead-store";
+import { postSignedWebhook, sendOperationsEmail } from "@/lib/lead-notifications";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { contact } from "@/lib/site";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const MAX_FILE_BYTES = 4 * 1024 * 1024; // 4 MB upload cap
-const ATTACH_FORWARD_BYTES = 3 * 1024 * 1024; // base64-forward cap (webhook payload size)
-const ACCEPTED_EXTENSIONS = [
-  ".xlsx",
-  ".xls",
-  ".csv",
-  ".pdf",
-  ".doc",
-  ".docx",
-  ".txt",
-];
+const MAX_FILE_BYTES = 4 * 1024 * 1024;
+const ATTACH_FORWARD_BYTES = 3 * 1024 * 1024;
+const ACCEPTED_EXTENSIONS = [".xlsx", ".xls", ".csv", ".pdf", ".doc", ".docx", ".txt"];
 
 type ContactFields = {
   firstName: string;
@@ -50,7 +29,7 @@ type Attachment = {
   name: string;
   type: string;
   size: number;
-  base64?: string;
+  base64: string;
 };
 
 function clean(value: unknown, max: number): string {
@@ -63,72 +42,98 @@ function cleanMultiline(value: unknown, max: number): string {
   return value.replace(/\r\n/g, "\n").trim().slice(0, max);
 }
 
-function isAcceptedFile(name: string): boolean {
+function extension(name: string) {
   const lower = name.toLowerCase();
-  return ACCEPTED_EXTENSIONS.some((ext) => lower.endsWith(ext));
+  return ACCEPTED_EXTENSIONS.find((ext) => lower.endsWith(ext));
+}
+
+function beginsWith(bytes: Uint8Array, signature: number[]) {
+  return signature.every((value, index) => bytes[index] === value);
+}
+
+function contentMatchesExtension(bytes: Uint8Array, ext: string): boolean {
+  if (ext === ".pdf") return beginsWith(bytes, [0x25, 0x50, 0x44, 0x46, 0x2d]);
+  if (ext === ".docx" || ext === ".xlsx") {
+    return (
+      beginsWith(bytes, [0x50, 0x4b, 0x03, 0x04]) ||
+      beginsWith(bytes, [0x50, 0x4b, 0x05, 0x06]) ||
+      beginsWith(bytes, [0x50, 0x4b, 0x07, 0x08])
+    );
+  }
+  if (ext === ".doc" || ext === ".xls") {
+    return beginsWith(bytes, [0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1]);
+  }
+  if (ext === ".csv" || ext === ".txt") {
+    if (bytes.some((value) => value === 0)) return false;
+    try {
+      new TextDecoder("utf-8", { fatal: true }).decode(bytes.slice(0, 8192));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  return false;
 }
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
-  const limit = checkRateLimit(`contact:${ip}`, {
-    windowMs: 60 * 60 * 1000,
-    max: 5,
-  });
+  const limit = await checkRateLimit(`contact:${ip}`, { windowMs: 60 * 60 * 1000, max: 5 });
   if (!limit.allowed) {
     return Response.json(
-      { error: "Too many messages — please try again later." },
+      { error: "Too many messages - please try again later." },
       { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
     );
   }
 
   const contentType = request.headers.get("content-type") || "";
   let raw: Record<string, unknown> = {};
-  let attachment: Attachment | null = null;
+  let attachment: Attachment | undefined;
 
   if (contentType.includes("multipart/form-data")) {
-    let fd: FormData;
+    let formData: FormData;
     try {
-      fd = await request.formData();
+      formData = await request.formData();
     } catch {
       return Response.json({ error: "Invalid request." }, { status: 400 });
     }
+
     raw = {
-      firstName: fd.get("firstName"),
-      surname: fd.get("surname"),
-      company: fd.get("company"),
-      vessel: fd.get("vessel"),
-      email: fd.get("email"),
-      phone: fd.get("phone"),
-      deliveryPoint: fd.get("deliveryPoint"),
-      urgency: fd.get("urgency"),
-      category: fd.get("category"),
-      preferredContact: fd.get("preferredContact"),
-      message: fd.get("message"),
+      firstName: formData.get("firstName"),
+      surname: formData.get("surname"),
+      company: formData.get("company"),
+      vessel: formData.get("vessel"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      deliveryPoint: formData.get("deliveryPoint"),
+      urgency: formData.get("urgency"),
+      category: formData.get("category"),
+      preferredContact: formData.get("preferredContact"),
+      message: formData.get("message"),
     };
-    const f = fd.get("rfqFile");
-    if (f instanceof File && f.size > 0) {
-      if (f.size > MAX_FILE_BYTES) {
-        return Response.json(
-          { error: "File is too large — 4 MB max." },
-          { status: 413 },
-        );
+
+    const file = formData.get("rfqFile");
+    if (file instanceof File && file.size > 0) {
+      if (file.size > MAX_FILE_BYTES) {
+        return Response.json({ error: "File is too large - 4 MB maximum." }, { status: 413 });
       }
-      if (!isAcceptedFile(f.name)) {
+      const ext = extension(file.name);
+      if (!ext) {
+        return Response.json({ error: "Unsupported file type. Use Excel, PDF, Word, CSV or TXT." }, { status: 400 });
+      }
+
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      if (!contentMatchesExtension(bytes, ext)) {
         return Response.json(
-          { error: "Unsupported file type. Use Excel, PDF, Word or CSV." },
+          { error: "The attachment content does not match its file type. Please export it again and retry." },
           { status: 400 },
         );
       }
       attachment = {
-        name: clean(f.name, 160),
-        type: clean(f.type, 100),
-        size: f.size,
+        name: clean(file.name, 160),
+        type: clean(file.type, 100),
+        size: file.size,
+        base64: Buffer.from(bytes).toString("base64"),
       };
-      // Forward the content only when it fits a sane webhook payload; the
-      // metadata is always logged either way.
-      if (f.size <= ATTACH_FORWARD_BYTES) {
-        attachment.base64 = Buffer.from(await f.arrayBuffer()).toString("base64");
-      }
     }
   } else {
     try {
@@ -159,8 +164,9 @@ export async function POST(request: Request) {
     );
   }
 
+  const timestamp = new Date().toISOString();
   const entry = {
-    timestamp: new Date().toISOString(),
+    timestamp,
     source: "daron-website:contact-form",
     ...fields,
     attachment: attachment
@@ -169,41 +175,70 @@ export async function POST(request: Request) {
     ip,
   };
 
-  // Always log metadata (never the file content) — Vercel captures.
-  console.log("[contact-lead]", JSON.stringify(entry));
+  let reference: string;
+  try {
+    reference = await persistLead("contact", entry);
+  } catch (error) {
+    console.error("[contact-lead] durable storage failed", error);
+    return Response.json(
+      { error: `We could not secure the RFQ. Please email ${contact.emails.operations} or call ${contact.phone.display}.` },
+      { status: 503 },
+    );
+  }
+  console.log("[contact-lead]", JSON.stringify({ ...entry, reference }));
 
-  const webhookUrl =
-    process.env.CONTACT_WEBHOOK_URL || process.env.CHAT_LEAD_WEBHOOK_URL;
-  if (webhookUrl) {
-    const text =
-      `✉️ *New website RFQ — daron.com.na*\n` +
-      `*${fields.firstName} ${fields.surname}* — ${fields.company}\n` +
-      `<${fields.email}>\n` +
-      (fields.phone ? `Phone/WhatsApp: ${fields.phone}\n` : "") +
-      (fields.vessel ? `Vessel/project: ${fields.vessel}\n` : "") +
-      (fields.deliveryPoint ? `Delivery point: ${fields.deliveryPoint}\n` : "") +
-      (fields.urgency ? `Urgency/ETA: ${fields.urgency}\n` : "") +
-      (fields.category ? `Category: ${fields.category}\n` : "") +
-      (fields.preferredContact ? `Preferred response: ${fields.preferredContact}\n` : "") +
-      (attachment
-        ? `📎 Attachment: ${attachment.name} (${Math.ceil(attachment.size / 1024)} KB)${attachment.base64 ? "" : " — too large to forward, ask the client to resend via WhatsApp/email"}\n`
-        : "") +
-      `\n${fields.message}`;
-    const payload = JSON.stringify({ text, attachment: attachment ?? undefined });
-    const headers: Record<string, string> = { "Content-Type": "application/json" };
-    const secret = process.env.CHAT_LEAD_WEBHOOK_SECRET;
-    if (secret) {
-      headers["X-Daron-Signature"] =
-        "sha256=" + createHmac("sha256", secret).update(payload).digest("hex");
-    }
-    // Run after the response is sent, but keep the function alive until the
-    // webhook resolves (Vercel can otherwise freeze the instance mid-flight).
-    after(() =>
-      fetch(webhookUrl, { method: "POST", headers, body: payload }).catch((err) =>
-        console.warn("[contact-lead] webhook failed:", err),
-      ),
+  const text = [
+    `New website RFQ - ${reference}`,
+    "",
+    `${fields.firstName} ${fields.surname}`.trim(),
+    `Company: ${fields.company}`,
+    `Email: ${fields.email}`,
+    fields.phone ? `Phone/WhatsApp: ${fields.phone}` : "",
+    fields.vessel ? `Vessel/project: ${fields.vessel}` : "",
+    fields.deliveryPoint ? `Delivery point: ${fields.deliveryPoint}` : "",
+    fields.urgency ? `Urgency/ETA: ${fields.urgency}` : "",
+    fields.category ? `Category: ${fields.category}` : "",
+    fields.preferredContact ? `Preferred response: ${fields.preferredContact}` : "",
+    attachment ? `Attachment: ${attachment.name} (${Math.ceil(attachment.size / 1024)} KB)` : "",
+    "",
+    fields.message,
+  ].filter(Boolean).join("\n");
+
+  const webhookAttachment = attachment && attachment.size <= ATTACH_FORWARD_BYTES ? attachment : undefined;
+  const payload = JSON.stringify({
+    text,
+    reference,
+    attachment: webhookAttachment,
+  });
+  const secret = process.env.CHAT_LEAD_WEBHOOK_SECRET;
+  const signature = secret
+    ? `sha256=${createHmac("sha256", secret).update(payload).digest("hex")}`
+    : undefined;
+
+  const [emailDelivered, webhookDelivered] = await Promise.all([
+    sendOperationsEmail({
+      subject: `[${reference}] Website RFQ - ${fields.company}`,
+      text,
+      replyTo: fields.email,
+      attachment: attachment ? { name: attachment.name, base64: attachment.base64 } : undefined,
+    }),
+    postSignedWebhook({
+      url: process.env.CONTACT_WEBHOOK_URL || process.env.CHAT_LEAD_WEBHOOK_URL,
+      payload,
+      signature,
+    }),
+  ]);
+
+  if (!emailDelivered && !webhookDelivered) {
+    return Response.json(
+      {
+        error: `Your RFQ was secured as ${reference}, but the operations notification could not be delivered. Please email ${contact.emails.operations} and quote this reference.`,
+        reference,
+        stored: true,
+      },
+      { status: 503 },
     );
   }
 
-  return Response.json({ ok: true });
+  return Response.json({ ok: true, reference, notified: true });
 }

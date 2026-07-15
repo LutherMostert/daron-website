@@ -16,7 +16,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "How fast can I get a quote?",
-    a: "Fast. Send your RFQ to the Daron AI assistant on WhatsApp (+264 81 141 3840) and a drafted quote comes back in minutes. A human key account manager reviews and approves every quote before it ships — usually the same business day.",
+    a: "Fast. Send your RFQ to Daron operations on WhatsApp (+264 81 141 3840). The team structures the request and routes it to the right key account manager for pricing, availability and delivery control.",
   },
   {
     q: "Do you supply offshore drilling rigs?",
@@ -36,10 +36,10 @@ export const faqs: Faq[] = [
   },
   {
     q: "How do I send an RFQ or request for quote?",
-    a: "The fastest route is WhatsApp to the Daron AI assistant at +264 81 141 3840 — you can send a spreadsheet, PDF or voice note. You can also use the contact form on our site or email dnoperations@daron-group.com.",
+    a: "Use the secure RFQ form on this website, contact Daron operations on WhatsApp at +264 81 141 3840, or email dnoperations@daron-group.com. The website form accepts Excel, PDF, Word, CSV and TXT documents up to 4 MB.",
   },
   {
     q: "What is “Don”, the Daron AI assistant?",
-    a: "Don is our AI operations copilot. He reads incoming RFQs, matches them against our live catalog, applies the right client pricing and drafts a ready-to-send quote in minutes. Don never sends a quote on his own — a Daron specialist reviews and approves every quote before it leaves our system.",
+    a: "Don is our website AI operations copilot. It answers operational questions from approved Daron reference information and captures the context needed for a direct handoff. Pricing, availability and every quote remain under specialist control.",
   },
 ];

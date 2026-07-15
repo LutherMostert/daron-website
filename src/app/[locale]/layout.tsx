@@ -11,6 +11,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { ChatWidget } from "@/components/ChatWidget";
 import { RevealController } from "@/components/RevealController";
 import { StickyActions } from "@/components/StickyActions";
+import { ConversionAnalytics } from "@/components/ConversionAnalytics";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { contact, site } from "@/lib/site";
 import { routing } from "@/i18n/routing";
 
@@ -198,17 +200,22 @@ export default async function LocaleLayout({
           <JsonLd id="ld-localbusiness" data={localBusinessJsonLd} />
           <ChatWidget />
           <RevealController />
+          <ConversionAnalytics />
         </NextIntlClientProvider>
         {/* Plausible — cookieless, privacy-friendly analytics (no consent banner
             needed). Tagged-events variant powers conversion events via CSS
             classes (plausible-event-name=…). No-op until the daron.com.na site
             is created in the Plausible account. */}
+        <Script id="plausible-init" strategy="afterInteractive">
+          {`window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}`}
+        </Script>
         <Script
           defer
           data-domain="daron.com.na"
           src="https://plausible.io/js/script.tagged-events.js"
           strategy="afterInteractive"
         />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -1,23 +1,11 @@
-/**
- * In-memory sliding-window rate limiter.
- *
- * Used to cap chat + lead-capture abuse per-IP. Keeps the implementation
- * dependency-free for Week 0 launch — acceptable tradeoff:
- *
- * - Each serverless instance has its own Map, so a motivated attacker who
- *   hits Vercel enough times to spin up multiple instances can evade somewhat.
- *   In practice for a Walvis Bay ship-chandler site this is more than adequate.
- * - Memory resets on cold start (≤15 min of quiet traffic). That means buckets
- *   clear themselves — we don't need a cleanup cron.
- * - If abuse becomes a real issue, swap this for @upstash/ratelimit + KV with
- *   only the `checkRateLimit` signature staying the same.
- */
+import { Ratelimit } from "@upstash/ratelimit";
+import { getRedis } from "@/lib/redis";
+
 const buckets = new Map<string, number[]>();
+const limiters = new Map<string, Ratelimit>();
 
 export type RateLimitOptions = {
-  /** Time window in milliseconds */
   windowMs: number;
-  /** Max requests allowed inside the window */
   max: number;
 };
 
@@ -25,54 +13,71 @@ export type RateLimitResult =
   | { allowed: true; remaining: number }
   | { allowed: false; retryAfterSeconds: number };
 
-export function checkRateLimit(
+/**
+ * Shared rate limiting in production, with a small in-memory fallback for
+ * local development. The public signature stays the same for all API routes.
+ */
+export async function checkRateLimit(
   key: string,
   opts: RateLimitOptions,
-): RateLimitResult {
+): Promise<RateLimitResult> {
+  const redis = getRedis();
+  if (redis) {
+    const cacheKey = `${opts.max}:${opts.windowMs}`;
+    let limiter = limiters.get(cacheKey);
+    if (!limiter) {
+      limiter = new Ratelimit({
+        redis,
+        limiter: Ratelimit.slidingWindow(opts.max, `${Math.ceil(opts.windowMs / 1000)} s`),
+        prefix: "daron:rate-limit",
+        analytics: true,
+      });
+      limiters.set(cacheKey, limiter);
+    }
+
+    try {
+      const result = await limiter.limit(key);
+      if (result.success) {
+        return { allowed: true, remaining: result.remaining };
+      }
+      return {
+        allowed: false,
+        retryAfterSeconds: Math.max(1, Math.ceil((result.reset - Date.now()) / 1000)),
+      };
+    } catch (error) {
+      console.error("[rate-limit] Redis unavailable; using local fallback", error);
+    }
+  }
+
+  return checkMemoryRateLimit(key, opts);
+}
+
+function checkMemoryRateLimit(key: string, opts: RateLimitOptions): RateLimitResult {
   const now = Date.now();
   const windowStart = now - opts.windowMs;
-
-  const timestamps = (buckets.get(key) ?? []).filter((t) => t > windowStart);
+  const timestamps = (buckets.get(key) ?? []).filter((time) => time > windowStart);
 
   if (timestamps.length >= opts.max) {
-    const oldest = timestamps[0];
-    const retryAfterSeconds = Math.max(
-      1,
-      Math.ceil((oldest + opts.windowMs - now) / 1000),
-    );
-    // Store the filtered array back so we don't keep stale entries forever.
     buckets.set(key, timestamps);
-    return { allowed: false, retryAfterSeconds };
+    return {
+      allowed: false,
+      retryAfterSeconds: Math.max(1, Math.ceil((timestamps[0] + opts.windowMs - now) / 1000)),
+    };
   }
 
   timestamps.push(now);
   buckets.set(key, timestamps);
-
-  // Opportunistic cleanup: if the Map gets big, prune empty entries.
   if (buckets.size > 1000) {
-    for (const [k, v] of buckets) {
-      const pruned = v.filter((t) => t > windowStart);
-      if (pruned.length === 0) buckets.delete(k);
-      else buckets.set(k, pruned);
+    for (const [bucketKey, values] of buckets) {
+      const active = values.filter((time) => time > windowStart);
+      if (active.length === 0) buckets.delete(bucketKey);
+      else buckets.set(bucketKey, active);
     }
   }
 
   return { allowed: true, remaining: opts.max - timestamps.length };
 }
 
-/**
- * Extract the client IP from a request, preferring headers the platform sets
- * and a client CANNOT spoof.
- *
- * The naive `x-forwarded-for[0]` is attacker-controlled (a client can send its
- * own `X-Forwarded-For: 1.2.3.4` and Vercel appends the real hop after it), so
- * trusting the *first* value lets an attacker rotate the value to defeat
- * per-IP limits and poison lead logs. We therefore prefer, in order:
- *   1. `x-vercel-forwarded-for` — set by Vercel's edge, inbound copies stripped.
- *   2. `x-real-ip` — the connecting IP as seen by the platform.
- *   3. the LAST hop in `x-forwarded-for` — the one added by the trusted proxy
- *      nearest us, rather than the client-supplied leftmost value.
- */
 export function getClientIp(request: Request): string {
   const vercel = request.headers.get("x-vercel-forwarded-for")?.trim();
   if (vercel) return vercel.split(",")[0]!.trim();
@@ -82,7 +87,7 @@ export function getClientIp(request: Request): string {
 
   const xff = request.headers.get("x-forwarded-for");
   if (xff) {
-    const hops = xff.split(",").map((h) => h.trim()).filter(Boolean);
+    const hops = xff.split(",").map((hop) => hop.trim()).filter(Boolean);
     if (hops.length > 0) return hops[hops.length - 1]!;
   }
 

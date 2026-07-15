@@ -25,7 +25,7 @@ export async function generateMetadata({
 }
 
 // Source: Don build session summary, 2026-04-22 (platform corrected to
-// Nous Hermes per Luther, 2026-06-12). Dual branding rule:
+// Dual branding rule:
 // "Don" = friendly/personal name, "Daron AI assistant" = formal product label.
 // Header/footer CTAs stay "Daron AI assistant"; in-page body uses "Don".
 

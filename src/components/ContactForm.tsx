@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -16,6 +17,7 @@ function isAcceptedFile(name: string): boolean {
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [reference, setReference] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -42,10 +44,24 @@ export function ContactForm() {
     setErrorMsg("");
     try {
       const res = await fetch("/api/contact", { method: "POST", body: fd });
+      const result = (await res.json().catch(() => ({}))) as {
+        error?: string;
+        reference?: string;
+        stored?: boolean;
+      };
       if (!res.ok) {
-        const j = (await res.json().catch(() => ({}))) as { error?: string };
-        throw new Error(j.error || "The RFQ could not be sent. Please call or WhatsApp Daron now.");
+        if (result.reference) setReference(result.reference);
+        trackEvent("RFQ_Submit_Failed", {
+          status: String(res.status),
+          stored: result.stored ? "yes" : "no",
+        });
+        throw new Error(result.error || "The RFQ could not be sent. Please call or WhatsApp Daron now.");
       }
+      setReference(result.reference || "");
+      trackEvent("RFQ_Submit_Success", {
+        category: String(fd.get("category") || "Unknown"),
+        attachment: file instanceof File && file.size > 0 ? "yes" : "no",
+      });
       form.reset();
       setStatus("success");
     } catch (err) {
@@ -59,13 +75,14 @@ export function ContactForm() {
       <div role="status" aria-live="polite" className="border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 p-6">
         <h3 className="font-[family-name:var(--font-poppins)] text-xl font-black tracking-[-0.04em] text-[var(--color-navy)]">RFQ received.</h3>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-mute)]">The operations team has the request. For urgent vessel supply, call or WhatsApp Daron directly.</p>
+        {reference && <p className="mt-3 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-accent-text)]">Reference: {reference}</p>}
         <button type="button" onClick={() => setStatus("idle")} className="mt-4 text-sm font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline">Send another RFQ</button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="mt-7 grid gap-4" noValidate>
+    <form action="/api/contact" method="post" encType="multipart/form-data" onSubmit={onSubmit} className="mt-7 grid gap-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <Field id="firstName" label="Name" autoComplete="given-name" required />
         <Field id="surname" label="Surname" autoComplete="family-name" />

@@ -10,14 +10,15 @@
  * Behaviour:
  *   - Always log to server output (Vercel captures; Luther can grep [chat-lead])
  *   - Optional webhook forward (CHAT_LEAD_WEBHOOK_URL) for Slack/Discord/GChat
- *   - Future: Supabase `leads` table + per-category webhook routing
+ *   - Durable Redis storage + optional email/webhook notification
  *
  * Body: { name, email, company?, vessel?, whatsapp?, firstMessage?, referrer?, userAgent? }
  * Response: 204 on success, 400 on malformed body.
  */
 
-import { after } from "next/server";
 import { createHmac } from "node:crypto";
+import { persistLead } from "@/lib/lead-store";
+import { postSignedWebhook, sendOperationsEmail } from "@/lib/lead-notifications";
 import { classifyIntent, CATEGORY_OWNER_FIRST_NAME } from "@/lib/routing";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
@@ -63,7 +64,7 @@ export async function POST(request: Request) {
   // Per-IP lead-capture limit: 5 per hour. A real visitor starts one chat;
   // this blocks form-spam loops without ever annoying a human.
   const ip = getClientIp(request);
-  const limit = checkRateLimit(`chat-lead:${ip}`, {
+  const limit = await checkRateLimit(`chat-lead:${ip}`, {
     windowMs: 60 * 60 * 1000,
     max: 5,
   });
@@ -113,44 +114,46 @@ export async function POST(request: Request) {
     ip: getClientIp(request),
   };
 
-  // Always log — Vercel captures, grep for [chat-lead]
-  console.log("[chat-lead]", JSON.stringify(entry));
+  let reference: string;
+  try {
+    reference = await persistLead("chat", entry);
+  } catch (error) {
+    console.error("[chat-lead] durable storage failed", error);
+    return Response.json({ error: "We could not secure your details. Please retry." }, { status: 503 });
+  }
+  console.log("[chat-lead]", JSON.stringify({ ...entry, reference }));
 
-  // Optional webhook forward
+  const text =
+    `New website chat - ${reference}\n` +
+    `Category: ${category} - routing to ${owner}\n\n` +
+    `${entry.name} <${entry.email}>\n` +
+    (entry.company ? `Company: ${entry.company}\n` : "") +
+    (entry.vessel ? `Vessel: ${entry.vessel}\n` : "") +
+    (entry.whatsapp ? `WhatsApp: ${entry.whatsapp}\n` : "") +
+    (entry.firstMessage ? `\nFirst message: ${entry.firstMessage.slice(0, 300)}\n` : "") +
+    (entry.referrer ? `\nReferrer: ${entry.referrer}\n` : "");
+
   const webhookUrl = process.env.CHAT_LEAD_WEBHOOK_URL;
+  let webhookPayload = "";
+  let signature: string | undefined;
   if (webhookUrl) {
-    const text =
-      `💬 *New chat on daron.com.na*\n` +
-      `Category: *${category}* → routing to *${owner}*\n` +
-      `\n` +
-      `*${entry.name}* <${entry.email}>\n` +
-      (entry.company ? `Company: ${entry.company}\n` : "") +
-      (entry.vessel ? `Vessel: ${entry.vessel}\n` : "") +
-      (entry.whatsapp ? `WhatsApp: ${entry.whatsapp}\n` : "") +
-      (entry.firstMessage ? `\nFirst message: ${entry.firstMessage.slice(0, 300)}\n` : "") +
-      (entry.referrer ? `\nReferrer: ${entry.referrer}\n` : "");
-
-    const payload = JSON.stringify({ text });
-    const headers: Record<string, string> = { "Content-Type": "application/json" };
-
-    // If a signing secret is configured, HMAC-sign the body so the receiver can
-    // verify the notification genuinely came from this site (prevents a leaked
-    // webhook URL from being abused to inject fake leads).
+    webhookPayload = JSON.stringify({ text, reference });
     const signingSecret = process.env.CHAT_LEAD_WEBHOOK_SECRET;
     if (signingSecret) {
-      const signature = createHmac("sha256", signingSecret)
-        .update(payload)
-        .digest("hex");
-      headers["X-Daron-Signature"] = `sha256=${signature}`;
+      signature = `sha256=${createHmac("sha256", signingSecret)
+        .update(webhookPayload)
+        .digest("hex")}`;
     }
-
-    // Post-response, but keep the instance alive until the webhook resolves.
-    after(() =>
-      fetch(webhookUrl, { method: "POST", headers, body: payload }).catch((err) =>
-        console.warn("[chat-lead] webhook failed:", err),
-      ),
-    );
   }
 
-  return new Response(null, { status: 204 });
+  await Promise.all([
+    sendOperationsEmail({
+      subject: `[${reference}] Website chat - ${entry.company || entry.name}`,
+      text,
+      replyTo: entry.email,
+    }),
+    postSignedWebhook({ url: webhookUrl, payload: webhookPayload, signature }),
+  ]);
+
+  return Response.json({ ok: true, reference }, { status: 201 });
 }

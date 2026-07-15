@@ -35,11 +35,11 @@ export const contact = {
     href: "tel:+264833374710",
   },
   whatsapp: {
-    // Daron AI assistant, the AI quoting agent — front door for RFQs.
+    // Direct operations WhatsApp line for RFQs.
     e164: "+264811413840",
     display: "+264 81 141 3840",
     href: "https://wa.me/264811413840",
-    label: "Chat with Daron AI assistant on WhatsApp",
+    label: "Send RFQ on WhatsApp",
   },
   emails: {
     operations: "dnoperations@daron-group.com",

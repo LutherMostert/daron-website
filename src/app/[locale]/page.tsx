@@ -30,10 +30,10 @@ export async function generateMetadata({
 }
 
 const heroStats = [
-  { label: "Daron Group founded", value: 1959, suffix: "" },
-  { label: "Namibia operation", value: 2012, suffix: "" },
-  { label: "Supplier network", value: 2500, suffix: "+" },
-  { label: "Operations response", value: 24, suffix: "/7" },
+  { label: "Daron Group founded", value: 1959, suffix: "", separator: false },
+  { label: "Namibia operation", value: 2012, suffix: "", separator: false },
+  { label: "Supplier network", value: 2500, suffix: "+", separator: true },
+  { label: "Operations response", value: 24, suffix: "/7", separator: false },
 ];
 
 const services = [
@@ -76,12 +76,12 @@ const services = [
 ];
 
 const industries = [
-  { title: "Marine & shipping", image: "/images/site/operations/seven-borealis-dock.jpg", body: "Vessels, port calls, chandlery, provisions and technical stores." },
-  { title: "Offshore oil & gas", image: "/generated/daron/hero-offshore-poster.jpg", body: "Rig campaigns, subsea vessels, offshore construction and shutdown pressure." },
-  { title: "Mining & industrial", image: "/images/site/mining.jpeg", body: "Remote sites, PPE, MRO, chemicals, tools and logistics support." },
-  { title: "Hospitality & catering", image: "/images/site/offshore-catering.jpg", body: "Crew feeding, remote camps, galley supply and welfare-critical procurement." },
-  { title: "Ports & logistics", image: "/generated/daron/port-logistics-night.jpg", body: "Truck movement, quayside coordination, customs timing and staged delivery." },
-  { title: "Dry dock & repair", image: "/images/site/drydock/case-study-hempel-bow.jpg", body: "Refit scopes, coating supply, cleaning chemicals and technical materials." },
+  { title: "Marine & shipping", href: "/services/ship-chandlery" as const, image: "/images/site/operations/seven-borealis-dock.jpg", body: "Vessels, port calls, chandlery, provisions and technical stores." },
+  { title: "Offshore oil & gas", href: "/industries/oil-and-gas" as const, image: "/images/site/operations/seven-borealis-dusk.jpg", body: "Rig campaigns, subsea vessels, offshore construction and shutdown pressure." },
+  { title: "Mining & industrial", href: "/industries" as const, image: "/images/site/mining.jpeg", body: "Remote sites, PPE, MRO, chemicals, tools and logistics support." },
+  { title: "Hospitality & catering", href: "/services" as const, image: "/images/site/offshore-catering.jpg", body: "Crew feeding, remote camps, galley supply and welfare-critical procurement." },
+  { title: "Ports & logistics", href: "/services" as const, image: "/images/site/operations/truck-fleet-night.jpg", body: "Truck movement, quayside coordination, customs timing and staged delivery." },
+  { title: "Dry dock & repair", href: "/services/dry-dock" as const, image: "/images/site/drydock/case-study-orlichem-deck.jpg", body: "Refit scopes, coating supply, cleaning chemicals and technical materials." },
 ];
 
 const whyDaron = [
@@ -89,19 +89,20 @@ const whyDaron = [
   ["02", "African reach", "Daron Group network depth across Africa with supplier access into Europe."],
   ["03", "Infrastructure", "Warehousing, cold chain, vehicles, staging discipline and accountable release control."],
   ["04", "Compliance", "ISO 9001:2015, HACCP, ISSA and IMPA credibility for procurement teams."],
-  ["05", "RFQ speed", "Don AI structures requests fast while Daron specialists retain final commercial control."],
+  ["05", "Digital intake", "Don answers scope questions and captures context while Daron specialists retain final commercial control."],
+  ["06", "Direct response", "A 24/7 operational contact path for urgent vessel, offshore and industrial requirements."],
 ];
 
 const rfqWorkflow = [
-  ["01", "Send RFQ", "WhatsApp, email, Excel, PDF, Word, photo or vessel list."],
-  ["02", "Don structures it", "Lines are classified, cleaned and matched against catalogue and supplier logic."],
-  ["03", "KAM review", "A Daron specialist checks exceptions, pricing, availability and delivery pressure."],
-  ["04", "Quote issued", "Professional Excel quote, follow-up trail and operational handoff."],
+  ["01", "Send RFQ", "Use the secure website form, WhatsApp or email, with your RFQ document where available."],
+  ["02", "Scope captured", "Don answers operational questions and captures the contact details needed for a direct handoff."],
+  ["03", "Operations review", "A Daron specialist checks scope, sourcing options, pricing, availability and delivery pressure."],
+  ["04", "Response issued", "The operations team confirms the quote, timing and accountable delivery follow-up."],
 ];
 
 const trackRecord = [
-  { title: "Concurrent offshore rig support", image: "/generated/daron/hero-offshore-poster.jpg", body: "Deepsea Mira, Deepsea Bollsta and Deepsea Hercules supported during active offshore campaign pressure." },
-  { title: "Sapura Berani reactivation", image: "/generated/daron/high-pressure-maintenance.jpg", body: "Rig reactivation support under severe time pressure, including catering, cleaning, technical sourcing and rapid release." },
+  { title: "Concurrent offshore rig support", image: "/images/site/operations/daron-fleet-normand-energy.jpg", body: "Deepsea Mira, Deepsea Bollsta and Deepsea Hercules supported during active offshore campaign pressure." },
+  { title: "Sapura Berani reactivation", image: "/images/site/operations/crew-lifting-pallet.jpg", body: "Rig reactivation support under severe time pressure, including catering, cleaning, technical sourcing and rapid release." },
   { title: "Subsea7 / Seven Borealis", image: "/images/site/operations/container-lift-subsea7.jpg", body: "Quayside heavy-lift and offshore construction support from Walvis Bay." },
   { title: "Cruise provisioning", image: "/images/site/operations/daron-truck-cruise-ship.jpg", body: "Dock-to-gangway provisioning, cold-chain handling and fast turnaround for passenger vessel requirements." },
 ];
@@ -161,12 +162,12 @@ export default async function HomePage({
               </a>
             </div>
             <aside data-gsap="hero-panel" className="ops-panel hidden p-5 lg:block">
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/44">Live RFQ posture</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/44">Operational posture</p>
               <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden border border-white/10 bg-white/10">
                 {heroStats.map((stat) => (
                   <div key={stat.label} className="bg-[#06111d]/90 p-4">
                     <p className="font-[family-name:var(--font-poppins)] text-3xl font-black text-white sm:text-4xl">
-                      <CountUp to={stat.value} separator={stat.value > 999} suffix={stat.suffix} animate={false} />
+                      <CountUp to={stat.value} separator={stat.separator} suffix={stat.suffix} animate={false} />
                     </p>
                     <p className="mt-2 text-xs leading-5 text-white/54">{stat.label}</p>
                   </div>
@@ -198,7 +199,7 @@ export default async function HomePage({
             {heroStats.map((stat) => (
               <div key={stat.label} className="bg-[#06111d] p-4">
                 <p className="font-[family-name:var(--font-poppins)] text-3xl font-black">
-                  <CountUp to={stat.value} separator={stat.value > 999} suffix={stat.suffix} animate={false} />
+                  <CountUp to={stat.value} separator={stat.separator} suffix={stat.suffix} animate={false} />
                 </p>
                 <p className="mt-1 text-xs leading-5 text-white/68">{stat.label}</p>
               </div>
@@ -212,7 +213,7 @@ export default async function HomePage({
           <SectionIntro eyebrow="Service command" title="One operating platform for serious marine, offshore and industrial supply." body="Six capability lanes connect urgent vessel demand, controlled sourcing, staging and delivery to one accountable operations desk." />
           <div className="mt-10 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, idx) => (
-              <Link key={service.title} href={service.href} data-gsap="service-card" style={{ "--reveal-delay": `${idx * 55}ms` } as CSSProperties} className="service-card group min-h-[220px] bg-[#071521] p-6 transition hover:bg-[#0b2133] md:min-h-[270px] sm:p-7">
+              <Link key={service.title} href={service.href} data-gsap="service-card" style={{ "--reveal-delay": `${idx * 55}ms` } as CSSProperties} className={`${idx >= 4 ? "hidden md:block" : ""} service-card group min-h-[220px] bg-[#071521] p-6 transition hover:bg-[#0b2133] md:min-h-[270px] sm:p-7`}>
                 <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-accent)]">{service.kicker}</p>
                 <h3 className="mt-6 font-[family-name:var(--font-poppins)] text-3xl font-black leading-none tracking-[-0.04em] text-white">{service.title}</h3>
                 <p className="mt-5 text-sm leading-7 text-white/74">{service.body}</p>
@@ -220,6 +221,7 @@ export default async function HomePage({
               </Link>
             ))}
           </div>
+          <Link href="/services" className="mt-6 inline-flex font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-cta)] md:hidden">View all capabilities →</Link>
         </Container>
       </section>
 
@@ -252,7 +254,7 @@ export default async function HomePage({
           <SectionIntro eyebrow="Industries" title="Built for sectors where delay has a real cost." body="Direct capability routes for vessel managers, offshore teams, industrial buyers, ports and remote operations." />
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry, idx) => (
-              <article key={industry.title} data-gsap="image-card" style={{ "--reveal-delay": `${idx * 60}ms` } as CSSProperties} className="group relative min-h-[320px] overflow-hidden border border-white/10 bg-[#081726] md:min-h-[370px]">
+              <Link href={industry.href} key={industry.title} data-gsap="image-card" style={{ "--reveal-delay": `${idx * 60}ms` } as CSSProperties} className={`${idx >= 4 ? "hidden md:block" : "block"} group relative min-h-[320px] overflow-hidden border border-white/10 bg-[#081726] md:min-h-[370px]`}>
                 <Image src={industry.image} alt="" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-62 transition duration-700 group-hover:scale-[1.045] group-hover:opacity-78" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#040b13] via-[#040b13]/44 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
@@ -260,9 +262,11 @@ export default async function HomePage({
                   <h3 className="mt-3 font-[family-name:var(--font-poppins)] text-3xl font-black leading-none tracking-[-0.04em]">{industry.title}</h3>
                   <p className="mt-4 max-w-sm text-sm leading-6 text-white/76">{industry.body}</p>
                 </div>
-              </article>
+                <span className="absolute right-6 top-6 font-mono text-xs uppercase tracking-[0.16em] text-white/70 transition group-hover:text-[var(--color-cta)]">Open →</span>
+              </Link>
             ))}
           </div>
+          <Link href="/industries" className="mt-6 inline-flex font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-cta)] md:hidden">Explore all industries →</Link>
         </Container>
       </section>
 
@@ -306,7 +310,7 @@ export default async function HomePage({
           <SectionIntro light eyebrow="Track record" title="Proof that belongs in the procurement room." body="Named vessels, campaign context and operational imagery show where Daron has already delivered under pressure." />
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {trackRecord.map((item, idx) => (
-              <article key={item.title} data-gsap="image-card" style={{ "--reveal-delay": `${idx * 65}ms` } as CSSProperties} className="group relative min-h-[340px] overflow-hidden border border-slate-300 bg-[#08111f] text-white sm:grid sm:min-h-[300px] sm:grid-cols-[.92fr_1.08fr]">
+              <article key={item.title} data-gsap="image-card" style={{ "--reveal-delay": `${idx * 65}ms` } as CSSProperties} className={`${idx >= 2 ? "hidden md:grid" : "sm:grid"} group relative min-h-[340px] overflow-hidden border border-slate-300 bg-[#08111f] text-white sm:min-h-[300px] sm:grid-cols-[.92fr_1.08fr]`}>
                 <div className="absolute inset-0 overflow-hidden sm:relative">
                   <Image src={item.image} alt="" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover opacity-78 transition duration-700 group-hover:scale-[1.04] group-hover:opacity-90" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#08111f] via-[#08111f]/32 to-transparent sm:bg-gradient-to-r sm:from-transparent sm:to-[#08111f]/45" />

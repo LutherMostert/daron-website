@@ -36,13 +36,11 @@ export function RevealController() {
 
         const ctx = gsap.context(() => {
           gsap.set("[data-reveal], [data-gsap='fade-up'], [data-gsap='service-card'], [data-gsap='image-card']", {
-            autoAlpha: 0,
             y: 24,
           });
 
           gsap.utils.toArray<HTMLElement>("[data-reveal], [data-gsap='fade-up']").forEach((el) => {
             gsap.to(el, {
-              autoAlpha: 1,
               y: 0,
               duration: 0.7,
               ease: "power3.out",
@@ -53,7 +51,6 @@ export function RevealController() {
 
           gsap.utils.toArray<HTMLElement>("[data-gsap='service-card']").forEach((el) => {
             gsap.to(el, {
-              autoAlpha: 1,
               y: 0,
               duration: 0.65,
               ease: "power3.out",
@@ -79,7 +76,6 @@ export function RevealController() {
 
           gsap.utils.toArray<HTMLElement>("[data-gsap='image-card']").forEach((el) => {
             gsap.to(el, {
-              autoAlpha: 1,
               y: 0,
               duration: 0.7,
               ease: "power3.out",
@@ -117,7 +113,6 @@ export function RevealController() {
           });
 
           gsap.from("[data-gsap='network-map']", {
-            autoAlpha: 0,
             scale: 0.98,
             duration: 0.8,
             ease: "power3.out",
@@ -125,7 +120,6 @@ export function RevealController() {
           });
 
           gsap.from(".rfq-step", {
-            autoAlpha: 0,
             x: 22,
             duration: 0.5,
             ease: "power3.out",
@@ -151,7 +145,15 @@ export function RevealController() {
           ctx.revert();
         };
       },
-    );
+    ).catch((error) => {
+      console.error("[motion] reveal system failed", error);
+      document.querySelectorAll<HTMLElement>("[data-reveal], [data-gsap]").forEach((el) => {
+        el.classList.add("is-visible");
+        el.style.removeProperty("opacity");
+        el.style.removeProperty("transform");
+        el.style.removeProperty("visibility");
+      });
+    });
 
     return () => {
       cancelled = true;

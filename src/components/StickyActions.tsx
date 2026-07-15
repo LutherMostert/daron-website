@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { contact } from "@/lib/site";
 
 /**
- * Mobile sticky conversion bar — RFQ (WhatsApp/Don) + tap-to-call, always one
+ * Mobile sticky conversion bar — RFQ, operations chat and tap-to-call, always one
  * thumb away. Hidden at xl+ where the sticky header CTA covers the same job.
  * The flow spacer keeps the bar from covering the footer's last lines.
  */

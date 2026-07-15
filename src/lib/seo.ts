@@ -38,7 +38,7 @@ function clampMetadataText(value: string, maxLength: number) {
   const candidate = value.slice(0, maxLength - 3);
   const wordBoundary = candidate.lastIndexOf(" ");
   const trimmed = wordBoundary > maxLength * 0.65 ? candidate.slice(0, wordBoundary) : candidate;
-  return `${trimmed.trimEnd()}...`;
+  return `${trimmed.trimEnd()}…`;
 }
 
 export function buildMetadata({
@@ -65,8 +65,10 @@ export function buildMetadata({
     locale: routing.defaultLocale,
   });
 
-  const metadataTitle = titleAbsolute ? title : clampMetadataText(title, 46);
+  const metadataTitle = title;
   const metadataDescription = clampMetadataText(description, 160);
+  const localeRoot = getPathname({ href: "/", locale: loc }).replace(/\/$/, "");
+  const socialImage = `${localeRoot}/opengraph-image`;
 
   return {
     title: titleAbsolute ? { absolute: metadataTitle } : metadataTitle,
@@ -78,11 +80,13 @@ export function buildMetadata({
       title: ogTitle ?? title,
       description: metadataDescription,
       locale: OG_LOCALE[loc] ?? loc,
+      images: [{ url: socialImage, width: 1200, height: 630, alt: "Daron Namibia marine and offshore operations" }],
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle ?? title,
       description: metadataDescription,
+      images: [socialImage],
     },
   };
 }

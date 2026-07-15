@@ -39,7 +39,7 @@ const nodes: NetworkNode[] = [
   { id: "Gabon", x: 0.384, y: 0.523, labelDx: 14, labelDy: -14 },
   { id: "Mozambique", x: 0.735, y: 0.775, labelDx: 14, labelDy: -2 },
   { id: "South Africa", x: 0.56, y: 0.905, labelDx: 14, labelDy: 0 },
-  { id: "France", x: 0.3, y: 0.075, dashed: true, floating: true, labelDx: 14, labelDy: -2 },
+  { id: "France supply node", x: 0.3, y: 0.075, dashed: true, floating: true, labelDx: 14, labelDy: -2 },
 ];
 
 function mapX(x: number) {

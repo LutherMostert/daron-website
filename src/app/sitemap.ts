@@ -12,6 +12,7 @@ function absUrl(path: string, locale: string): string {
 /** One sitemap entry per route, with xhtml:link hreflang alternates for en/pt/fr. */
 function entry(
   path: string,
+  locale: string,
   priority: number,
   changeFrequency: ChangeFreq,
   lastModified: Date,
@@ -21,7 +22,7 @@ function entry(
   languages["x-default"] = absUrl(path, routing.defaultLocale);
 
   return {
-    url: absUrl(path, routing.defaultLocale),
+    url: absUrl(path, locale),
     lastModified,
     changeFrequency,
     priority,
@@ -56,9 +57,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/privacy", priority: 0.3, cf: "yearly" },
   ];
 
-  const staticEntries = staticRoutes.map((r) => entry(r.path, r.priority, r.cf, now));
-  const postEntries = posts.map((p) =>
-    entry(`/insights/${p.slug}`, 0.6, "yearly", new Date(p.date)),
+  const staticEntries = staticRoutes.flatMap((route) =>
+    routing.locales.map((locale) => entry(route.path, locale, route.priority, route.cf, now)),
+  );
+  const postEntries = posts.flatMap((post) =>
+    routing.locales.map((locale) =>
+      entry(`/insights/${post.slug}`, locale, 0.6, "yearly", new Date(post.date)),
+    ),
   );
 
   return [...staticEntries, ...postEntries];

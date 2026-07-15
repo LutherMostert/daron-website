@@ -24,6 +24,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { contact } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 
 type Role = "user" | "assistant";
 type Message = { role: Role; content: string };
@@ -78,13 +79,23 @@ export function ChatWidget() {
   );
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
+  const [gateSubmitting, setGateSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [aiStatus, setAiStatus] = useState<"checking" | "operational" | "degraded" | "offline">("checking");
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const firstFieldRef = useRef<HTMLInputElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const launcherRef = useRef<HTMLButtonElement | null>(null);
   const interacted = useRef(false);
+  const statusLabel =
+    aiStatus === "operational"
+      ? t("statusOperational")
+      : aiStatus === "degraded"
+        ? t("statusDegraded")
+        : aiStatus === "offline"
+          ? t("statusOffline")
+          : t("statusChecking");
 
   // Persist whenever lead or messages change
   useEffect(() => {
@@ -125,6 +136,24 @@ export function ChatWidget() {
     }, 50);
     return () => clearTimeout(t);
   }, [open, lead]);
+
+  useEffect(() => {
+    if (!open) return;
+    let active = true;
+    fetch("/api/chat", { cache: "no-store" })
+      .then(async (response) => {
+        const body = (await response.json()) as { available?: boolean; status?: string };
+        if (!active) return;
+        if (!body.available) setAiStatus("offline");
+        else setAiStatus(body.status === "degraded" ? "degraded" : "operational");
+      })
+      .catch(() => {
+        if (active) setAiStatus("offline");
+      });
+    return () => {
+      active = false;
+    };
+  }, [open]);
 
   // Restore focus to the launcher when the dialog closes (a11y) — but never
   // steal focus on first page load (only after the user has opened it once).
@@ -183,6 +212,10 @@ export function ChatWidget() {
 
         if (!res.body) throw new Error("No response stream.");
 
+        const provider = res.headers.get("X-Daron-AI-Provider") || "unknown";
+        trackEvent("AI_Response_Success", { provider });
+        setAiStatus("operational");
+
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
         let acc = "";
@@ -199,6 +232,8 @@ export function ChatWidget() {
         }
       } catch (err) {
         const msg = err instanceof Error ? err.message : "Something went wrong.";
+        trackEvent("AI_Response_Failed");
+        setAiStatus("offline");
         setError(msg);
         setMessages((prev) => {
           const next = prev.slice();
@@ -234,18 +269,29 @@ export function ChatWidget() {
 
       const newLead: Lead = { name, email, company, vessel, whatsapp };
 
-      // Fire-and-forget lead capture; don't block the chat
-      void fetch("/api/chat-lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...newLead,
-          referrer: typeof document !== "undefined" ? document.referrer : "",
-          userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
-        }),
-      }).catch(() => {
-        /* non-fatal */
-      });
+      setGateSubmitting(true);
+      try {
+        const leadResponse = await fetch("/api/chat-lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...newLead,
+            referrer: typeof document !== "undefined" ? document.referrer : "",
+            userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
+          }),
+        });
+        if (!leadResponse.ok) {
+          const result = (await leadResponse.json().catch(() => ({}))) as { error?: string };
+          throw new Error(result.error || t("leadError"));
+        }
+        trackEvent("AI_Lead_Captured");
+      } catch (leadError) {
+        trackEvent("AI_Lead_Failed");
+        setError(leadError instanceof Error ? leadError.message : t("leadError"));
+        setGateSubmitting(false);
+        return;
+      }
+      setGateSubmitting(false);
 
       setLead(newLead);
       // Kick off the conversation with a neutral opener — Don's system prompt
@@ -351,7 +397,8 @@ export function ChatWidget() {
                   {t("title")}
                 </p>
                 <p className="mt-0.5 text-xs text-white/70">
-                  {t("subtitle")}
+                  <span className={`mr-1.5 inline-block h-1.5 w-1.5 rounded-full ${aiStatus === "offline" ? "bg-red-400" : aiStatus === "checking" ? "bg-white/40" : aiStatus === "degraded" ? "bg-amber-300" : "bg-emerald-400"}`} />
+                  {statusLabel}
                 </p>
               </div>
             </div>
@@ -485,9 +532,10 @@ export function ChatWidget() {
 
               <button
                 type="submit"
-                className="mt-1 rounded-full bg-[var(--color-cta)] px-5 py-3 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+                disabled={gateSubmitting}
+                className="mt-1 rounded-full bg-[var(--color-cta)] px-5 py-3 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-60"
               >
-                {t("startChat")} &rarr;
+                {gateSubmitting ? t("securing") : t("startChat")} &rarr;
               </button>
 
               <p className="text-xs leading-relaxed text-[var(--color-mute)]">
