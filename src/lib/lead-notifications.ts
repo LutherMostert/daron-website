@@ -23,7 +23,10 @@ export async function sendOperationsEmail(args: {
   const client = getResend();
   if (!client) return false;
 
-  const from = process.env.RFQ_FROM_EMAIL || "Daron Website <onboarding@resend.dev>";
+  const emailDomain = process.env.RESEND_EMAIL_DOMAIN;
+  const from =
+    process.env.RFQ_FROM_EMAIL ||
+    (emailDomain ? `Daron Website <website@${emailDomain}>` : "Daron Website <onboarding@resend.dev>");
   const to = process.env.RFQ_TO_EMAIL || contact.emails.operations;
 
   try {
