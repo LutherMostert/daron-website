@@ -119,24 +119,34 @@ export function RevealController() {
             scrollTrigger: { trigger: "[data-gsap='network-map']", start: "top 82%", once: true },
           });
 
-          gsap.from(".rfq-step", {
-            x: 22,
-            duration: 0.5,
-            ease: "power3.out",
-            stagger: 0.1,
-            scrollTrigger: { trigger: "[data-gsap='rfq-workflow']", start: "top 80%", once: true },
-          });
+          const rfqWorkflow = document.querySelector<HTMLElement>("[data-gsap='rfq-workflow']");
+          if (rfqWorkflow) {
+            const rfqSteps = rfqWorkflow.querySelectorAll<HTMLElement>(".rfq-step");
+            const routeLine = rfqWorkflow.querySelector<HTMLElement>(".route-line");
 
-          gsap.fromTo(
-            ".route-line",
-            { scaleY: 0, transformOrigin: "top" },
-            {
-              scaleY: 1,
-              duration: 0.9,
-              ease: "power2.out",
-              scrollTrigger: { trigger: "[data-gsap='rfq-workflow']", start: "top 80%", once: true },
-            },
-          );
+            if (rfqSteps.length > 0) {
+              gsap.from(rfqSteps, {
+                x: 22,
+                duration: 0.5,
+                ease: "power3.out",
+                stagger: 0.1,
+                scrollTrigger: { trigger: rfqWorkflow, start: "top 80%", once: true },
+              });
+            }
+
+            if (routeLine) {
+              gsap.fromTo(
+                routeLine,
+                { scaleY: 0, transformOrigin: "top" },
+                {
+                  scaleY: 1,
+                  duration: 0.9,
+                  ease: "power2.out",
+                  scrollTrigger: { trigger: rfqWorkflow, start: "top 80%", once: true },
+                },
+              );
+            }
+          }
         });
 
         ScrollTrigger.refresh();

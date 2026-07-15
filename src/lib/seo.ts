@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getPathname, routing, type Locale } from "@/i18n/routing";
+import { site } from "@/lib/site";
 
 /**
  * Single source of truth for per-page metadata.
@@ -33,6 +34,10 @@ const OG_LOCALE: Record<string, string> = {
   fr: "fr_FR",
 };
 
+function absoluteUrl(pathname: string) {
+  return pathname === "/" ? site.url : `${site.url}${pathname}`;
+}
+
 function clampMetadataText(value: string, maxLength: number) {
   if (value.length <= maxLength) return value;
   const candidate = value.slice(0, maxLength - 3);
@@ -54,21 +59,20 @@ export function buildMetadata({
     ? (locale as Locale)
     : routing.defaultLocale;
 
-  const canonical = getPathname({ href: path, locale: loc });
+  const canonical = absoluteUrl(getPathname({ href: path, locale: loc }));
 
   const languages: Record<string, string> = {};
   for (const l of routing.locales) {
-    languages[l] = getPathname({ href: path, locale: l });
+    languages[l] = absoluteUrl(getPathname({ href: path, locale: l }));
   }
-  languages["x-default"] = getPathname({
-    href: path,
-    locale: routing.defaultLocale,
-  });
+  languages["x-default"] = absoluteUrl(
+    getPathname({ href: path, locale: routing.defaultLocale }),
+  );
 
   const metadataTitle = title;
   const metadataDescription = clampMetadataText(description, 160);
   const localeRoot = getPathname({ href: "/", locale: loc }).replace(/\/$/, "");
-  const socialImage = `${localeRoot}/opengraph-image`;
+  const socialImage = absoluteUrl(`${localeRoot}/opengraph-image`);
 
   return {
     title: titleAbsolute ? { absolute: metadataTitle } : metadataTitle,

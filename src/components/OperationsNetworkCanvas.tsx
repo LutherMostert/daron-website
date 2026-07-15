@@ -101,6 +101,7 @@ export function OperationsNetworkCanvas() {
     let height = 0;
     let alive = true;
     let visible = false;
+    let mapRequested = false;
     const hub = nodes[0];
     const routes = nodes.slice(1).map((node) => route(hub, node));
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -270,20 +271,25 @@ export function OperationsNetworkCanvas() {
     resize();
     draw(0);
 
-    fetch("/generated/maps/africa-network-map.json")
-      .then((response) => {
-        if (!response.ok) throw new Error("Africa map data failed to load");
-        return response.json() as Promise<AfricaMapData>;
-      })
-      .then((data) => {
-        if (!alive) return;
-        mapDataRef.current = data;
-        draw(performance.now());
-        startAnimation();
-      })
-      .catch(() => {
-        mapDataRef.current = null;
-      });
+    function requestMap() {
+      if (mapRequested) return;
+      mapRequested = true;
+
+      fetch("/generated/maps/africa-network-map.json")
+        .then((response) => {
+          if (!response.ok) throw new Error("Africa map data failed to load");
+          return response.json() as Promise<AfricaMapData>;
+        })
+        .then((data) => {
+          if (!alive) return;
+          mapDataRef.current = data;
+          draw(performance.now());
+          startAnimation();
+        })
+        .catch(() => {
+          mapDataRef.current = null;
+        });
+    }
 
     const resizeObserver = new ResizeObserver(() => {
       resize();
@@ -294,10 +300,13 @@ export function OperationsNetworkCanvas() {
     const visibilityObserver = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
-        if (visible) startAnimation();
+        if (visible) {
+          requestMap();
+          startAnimation();
+        }
         else stopAnimation();
       },
-      { rootMargin: "120px 0px", threshold: 0.01 },
+      { rootMargin: "320px 0px", threshold: 0.01 },
     );
     visibilityObserver.observe(surface);
 

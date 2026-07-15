@@ -167,6 +167,9 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
   const tA11y = await getTranslations("A11y");
+  const analyticsEnabled =
+    process.env.VERCEL_ENV === "production" ||
+    process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === "true";
 
   return (
     <html
@@ -206,16 +209,20 @@ export default async function LocaleLayout({
             needed). Tagged-events variant powers conversion events via CSS
             classes (plausible-event-name=…). No-op until the daron.com.na site
             is created in the Plausible account. */}
-        <Script id="plausible-init" strategy="afterInteractive">
-          {`window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}`}
-        </Script>
-        <Script
-          defer
-          data-domain="daron.com.na"
-          src="https://plausible.io/js/script.tagged-events.js"
-          strategy="afterInteractive"
-        />
-        <SpeedInsights />
+        {analyticsEnabled && (
+          <>
+            <Script id="plausible-init" strategy="afterInteractive">
+              {`window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}`}
+            </Script>
+            <Script
+              defer
+              data-domain="daron.com.na"
+              src="https://plausible.io/js/script.tagged-events.js"
+              strategy="afterInteractive"
+            />
+            <SpeedInsights />
+          </>
+        )}
       </body>
     </html>
   );
