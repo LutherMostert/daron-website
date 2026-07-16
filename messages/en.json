@@ -691,5 +691,273 @@
     "formAnother": "Send another message",
     "formErrorBody": "Sorry — something went wrong sending your message. Please try again, or reach us on WhatsApp.",
     "formNote": "We reply within one business day. Your details are handled per our Privacy Policy and never sold."
+  },
+  "CommandHome": {
+    "openCapability": "Open capability",
+    "hero": {
+      "alt": "Seven Borealis and offshore support operations at dusk in Walvis Bay",
+      "location": "Walvis Bay / Namibia",
+      "reach": "Africa supply reach",
+      "heading": "When operations cannot wait.",
+      "subheading": "Walvis Bay command. Africa reach.",
+      "intro": "Marine supply, offshore logistics, technical procurement and crew support for vessels, rigs and industrial operations working under real pressure.",
+      "rfqCta": "Send your RFQ",
+      "talkCta": "Talk to operations",
+      "contactLine": "24/7 operational contact · {phone}",
+      "panel": {
+        "eyebrow": "Operations node",
+        "title": "Walvis Bay Command",
+        "active": "Active",
+        "row1Label": "RFQ intake",
+        "row1Value": "Ready",
+        "row2Label": "Port coordination",
+        "row3Label": "Supplier network",
+        "row4Label": "Commercial control",
+        "row4Value": "Human reviewed",
+        "calloutTitle": "RFQ in. Operation moving.",
+        "calloutBody": "Digital intake accelerates the handoff. Daron people control sourcing, pricing and delivery."
+      }
+    },
+    "metrics": {
+      "ariaLabel": "Daron operational metrics",
+      "groupFounded": "Daron Group founded",
+      "namibiaOperations": "Namibia operations",
+      "suppliers": "Verified supplier network",
+      "response": "Operational response"
+    },
+    "capabilities": {
+      "eyebrow": "Integrated operating divisions",
+      "title": "One command structure. Multiple routes to execution.",
+      "body": "Daron connects vessel supply, offshore support, technical procurement, crew welfare and controlled logistics without handing the operation between disconnected suppliers."
+    },
+    "divisions": {
+      "marine": {
+        "eyebrow": "Deck · engine · provisions · bonded",
+        "title": "Marine chandlery",
+        "body": "Full vessel supply from Walvis Bay, staged against port-call pressure and delivered through one accountable operations desk.",
+        "alt": "Seven Borealis offshore construction vessel alongside in Walvis Bay"
+      },
+      "offshore": {
+        "eyebrow": "Rigs · subsea · campaign support",
+        "title": "Oil and gas offshore",
+        "body": "Procurement, technical supply, safety and quayside coordination for complex offshore campaigns.",
+        "alt": "Daron vehicles supporting an offshore energy vessel"
+      },
+      "welfare": {
+        "eyebrow": "Catering · cold chain · HACCP",
+        "title": "Crew welfare",
+        "body": "Controlled provisioning for vessels, rigs and remote operations.",
+        "alt": "Offshore catering and vessel provisions prepared by Daron"
+      },
+      "maintenance": {
+        "eyebrow": "UHP · Hempel · dry dock",
+        "title": "Coatings and maintenance",
+        "body": "High-pressure systems, marine surface preparation and coating supply aligned to the maintenance window.",
+        "alt": "High-pressure marine maintenance and surface preparation"
+      },
+      "logistics": {
+        "eyebrow": "Warehouse · fleet · technical supply",
+        "title": "Operational logistics",
+        "body": "Cold, frozen and dry storage, branded vehicles, technical stores and timed release control from warehouse to quayside.",
+        "alt": "Daron Namibia truck fleet ready for night operations"
+      }
+    },
+    "don": {
+      "eyebrow": "Don AI / Operations intake",
+      "title": "Digital speed. Human command.",
+      "body": "Don keeps the first response moving while Daron specialists retain control of specifications, sourcing, pricing, availability and delivery.",
+      "controlLabel": "Important control",
+      "controlBody": "Don does not issue pricing or confirm stock. Every commercial response is reviewed and released by the Daron operations team."
+    },
+    "workflow": {
+      "sequence": "Operational sequence",
+      "ariaLabel": "Daron RFQ operations flow",
+      "consoleTitle": "DON / OPERATIONS INTAKE",
+      "consoleReference": "REFERENCE WORKFLOW · WALVIS BAY",
+      "stage": "Stage {number}",
+      "intake": {
+        "title": "Send the RFQ",
+        "label": "Secure intake",
+        "description": "Send the requirement through the secure website form, WhatsApp or email. Attach the vessel list, spreadsheet or PDF when available.",
+        "status": "INPUT CHANNELS READY",
+        "rowPdf": "RFQ document",
+        "rowXls": "Vessel list",
+        "rowMsg": "Email / WhatsApp",
+        "rowWeb": "Secure contact form"
+      },
+      "capture": {
+        "title": "Don captures context",
+        "label": "AI-assisted handoff",
+        "description": "Don answers approved operational questions and captures the contact, requirement and urgency needed for a direct operations handoff.",
+        "status": "CONTEXT CAPTURE ACTIVE",
+        "keyScope": "SCOPE",
+        "rowScope": "Vessel support",
+        "keyPort": "PORT",
+        "keyPriority": "PRIORITY",
+        "rowPriority": "Time critical",
+        "keyRoute": "ROUTE",
+        "rowRoute": "Operations desk"
+      },
+      "review": {
+        "title": "Technical review",
+        "label": "KAM control",
+        "description": "A Daron specialist validates specification, supplier options, availability, pricing and delivery pressure before any commercial response is issued.",
+        "status": "HUMAN REVIEW REQUIRED",
+        "keySpec": "SPEC",
+        "rowSpec": "Checked",
+        "keySource": "SOURCE",
+        "rowSource": "Supplier route",
+        "rowEta": "Delivery window",
+        "keyOwner": "OWNER",
+        "rowOwner": "Named KAM"
+      },
+      "response": {
+        "title": "Response issued",
+        "label": "Commercial release",
+        "description": "The operations team confirms the quote, timing and accountable follow-up. Pricing and availability always remain under human control.",
+        "status": "READY FOR CLIENT RESPONSE",
+        "keyQuote": "QUOTE",
+        "rowQuote": "Human approved",
+        "keyTiming": "TIMING",
+        "rowTiming": "Confirmed",
+        "keyDelivery": "DELIVERY",
+        "rowDelivery": "Coordinated",
+        "keyFollowUp": "FOLLOW-UP",
+        "rowFollowUp": "Accountable"
+      }
+    },
+    "sectorSection": {
+      "eyebrow": "Sector command",
+      "title": "Select the operation. See the execution path.",
+      "body": "Four operating modes, each connected to Daron's Walvis Bay infrastructure, people and regional sourcing network."
+    },
+    "sectors": {
+      "ariaLabel": "Daron operational sectors",
+      "operationalControl": "Walvis Bay operational control",
+      "marine": {
+        "name": "Marine chandlery",
+        "eyebrow": "Vessel supply",
+        "title": "One accountable desk for every department on board.",
+        "body": "Deck, engine, cabin, bonded stores and provisions staged for the vessel schedule, not office hours.",
+        "alt": "Seven Borealis offshore construction vessel supported in Walvis Bay",
+        "cap1": "Deck and engine stores",
+        "cap2": "Fresh, frozen and dry provisions",
+        "cap3": "Bonded and cabin supply",
+        "cap4": "Last-minute port-call requests",
+        "statLabel": "operations contact"
+      },
+      "offshore": {
+        "name": "Offshore support",
+        "eyebrow": "Campaign execution",
+        "title": "Built for rigs, subsea vessels and offshore campaign pressure.",
+        "body": "Procurement, provisioning, safety and logistics coordinated from Walvis Bay with regional supplier depth behind the operation.",
+        "alt": "Daron fleet supporting an offshore energy vessel in Walvis Bay",
+        "cap1": "Drilling campaign support",
+        "cap2": "Subsea and offshore construction",
+        "cap3": "Safety and specialist sourcing",
+        "cap4": "Quayside logistics coordination",
+        "statLabel": "concurrent rig campaigns"
+      },
+      "maintenance": {
+        "name": "UHP and coatings",
+        "eyebrow": "Asset maintenance",
+        "title": "Surface preparation and coating support with technical discipline.",
+        "body": "UHP water-jetting equipment, marine chemicals, Hempel coatings and dry-dock supply aligned to the maintenance window.",
+        "alt": "Marine maintenance worker operating high-pressure surface preparation equipment",
+        "cap1": "UHP water-jetting systems",
+        "cap2": "Marine surface preparation",
+        "cap3": "Hempel coating supply",
+        "cap4": "Dry-dock technical materials",
+        "statLabel": "maintenance capability"
+      },
+      "catering": {
+        "name": "Catering and logistics",
+        "eyebrow": "Crew welfare",
+        "title": "Controlled provisioning from warehouse to gangway.",
+        "body": "HACCP-led food handling, cold-chain control, storage and delivery for vessels, offshore crews and remote operations.",
+        "alt": "Daron offshore catering and provisions prepared for delivery",
+        "cap1": "HACCP-controlled provisioning",
+        "cap2": "Cold, frozen and dry storage",
+        "cap3": "Menu and crew requirement support",
+        "cap4": "Timed quayside delivery",
+        "statLabel": "food safety control"
+      }
+    },
+    "projectsAriaLabel": "Named offshore operations",
+    "trackRecord": {
+      "eyebrow": "Operational track record",
+      "title": "Proof from the quay, the rig and the vessel schedule.",
+      "body": "Named campaigns and real Daron operational imagery show where the team has already executed under pressure.",
+      "primaryCta": "View full track record",
+      "secondaryCta": "Explore dry-dock support"
+    },
+    "operations": {
+      "drilling": {
+        "title": "Concurrent drilling support",
+        "body": "Deepsea Mira, Deepsea Bollsta and Deepsea Hercules supported during active offshore campaign pressure.",
+        "alt": "Daron fleet supporting simultaneous offshore drilling operations",
+        "meta": "3 rigs · Walvis Bay"
+      },
+      "subsea": {
+        "body": "Quayside heavy-lift and offshore construction support executed from Walvis Bay.",
+        "alt": "Container lift operation supporting Subsea7 and Seven Borealis",
+        "meta": "Heavy lift · Quayside"
+      },
+      "sapura": {
+        "title": "Sapura Berani reactivation",
+        "body": "Catering, cleaning, technical sourcing and rapid release under severe reactivation pressure.",
+        "alt": "Daron crew lifting supplies during an offshore vessel operation",
+        "meta": "Reactivation · Rapid supply"
+      },
+      "cruise": {
+        "title": "Cruise vessel provisioning",
+        "body": "Dock-to-gangway provisioning, cold-chain handling and fast turnaround for passenger vessel requirements.",
+        "alt": "Daron truck provisioning a cruise vessel at the port",
+        "meta": "Cold chain · Turnaround"
+      }
+    },
+    "network": {
+      "eyebrow": "African supply network",
+      "title": "Walvis Bay control. Regional reach.",
+      "body": "Daron connects local port knowledge, warehousing, vehicles and technical sourcing with the wider Daron Group supplier network across Southern and West Africa."
+    },
+    "countries": {
+      "namibia": "Namibia",
+      "angola": "Angola",
+      "congo": "Congo",
+      "gabon": "Gabon",
+      "mozambique": "Mozambique",
+      "southAfrica": "South Africa"
+    },
+    "mapLabels": {
+      "ariaLabel": "Animated logistics route map from Walvis Bay to Daron Group operating countries",
+      "walvisBay": "Walvis Bay",
+      "angola": "Angola",
+      "congo": "Congo",
+      "gabon": "Gabon",
+      "mozambique": "Mozambique",
+      "southAfrica": "South Africa",
+      "franceNode": "France supply node"
+    },
+    "confidence": {
+      "eyebrow": "Procurement confidence",
+      "title": "Controls buyers can defend.",
+      "body": "Recognised quality, food-safety and procurement standards support every operational response.",
+      "verified": "Verified control",
+      "partnersAriaLabel": "Operators and partners Daron has supported",
+      "logoAlt": "{name} logo"
+    },
+    "controls": {
+      "issa": "ISSA listed",
+      "impa": "IMPA listed"
+    },
+    "cta": {
+      "alt": "Walvis Bay port and marine logistics operating at night",
+      "eyebrow": "Start an operation",
+      "title": "Complex requirement? Put Daron on it.",
+      "body": "Send the RFQ, call the operations desk or open WhatsApp. A Daron specialist will take control of the commercial response and delivery path.",
+      "rfqCta": "Send your RFQ",
+      "whatsappCta": "WhatsApp operations"
+    }
   }
 }

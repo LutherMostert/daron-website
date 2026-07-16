@@ -2,128 +2,70 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/routing";
 
-const workflow = [
-  {
-    id: "intake",
-    number: "01",
-    title: "Send the RFQ",
-    label: "Secure intake",
-    description:
-      "Send the requirement through the secure website form, WhatsApp or email. Attach the vessel list, spreadsheet or PDF when available.",
-    status: "INPUT CHANNELS READY",
-    rows: [
-      ["PDF", "RFQ document"],
-      ["XLS", "Vessel list"],
-      ["MSG", "Email / WhatsApp"],
-      ["WEB", "Secure contact form"],
-    ],
-  },
-  {
-    id: "capture",
-    number: "02",
-    title: "Don captures context",
-    label: "AI-assisted handoff",
-    description:
-      "Don answers approved operational questions and captures the contact, requirement and urgency needed for a direct operations handoff.",
-    status: "CONTEXT CAPTURE ACTIVE",
-    rows: [
-      ["SCOPE", "Vessel support"],
-      ["PORT", "Walvis Bay"],
-      ["PRIORITY", "Time critical"],
-      ["ROUTE", "Operations desk"],
-    ],
-  },
-  {
-    id: "review",
-    number: "03",
-    title: "Technical review",
-    label: "KAM control",
-    description:
-      "A Daron specialist validates specification, supplier options, availability, pricing and delivery pressure before any commercial response is issued.",
-    status: "HUMAN REVIEW REQUIRED",
-    rows: [
-      ["SPEC", "Checked"],
-      ["SOURCE", "Supplier route"],
-      ["ETA", "Delivery window"],
-      ["OWNER", "Named KAM"],
-    ],
-  },
-  {
-    id: "response",
-    number: "04",
-    title: "Response issued",
-    label: "Commercial release",
-    description:
-      "The operations team confirms the quote, timing and accountable follow-up. Pricing and availability always remain under human control.",
-    status: "READY FOR CLIENT RESPONSE",
-    rows: [
-      ["QUOTE", "Human approved"],
-      ["TIMING", "Confirmed"],
-      ["DELIVERY", "Coordinated"],
-      ["FOLLOW-UP", "Accountable"],
-    ],
-  },
-] as const;
-
-const sectors = [
-  {
-    id: "marine",
-    name: "Marine chandlery",
-    eyebrow: "Vessel supply",
-    title: "One accountable desk for every department on board.",
-    body: "Deck, engine, cabin, bonded stores and provisions staged for the vessel schedule, not office hours.",
-    image: "/images/site/operations/seven-borealis-dock.jpg",
-    alt: "Seven Borealis offshore construction vessel supported in Walvis Bay",
-    capabilities: ["Deck and engine stores", "Fresh, frozen and dry provisions", "Bonded and cabin supply", "Last-minute port-call requests"],
-    stat: "24/7",
-    statLabel: "operations contact",
-    href: "/services/ship-chandlery" as const,
-  },
-  {
-    id: "offshore",
-    name: "Offshore support",
-    eyebrow: "Campaign execution",
-    title: "Built for rigs, subsea vessels and offshore campaign pressure.",
-    body: "Procurement, provisioning, safety and logistics coordinated from Walvis Bay with regional supplier depth behind the operation.",
-    image: "/images/site/operations/daron-fleet-normand-energy.jpg",
-    alt: "Daron fleet supporting an offshore energy vessel in Walvis Bay",
-    capabilities: ["Drilling campaign support", "Subsea and offshore construction", "Safety and specialist sourcing", "Quayside logistics coordination"],
-    stat: "3",
-    statLabel: "concurrent rig campaigns",
-    href: "/industries/oil-and-gas" as const,
-  },
-  {
-    id: "maintenance",
-    name: "UHP and coatings",
-    eyebrow: "Asset maintenance",
-    title: "Surface preparation and coating support with technical discipline.",
-    body: "UHP water-jetting equipment, marine chemicals, Hempel coatings and dry-dock supply aligned to the maintenance window.",
-    image: "/generated/daron/high-pressure-maintenance.jpg",
-    alt: "Marine maintenance worker operating high-pressure surface preparation equipment",
-    capabilities: ["UHP water-jetting systems", "Marine surface preparation", "Hempel coating supply", "Dry-dock technical materials"],
-    stat: "UHP",
-    statLabel: "maintenance capability",
-    href: "/services/dry-dock" as const,
-  },
-  {
-    id: "catering",
-    name: "Catering and logistics",
-    eyebrow: "Crew welfare",
-    title: "Controlled provisioning from warehouse to gangway.",
-    body: "HACCP-led food handling, cold-chain control, storage and delivery for vessels, offshore crews and remote operations.",
-    image: "/images/site/offshore-catering.jpg",
-    alt: "Daron offshore catering and provisions prepared for delivery",
-    capabilities: ["HACCP-controlled provisioning", "Cold, frozen and dry storage", "Menu and crew requirement support", "Timed quayside delivery"],
-    stat: "HACCP",
-    statLabel: "food safety control",
-    href: "/services" as const,
-  },
-] as const;
-
 export function DonOperationsFlow() {
+  const t = useTranslations("CommandHome");
+  const workflow = [
+    {
+      id: "intake",
+      number: "01",
+      title: t("workflow.intake.title"),
+      label: t("workflow.intake.label"),
+      description: t("workflow.intake.description"),
+      status: t("workflow.intake.status"),
+      rows: [
+        ["PDF", t("workflow.intake.rowPdf")],
+        ["XLS", t("workflow.intake.rowXls")],
+        ["MSG", t("workflow.intake.rowMsg")],
+        ["WEB", t("workflow.intake.rowWeb")],
+      ],
+    },
+    {
+      id: "capture",
+      number: "02",
+      title: t("workflow.capture.title"),
+      label: t("workflow.capture.label"),
+      description: t("workflow.capture.description"),
+      status: t("workflow.capture.status"),
+      rows: [
+        [t("workflow.capture.keyScope"), t("workflow.capture.rowScope")],
+        [t("workflow.capture.keyPort"), "Walvis Bay"],
+        [t("workflow.capture.keyPriority"), t("workflow.capture.rowPriority")],
+        [t("workflow.capture.keyRoute"), t("workflow.capture.rowRoute")],
+      ],
+    },
+    {
+      id: "review",
+      number: "03",
+      title: t("workflow.review.title"),
+      label: t("workflow.review.label"),
+      description: t("workflow.review.description"),
+      status: t("workflow.review.status"),
+      rows: [
+        [t("workflow.review.keySpec"), t("workflow.review.rowSpec")],
+        [t("workflow.review.keySource"), t("workflow.review.rowSource")],
+        ["ETA", t("workflow.review.rowEta")],
+        [t("workflow.review.keyOwner"), t("workflow.review.rowOwner")],
+      ],
+    },
+    {
+      id: "response",
+      number: "04",
+      title: t("workflow.response.title"),
+      label: t("workflow.response.label"),
+      description: t("workflow.response.description"),
+      status: t("workflow.response.status"),
+      rows: [
+        [t("workflow.response.keyQuote"), t("workflow.response.rowQuote")],
+        [t("workflow.response.keyTiming"), t("workflow.response.rowTiming")],
+        [t("workflow.response.keyDelivery"), t("workflow.response.rowDelivery")],
+        [t("workflow.response.keyFollowUp"), t("workflow.response.rowFollowUp")],
+      ],
+    },
+  ];
   const [active, setActive] = useState(0);
   const step = workflow[active];
 
@@ -131,9 +73,9 @@ export function DonOperationsFlow() {
     <div className="grid overflow-hidden border border-white/12 bg-[#050d18] lg:grid-cols-[0.82fr_1.18fr]">
       <div className="border-b border-white/10 lg:border-b-0 lg:border-r">
         <div className="border-b border-white/10 px-5 py-4 sm:px-6">
-          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/64">Operational sequence</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/64">{t("workflow.sequence")}</p>
         </div>
-        <div role="tablist" aria-label="Daron RFQ operations flow">
+        <div role="tablist" aria-label={t("workflow.ariaLabel")}>
           {workflow.map((item, index) => (
             <button
               key={item.id}
@@ -164,8 +106,8 @@ export function DonOperationsFlow() {
         <div className="relative">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-5">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)]">DON / OPERATIONS INTAKE</p>
-              <p className="mt-2 font-mono text-xs text-white/64">REFERENCE WORKFLOW · WALVIS BAY</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)]">{t("workflow.consoleTitle")}</p>
+              <p className="mt-2 font-mono text-xs text-white/64">{t("workflow.consoleReference")}</p>
             </div>
             <span className="inline-flex items-center gap-2 border border-white/12 bg-white/[0.04] px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-white/64">
               <span className="live-status-dot h-1.5 w-1.5 rounded-full bg-emerald-400" />
@@ -174,7 +116,7 @@ export function DonOperationsFlow() {
           </div>
 
           <div key={step.id} className="workflow-panel-in mt-7">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-cta)]">Stage {step.number}</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-cta)]">{t("workflow.stage", { number: step.number })}</p>
             <h3 className="mt-3 max-w-xl text-2xl font-black text-white sm:text-3xl">{step.title}</h3>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-white/64 sm:text-base">{step.description}</p>
 
@@ -194,12 +136,67 @@ export function DonOperationsFlow() {
 }
 
 export function SectorSelector() {
+  const t = useTranslations("CommandHome");
+  const sectors = [
+    {
+      id: "marine",
+      name: t("sectors.marine.name"),
+      eyebrow: t("sectors.marine.eyebrow"),
+      title: t("sectors.marine.title"),
+      body: t("sectors.marine.body"),
+      image: "/images/site/operations/seven-borealis-dock.jpg",
+      alt: t("sectors.marine.alt"),
+      capabilities: [t("sectors.marine.cap1"), t("sectors.marine.cap2"), t("sectors.marine.cap3"), t("sectors.marine.cap4")],
+      stat: "24/7",
+      statLabel: t("sectors.marine.statLabel"),
+      href: "/services/ship-chandlery" as const,
+    },
+    {
+      id: "offshore",
+      name: t("sectors.offshore.name"),
+      eyebrow: t("sectors.offshore.eyebrow"),
+      title: t("sectors.offshore.title"),
+      body: t("sectors.offshore.body"),
+      image: "/images/site/operations/daron-fleet-normand-energy.jpg",
+      alt: t("sectors.offshore.alt"),
+      capabilities: [t("sectors.offshore.cap1"), t("sectors.offshore.cap2"), t("sectors.offshore.cap3"), t("sectors.offshore.cap4")],
+      stat: "3",
+      statLabel: t("sectors.offshore.statLabel"),
+      href: "/industries/oil-and-gas" as const,
+    },
+    {
+      id: "maintenance",
+      name: t("sectors.maintenance.name"),
+      eyebrow: t("sectors.maintenance.eyebrow"),
+      title: t("sectors.maintenance.title"),
+      body: t("sectors.maintenance.body"),
+      image: "/generated/daron/high-pressure-maintenance.jpg",
+      alt: t("sectors.maintenance.alt"),
+      capabilities: [t("sectors.maintenance.cap1"), t("sectors.maintenance.cap2"), t("sectors.maintenance.cap3"), t("sectors.maintenance.cap4")],
+      stat: "UHP",
+      statLabel: t("sectors.maintenance.statLabel"),
+      href: "/services/dry-dock" as const,
+    },
+    {
+      id: "catering",
+      name: t("sectors.catering.name"),
+      eyebrow: t("sectors.catering.eyebrow"),
+      title: t("sectors.catering.title"),
+      body: t("sectors.catering.body"),
+      image: "/images/site/offshore-catering.jpg",
+      alt: t("sectors.catering.alt"),
+      capabilities: [t("sectors.catering.cap1"), t("sectors.catering.cap2"), t("sectors.catering.cap3"), t("sectors.catering.cap4")],
+      stat: "HACCP",
+      statLabel: t("sectors.catering.statLabel"),
+      href: "/services" as const,
+    },
+  ];
   const [active, setActive] = useState(0);
   const sector = sectors[active];
 
   return (
     <div className="border border-white/12 bg-[#050d18]">
-      <div className="grid border-b border-white/10 sm:grid-cols-2 lg:grid-cols-4" role="tablist" aria-label="Daron operational sectors">
+      <div className="grid border-b border-white/10 sm:grid-cols-2 lg:grid-cols-4" role="tablist" aria-label={t("sectors.ariaLabel")}>
         {sectors.map((item, index) => (
           <button
             key={item.id}
@@ -227,7 +224,7 @@ export function SectorSelector() {
           <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-5 p-5 sm:p-7">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/58">{sector.eyebrow}</p>
-              <p className="mt-2 max-w-md text-sm font-semibold text-white/88">Walvis Bay operational control</p>
+              <p className="mt-2 max-w-md text-sm font-semibold text-white/88">{t("sectors.operationalControl")}</p>
             </div>
             <div className="border-l border-[var(--color-cta)] pl-4 text-right">
               <p className="font-mono text-2xl font-bold text-white sm:text-3xl">{sector.stat}</p>
@@ -249,7 +246,7 @@ export function SectorSelector() {
             ))}
           </ul>
           <Link href={sector.href} className="mt-7 inline-flex min-h-12 items-center justify-center self-start bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.14em] text-[#07111f] transition hover:bg-[var(--color-cta)]">
-            Open capability
+            {t("openCapability")}
           </Link>
         </div>
       </div>

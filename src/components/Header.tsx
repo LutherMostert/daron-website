@@ -40,8 +40,9 @@ function LanguageSwitcher() {
 
   function select(nextLocale: Locale) {
     setOpen(false);
+    if (nextLocale === locale) return;
     startTransition(() => {
-      router.replace({ pathname }, { locale: nextLocale });
+      router.replace(pathname, { locale: nextLocale, scroll: false });
     });
   }
 

@@ -691,5 +691,273 @@
     "formAnother": "Enviar outra mensagem",
     "formErrorBody": "Lamentamos — ocorreu um erro ao enviar a sua mensagem. Tente novamente ou contacte-nos por WhatsApp.",
     "formNote": "Respondemos no prazo de um dia útil. Os seus dados são tratados de acordo com a nossa Política de Privacidade e nunca são vendidos."
+  },
+  "CommandHome": {
+    "openCapability": "Ver capacidade",
+    "hero": {
+      "alt": "Seven Borealis e operações de apoio offshore ao anoitecer em Walvis Bay",
+      "location": "Walvis Bay / Namíbia",
+      "reach": "Alcance de fornecimento em África",
+      "heading": "Quando as operações não podem esperar.",
+      "subheading": "Comando em Walvis Bay. Alcance em África.",
+      "intro": "Fornecimento marítimo, logística offshore, aquisição técnica e apoio às tripulações para navios, plataformas e operações industriais sob pressão real.",
+      "rfqCta": "Envie o seu RFQ",
+      "talkCta": "Falar com operações",
+      "contactLine": "Contacto operacional 24/7 · {phone}",
+      "panel": {
+        "eyebrow": "Centro operacional",
+        "title": "Comando Walvis Bay",
+        "active": "Ativo",
+        "row1Label": "Receção de RFQ",
+        "row1Value": "Pronto",
+        "row2Label": "Coordenação portuária",
+        "row3Label": "Rede de fornecedores",
+        "row4Label": "Controlo comercial",
+        "row4Value": "Revisto por pessoas",
+        "calloutTitle": "RFQ recebido. Operação em movimento.",
+        "calloutBody": "A receção digital acelera a passagem. As pessoas da Daron controlam a aquisição, os preços e a entrega."
+      }
+    },
+    "metrics": {
+      "ariaLabel": "Indicadores operacionais da Daron",
+      "groupFounded": "Fundação do Grupo Daron",
+      "namibiaOperations": "Operações na Namíbia",
+      "suppliers": "Rede de fornecedores verificados",
+      "response": "Resposta operacional"
+    },
+    "capabilities": {
+      "eyebrow": "Divisões operacionais integradas",
+      "title": "Uma estrutura de comando. Várias vias de execução.",
+      "body": "A Daron liga o fornecimento a navios, o apoio offshore, a aquisição técnica, o bem-estar das tripulações e a logística controlada sem transferir a operação entre fornecedores desconectados."
+    },
+    "divisions": {
+      "marine": {
+        "eyebrow": "Convés · máquinas · provisões · bonded",
+        "title": "Aprovisionamento marítimo",
+        "body": "Fornecimento completo a navios a partir de Walvis Bay, preparado para a pressão da escala portuária e entregue por um único centro operacional responsável.",
+        "alt": "Navio de construção offshore Seven Borealis atracado em Walvis Bay"
+      },
+      "offshore": {
+        "eyebrow": "Plataformas · subsea · apoio a campanhas",
+        "title": "Petróleo e gás offshore",
+        "body": "Aquisição, fornecimento técnico, segurança e coordenação no cais para campanhas offshore complexas.",
+        "alt": "Viaturas da Daron a apoiar um navio de energia offshore"
+      },
+      "welfare": {
+        "eyebrow": "Catering · cadeia de frio · HACCP",
+        "title": "Bem-estar das tripulações",
+        "body": "Aprovisionamento controlado para navios, plataformas e operações remotas.",
+        "alt": "Catering offshore e provisões para navios preparados pela Daron"
+      },
+      "maintenance": {
+        "eyebrow": "UHP · Hempel · doca seca",
+        "title": "Revestimentos e manutenção",
+        "body": "Sistemas de alta pressão, preparação de superfícies marítimas e fornecimento de revestimentos alinhados com a janela de manutenção.",
+        "alt": "Manutenção marítima de alta pressão e preparação de superfícies"
+      },
+      "logistics": {
+        "eyebrow": "Armazém · frota · fornecimento técnico",
+        "title": "Logística operacional",
+        "body": "Armazenamento refrigerado, congelado e seco, viaturas dedicadas, lojas técnicas e controlo de saída do armazém até ao cais.",
+        "alt": "Frota de camiões da Daron Namibia pronta para operações noturnas"
+      }
+    },
+    "don": {
+      "eyebrow": "Don IA / Receção operacional",
+      "title": "Velocidade digital. Comando humano.",
+      "body": "O Don mantém a primeira resposta em movimento enquanto os especialistas da Daron controlam especificações, aquisição, preços, disponibilidade e entrega.",
+      "controlLabel": "Controlo essencial",
+      "controlBody": "O Don não emite preços nem confirma stock. Cada resposta comercial é revista e autorizada pela equipa de operações da Daron."
+    },
+    "workflow": {
+      "sequence": "Sequência operacional",
+      "ariaLabel": "Fluxo operacional de RFQ da Daron",
+      "consoleTitle": "DON / RECEÇÃO OPERACIONAL",
+      "consoleReference": "FLUXO DE REFERÊNCIA · WALVIS BAY",
+      "stage": "Etapa {number}",
+      "intake": {
+        "title": "Envie o RFQ",
+        "label": "Receção segura",
+        "description": "Envie o requisito através do formulário seguro do site, WhatsApp ou email. Anexe a lista do navio, folha de cálculo ou PDF quando disponível.",
+        "status": "CANAIS DE RECEÇÃO PRONTOS",
+        "rowPdf": "Documento RFQ",
+        "rowXls": "Lista do navio",
+        "rowMsg": "Email / WhatsApp",
+        "rowWeb": "Formulário seguro"
+      },
+      "capture": {
+        "title": "O Don capta o contexto",
+        "label": "Passagem assistida por IA",
+        "description": "O Don responde a perguntas operacionais aprovadas e recolhe o contacto, o requisito e a urgência necessários para a passagem direta à equipa de operações.",
+        "status": "CAPTAÇÃO DE CONTEXTO ATIVA",
+        "keyScope": "ÂMBITO",
+        "rowScope": "Apoio ao navio",
+        "keyPort": "PORTO",
+        "keyPriority": "PRIORIDADE",
+        "rowPriority": "Tempo crítico",
+        "keyRoute": "ROTA",
+        "rowRoute": "Centro operacional"
+      },
+      "review": {
+        "title": "Revisão técnica",
+        "label": "Controlo KAM",
+        "description": "Um especialista da Daron valida a especificação, as opções de fornecedores, a disponibilidade, o preço e a pressão de entrega antes de qualquer resposta comercial.",
+        "status": "REVISÃO HUMANA NECESSÁRIA",
+        "keySpec": "ESPEC.",
+        "rowSpec": "Verificada",
+        "keySource": "FONTE",
+        "rowSource": "Rota do fornecedor",
+        "rowEta": "Janela de entrega",
+        "keyOwner": "RESP.",
+        "rowOwner": "KAM designado"
+      },
+      "response": {
+        "title": "Resposta emitida",
+        "label": "Libertação comercial",
+        "description": "A equipa de operações confirma a cotação, o prazo e o acompanhamento responsável. Os preços e a disponibilidade permanecem sempre sob controlo humano.",
+        "status": "PRONTO PARA RESPOSTA AO CLIENTE",
+        "keyQuote": "COTAÇÃO",
+        "rowQuote": "Aprovada por pessoa",
+        "keyTiming": "PRAZO",
+        "rowTiming": "Confirmado",
+        "keyDelivery": "ENTREGA",
+        "rowDelivery": "Coordenada",
+        "keyFollowUp": "ACOMP.",
+        "rowFollowUp": "Responsável definido"
+      }
+    },
+    "sectorSection": {
+      "eyebrow": "Comando por setor",
+      "title": "Selecione a operação. Veja a via de execução.",
+      "body": "Quatro modos operacionais, cada um ligado às infraestruturas, às pessoas e à rede regional de aquisição da Daron em Walvis Bay."
+    },
+    "sectors": {
+      "ariaLabel": "Setores operacionais da Daron",
+      "operationalControl": "Controlo operacional em Walvis Bay",
+      "marine": {
+        "name": "Aprovisionamento marítimo",
+        "eyebrow": "Fornecimento a navios",
+        "title": "Um centro responsável por todos os departamentos a bordo.",
+        "body": "Convés, máquinas, cabines, produtos bonded e provisões preparados para o horário do navio, não para o horário de escritório.",
+        "alt": "Navio de construção offshore Seven Borealis apoiado em Walvis Bay",
+        "cap1": "Materiais de convés e máquinas",
+        "cap2": "Provisões frescas, congeladas e secas",
+        "cap3": "Fornecimento bonded e de cabines",
+        "cap4": "Pedidos de escala de última hora",
+        "statLabel": "contacto operacional"
+      },
+      "offshore": {
+        "name": "Apoio offshore",
+        "eyebrow": "Execução de campanhas",
+        "title": "Preparado para plataformas, navios subsea e a pressão das campanhas offshore.",
+        "body": "Aquisição, aprovisionamento, segurança e logística coordenados a partir de Walvis Bay, apoiados por uma ampla rede regional de fornecedores.",
+        "alt": "Frota da Daron a apoiar um navio de energia offshore em Walvis Bay",
+        "cap1": "Apoio a campanhas de perfuração",
+        "cap2": "Construção subsea e offshore",
+        "cap3": "Segurança e aquisição especializada",
+        "cap4": "Coordenação logística no cais",
+        "statLabel": "campanhas simultâneas de plataformas"
+      },
+      "maintenance": {
+        "name": "UHP e revestimentos",
+        "eyebrow": "Manutenção de ativos",
+        "title": "Preparação de superfícies e apoio a revestimentos com disciplina técnica.",
+        "body": "Equipamento de jato de água UHP, produtos químicos marítimos, revestimentos Hempel e fornecimento de doca seca alinhados com a janela de manutenção.",
+        "alt": "Técnico de manutenção marítima a operar equipamento de preparação de superfícies de alta pressão",
+        "cap1": "Sistemas de jato de água UHP",
+        "cap2": "Preparação de superfícies marítimas",
+        "cap3": "Fornecimento de revestimentos Hempel",
+        "cap4": "Materiais técnicos para doca seca",
+        "statLabel": "capacidade de manutenção"
+      },
+      "catering": {
+        "name": "Catering e logística",
+        "eyebrow": "Bem-estar das tripulações",
+        "title": "Aprovisionamento controlado do armazém à prancha.",
+        "body": "Manuseamento de alimentos segundo HACCP, controlo da cadeia de frio, armazenamento e entrega para navios, tripulações offshore e operações remotas.",
+        "alt": "Catering offshore e provisões Daron preparados para entrega",
+        "cap1": "Aprovisionamento controlado por HACCP",
+        "cap2": "Armazenamento refrigerado, congelado e seco",
+        "cap3": "Apoio a menus e requisitos da tripulação",
+        "cap4": "Entrega programada no cais",
+        "statLabel": "controlo de segurança alimentar"
+      }
+    },
+    "projectsAriaLabel": "Operações offshore identificadas",
+    "trackRecord": {
+      "eyebrow": "Histórico operacional",
+      "title": "Provas no cais, na plataforma e no horário do navio.",
+      "body": "Campanhas identificadas e imagens reais das operações mostram onde a equipa Daron já executou sob pressão.",
+      "primaryCta": "Ver histórico completo",
+      "secondaryCta": "Explorar apoio em doca seca"
+    },
+    "operations": {
+      "drilling": {
+        "title": "Apoio simultâneo à perfuração",
+        "body": "Deepsea Mira, Deepsea Bollsta e Deepsea Hercules apoiados durante campanhas offshore ativas sob pressão.",
+        "alt": "Frota da Daron a apoiar simultaneamente operações de perfuração offshore",
+        "meta": "3 plataformas · Walvis Bay"
+      },
+      "subsea": {
+        "body": "Apoio a elevação pesada no cais e construção offshore executado a partir de Walvis Bay.",
+        "alt": "Operação de elevação de contentor em apoio à Subsea7 e ao Seven Borealis",
+        "meta": "Elevação pesada · Cais"
+      },
+      "sapura": {
+        "title": "Reativação do Sapura Berani",
+        "body": "Catering, limpeza, aquisição técnica e libertação rápida sob forte pressão de reativação.",
+        "alt": "Equipa Daron a elevar fornecimentos durante uma operação de navio offshore",
+        "meta": "Reativação · Fornecimento rápido"
+      },
+      "cruise": {
+        "title": "Aprovisionamento de navio de cruzeiro",
+        "body": "Aprovisionamento do cais à prancha, gestão da cadeia de frio e resposta rápida às necessidades dos navios de passageiros.",
+        "alt": "Camião Daron a aprovisionar um navio de cruzeiro no porto",
+        "meta": "Cadeia de frio · Resposta rápida"
+      }
+    },
+    "network": {
+      "eyebrow": "Rede de fornecimento africana",
+      "title": "Controlo em Walvis Bay. Alcance regional.",
+      "body": "A Daron liga o conhecimento portuário local, os armazéns, as viaturas e a aquisição técnica à ampla rede de fornecedores do Grupo Daron na África Austral e Ocidental."
+    },
+    "countries": {
+      "namibia": "Namíbia",
+      "angola": "Angola",
+      "congo": "Congo",
+      "gabon": "Gabão",
+      "mozambique": "Moçambique",
+      "southAfrica": "África do Sul"
+    },
+    "mapLabels": {
+      "ariaLabel": "Mapa animado das rotas logísticas de Walvis Bay para os países de operação do Grupo Daron",
+      "walvisBay": "Walvis Bay",
+      "angola": "Angola",
+      "congo": "Congo",
+      "gabon": "Gabão",
+      "mozambique": "Moçambique",
+      "southAfrica": "África do Sul",
+      "franceNode": "Centro de fornecimento em França"
+    },
+    "confidence": {
+      "eyebrow": "Confiança na aquisição",
+      "title": "Controlos que os compradores podem defender.",
+      "body": "Normas reconhecidas de qualidade, segurança alimentar e aquisição apoiam cada resposta operacional.",
+      "verified": "Controlo verificado",
+      "partnersAriaLabel": "Operadores e parceiros apoiados pela Daron",
+      "logoAlt": "Logótipo {name}"
+    },
+    "controls": {
+      "issa": "Listado na ISSA",
+      "impa": "Listado na IMPA"
+    },
+    "cta": {
+      "alt": "Porto de Walvis Bay e logística marítima em operação noturna",
+      "eyebrow": "Iniciar uma operação",
+      "title": "Requisito complexo? Coloque a Daron a tratar.",
+      "body": "Envie o RFQ, ligue para o centro operacional ou abra o WhatsApp. Um especialista da Daron assumirá o controlo da resposta comercial e do percurso de entrega.",
+      "rfqCta": "Envie o seu RFQ",
+      "whatsappCta": "Operações no WhatsApp"
+    }
   }
 }

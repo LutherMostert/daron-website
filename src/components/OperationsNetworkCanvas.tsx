@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 
 type NetworkNode = {
   id: string;
@@ -85,8 +86,18 @@ function overlayPosition(node: NetworkNode) {
 }
 
 export function OperationsNetworkCanvas() {
+  const t = useTranslations("CommandHome");
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mapDataRef = useRef<AfricaMapData | null>(null);
+  const nodeLabels: Record<string, string> = {
+    "Walvis Bay": t("mapLabels.walvisBay"),
+    Angola: t("mapLabels.angola"),
+    Congo: t("mapLabels.congo"),
+    Gabon: t("mapLabels.gabon"),
+    Mozambique: t("mapLabels.mozambique"),
+    "South Africa": t("mapLabels.southAfrica"),
+    "France supply node": t("mapLabels.franceNode"),
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -323,7 +334,7 @@ export function OperationsNetworkCanvas() {
       <canvas
         ref={canvasRef}
         className="h-[420px] w-full"
-        aria-label="Animated logistics route map from Walvis Bay to Daron Group operating countries"
+        aria-label={t("mapLabels.ariaLabel")}
       />
       <div className="pointer-events-none absolute inset-0">
         {nodes.map((node) => (
@@ -337,7 +348,7 @@ export function OperationsNetworkCanvas() {
               transform: "translateY(-50%)",
             }}
           >
-            {node.id}
+            {nodeLabels[node.id]}
           </span>
         ))}
       </div>

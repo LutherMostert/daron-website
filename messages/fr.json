@@ -691,5 +691,273 @@
     "formAnother": "Envoyer un autre message",
     "formErrorBody": "Désolé — une erreur s'est produite lors de l'envoi de votre message. Réessayez ou contactez-nous sur WhatsApp.",
     "formNote": "Nous répondons sous un jour ouvré. Vos données sont traitées conformément à notre politique de confidentialité et ne sont jamais vendues."
+  },
+  "CommandHome": {
+    "openCapability": "Voir la capacité",
+    "hero": {
+      "alt": "Le Seven Borealis et les opérations de soutien offshore au crépuscule à Walvis Bay",
+      "location": "Walvis Bay / Namibie",
+      "reach": "Réseau d'approvisionnement africain",
+      "heading": "Quand les opérations ne peuvent pas attendre.",
+      "subheading": "Commandement à Walvis Bay. Portée africaine.",
+      "intro": "Approvisionnement maritime, logistique offshore, achats techniques et soutien aux équipages pour les navires, les plateformes et les opérations industrielles sous forte pression.",
+      "rfqCta": "Envoyer votre RFQ",
+      "talkCta": "Parler aux opérations",
+      "contactLine": "Contact opérationnel 24 h/24, 7 j/7 · {phone}",
+      "panel": {
+        "eyebrow": "Centre opérationnel",
+        "title": "Commandement Walvis Bay",
+        "active": "Actif",
+        "row1Label": "Réception RFQ",
+        "row1Value": "Prêt",
+        "row2Label": "Coordination portuaire",
+        "row3Label": "Réseau fournisseurs",
+        "row4Label": "Contrôle commercial",
+        "row4Value": "Revue humaine",
+        "calloutTitle": "RFQ reçue. Opération en mouvement.",
+        "calloutBody": "La réception numérique accélère la transmission. Les équipes Daron contrôlent le sourcing, les prix et la livraison."
+      }
+    },
+    "metrics": {
+      "ariaLabel": "Indicateurs opérationnels de Daron",
+      "groupFounded": "Fondation du Groupe Daron",
+      "namibiaOperations": "Opérations en Namibie",
+      "suppliers": "Réseau de fournisseurs vérifiés",
+      "response": "Réponse opérationnelle"
+    },
+    "capabilities": {
+      "eyebrow": "Divisions opérationnelles intégrées",
+      "title": "Une structure de commandement. Plusieurs voies d'exécution.",
+      "body": "Daron relie l'approvisionnement des navires, le soutien offshore, les achats techniques, le bien-être des équipages et la logistique contrôlée sans transférer l'opération entre des fournisseurs déconnectés."
+    },
+    "divisions": {
+      "marine": {
+        "eyebrow": "Pont · machine · vivres · sous douane",
+        "title": "Avitaillement maritime",
+        "body": "Approvisionnement complet des navires depuis Walvis Bay, préparé selon les contraintes de l'escale et livré par un seul centre opérationnel responsable.",
+        "alt": "Navire de construction offshore Seven Borealis à quai à Walvis Bay"
+      },
+      "offshore": {
+        "eyebrow": "Plateformes · subsea · soutien de campagne",
+        "title": "Pétrole et gaz offshore",
+        "body": "Achats, fournitures techniques, sécurité et coordination à quai pour les campagnes offshore complexes.",
+        "alt": "Véhicules Daron soutenant un navire énergétique offshore"
+      },
+      "welfare": {
+        "eyebrow": "Restauration · chaîne du froid · HACCP",
+        "title": "Bien-être des équipages",
+        "body": "Avitaillement contrôlé pour les navires, les plateformes et les opérations isolées.",
+        "alt": "Restauration offshore et provisions de navire préparées par Daron"
+      },
+      "maintenance": {
+        "eyebrow": "UHP · Hempel · cale sèche",
+        "title": "Revêtements et maintenance",
+        "body": "Systèmes haute pression, préparation de surfaces marines et fourniture de revêtements alignés sur la fenêtre de maintenance.",
+        "alt": "Maintenance marine haute pression et préparation de surface"
+      },
+      "logistics": {
+        "eyebrow": "Entrepôt · flotte · fourniture technique",
+        "title": "Logistique opérationnelle",
+        "body": "Stockage froid, surgelé et sec, véhicules dédiés, magasins techniques et contrôle des sorties de l'entrepôt jusqu'au quai.",
+        "alt": "Flotte de camions Daron Namibia prête pour les opérations de nuit"
+      }
+    },
+    "don": {
+      "eyebrow": "Don IA / Réception des opérations",
+      "title": "Vitesse numérique. Commandement humain.",
+      "body": "Don maintient la première réponse en mouvement tandis que les spécialistes Daron gardent le contrôle des spécifications, du sourcing, des prix, de la disponibilité et de la livraison.",
+      "controlLabel": "Contrôle essentiel",
+      "controlBody": "Don n'émet aucun prix et ne confirme aucun stock. Chaque réponse commerciale est vérifiée et validée par l'équipe opérationnelle Daron."
+    },
+    "workflow": {
+      "sequence": "Séquence opérationnelle",
+      "ariaLabel": "Flux opérationnel des RFQ Daron",
+      "consoleTitle": "DON / RÉCEPTION DES OPÉRATIONS",
+      "consoleReference": "FLUX DE RÉFÉRENCE · WALVIS BAY",
+      "stage": "Étape {number}",
+      "intake": {
+        "title": "Envoyez la RFQ",
+        "label": "Réception sécurisée",
+        "description": "Envoyez le besoin via le formulaire sécurisé du site, WhatsApp ou e-mail. Joignez la liste du navire, la feuille de calcul ou le PDF si disponible.",
+        "status": "CANAUX DE RÉCEPTION PRÊTS",
+        "rowPdf": "Document RFQ",
+        "rowXls": "Liste du navire",
+        "rowMsg": "E-mail / WhatsApp",
+        "rowWeb": "Formulaire sécurisé"
+      },
+      "capture": {
+        "title": "Don saisit le contexte",
+        "label": "Transmission assistée par IA",
+        "description": "Don répond aux questions opérationnelles approuvées et recueille le contact, le besoin et l'urgence nécessaires à une transmission directe aux opérations.",
+        "status": "SAISIE DU CONTEXTE ACTIVE",
+        "keyScope": "PÉRIMÈTRE",
+        "rowScope": "Soutien au navire",
+        "keyPort": "PORT",
+        "keyPriority": "PRIORITÉ",
+        "rowPriority": "Urgence critique",
+        "keyRoute": "ROUTE",
+        "rowRoute": "Centre opérationnel"
+      },
+      "review": {
+        "title": "Revue technique",
+        "label": "Contrôle KAM",
+        "description": "Un spécialiste Daron valide les spécifications, les options fournisseurs, la disponibilité, les prix et les contraintes de livraison avant toute réponse commerciale.",
+        "status": "REVUE HUMAINE REQUISE",
+        "keySpec": "SPÉC.",
+        "rowSpec": "Vérifiée",
+        "keySource": "SOURCE",
+        "rowSource": "Circuit fournisseur",
+        "rowEta": "Fenêtre de livraison",
+        "keyOwner": "RESP.",
+        "rowOwner": "KAM désigné"
+      },
+      "response": {
+        "title": "Réponse émise",
+        "label": "Validation commerciale",
+        "description": "L'équipe opérationnelle confirme le devis, le calendrier et le suivi responsable. Les prix et la disponibilité restent toujours sous contrôle humain.",
+        "status": "PRÊT POUR RÉPONSE CLIENT",
+        "keyQuote": "DEVIS",
+        "rowQuote": "Validé par un humain",
+        "keyTiming": "DÉLAI",
+        "rowTiming": "Confirmé",
+        "keyDelivery": "LIVRAISON",
+        "rowDelivery": "Coordonnée",
+        "keyFollowUp": "SUIVI",
+        "rowFollowUp": "Responsable désigné"
+      }
+    },
+    "sectorSection": {
+      "eyebrow": "Commandement par secteur",
+      "title": "Sélectionnez l'opération. Voyez le chemin d'exécution.",
+      "body": "Quatre modes opérationnels, tous reliés aux infrastructures, aux équipes et au réseau régional de sourcing de Daron à Walvis Bay."
+    },
+    "sectors": {
+      "ariaLabel": "Secteurs opérationnels de Daron",
+      "operationalControl": "Contrôle opérationnel à Walvis Bay",
+      "marine": {
+        "name": "Avitaillement maritime",
+        "eyebrow": "Approvisionnement des navires",
+        "title": "Un seul centre responsable pour tous les services à bord.",
+        "body": "Pont, machine, cabine, produits sous douane et provisions préparés selon l'horaire du navire, pas selon les heures de bureau.",
+        "alt": "Navire de construction offshore Seven Borealis soutenu à Walvis Bay",
+        "cap1": "Fournitures pont et machine",
+        "cap2": "Produits frais, surgelés et secs",
+        "cap3": "Produits sous douane et de cabine",
+        "cap4": "Demandes d'escale de dernière minute",
+        "statLabel": "contact opérationnel"
+      },
+      "offshore": {
+        "name": "Soutien offshore",
+        "eyebrow": "Exécution de campagne",
+        "title": "Conçu pour les plateformes, les navires subsea et la pression des campagnes offshore.",
+        "body": "Achats, avitaillement, sécurité et logistique coordonnés depuis Walvis Bay avec la profondeur du réseau régional de fournisseurs.",
+        "alt": "Flotte Daron soutenant un navire énergétique offshore à Walvis Bay",
+        "cap1": "Soutien aux campagnes de forage",
+        "cap2": "Construction subsea et offshore",
+        "cap3": "Sécurité et sourcing spécialisé",
+        "cap4": "Coordination logistique à quai",
+        "statLabel": "campagnes de plateformes simultanées"
+      },
+      "maintenance": {
+        "name": "UHP et revêtements",
+        "eyebrow": "Maintenance des actifs",
+        "title": "Préparation de surface et soutien aux revêtements avec discipline technique.",
+        "body": "Équipements de jet d'eau UHP, produits chimiques marins, revêtements Hempel et fournitures de cale sèche alignés sur la fenêtre de maintenance.",
+        "alt": "Technicien de maintenance marine utilisant un équipement de préparation de surface haute pression",
+        "cap1": "Systèmes de jet d'eau UHP",
+        "cap2": "Préparation des surfaces marines",
+        "cap3": "Fourniture de revêtements Hempel",
+        "cap4": "Matériaux techniques de cale sèche",
+        "statLabel": "capacité de maintenance"
+      },
+      "catering": {
+        "name": "Restauration et logistique",
+        "eyebrow": "Bien-être des équipages",
+        "title": "Avitaillement contrôlé de l'entrepôt à la passerelle.",
+        "body": "Manipulation alimentaire selon HACCP, chaîne du froid, stockage et livraison pour les navires, les équipages offshore et les opérations isolées.",
+        "alt": "Restauration offshore et provisions Daron préparées pour la livraison",
+        "cap1": "Avitaillement contrôlé HACCP",
+        "cap2": "Stockage froid, surgelé et sec",
+        "cap3": "Soutien aux menus et besoins d'équipage",
+        "cap4": "Livraison planifiée à quai",
+        "statLabel": "contrôle de sécurité alimentaire"
+      }
+    },
+    "projectsAriaLabel": "Opérations offshore nommées",
+    "trackRecord": {
+      "eyebrow": "Références opérationnelles",
+      "title": "La preuve par le quai, la plateforme et l'horaire du navire.",
+      "body": "Des campagnes identifiées et de vraies images opérationnelles montrent où l'équipe Daron a déjà exécuté sous pression.",
+      "primaryCta": "Voir toutes les références",
+      "secondaryCta": "Découvrir le soutien en cale sèche"
+    },
+    "operations": {
+      "drilling": {
+        "title": "Soutien simultané au forage",
+        "body": "Deepsea Mira, Deepsea Bollsta et Deepsea Hercules soutenus pendant des campagnes offshore actives sous forte pression.",
+        "alt": "Flotte Daron soutenant simultanément plusieurs opérations de forage offshore",
+        "meta": "3 plateformes · Walvis Bay"
+      },
+      "subsea": {
+        "body": "Soutien au levage lourd à quai et à la construction offshore exécuté depuis Walvis Bay.",
+        "alt": "Opération de levage de conteneur pour Subsea7 et Seven Borealis",
+        "meta": "Levage lourd · Quai"
+      },
+      "sapura": {
+        "title": "Réactivation du Sapura Berani",
+        "body": "Restauration, nettoyage, sourcing technique et mise à disposition rapide sous une forte pression de réactivation.",
+        "alt": "Équipe Daron levant des fournitures pendant une opération de navire offshore",
+        "meta": "Réactivation · Approvisionnement rapide"
+      },
+      "cruise": {
+        "title": "Avitaillement de navire de croisière",
+        "body": "Avitaillement du quai à la passerelle, gestion de la chaîne du froid et rotation rapide pour les besoins des navires à passagers.",
+        "alt": "Camion Daron avitaillant un navire de croisière au port",
+        "meta": "Chaîne du froid · Rotation"
+      }
+    },
+    "network": {
+      "eyebrow": "Réseau d'approvisionnement africain",
+      "title": "Contrôle à Walvis Bay. Portée régionale.",
+      "body": "Daron relie la connaissance portuaire locale, les entrepôts, les véhicules et le sourcing technique au vaste réseau de fournisseurs du Groupe Daron en Afrique australe et de l'Ouest."
+    },
+    "countries": {
+      "namibia": "Namibie",
+      "angola": "Angola",
+      "congo": "Congo",
+      "gabon": "Gabon",
+      "mozambique": "Mozambique",
+      "southAfrica": "Afrique du Sud"
+    },
+    "mapLabels": {
+      "ariaLabel": "Carte animée des routes logistiques de Walvis Bay vers les pays d'opération du Groupe Daron",
+      "walvisBay": "Walvis Bay",
+      "angola": "Angola",
+      "congo": "Congo",
+      "gabon": "Gabon",
+      "mozambique": "Mozambique",
+      "southAfrica": "Afrique du Sud",
+      "franceNode": "Centre d'approvisionnement France"
+    },
+    "confidence": {
+      "eyebrow": "Confiance des acheteurs",
+      "title": "Des contrôles que les acheteurs peuvent défendre.",
+      "body": "Des normes reconnues de qualité, de sécurité alimentaire et d'approvisionnement soutiennent chaque réponse opérationnelle.",
+      "verified": "Contrôle vérifié",
+      "partnersAriaLabel": "Opérateurs et partenaires soutenus par Daron",
+      "logoAlt": "Logo {name}"
+    },
+    "controls": {
+      "issa": "Référencé ISSA",
+      "impa": "Référencé IMPA"
+    },
+    "cta": {
+      "alt": "Port de Walvis Bay et logistique maritime en opération de nuit",
+      "eyebrow": "Lancer une opération",
+      "title": "Besoin complexe ? Confiez-le à Daron.",
+      "body": "Envoyez la RFQ, appelez le centre opérationnel ou ouvrez WhatsApp. Un spécialiste Daron prendra le contrôle de la réponse commerciale et du parcours de livraison.",
+      "rfqCta": "Envoyer votre RFQ",
+      "whatsappCta": "Opérations sur WhatsApp"
+    }
   }
 }
