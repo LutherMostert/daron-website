@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 
 import { Header } from "@/components/Header";
@@ -199,22 +199,10 @@ export default async function LocaleLayout({
           <RevealController />
           <ConversionAnalytics />
         </NextIntlClientProvider>
-        {/* Plausible — cookieless, privacy-friendly analytics (no consent banner
-            needed). Tagged-events variant powers conversion events via CSS
-            classes (plausible-event-name=…). No-op until the daron.com.na site
-            is created in the Plausible account. */}
         {analyticsEnabled && (
           <>
-            <Script id="plausible-init" strategy="afterInteractive">
-              {`window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}`}
-            </Script>
-            <Script
-              defer
-              data-domain="daron.com.na"
-              src="https://plausible.io/js/script.tagged-events.js"
-              strategy="afterInteractive"
-            />
             <SpeedInsights />
+            <Analytics />
           </>
         )}
       </body>
