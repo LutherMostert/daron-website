@@ -7,6 +7,7 @@ import { buildMetadata } from "@/lib/seo";
 import { contact, partners } from "@/lib/site";
 import { GroupCapability } from "@/components/GroupCapability";
 import { SolutionCards } from "@/components/SolutionCards";
+import { RigCampaign } from "@/components/RigCampaign";
 import { getGrowthContent } from "@/lib/growth-content";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -35,6 +36,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <div className="premium-service-list">{services.map((service,index)=><Link href={service.href} key={service.key}><span className="premium-service-number">0{index+1}</span><div><h3>{t(service.key)}</h3><p>{t(`${service.key}Body`)}</p></div><span className="premium-service-arrow" aria-hidden="true">↗</span></Link>)}<Link className="all-services" href="/services">{t("allServices")} →</Link></div></div>
     </Container></section>
     <section className="premium-section home-solutions"><Container><div className="premium-section-heading"><div><p className="premium-eyebrow">{growth.solutionsEyebrow}</p><h2>{growth.solutionsTitle}</h2></div><p>{growth.solutionsIntro}</p></div><SolutionCards locale={locale} /></Container></section>
+    <RigCampaign locale={locale} />
     <section className="premium-section premium-proof"><Container><div className="premium-section-heading"><div><p className="premium-eyebrow">{t("proofEyebrow")}</p><h2>{t("proofTitle")}</h2></div><p>{t("proofBody")}</p></div>
       <div className="premium-projects"><Link href="/track-record"><div className="premium-project-image"><Image src="/images/site/operations/container-lift-subsea7.jpg" alt={t("projectAlt")} fill sizes="(max-width: 700px) 100vw, 60vw" /></div><div className="premium-project-caption"><div><h3>{t("project1")}</h3><p>{t("project1Body")}</p></div><span aria-hidden="true">↗</span></div></Link>
       <Link href="/services/dry-dock"><div className="premium-project-image"><Image src="/images/site/drydock/case-study-hempel-bow.jpg" alt={t("maintenanceAlt")} fill sizes="(max-width: 700px) 100vw, 40vw" className="contain-image" /></div><div className="premium-project-caption"><div><h3>{t("project2")}</h3><p>{t("project2Body")}</p></div><span aria-hidden="true">↗</span></div></Link></div>

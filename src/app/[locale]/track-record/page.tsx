@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
+import { RigCampaign } from "@/components/RigCampaign";
 import { CountUp } from "@/components/CountUp";
 import { PageHero } from "@/components/PageHero";
 import { InlineRFQ } from "@/components/InlineRFQ";
@@ -80,6 +81,7 @@ export default async function TrackRecordPage({
       />
 
       {/* Headline numbers */}
+      <RigCampaign locale={locale} />
       <section className="bg-[var(--color-navy)] py-16 text-white">
         <Container className="grid gap-8 md:grid-cols-3 md:gap-12">
           <div data-reveal>
