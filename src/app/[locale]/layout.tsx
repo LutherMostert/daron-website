@@ -3,6 +3,7 @@ import Script from "next/script";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 
 import { Header } from "@/components/Header";
@@ -221,6 +222,7 @@ export default async function LocaleLayout({
               strategy="afterInteractive"
             />
             <SpeedInsights />
+            <Analytics />
           </>
         )}
       </body>
