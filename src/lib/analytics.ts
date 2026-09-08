@@ -1,11 +1,7 @@
 "use client";
 
-declare global {
-  interface Window {
-    plausible?: (event: string, options?: { props?: Record<string, string> }) => void;
-  }
-}
+import { track } from "@vercel/analytics";
 
 export function trackEvent(event: string, props?: Record<string, string>) {
-  window.plausible?.(event, props ? { props } : undefined);
+  track(event, props);
 }

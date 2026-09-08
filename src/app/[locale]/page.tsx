@@ -186,7 +186,7 @@ export default async function HomePage({
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href="/contact" className="magnetic-action plausible-event-name=Hero+RFQ inline-flex min-h-13 items-center justify-center bg-[var(--color-cta)] px-7 py-4 text-sm font-black uppercase tracking-[0.13em] text-[var(--color-cta-ink)] transition duration-300 hover:bg-white">
+                <Link href="/contact" className="magnetic-action inline-flex min-h-13 items-center justify-center bg-[var(--color-cta)] px-7 py-4 text-sm font-black uppercase tracking-[0.13em] text-[var(--color-cta-ink)] transition duration-300 hover:bg-white">
                   {t("hero.rfqCta")}
                   <span className="ml-4 text-lg" aria-hidden="true">→</span>
                 </Link>

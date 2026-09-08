@@ -20,7 +20,7 @@ export function StickyActions() {
           href={contact.whatsapp.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="plausible-event-name=RFQ_WhatsApp flex items-center justify-center gap-2 bg-[var(--color-cta)] py-3.5 text-sm font-semibold text-[var(--color-cta-ink)]"
+          className="flex items-center justify-center gap-2 bg-[var(--color-cta)] py-3.5 text-sm font-semibold text-[var(--color-cta-ink)]"
         >
           {t("rfq")} &rarr;
         </a>
