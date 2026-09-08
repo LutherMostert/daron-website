@@ -45,3 +45,5 @@ next-env.d.ts
 
 # claude code local config
 .claude/
+# Local design previews and verification output
+.preview/

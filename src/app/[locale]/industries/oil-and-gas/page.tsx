@@ -4,6 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
+import { RigCampaign } from "@/components/RigCampaign";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { PageHero } from "@/components/PageHero";
 import { contact } from "@/lib/site";
@@ -97,6 +98,7 @@ export default async function OilAndGasPage({
       </PageHero>
 
       {/* Rigs supported */}
+      <RigCampaign locale={locale} />
       <section className="bg-white py-20 sm:py-24">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">

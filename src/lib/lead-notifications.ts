@@ -17,6 +17,7 @@ export type EmailAttachment = {
 export async function sendOperationsEmail(args: {
   subject: string;
   text: string;
+  html?: string;
   replyTo: string;
   attachment?: EmailAttachment;
 }): Promise<boolean> {
@@ -28,6 +29,10 @@ export async function sendOperationsEmail(args: {
     process.env.RFQ_FROM_EMAIL ||
     (emailDomain ? `Daron Website <website@${emailDomain}>` : "Daron Website <onboarding@resend.dev>");
   const to = process.env.RFQ_TO_EMAIL || contact.emails.operations;
+  if (process.env.NODE_ENV === "production" && /@resend\.dev\b/i.test(from)) {
+    console.error("[lead-email] Configure RFQ_FROM_EMAIL with a verified sending domain before production release.");
+    return false;
+  }
 
   try {
     const { error } = await client.emails.send({
@@ -36,6 +41,7 @@ export async function sendOperationsEmail(args: {
       replyTo: args.replyTo,
       subject: args.subject,
       text: args.text,
+      html: args.html,
       attachments: args.attachment
         ? [{ filename: args.attachment.name, content: Buffer.from(args.attachment.base64, "base64") }]
         : undefined,

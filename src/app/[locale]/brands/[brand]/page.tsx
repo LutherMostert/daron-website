@@ -7,9 +7,10 @@ import { Link } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
+import { AddCatalogue } from "@/components/CatalogueEnquiry";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
-import { brands, getBrand, getPartnerByName, contact, site } from "@/lib/site";
+import { brands, getBrand, getPartnerByName, site } from "@/lib/site";
 
 type Params = Promise<{ locale: string; brand: string }>;
 
@@ -119,14 +120,12 @@ export default async function BrandPage({ params }: { params: Params }) {
             {b.intro[0]}
           </p>
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-            <a
-              href={contact.whatsapp.href}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/contact#rfq"
               className="rounded-full bg-[var(--color-cta)] px-7 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
             >
               {t("sendRfq")} &rarr;
-            </a>
+            </Link>
             <Link
               href="/contact"
               className="rounded-full border border-white/30 px-7 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
@@ -257,6 +256,7 @@ export default async function BrandPage({ params }: { params: Params }) {
                       PDF · {cat.sizeMB} MB
                     </span>
                   </a>
+                  <AddCatalogue file={cat.file} />
                 </li>
               ))}
             </ul>

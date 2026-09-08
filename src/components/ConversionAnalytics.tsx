@@ -12,6 +12,10 @@ export function ConversionAnalytics() {
       if (href.startsWith("tel:")) trackEvent("Phone_Click");
       else if (href.startsWith("mailto:")) trackEvent("Email_Click");
       else if (href.includes("wa.me/") || href.includes("whatsapp.com/")) trackEvent("WhatsApp_Click");
+      else {
+        const url = new URL(href);
+        if (url.hostname === "daron-group.com") trackEvent("Group_Capability_Click", { destination: url.pathname });
+      }
     }
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);

@@ -61,24 +61,20 @@ export function InlineRFQ({
           <div className="flex flex-col items-stretch gap-3">
             <a
               href={contact.whatsapp.href}
-              className="rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
+              className="order-2 border border-current px-6 py-3 text-center text-sm font-semibold transition-colors hover:opacity-80"
               target="_blank"
               rel="noopener noreferrer"
             >
               {t("whatsappCta")} &rarr;
             </a>
             <Link
-              href="/contact"
-              className={`rounded-full border px-6 py-3 text-center text-base font-semibold transition-colors ${
-                isNavy
-                  ? "border-white/30 text-white hover:bg-white/10"
-                  : "border-[var(--color-navy)] text-[var(--color-navy)] hover:bg-[var(--color-navy)] hover:text-white"
-              }`}
+              href="/contact#rfq"
+              className="premium-button order-1 justify-center"
             >
               {t("contactCta")}
             </Link>
             <p
-              className={`mt-1 text-center text-xs ${
+              className={`order-3 mt-1 text-center text-xs ${
                 isNavy ? "text-white/60" : "text-[var(--color-mute)]"
               }`}
             >

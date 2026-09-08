@@ -21,6 +21,7 @@ import { persistLead } from "@/lib/lead-store";
 import { postSignedWebhook, sendOperationsEmail } from "@/lib/lead-notifications";
 import { classifyIntent, CATEGORY_OWNER_FIRST_NAME } from "@/lib/routing";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { contact } from "@/lib/site";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -70,9 +71,9 @@ export async function POST(request: Request) {
   });
   if (!limit.allowed) {
     return Response.json(
-      { error: "Too many chat starts — try again later." },
+      { error: limit.unavailable ? "Chat is temporarily unavailable. Please contact our team directly." : "Too many chat starts — try again later." },
       {
-        status: 429,
+        status: limit.unavailable ? 503 : 429,
         headers: { "Retry-After": String(limit.retryAfterSeconds) },
       },
     );
@@ -121,7 +122,7 @@ export async function POST(request: Request) {
     console.error("[chat-lead] durable storage failed", error);
     return Response.json({ error: "We could not secure your details. Please retry." }, { status: 503 });
   }
-  console.log("[chat-lead]", JSON.stringify({ ...entry, reference }));
+  console.log("[chat-lead] stored", reference);
 
   const text =
     `New website chat - ${reference}\n` +
@@ -146,7 +147,7 @@ export async function POST(request: Request) {
     }
   }
 
-  await Promise.all([
+  const [emailNotified, webhookNotified] = await Promise.all([
     sendOperationsEmail({
       subject: `[${reference}] Website chat - ${entry.company || entry.name}`,
       text,
@@ -155,5 +156,11 @@ export async function POST(request: Request) {
     postSignedWebhook({ url: webhookUrl, payload: webhookPayload, signature }),
   ]);
 
-  return Response.json({ ok: true, reference }, { status: 201 });
+  if (!emailNotified && !webhookNotified) {
+    return Response.json({
+      error: `Your details were saved as ${reference}, but our team could not be notified. Please email ${contact.emails.operations} with this reference before submitting again.`,
+      stored: true, reference, notified: false,
+    }, { status: 503 });
+  }
+  return Response.json({ ok: true, reference, notified: true }, { status: 201 });
 }

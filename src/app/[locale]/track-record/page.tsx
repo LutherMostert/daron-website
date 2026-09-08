@@ -1,9 +1,11 @@
+import { HempelComparison } from "@/components/HempelComparison";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
+import { RigCampaign } from "@/components/RigCampaign";
 import { CountUp } from "@/components/CountUp";
 import { PageHero } from "@/components/PageHero";
 import { InlineRFQ } from "@/components/InlineRFQ";
@@ -80,6 +82,7 @@ export default async function TrackRecordPage({
       />
 
       {/* Headline numbers */}
+      <RigCampaign locale={locale} />
       <section className="bg-[var(--color-navy)] py-16 text-white">
         <Container className="grid gap-8 md:grid-cols-3 md:gap-12">
           <div data-reveal>
@@ -165,7 +168,8 @@ export default async function TrackRecordPage({
                 style={{ "--reveal-delay": `${idx * 70}ms` } as React.CSSProperties}
                 className="overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md"
               >
-                <div className="relative aspect-[16/9] w-full bg-[var(--color-navy)]">
+                {c.key === "case2" ? <HempelComparison locale={locale} /> : (
+<div className="relative aspect-[16/9] w-full bg-[var(--color-navy)]">
                   <Image
                     src={c.image}
                     alt={tDry(`${c.key}Alt`)}
@@ -174,6 +178,7 @@ export default async function TrackRecordPage({
                     className="object-cover"
                   />
                 </div>
+)}
                 <div className="p-6">
                   <h3 className="font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--color-navy)]">
                     {tDry(`${c.key}Title`)}

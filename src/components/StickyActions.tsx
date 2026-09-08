@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { contact } from "@/lib/site";
+import { Link } from "@/i18n/routing";
 
 /**
  * Mobile sticky conversion bar — RFQ, operations chat and tap-to-call, always one
@@ -16,14 +17,12 @@ export function StickyActions() {
     <>
       <div aria-hidden="true" className="h-14 xl:hidden" />
       <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 gap-px border-t border-[var(--color-line)] bg-[var(--color-line)] pb-[env(safe-area-inset-bottom)] xl:hidden">
-        <a
-          href={contact.whatsapp.href}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href="/contact#rfq"
           className="flex items-center justify-center gap-2 bg-[var(--color-cta)] py-3.5 text-sm font-semibold text-[var(--color-cta-ink)]"
         >
           {t("rfq")} &rarr;
-        </a>
+        </Link>
         <a
           href={contact.phone.href}
           className="flex items-center justify-center gap-2 bg-[var(--color-navy)] py-3.5 text-sm font-semibold text-white"

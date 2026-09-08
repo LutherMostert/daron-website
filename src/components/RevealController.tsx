@@ -7,6 +7,8 @@ export function RevealController() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // The editorial homepage and intake have no reveal targets: avoid loading animation libraries.
+    if (!document.querySelector("[data-reveal], [data-gsap]")) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const mobile = window.matchMedia("(max-width: 767px)").matches;
 
@@ -84,7 +86,7 @@ export function RevealController() {
             });
           });
 
-          gsap.from("[data-gsap='hero-copy'] > *", {
+          if (document.querySelector("[data-gsap='hero-copy']")) gsap.from("[data-gsap='hero-copy'] > *", {
             autoAlpha: 0,
             y: 24,
             duration: 0.75,
@@ -92,7 +94,7 @@ export function RevealController() {
             stagger: 0.07,
           });
 
-          gsap.from("[data-gsap='hero-panel']", {
+          if (document.querySelector("[data-gsap='hero-panel']")) gsap.from("[data-gsap='hero-panel']", {
             autoAlpha: 0,
             y: 28,
             duration: 0.8,
@@ -100,7 +102,7 @@ export function RevealController() {
             delay: 0.18,
           });
 
-          gsap.to(".ops-hero .hero-media", {
+          if (document.querySelector(".ops-hero .hero-media")) gsap.to(".ops-hero .hero-media", {
             yPercent: 5,
             scale: 1.04,
             ease: "none",
@@ -112,7 +114,7 @@ export function RevealController() {
             },
           });
 
-          gsap.from("[data-gsap='network-map']", {
+          if (document.querySelector("[data-gsap='network-map']")) gsap.from("[data-gsap='network-map']", {
             scale: 0.98,
             duration: 0.8,
             ease: "power3.out",

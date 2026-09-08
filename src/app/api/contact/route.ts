@@ -3,27 +3,10 @@ import { persistLead } from "@/lib/lead-store";
 import { postSignedWebhook, sendOperationsEmail } from "@/lib/lead-notifications";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { contact } from "@/lib/site";
+import { parseContact, buildRfqEmail, MAX_FILE_BYTES, ACCEPTED_EXTENSIONS } from "@/lib/rfq";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const MAX_FILE_BYTES = 4 * 1024 * 1024;
-const ATTACH_FORWARD_BYTES = 3 * 1024 * 1024;
-const ACCEPTED_EXTENSIONS = [".xlsx", ".xls", ".csv", ".pdf", ".doc", ".docx", ".txt"];
-
-type ContactFields = {
-  firstName: string;
-  surname: string;
-  company: string;
-  vessel: string;
-  email: string;
-  phone: string;
-  deliveryPoint: string;
-  urgency: string;
-  category: string;
-  preferredContact: string;
-  message: string;
-};
 
 type Attachment = {
   name: string;
@@ -35,11 +18,6 @@ type Attachment = {
 function clean(value: unknown, max: number): string {
   if (typeof value !== "string") return "";
   return value.replace(/[\r\n\t]+/g, " ").trim().slice(0, max);
-}
-
-function cleanMultiline(value: unknown, max: number): string {
-  if (typeof value !== "string") return "";
-  return value.replace(/\r\n/g, "\n").trim().slice(0, max);
 }
 
 function extension(name: string) {
@@ -76,12 +54,14 @@ function contentMatchesExtension(bytes: Uint8Array, ext: string): boolean {
 }
 
 export async function POST(request: Request) {
+  const contentLength = Number(request.headers.get("content-length"));
+  if (contentLength > MAX_FILE_BYTES + 128 * 1024) return Response.json({ error: "Request is too large. Attach a file smaller than 4 MB." }, { status: 413 });
   const ip = getClientIp(request);
   const limit = await checkRateLimit(`contact:${ip}`, { windowMs: 60 * 60 * 1000, max: 5 });
   if (!limit.allowed) {
     return Response.json(
-      { error: "Too many messages - please try again later." },
-      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
+      { error: limit.unavailable ? `Enquiries are temporarily unavailable. Please email ${contact.emails.operations}.` : "Too many messages - please try again later." },
+      { status: limit.unavailable ? 503 : 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
     );
   }
 
@@ -98,6 +78,8 @@ export async function POST(request: Request) {
     }
 
     raw = {
+      requestType: formData.get("requestType"),
+      website: formData.get("website"),
       firstName: formData.get("firstName"),
       surname: formData.get("surname"),
       company: formData.get("company"),
@@ -109,6 +91,9 @@ export async function POST(request: Request) {
       category: formData.get("category"),
       preferredContact: formData.get("preferredContact"),
       message: formData.get("message"),
+      catalogueSelections: formData.get("catalogueSelections"),
+      sourceContext: formData.get("sourceContext"),
+      multiLocation: formData.get("multiLocation"),
     };
 
     const file = formData.get("rfqFile");
@@ -143,41 +128,25 @@ export async function POST(request: Request) {
     }
   }
 
-  const fields: ContactFields = {
-    firstName: clean(raw.firstName, 80),
-    surname: clean(raw.surname, 80),
-    company: clean(raw.company, 120),
-    vessel: clean(raw.vessel, 120),
-    email: clean(raw.email, 160),
-    phone: clean(raw.phone, 40),
-    deliveryPoint: clean(raw.deliveryPoint, 140),
-    urgency: clean(raw.urgency, 120),
-    category: clean(raw.category, 120),
-    preferredContact: clean(raw.preferredContact, 80),
-    message: cleanMultiline(raw.message, 4000),
-  };
-
-  if (!fields.firstName || !fields.company || !fields.email.includes("@") || fields.message.length < 2) {
-    return Response.json(
-      { error: "Please provide your name, company, a valid email, and the RFQ details." },
-      { status: 400 },
-    );
-  }
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return Response.json({ error: "Invalid request." }, { status: 400 });
+  if (raw.website) return Response.json({ error: "Invalid request." }, { status: 400 });
+  const parsed = parseContact(raw, Boolean(attachment));
+  if (!parsed.fields) return Response.json({ error: parsed.error }, { status: 400 });
+  const fields = parsed.fields;
 
   const timestamp = new Date().toISOString();
   const entry = {
     timestamp,
     source: "daron-website:contact-form",
     ...fields,
-    attachment: attachment
-      ? { name: attachment.name, type: attachment.type, size: attachment.size }
-      : undefined,
+    // Preserve the actual file, so a failed notification never loses the buyer's scope.
+    attachment,
     ip,
   };
 
   let reference: string;
   try {
-    reference = await persistLead("contact", entry);
+    reference = await persistLead(fields.requestType === "quote" ? "contact" : "enquiry", entry);
   } catch (error) {
     console.error("[contact-lead] durable storage failed", error);
     return Response.json(
@@ -185,30 +154,14 @@ export async function POST(request: Request) {
       { status: 503 },
     );
   }
-  console.log("[contact-lead]", JSON.stringify({ ...entry, reference }));
+  console.log("[contact-lead] stored", reference);
 
-  const text = [
-    `New website RFQ - ${reference}`,
-    "",
-    `${fields.firstName} ${fields.surname}`.trim(),
-    `Company: ${fields.company}`,
-    `Email: ${fields.email}`,
-    fields.phone ? `Phone/WhatsApp: ${fields.phone}` : "",
-    fields.vessel ? `Vessel/project: ${fields.vessel}` : "",
-    fields.deliveryPoint ? `Delivery point: ${fields.deliveryPoint}` : "",
-    fields.urgency ? `Urgency/ETA: ${fields.urgency}` : "",
-    fields.category ? `Category: ${fields.category}` : "",
-    fields.preferredContact ? `Preferred response: ${fields.preferredContact}` : "",
-    attachment ? `Attachment: ${attachment.name} (${Math.ceil(attachment.size / 1024)} KB)` : "",
-    "",
-    fields.message,
-  ].filter(Boolean).join("\n");
-
-  const webhookAttachment = attachment && attachment.size <= ATTACH_FORWARD_BYTES ? attachment : undefined;
+  const { text, html, subject } = buildRfqEmail(fields, reference, timestamp, attachment);
   const payload = JSON.stringify({
     text,
     reference,
-    attachment: webhookAttachment,
+    attachment,
+    request: fields,
   });
   const secret = process.env.CHAT_LEAD_WEBHOOK_SECRET;
   const signature = secret
@@ -217,8 +170,9 @@ export async function POST(request: Request) {
 
   const [emailDelivered, webhookDelivered] = await Promise.all([
     sendOperationsEmail({
-      subject: `[${reference}] Website RFQ - ${fields.company}`,
+      subject,
       text,
+      html,
       replyTo: fields.email,
       attachment: attachment ? { name: attachment.name, base64: attachment.base64 } : undefined,
     }),
@@ -240,5 +194,5 @@ export async function POST(request: Request) {
     );
   }
 
-  return Response.json({ ok: true, reference, notified: true });
+  return Response.json({ ok: true, reference, notified: true, requestType: fields.requestType });
 }
