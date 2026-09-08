@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { HempelComparison } from "@/components/HempelComparison";
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { PageHero } from "@/components/PageHero";
@@ -15,7 +15,7 @@ function content(locale:string){return copy[locale as keyof typeof copy] || copy
 export async function generateMetadata({params}:{params:Promise<{locale:string}>}):Promise<Metadata>{const {locale}=await params;const c=content(locale);return buildMetadata({locale,path:"/services/coatings",title:c.title,description:c.description});}
 export default async function CoatingsPage({params}:{params:Promise<{locale:string}>}){
   const {locale}=await params;setRequestLocale(locale);const c=content(locale);const t=await getTranslations("PremiumHome");
-  return <div className="premium-home"><PageHero eyebrow={t("coatings")} title={c.title} intro={c.intro} image={{src:"/images/site/drydock/case-study-hempel-bow.jpg",alt:t("maintenanceAlt")}}><Link href="/contact#rfq" className="premium-button">{t("quote")} →</Link></PageHero>
-    <section className="premium-section"><Container className="premium-team"><div><p className="premium-eyebrow">{t("brandsEyebrow")}</p><h2 className="my-5">{c.heading}</h2><p className="premium-lead">{c.body}</p><h3 className="mt-8 mb-4 text-xl font-semibold">{c.products}</h3><div className="space-y-4">{[["hempel",c.product1],["hammelmann",c.product2],["orlichem",c.product3]].map(([slug,label])=><Link className="block underline underline-offset-4" key={slug} href={`/brands/${slug}`}>{label} ↗</Link>)}</div></div><div><Image src="/images/site/drydock/case-study-hempel-bow.jpg" alt={t("maintenanceAlt")} width={1200} height={900} sizes="(max-width:850px) 100vw,50vw" style={{width:"100%",height:"auto"}}/><h3 className="mt-6 text-xl font-semibold">{c.proof}</h3><p className="mt-3 text-sm leading-7 text-slate-600">{c.proofBody}</p><Link className="premium-text-link mt-5 inline-flex" href="/track-record">{t("projectCta")} →</Link></div></Container></section>
+  return <div className="premium-home"><PageHero eyebrow={t("coatings")} title={c.title} intro={c.intro}><Link href="/contact#rfq" className="premium-button">{t("quote")} →</Link></PageHero>
+    <section className="premium-section"><Container className="premium-team"><div><p className="premium-eyebrow">{t("brandsEyebrow")}</p><h2 className="my-5">{c.heading}</h2><p className="premium-lead">{c.body}</p><h3 className="mt-8 mb-4 text-xl font-semibold">{c.products}</h3><div className="space-y-4">{[["hempel",c.product1],["hammelmann",c.product2],["orlichem",c.product3]].map(([slug,label])=><Link className="block underline underline-offset-4" key={slug} href={`/brands/${slug}`}>{label} ↗</Link>)}</div></div><div><HempelComparison locale={locale} /><h3 className="mt-6 text-xl font-semibold">{c.proof}</h3><p className="mt-3 text-sm leading-7 text-slate-600">{c.proofBody}</p><Link className="premium-text-link mt-5 inline-flex" href="/track-record">{t("projectCta")} →</Link></div></Container></section>
     <InlineRFQ heading={c.scope} body={c.scopeBody}/></div>;
 }

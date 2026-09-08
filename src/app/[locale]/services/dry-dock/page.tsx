@@ -1,3 +1,4 @@
+import { HempelComparison } from "@/components/HempelComparison";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -237,7 +238,8 @@ export default async function DryDockPage({
                 key={study.title}
                 className="overflow-hidden rounded-2xl border border-[var(--color-line)] bg-white shadow-sm"
               >
-                <div className="relative aspect-[16/9] w-full bg-[var(--color-navy)]">
+                {study.image.endsWith("case-study-hempel-bow.jpg") ? <HempelComparison locale={locale} /> : (
+<div className="relative aspect-[16/9] w-full bg-[var(--color-navy)]">
                   <Image
                     src={study.image}
                     alt={study.alt}
@@ -246,6 +248,7 @@ export default async function DryDockPage({
                     className="h-full w-full object-cover"
                   />
                 </div>
+)}
                 <div className="p-6">
                   <h3 className="font-[family-name:var(--font-poppins)] text-lg font-bold text-[var(--color-navy)]">
                     {study.title}

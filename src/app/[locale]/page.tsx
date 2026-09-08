@@ -1,3 +1,4 @@
+import { HempelComparison } from "@/components/HempelComparison";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -38,8 +39,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <section className="premium-section home-solutions"><Container><div className="premium-section-heading"><div><p className="premium-eyebrow">{growth.solutionsEyebrow}</p><h2>{growth.solutionsTitle}</h2></div><p>{growth.solutionsIntro}</p></div><SolutionCards locale={locale} /></Container></section>
     <RigCampaign locale={locale} />
     <section className="premium-section premium-proof"><Container><div className="premium-section-heading"><div><p className="premium-eyebrow">{t("proofEyebrow")}</p><h2>{t("proofTitle")}</h2></div><p>{t("proofBody")}</p></div>
-      <div className="premium-projects"><Link href="/track-record"><div className="premium-project-image"><Image src="/images/site/operations/container-lift-subsea7.jpg" alt={t("projectAlt")} fill sizes="(max-width: 700px) 100vw, 60vw" /></div><div className="premium-project-caption"><div><h3>{t("project1")}</h3><p>{t("project1Body")}</p></div><span aria-hidden="true">↗</span></div></Link>
-      <Link href="/services/dry-dock"><div className="premium-project-image"><Image src="/images/site/drydock/case-study-hempel-bow.jpg" alt={t("maintenanceAlt")} fill sizes="(max-width: 700px) 100vw, 40vw" className="contain-image" /></div><div className="premium-project-caption"><div><h3>{t("project2")}</h3><p>{t("project2Body")}</p></div><span aria-hidden="true">↗</span></div></Link></div>
+      <div className="premium-projects"><Link href="/track-record"><div className="premium-project-image"><Image src="/images/site/operations/container-lift-subsea7.jpg" alt={t("projectAlt")} fill sizes="(max-width: 600px) 100vw, 50vw" /></div><div className="premium-project-caption"><div><h3>{t("project1")}</h3><p>{t("project1Body")}</p></div><span aria-hidden="true">↗</span></div></Link>
+      <Link href="/services/dry-dock"><HempelComparison locale={locale} /><div className="premium-project-caption"><div><h3>{t("project2")}</h3><p>{t("project2Body")}</p></div><span aria-hidden="true">↗</span></div></Link></div>
       <Link href="/track-record" className="premium-text-link mt-8 inline-flex">{t("projectCta")} →</Link>
     </Container></section>
     <section className="premium-section"><Container className="premium-team"><div><p className="premium-eyebrow">{t("teamEyebrow")}</p><h2>{t("teamTitle")}</h2><p className="premium-lead">{t("teamBody")}</p><Link href="/about" className="premium-text-link">{t("teamCta")} →</Link></div><figure><Image src="/images/site/operations/daron-team-hempel-launch.jpg" alt={t("teamAlt")} width={1600} height={1200} sizes="(max-width: 850px) 100vw, 50vw" /></figure></Container></section>
