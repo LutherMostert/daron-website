@@ -11,7 +11,7 @@ export type RateLimitOptions = {
 
 export type RateLimitResult =
   | { allowed: true; remaining: number }
-  | { allowed: false; retryAfterSeconds: number };
+  | { allowed: false; retryAfterSeconds: number; unavailable?: boolean };
 
 /**
  * Shared rate limiting in production, with a small in-memory fallback for
@@ -37,6 +37,9 @@ export async function checkRateLimit(
 
     try {
       const result = await limiter.limit(key);
+      if (result.reason === "timeout") {
+        return { allowed: false, retryAfterSeconds: 60, unavailable: true };
+      }
       if (result.success) {
         return { allowed: true, remaining: result.remaining };
       }
@@ -45,10 +48,13 @@ export async function checkRateLimit(
         retryAfterSeconds: Math.max(1, Math.ceil((result.reset - Date.now()) / 1000)),
       };
     } catch (error) {
-      console.error("[rate-limit] Redis unavailable; using local fallback", error);
+      console.error("[rate-limit] Redis unavailable", error);
     }
   }
 
+  if (process.env.NODE_ENV === "production" || process.env.VERCEL) {
+    return { allowed: false, retryAfterSeconds: 60, unavailable: true };
+  }
   return checkMemoryRateLimit(key, opts);
 }
 

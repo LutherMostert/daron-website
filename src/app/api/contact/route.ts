@@ -60,8 +60,8 @@ export async function POST(request: Request) {
   const limit = await checkRateLimit(`contact:${ip}`, { windowMs: 60 * 60 * 1000, max: 5 });
   if (!limit.allowed) {
     return Response.json(
-      { error: "Too many messages - please try again later." },
-      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
+      { error: limit.unavailable ? `Enquiries are temporarily unavailable. Please email ${contact.emails.operations}.` : "Too many messages - please try again later." },
+      { status: limit.unavailable ? 503 : 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
     );
   }
 

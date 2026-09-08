@@ -15,6 +15,32 @@ const enquiryContext=load('src/lib/enquiry-context.ts',{'./site':siteData});
 const rfq=load('src/lib/rfq.ts',{'./enquiry-context':enquiryContext});
 const sample={requestType:'enquiry',firstName:'Example Buyer',company:'Example Marine',email:'buyer@example.com',preferredContact:'Email',message:'Please send information about vessel provisions.'};
 const catalogueFile=enquiryContext.catalogueDirectory[0].file;
+
+test('deployed rate limiting rejects Redis timeouts, outages and missing configuration',async()=>{
+  const previous=process.env.NODE_ENV; process.env.NODE_ENV='production';
+  try {
+    for(const mode of ['timeout','throw','missing','success']) {
+      class Limiter { static slidingWindow(){return {}; } async limit(){if(mode==='throw')throw Error('simulated outage');return {success:true,remaining:2,reason:mode==='timeout'?'timeout':undefined};} }
+      const limiter=load('src/lib/rate-limit.ts',{'@upstash/ratelimit':{Ratelimit:Limiter},'@/lib/redis':{getRedis:()=>mode==='missing'?null:{}}});
+      const result=await limiter.checkRateLimit('offline-test',{max:5,windowMs:60000});
+      assert.equal(result.allowed,mode==='success');
+      if(mode!=='success')assert.equal(result.unavailable,true);
+    }
+  } finally {if(previous===undefined)delete process.env.NODE_ENV;else process.env.NODE_ENV=previous;}
+});
+
+test('chat lead keeps its saved reference and reports notification failure without logging contact data',async()=>{
+  const route=load('src/app/api/chat-lead/route.ts',{
+    '@/lib/site':siteData,
+    '@/lib/routing':{classifyIntent:()=> 'other',CATEGORY_OWNER_FIRST_NAME:{other:'Operations'}},
+    '@/lib/rate-limit':{getClientIp:()=> 'test',checkRateLimit:async()=>({allowed:true})},
+    '@/lib/lead-store':{persistLead:async()=> 'CHAT-TEST'},
+    '@/lib/lead-notifications':{sendOperationsEmail:async()=>false,postSignedWebhook:async()=>false},
+  });
+  const response=await route.POST(new Request('http://localhost/api/chat-lead',{method:'POST',body:JSON.stringify({name:'Example Buyer',email:'buyer@example.com'})}));
+  assert.equal(response.status,503);const body=await response.json();
+  assert.equal(body.stored,true);assert.equal(body.notified,false);assert.equal(body.reference,'CHAT-TEST');
+});
 test('catalogue context resolves trusted titles and rejects forged URLs, duplicates and excessive lists',()=>{
   const selection={file:catalogueFile,detail:'Page 12, code ABC',quantity:'2 packs',title:'Forged title'};
   const parsed=enquiryContext.parseCatalogueSelections([selection]);

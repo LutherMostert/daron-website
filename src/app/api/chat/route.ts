@@ -7,6 +7,7 @@ import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const MAX_OUTPUT_TOKENS = 1024;
 const MAX_MESSAGE_CHARS = 2000;
@@ -77,25 +78,26 @@ function providerOrder(): Provider[] {
   return ["gateway", "openai", "anthropic"];
 }
 
-async function askGateway(system: string, messages: IncomingMessage[]): Promise<string> {
+async function askGateway(system: string, messages: IncomingMessage[], signal: AbortSignal): Promise<string> {
   const result = await generateText({
     model: process.env.AI_GATEWAY_MODEL || "google/gemini-2.5-flash-lite",
     system,
     messages,
     maxOutputTokens: MAX_OUTPUT_TOKENS,
-    abortSignal: AbortSignal.timeout(25000),
+    abortSignal: signal,
+    maxRetries: 0,
   });
   return result.text.trim();
 }
 
-async function askAnthropic(system: string, messages: IncomingMessage[]): Promise<string> {
-  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+async function askAnthropic(system: string, messages: IncomingMessage[], signal: AbortSignal): Promise<string> {
+  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, timeout: 15000, maxRetries: 0 });
   const response = await client.messages.create({
     model: process.env.ANTHROPIC_CHAT_MODEL || "claude-sonnet-4-5",
     max_tokens: MAX_OUTPUT_TOKENS,
     system,
     messages,
-  });
+  }, { signal });
   return response.content
     .filter((block) => block.type === "text")
     .map((block) => block.text)
@@ -109,7 +111,7 @@ type OpenAIResponse = {
   error?: { message?: string };
 };
 
-async function askOpenAI(system: string, messages: IncomingMessage[]): Promise<string> {
+async function askOpenAI(system: string, messages: IncomingMessage[], signal: AbortSignal): Promise<string> {
   const response = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: {
@@ -122,7 +124,7 @@ async function askOpenAI(system: string, messages: IncomingMessage[]): Promise<s
       input: messages,
       max_output_tokens: MAX_OUTPUT_TOKENS,
     }),
-    signal: AbortSignal.timeout(25000),
+    signal,
   });
 
   const body = (await response.json().catch(() => ({}))) as OpenAIResponse;
@@ -152,14 +154,15 @@ export function GET() {
 }
 
 export async function POST(request: Request) {
+  const deadline = Date.now() + 50000;
   const ip = getClientIp(request);
   const limit = await checkRateLimit(`chat:${ip}`, { windowMs: 60 * 60 * 1000, max: 20 });
   if (!limit.allowed) {
     return Response.json(
       {
-        error: `Too many messages from this connection. Try again in ${Math.ceil(limit.retryAfterSeconds / 60)} minutes, or use WhatsApp at ${contact.whatsapp.display}.`,
+        error: limit.unavailable ? OFFLINE_FALLBACK : `Too many messages from this connection. Try again in ${Math.ceil(limit.retryAfterSeconds / 60)} minutes, or use WhatsApp at ${contact.whatsapp.display}.`,
       },
-      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
+      { status: limit.unavailable ? 503 : 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
     );
   }
 
@@ -182,12 +185,15 @@ export async function POST(request: Request) {
 
   for (const provider of providerOrder()) {
     if (!isConfigured(provider) || isSuppressed(provider)) continue;
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) break;
+    const signal = AbortSignal.any([request.signal, AbortSignal.timeout(Math.min(15000, remaining))]);
     try {
       const raw = provider === "gateway"
-        ? await askGateway(system, body.messages)
+        ? await askGateway(system, body.messages, signal)
         : provider === "openai"
-          ? await askOpenAI(system, body.messages)
-          : await askAnthropic(system, body.messages);
+          ? await askOpenAI(system, body.messages, signal)
+          : await askAnthropic(system, body.messages, signal);
       if (!raw) throw new Error("Provider returned an empty response.");
 
       unavailableUntil.delete(provider);
