@@ -1,204 +1,21 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
-
 import { Container } from "@/components/Container";
-import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/ContactForm";
 import { contact } from "@/lib/site";
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Meta" });
-  return buildMetadata({
-    locale,
-    path: "/contact",
-    title: t("contactTitle"),
-    description: t("contactDescription"),
-  });
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params; const t = await getTranslations({ locale, namespace: "Meta" });
+  return buildMetadata({ locale, path: "/contact", title: t("contactTitle"), description: t("contactDescription") });
 }
-
-export default async function ContactPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const t = await getTranslations("Contact");
-
-  return (
-    <>
-      <PageHero
-        eyebrow="Contact / RFQ"
-        title="Send your RFQ to the operations desk"
-        intro="Upload the requirement, add the vessel or project details, and route it straight to Daron Namibia. For urgent vessel supply, WhatsApp or call the operations team now."
-        image={{ src: "/images/site/operations/daron-truck-normand-energy.jpg" }}
-      />
-
-      <section className="bg-white py-20 sm:py-24">
-        <Container className="grid gap-8 md:grid-cols-3">
-          <ContactCard
-            eyebrow={t("card1Eyebrow")}
-            title={t("card1Title")}
-            body={t("card1Body")}
-            href={contact.whatsapp.href}
-            cta={`${contact.whatsapp.display} \u2192`}
-            external
-            highlight
-          />
-          <ContactCard
-            eyebrow={t("card2Eyebrow")}
-            title={t("card2Title")}
-            body={t("card2Body")}
-            href={`mailto:${contact.emails.operations}`}
-            cta={contact.emails.operations}
-          />
-          <ContactCard
-            eyebrow={t("card3Eyebrow")}
-            title={t("card3Title")}
-            body={t("card3Body")}
-            href={`mailto:${contact.emails.technical}`}
-            cta={contact.emails.technical}
-          />
-        </Container>
-      </section>
-
-      <section className="bg-[var(--color-sand)] py-20 sm:py-24">
-        <Container className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-start">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
-              {t("officeEyebrow")}
-            </p>
-            <h2 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
-              {t("officeHeading")}
-            </h2>
-            <address className="mt-6 space-y-4 text-base not-italic leading-relaxed text-[var(--color-ink)]">
-              <p>
-                {contact.address.line1}
-                <br />
-                {contact.address.line2}
-                <br />
-                {contact.address.city}, {contact.address.region}
-                <br />
-                {contact.address.country}
-              </p>
-              <p>
-                <span className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-mute)]">
-                  {t("officeLine")}
-                </span>
-                <a
-                  href={contact.phone.href}
-                  className="text-lg font-semibold text-[var(--color-navy)] hover:text-[var(--color-accent-text)]"
-                >
-                  {contact.phone.display}
-                </a>
-              </p>
-              <p>
-                <span className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-mute)]">
-                  {t("hours")}
-                </span>
-                {t("hoursValue")}
-                <br />
-                {t("hoursOffshore")}
-              </p>
-              <p className="flex flex-wrap gap-x-5 gap-y-2">
-                <a
-                  href={contact.socials.linkedin}
-                  className="font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t("linkedinLink")} &rarr;
-                </a>
-                <a
-                  href={contact.socials.facebook}
-                  className="font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t("facebookLink")} &rarr;
-                </a>
-              </p>
-            </address>
-          </div>
-
-          <div className="rounded-2xl border border-[var(--color-line)] bg-white p-8 shadow-sm">
-            <h2 className="font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)]">
-              Send Your RFQ
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--color-mute)]">
-              Add the company, vessel or project, urgency, delivery point and attach the RFQ file. Excel, PDF, Word and CSV uploads are supported.
-            </p>
-            <ContactForm />
-          </div>
-        </Container>
-      </section>
-    </>
-  );
-}
-
-function ContactCard({
-  eyebrow,
-  title,
-  body,
-  href,
-  cta,
-  external,
-  highlight,
-}: {
-  eyebrow: string;
-  title: string;
-  body: string;
-  href: string;
-  cta: string;
-  external?: boolean;
-  highlight?: boolean;
-}) {
-  return (
-    <article
-      className={
-        highlight
-          ? "rounded-2xl bg-[var(--color-navy)] p-7 text-white shadow-md"
-          : "rounded-2xl border border-[var(--color-line)] bg-white p-7 shadow-sm"
-      }
-    >
-      <p
-        className={`text-xs font-semibold uppercase tracking-[0.2em] ${
-          highlight ? "text-white/85" : "text-[var(--color-accent-text)]"
-        }`}
-      >
-        {eyebrow}
-      </p>
-      <h2
-        className={`mt-3 font-[family-name:var(--font-poppins)] text-xl font-bold ${
-          highlight ? "text-white" : "text-[var(--color-navy)]"
-        }`}
-      >
-        {title}
-      </h2>
-      <p
-        className={`mt-3 text-sm leading-relaxed ${
-          highlight ? "text-white/90" : "text-[var(--color-mute)]"
-        }`}
-      >
-        {body}
-      </p>
-      <a
-        href={href}
-        className={`mt-5 inline-flex items-center font-semibold underline-offset-4 hover:underline ${
-          highlight ? "text-white" : "text-[var(--color-navy)]"
-        }`}
-        {...(external
-          ? { target: "_blank", rel: "noopener noreferrer" }
-          : {})}
-      >
-        {cta}
-      </a>
-    </article>
-  );
+export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params; setRequestLocale(locale);
+  const t = await getTranslations("Intake"); const office = await getTranslations("Contact");
+  return <section className="premium-contact"><Container className="premium-contact-grid">
+    <div className="premium-contact-intro"><p className="premium-eyebrow">{t("eyebrow")}</p><h1>{t("title")}</h1><p className="premium-lead">{t("intro")}</p>
+      <div className="contact-direct"><p className="premium-eyebrow">{t("urgentTitle")}</p><a href={contact.phone.href}>{contact.phone.display}</a><a className="contact-whatsapp" href={contact.whatsapp.href} target="_blank" rel="noopener noreferrer">{t("whatsapp")} ↗</a><p>{t("directHint")}</p></div>
+      <div className="contact-office"><h2>{office("officeHeading")}</h2><address>{contact.address.line1}<br />{contact.address.line2}, {contact.address.city}<br />{office("hoursValue")}</address><a href={`mailto:${contact.emails.operations}`}>{contact.emails.operations}</a><a href={`mailto:${contact.emails.technical}`}>{contact.emails.technical}</a></div>
+    </div>
+    <div id="rfq" className="premium-form-panel"><p className="premium-eyebrow">{t("formEyebrow")}</p><h2>{t("formTitle")}</h2><p className="mb-7 mt-3 text-sm leading-6 text-slate-600">{t("formHint")}</p><ContactForm /></div>
+  </Container></section>;
 }

@@ -174,17 +174,11 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className="h-full antialiased"
     >
       <body className="flex min-h-full flex-col bg-white text-[var(--color-ink)]">
-        {/* Set .js before paint so the scroll-reveal CSS only hides content
-            when JS can reveal it again (no-JS / reduced-motion stay visible). */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
-          }}
-        />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[var(--color-navy)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"

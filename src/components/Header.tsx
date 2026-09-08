@@ -1,22 +1,20 @@
 "use client";
 
-import Image from "next/image";
+import { BrandLogo } from "./BrandLogo";
 import { useState, useRef, useEffect, useTransition } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter, type Locale } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
-import { contact, site } from "@/lib/site";
+import { site } from "@/lib/site";
 import { Container } from "./Container";
 
 const navItems = [
   { href: "/about" as const, key: "about" as const },
   { href: "/services" as const, key: "services" as const },
+  { href: "/solutions" as const, key: "solutions" as const },
   { href: "/industries" as const, key: "industries" as const },
-  { href: "/why-daron" as const, key: "whyDaron" as const },
-  { href: "/ai" as const, key: "ai" as const },
   { href: "/track-record" as const, key: "trackRecord" as const },
   { href: "/brands" as const, key: "brands" as const },
-  { href: "/contact" as const, key: "contact" as const },
 ];
 
 function LanguageSwitcher() {
@@ -42,7 +40,7 @@ function LanguageSwitcher() {
     setOpen(false);
     if (nextLocale === locale) return;
     startTransition(() => {
-      router.replace(pathname, { locale: nextLocale, scroll: false });
+      router.replace(`${pathname}${window.location.search}${window.location.hash}`, { locale: nextLocale, scroll: false });
     });
   }
 
@@ -101,25 +99,19 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const tNav = useTranslations("Nav");
   const tHeader = useTranslations("Header");
+  const tGrowth = useTranslations("Growth");
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#07111f]/92 text-white shadow-[0_1px_0_rgba(255,255,255,.04)] backdrop-blur-xl supports-[backdrop-filter]:bg-[#07111f]/82">
       <Container className="flex h-20 max-w-[1320px] items-center justify-between gap-4">
-        <Link
+        <div className="header-brand-group"><Link
           href="/"
-          className="flex shrink-0 items-center rounded-md bg-white px-2 py-1 shadow-[0_8px_30px_rgba(0,0,0,.18)]"
+          className="inline-flex shrink-0 items-center py-2"
           aria-label={`${site.name} home`}
         >
-          <Image
-            src="/images/logo-daron.png"
-            alt="Daron Namibia"
-            width={359}
-            height={215}
-            loading="eager"
-            sizes="120px"
-            className="h-14 w-auto"
-          />
+          <BrandLogo />
         </Link>
+        <a href="https://daron-group.com/" target="_blank" rel="noopener noreferrer" className="header-affiliation">{tGrowth("affiliation")} ↗</a></div>
 
         <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center gap-4 text-sm font-medium xl:gap-5">
@@ -138,14 +130,12 @@ export function Header() {
 
         <div className="hidden shrink-0 items-center gap-3 xl:flex">
           <LanguageSwitcher />
-          <a
-            href={contact.whatsapp.href}
+          <Link
+            href="/contact#rfq"
             className="shrink-0 whitespace-nowrap rounded-md bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
-            target="_blank"
-            rel="noopener noreferrer"
           >
             {tHeader("chatCta")} &rarr;
-          </a>
+          </Link>
         </div>
 
         <button
@@ -211,15 +201,13 @@ export function Header() {
             </ul>
             <div className="mt-3 flex items-center gap-3">
               <LanguageSwitcher />
-              <a
-                href={contact.whatsapp.href}
+              <Link
+                href="/contact#rfq"
                 onClick={() => setOpen(false)}
                 className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--color-cta)] px-5 py-3 text-sm font-semibold text-[var(--color-cta-ink)]"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 {tHeader("chatCtaMobile")} &rarr;
-              </a>
+              </Link>
             </div>
           </Container>
         </div>

@@ -15,7 +15,7 @@ type Props = {
 
 export function PageHero({ eyebrow, title, intro, image, children }: Props) {
   return (
-    <section className="relative isolate overflow-hidden bg-[var(--color-navy)] text-white">
+    <section className="premium-page-hero relative isolate overflow-hidden bg-[var(--color-navy)] text-white">
       {image && (
         <>
           <Image
@@ -24,7 +24,7 @@ export function PageHero({ eyebrow, title, intro, image, children }: Props) {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center kenburns"
+            className="object-cover object-center"
             aria-hidden={image.alt ? undefined : true}
           />
           <div

@@ -1,157 +1,91 @@
 "use client";
-
-import { useState } from "react";
+import { Suspense, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { trackEvent } from "@/lib/analytics";
-
-type Status = "idle" | "sending" | "success" | "error";
-
-const MAX_FILE_BYTES = 4 * 1024 * 1024; // 4 MB
-const ACCEPTED_EXTENSIONS = [".xlsx", ".xls", ".csv", ".pdf", ".doc", ".docx", ".txt"];
-const ACCEPT_ATTR = ACCEPTED_EXTENSIONS.join(",");
-
-function isAcceptedFile(name: string): boolean {
-  const lower = name.toLowerCase();
-  return ACCEPTED_EXTENSIONS.some((ext) => lower.endsWith(ext));
-}
+import { contact } from "@/lib/site";
+import { ACCEPTED_EXTENSIONS, CATEGORIES, MAX_FILE_BYTES } from "@/lib/rfq";
+import { CatalogueEnquiryList } from "./CatalogueEnquiry";
+import { useCatalogueEnquiry, saveCatalogueEnquiry } from "@/lib/enquiry-browser";
+import { enquirySources } from "@/lib/enquiry-context";
 
 export function ContactForm() {
-  const [status, setStatus] = useState<Status>("idle");
-  const [errorMsg, setErrorMsg] = useState("");
+  const t = useTranslations("Growth");
+  return <Suspense fallback={<p role="status">{t("loading")}</p>}><ContactFormContent /></Suspense>;
+}
+function ContactFormContent() {
+  const t = useTranslations("Intake");
+  const g = useTranslations("Growth"); const search = useSearchParams();
+  const requestedSource = search.get("from") || "";
+  const source = Object.hasOwn(enquirySources, requestedSource) ? requestedSource : "";
+  const catalogues = useCatalogueEnquiry();
+  const hasCatalogueRequirement = catalogues.some(item => item.detail.trim());
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "stored">("idle");
+  const [requestType, setRequestType] = useState(source === "procurement-resources" ? "enquiry" : "quote");
+  const [preferred, setPreferred] = useState("Email");
+  const [fileName, setFileName] = useState("");
+  const [error, setError] = useState("");
   const [reference, setReference] = useState("");
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-    const file = fd.get("rfqFile");
-
-    if (file instanceof File && file.size > 0) {
-      if (file.size > MAX_FILE_BYTES) {
-        setErrorMsg("File is too large — 4 MB max. Send larger RFQs by WhatsApp or email.");
-        setStatus("error");
-        return;
+  const busy = useRef(false);
+  const resultRef = useRef<HTMLDivElement>(null);
+  const finish = () => requestAnimationFrame(() => resultRef.current?.focus());
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault(); if (busy.current) return;
+    const form = event.currentTarget; const data = new FormData(form); const file = data.get("rfqFile");
+    data.set("catalogueSelections", JSON.stringify(catalogues)); data.set("sourceContext", source);
+    if (file instanceof File && file.size) {
+      if (file.size > MAX_FILE_BYTES || !ACCEPTED_EXTENSIONS.some(ext => file.name.toLowerCase().endsWith(ext))) {
+        setError(t("fileError")); setStatus("error"); finish(); return;
       }
-      if (!isAcceptedFile(file.name)) {
-        setErrorMsg("Unsupported file type. Use Excel, PDF, Word, CSV or TXT.");
-        setStatus("error");
-        return;
-      }
-    } else {
-      fd.delete("rfqFile");
-    }
-
-    setStatus("sending");
-    setErrorMsg("");
+    } else data.delete("rfqFile");
+    busy.current = true; setStatus("sending"); setError("");
     try {
-      const res = await fetch("/api/contact", { method: "POST", body: fd });
-      const result = (await res.json().catch(() => ({}))) as {
-        error?: string;
-        reference?: string;
-        stored?: boolean;
-      };
-      if (!res.ok) {
-        if (result.reference) setReference(result.reference);
-        trackEvent("RFQ_Submit_Failed", {
-          status: String(res.status),
-          stored: result.stored ? "yes" : "no",
-        });
-        throw new Error(result.error || "The RFQ could not be sent. Please call or WhatsApp Daron now.");
-      }
-      setReference(result.reference || "");
-      trackEvent("RFQ_Submit_Success", {
-        category: String(fd.get("category") || "Unknown"),
-        attachment: file instanceof File && file.size > 0 ? "yes" : "no",
-      });
-      form.reset();
-      setStatus("success");
-    } catch (err) {
-      setErrorMsg(err instanceof Error ? err.message : "The RFQ could not be sent. Please call or WhatsApp Daron now.");
-      setStatus("error");
-    }
+      const response = await fetch("/api/contact", { method: "POST", body: data, signal: AbortSignal.timeout(30000) });
+      const result = await response.json();
+      if (result.reference) setReference(result.reference);
+      if (result.stored && !response.ok) { setStatus("stored"); finish(); return; }
+      if (!response.ok || !result.ok) throw new Error(result.error || t("sendError"));
+      setStatus("success"); saveCatalogueEnquiry([]); trackEvent("RFQ_Submit_Success", { category: String(data.get("category") || "Unknown"), requestType, source: source || "direct" });
+      form.reset(); finish();
+    } catch (error) {
+      setStatus("error"); setError(error instanceof Error && error.name !== "TimeoutError" ? error.message : t("sendError")); finish();
+    } finally { busy.current = false; }
   }
-
-  if (status === "success") {
-    return (
-      <div role="status" aria-live="polite" className="border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 p-6">
-        <h3 className="font-[family-name:var(--font-poppins)] text-xl font-black tracking-[-0.04em] text-[var(--color-navy)]">RFQ received.</h3>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--color-mute)]">The operations team has the request. For urgent vessel supply, call or WhatsApp Daron directly.</p>
-        {reference && <p className="mt-3 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-accent-text)]">Reference: {reference}</p>}
-        <button type="button" onClick={() => setStatus("idle")} className="mt-4 text-sm font-semibold text-[var(--color-navy)] underline-offset-4 hover:underline">Send another RFQ</button>
+  if (status === "success" || status === "stored") return <div ref={resultRef} tabIndex={-1} className="intake-result" role="status">
+    <span className="premium-eyebrow">{t("reference")}</span><p className="my-3 font-mono text-sm">{reference}</p>
+    <h2 className="text-3xl font-semibold">{t(status === "stored" ? "storedTitle" : "successTitle")}</h2>
+    <p className="my-5 leading-7">{t(status === "stored" ? "storedBody" : "successBody")}</p>
+    <a className="premium-button" href={`mailto:${contact.emails.operations}?subject=${encodeURIComponent(`Website enquiry ${reference}`)}`}>{t("emailTeam")} →</a>
+    <a className="mt-5 block font-semibold" href={contact.phone.href}>{t("call")} {contact.phone.display}</a>
+    {status === "success" && <button className="mt-8 underline" type="button" onClick={() => { setStatus("idle"); setReference(""); setFileName(""); }}>{t("another")}</button>}
+  </div>;
+  return <form id="enquiry-form" onSubmit={submit} className="intake-form" encType="multipart/form-data">
+    <fieldset disabled={status === "sending"} className="space-y-6"><legend className="sr-only">{t("formTitle")}</legend>
+      {source && <p className="enquiry-context-label">{g("context")} <strong>{g(`sources.${source}`)}</strong></p>}
+      <CatalogueEnquiryList />
+      <div className="intake-choice" role="group" aria-label={t("typeLabel")}>
+        {(["quote", "enquiry"] as const).map(type => <label key={type} className={requestType === type ? "selected" : ""}><input type="radio" name="requestType" value={type} checked={requestType === type} onChange={() => setRequestType(type)} /><span><strong>{t(type)}</strong><small>{t(`${type}Hint`)}</small></span></label>)}
       </div>
-    );
-  }
-
-  return (
-    <form action="/api/contact" method="post" encType="multipart/form-data" onSubmit={onSubmit} className="mt-7 grid gap-4">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field id="firstName" label="Name" autoComplete="given-name" required />
-        <Field id="surname" label="Surname" autoComplete="family-name" />
-        <Field id="company" label="Company" autoComplete="organization" required />
-        <Field id="vessel" label="Vessel / project" placeholder="Optional, but helpful" />
-        <Field id="email" label="Email" type="email" autoComplete="email" required />
-        <Field id="phone" label="Telephone / WhatsApp" type="tel" autoComplete="tel" />
-        <Field id="deliveryPoint" label="Port / delivery point" placeholder="Walvis Bay, offshore, mine site…" />
-        <Field id="urgency" label="Urgency / ETA" placeholder="Today, 24h, next port call…" />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field id="firstName" label={t("name")} required autoComplete="name" maxLength={120} />
+        <Field id="company" label={t("company")} required autoComplete="organization" maxLength={120} />
+        <Field id="email" label={t("email")} required type="email" autoComplete="email" maxLength={160} />
+        <label className="intake-field"><span>{t("reply")}</span><select name="preferredContact" value={preferred} onChange={event => setPreferred(event.target.value)}>{["Email", "WhatsApp", "Phone call"].map((value, index) => <option key={value} value={value}>{t(`reply${index}`)}</option>)}</select></label>
       </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Select id="category" label="Requirement type" options={["Ship chandlery", "Provisions / catering", "Oil & gas / offshore", "Technical stores", "Health & safety", "Dry dock", "Warehousing / logistics", "Other"]} />
-        <Select id="preferredContact" label="Preferred response" options={["WhatsApp", "Email", "Phone call"]} />
-      </div>
-
-      <div className="flex flex-col gap-1.5">
-        <label htmlFor="message" className="text-sm font-semibold text-[var(--color-ink)]">RFQ details <span className="text-[var(--color-accent-text)]" aria-hidden="true">*</span></label>
-        <textarea id="message" name="message" rows={5} required placeholder="Paste the requirement, quantities, delivery date, vessel name, agency details or any notes the buyer should know." className="border border-[var(--color-line)] bg-white px-4 py-3 text-base text-[var(--color-ink)] outline-none transition focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/30" />
-      </div>
-
-      <div className="flex flex-col gap-1.5">
-        <label htmlFor="rfqFile" className="text-sm font-semibold text-[var(--color-ink)]">Attach RFQ file</label>
-        <input id="rfqFile" name="rfqFile" type="file" accept={ACCEPT_ATTR} className="border border-dashed border-slate-300 bg-white px-4 py-5 text-sm text-[var(--color-mute)] file:mr-3 file:border-0 file:bg-[var(--color-navy)] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30" />
-        <p className="text-xs text-[var(--color-mute)]">Excel, PDF, Word, CSV or TXT. Max 4 MB. Larger RFQs can be sent by WhatsApp or email.</p>
-      </div>
-
-      <div aria-live="polite" className="min-h-[1.25rem]">
-        {status === "error" && <p role="alert" className="text-sm font-medium text-red-600">{errorMsg}</p>}
-      </div>
-
-      <button type="submit" disabled={status === "sending"} className="mt-1 bg-[var(--color-cta)] px-6 py-4 text-base font-black uppercase tracking-[0.14em] text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)] disabled:cursor-not-allowed disabled:opacity-60">
-        {status === "sending" ? "Sending RFQ…" : "Send Your RFQ"}
-      </button>
-      <p className="text-xs leading-5 text-[var(--color-mute)]">For urgent supply, call Daron directly after submitting. This form does not replace emergency contact.</p>
-    </form>
-  );
+      {preferred !== "Email" && <Field id="phone" label={t("phone")} required type="tel" autoComplete="tel" placeholder="+264 …" maxLength={40} pattern="\+[0-9 ().\-]{7,24}" />}
+      <label className="intake-field"><span>{t("service")}{requestType === "quote" ? " *" : ` · ${t("optional")}`}</span><select name="category" defaultValue="" required={requestType === "quote"}><option value="">{t("choose")}</option>{CATEGORIES.map((value, index) => <option key={value} value={value}>{t(`category${index}`)}</option>)}</select></label>
+      <label className="intake-field"><span>{t("message")}{!fileName && !hasCatalogueRequirement && " *"}</span><textarea name="message" rows={4} minLength={fileName || hasCatalogueRequirement ? undefined : 10} maxLength={4000} required={!fileName && !hasCatalogueRequirement} placeholder={t(requestType === "quote" ? "messageQuote" : "messageEnquiry")} /></label>
+      <label className="intake-upload"><span><strong>{t("attach")}</strong><small>{fileName || t("attachHint")}</small></span><input type="file" name="rfqFile" accept={ACCEPTED_EXTENSIONS.join(",")} aria-label={t("attach")} onChange={event => setFileName(event.target.files?.[0]?.name || "")} /><small>{t("fileLimit")}</small></label>
+      {requestType === "quote" && <details className="intake-details"><summary>{t("deliveryDetails")} <span>{t("optional")}</span></summary><div className="mt-5 grid gap-5 sm:grid-cols-2"><Field id="vessel" label={t("vessel")} maxLength={120} /><Field id="deliveryPoint" label={t("delivery")} maxLength={140} /><Field id="urgency" label={t("date")} placeholder={t("dateHint")} maxLength={120} /></div></details>}
+      <details className="intake-details"><summary>{g("multiTitle")} <span>{t("optional")}</span></summary><label className="intake-field mt-5"><span>{g("multiLabel")}</span><textarea name="multiLocation" rows={3} maxLength={500} placeholder={g("multiHint")} /></label><p className="mt-3 text-xs leading-6 text-slate-600">{g("multiNote")}</p></details>
+      <div className="intake-trap" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
+      <div ref={resultRef} tabIndex={-1}>{status === "error" && <p role="alert" className="border-l-2 border-red-700 bg-red-50 p-4 text-sm text-red-800">{error}</p>}</div>
+      <button className="premium-button w-full justify-between" type="submit" disabled={status === "sending"}>{t(status === "sending" ? "sending" : requestType === "quote" ? "sendQuote" : "sendEnquiry")}<span aria-hidden="true">→</span></button>
+      <p className="text-xs leading-6 text-slate-600">{t("privacyIntro")} <Link href="/privacy" className="underline">{t("privacy")}</Link>. {t("urgent")}</p>
+    </fieldset>
+  </form>;
 }
-
-function Field({
-  id,
-  label,
-  type = "text",
-  autoComplete,
-  required,
-  placeholder,
-}: {
-  id: string;
-  label: string;
-  type?: string;
-  autoComplete?: string;
-  required?: boolean;
-  placeholder?: string;
-}) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-sm font-semibold text-[var(--color-ink)]">{label}{required && <span className="ml-0.5 text-[var(--color-accent-text)]" aria-hidden="true">*</span>}</label>
-      <input id={id} name={id} type={type} required={required} autoComplete={autoComplete} placeholder={placeholder} className="border border-[var(--color-line)] bg-white px-4 py-3 text-base text-[var(--color-ink)] outline-none transition placeholder:text-slate-400 focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/30" />
-    </div>
-  );
-}
-
-function Select({ id, label, options }: { id: string; label: string; options: string[] }) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-sm font-semibold text-[var(--color-ink)]">{label}</label>
-      <select id={id} name={id} className="border border-[var(--color-line)] bg-white px-4 py-3 text-base text-[var(--color-ink)] outline-none transition focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/30">
-        {options.map((option) => <option key={option}>{option}</option>)}
-      </select>
-    </div>
-  );
+function Field({ label, id, ...props }: React.InputHTMLAttributes<HTMLInputElement> & { label: string; id: string }) {
+  return <label className="intake-field" htmlFor={id}><span>{label}{props.required && " *"}</span><input id={id} name={id} {...props} /></label>;
 }

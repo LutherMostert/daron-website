@@ -258,6 +258,7 @@ export default async function ServicesPage({
                               PDF · {c.sizeMB.toFixed(1)} MB
                             </span>
                           </a>
+                          <AddCatalogue file={c.file} />
                         </li>
                       ))}
                     </ul>
@@ -273,3 +274,4 @@ export default async function ServicesPage({
     </>
   );
 }
+import { AddCatalogue } from "@/components/CatalogueEnquiry";

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BrandLogo } from "./BrandLogo";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { contact, site } from "@/lib/site";
@@ -21,6 +21,7 @@ const navItems = [
 export function Footer() {
   const t = useTranslations("Footer");
   const tNav = useTranslations("Nav");
+  const tGrowth = useTranslations("Growth");
   const year = new Date().getFullYear();
 
   return (
@@ -28,13 +29,8 @@ export function Footer() {
       <Container className="py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <Image
-              src="/images/logo-daron-white.png"
-              alt={`${site.name} logo`}
-              width={195}
-              height={175}
-              className="h-20 w-auto"
-            />
+            <BrandLogo />
+            <a href="https://daron-group.com/" target="_blank" rel="noopener noreferrer" className="mt-3 block text-xs text-white/75 hover:text-white">{tGrowth("affiliation")} ↗</a>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">
               {t("tagline", { founded: site.founded })}
             </p>
@@ -56,6 +52,9 @@ export function Footer() {
               {t("sitemap")}
             </h2>
             <ul className="mt-4 space-y-2 text-sm">
+              <li><Link href="/solutions" className="text-white/75 hover:text-white">{tGrowth("solutions")}</Link></li>
+              <li><Link href="/group-network" className="text-white/75 hover:text-white">{tGrowth("group")}</Link></li>
+              <li><Link href="/procurement-resources" className="text-white/75 hover:text-white">{tGrowth("resources")}</Link></li>
               {navItems.map((n) => (
                 <li key={n.href}>
                   <Link
