@@ -63,7 +63,7 @@ const nextConfig: NextConfig = {
   },
   // Apply security headers to every route.
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [{ source: "/:path*", headers: [...securityHeaders, { key: "X-Robots-Tag", value: "noindex, nofollow" }] }];
   },
   // Old WordPress URL slugs → new Next.js routes (CLAUDE.md "Site routes")
   async redirects() {

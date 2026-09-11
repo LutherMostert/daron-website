@@ -1,3 +1,4 @@
+import { ImmersiveHome } from "@/components/ImmersiveHome";
 import { HempelComparison } from "@/components/HempelComparison";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params; setRequestLocale(locale); const t = await getTranslations("PremiumHome");
+  if (locale === "en") return <ImmersiveHome />;
   const growth = getGrowthContent(locale);
   const services = [
     {key:"marine",href:"/services/ship-chandlery"}, {key:"offshore",href:"/industries/oil-and-gas"},

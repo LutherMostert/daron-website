@@ -43,6 +43,7 @@ function ContactFormContent() {
     try {
       const response = await fetch("/api/contact", { method: "POST", body: data, signal: AbortSignal.timeout(30000) });
       const result = await response.json();
+      if (result.preview) { setStatus("error"); setError("Preview validated successfully. No enquiry was sent or saved. Use the homepage enquiry preview to review the formatted request."); finish(); return; }
       if (result.reference) setReference(result.reference);
       if (result.stored && !response.ok) { setStatus("stored"); finish(); return; }
       if (!response.ok || !result.ok) throw new Error(result.error || t("sendError"));

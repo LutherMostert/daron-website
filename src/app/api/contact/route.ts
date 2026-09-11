@@ -1,8 +1,3 @@
-import { createHmac } from "node:crypto";
-import { persistLead } from "@/lib/lead-store";
-import { postSignedWebhook, sendOperationsEmail } from "@/lib/lead-notifications";
-import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
-import { contact } from "@/lib/site";
 import { parseContact, buildRfqEmail, MAX_FILE_BYTES, ACCEPTED_EXTENSIONS } from "@/lib/rfq";
 
 export const runtime = "nodejs";
@@ -56,15 +51,6 @@ function contentMatchesExtension(bytes: Uint8Array, ext: string): boolean {
 export async function POST(request: Request) {
   const contentLength = Number(request.headers.get("content-length"));
   if (contentLength > MAX_FILE_BYTES + 128 * 1024) return Response.json({ error: "Request is too large. Attach a file smaller than 4 MB." }, { status: 413 });
-  const ip = getClientIp(request);
-  const limit = await checkRateLimit(`contact:${ip}`, { windowMs: 60 * 60 * 1000, max: 5 });
-  if (!limit.allowed) {
-    return Response.json(
-      { error: limit.unavailable ? `Enquiries are temporarily unavailable. Please email ${contact.emails.operations}.` : "Too many messages - please try again later." },
-      { status: limit.unavailable ? 503 : 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
-    );
-  }
-
   const contentType = request.headers.get("content-type") || "";
   let raw: Record<string, unknown> = {};
   let attachment: Attachment | undefined;
@@ -132,67 +118,9 @@ export async function POST(request: Request) {
   if (raw.website) return Response.json({ error: "Invalid request." }, { status: 400 });
   const parsed = parseContact(raw, Boolean(attachment));
   if (!parsed.fields) return Response.json({ error: parsed.error }, { status: 400 });
-  const fields = parsed.fields;
-
-  const timestamp = new Date().toISOString();
-  const entry = {
-    timestamp,
-    source: "daron-website:contact-form",
-    ...fields,
-    // Preserve the actual file, so a failed notification never loses the buyer's scope.
-    attachment,
-    ip,
-  };
-
-  let reference: string;
-  try {
-    reference = await persistLead(fields.requestType === "quote" ? "contact" : "enquiry", entry);
-  } catch (error) {
-    console.error("[contact-lead] durable storage failed", error);
-    return Response.json(
-      { error: `We could not secure the RFQ. Please email ${contact.emails.operations} or call ${contact.phone.display}.` },
-      { status: 503 },
-    );
-  }
-  console.log("[contact-lead] stored", reference);
-
-  const { text, html, subject } = buildRfqEmail(fields, reference, timestamp, attachment);
-  const payload = JSON.stringify({
-    text,
-    reference,
-    attachment,
-    request: fields,
-  });
-  const secret = process.env.CHAT_LEAD_WEBHOOK_SECRET;
-  const signature = secret
-    ? `sha256=${createHmac("sha256", secret).update(payload).digest("hex")}`
-    : undefined;
-
-  const [emailDelivered, webhookDelivered] = await Promise.all([
-    sendOperationsEmail({
-      subject,
-      text,
-      html,
-      replyTo: fields.email,
-      attachment: attachment ? { name: attachment.name, base64: attachment.base64 } : undefined,
-    }),
-    postSignedWebhook({
-      url: process.env.CONTACT_WEBHOOK_URL || process.env.CHAT_LEAD_WEBHOOK_URL,
-      payload,
-      signature,
-    }),
-  ]);
-
-  if (!emailDelivered && !webhookDelivered) {
-    return Response.json(
-      {
-        error: `Your RFQ was secured as ${reference}, but the operations notification could not be delivered. Please email ${contact.emails.operations} and quote this reference.`,
-        reference,
-        stored: true,
-      },
-      { status: 503 },
-    );
-  }
-
-  return Response.json({ ok: true, reference, notified: true, requestType: fields.requestType });
+  const preview = buildRfqEmail(parsed.fields, "PREVIEW-NOT-SENT", new Date().toISOString(), attachment);
+  return Response.json({
+    ok: true, preview: true, subject: preview.subject,
+    text: preview.text.replace("— attached to this email", "— validated for preview, not sent"),
+  }, { headers: { "Cache-Control": "no-store" } });
 }

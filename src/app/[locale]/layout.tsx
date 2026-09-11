@@ -1,3 +1,4 @@
+import { PreviewChrome } from "@/components/PreviewChrome";
 import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -8,7 +9,6 @@ import "../globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { ChatWidget } from "@/components/ChatWidget";
 import { RevealController } from "@/components/RevealController";
 import { StickyActions } from "@/components/StickyActions";
 import { ConversionAnalytics } from "@/components/ConversionAnalytics";
@@ -62,11 +62,11 @@ export async function generateMetadata({
       description: t("homeDescription"),
     },
     robots: {
-      index: true,
-      follow: true,
+      index: false,
+      follow: false,
       googleBot: {
-        index: true,
-        follow: true,
+        index: false,
+        follow: false,
         "max-image-preview": "large",
         "max-snippet": -1,
       },
@@ -186,16 +186,16 @@ export default async function LocaleLayout({
           {tA11y("skipToContent")}
         </a>
         <NextIntlClientProvider>
-          <Header />
+          <PreviewChrome><Header /></PreviewChrome>
           <main id="main" tabIndex={-1} className="flex-1 outline-none">
             {children}
           </main>
-          <Footer />
-          <StickyActions />
+          <PreviewChrome><Footer /></PreviewChrome>
+          <PreviewChrome><StickyActions /></PreviewChrome>
           <JsonLd id="ld-website" data={websiteJsonLd} />
           <JsonLd id="ld-organization" data={orgJsonLd} />
           <JsonLd id="ld-localbusiness" data={localBusinessJsonLd} />
-          <ChatWidget />
+
           <RevealController />
           <ConversionAnalytics />
         </NextIntlClientProvider>
