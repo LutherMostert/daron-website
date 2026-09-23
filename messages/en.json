@@ -201,7 +201,15 @@
     "contactTitle": "Contact — Walvis Bay Ship Chandler & Marine Supply",
     "contactDescription": "Get in touch with Daron Namibia in Walvis Bay. Send an RFQ through the secure form or contact operations by WhatsApp, phone or email.",
     "privacyTitle": "Privacy Policy",
-    "privacyDescription": "How Daron Namibia collects, uses and protects your personal data — including chat widget data, RFQ intake and website analytics. Updated April 2026."
+    "privacyDescription": "How Daron Namibia collects, uses and protects your personal data — including chat widget data, RFQ intake and website analytics. Updated September 2026."
+  },
+  "Cookies": {
+    "title": "Cookies on this site",
+    "body": "We'd like to use Google Analytics cookies to see how visitors use the site, so we can improve it. They're only set if you accept, and you can change your choice any time.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "privacy": "Privacy Policy",
+    "settings": "Cookie settings"
   },
   "Privacy": {
     "heroEyebrow": "Privacy Policy",
@@ -222,7 +230,7 @@
     "sec3Item2": "Operating, securing, and improving the website (including abuse prevention and error monitoring).",
     "sec3Item3": "Meeting our obligations under Namibian law and, where applicable, the laws of your own jurisdiction.",
     "sec4Heading": "4. Who processes your data on our behalf",
-    "sec4Body": "Messages you send to Don may be processed by approved enterprise AI providers, including OpenAI or Anthropic, depending on service availability. Enquiry details are stored securely and may be sent to Daron's operations email or approved team webhook. Website hosting is handled by Vercel. Website analytics use Plausible, a privacy-friendly cookieless service. All sub-processors are bound by confidentiality and data-protection obligations.",
+    "sec4Body": "Messages you send to Don may be processed by approved enterprise AI providers, including OpenAI or Anthropic, depending on service availability. Enquiry details are stored securely and may be sent to Daron's operations email or approved team webhook. Website hosting is handled by Vercel. Website analytics use Vercel Analytics, which sets no cookies, and Google Analytics 4, which only loads and sets cookies if you accept analytics cookies in the cookie banner. You can change your choice at any time via \"Cookie settings\" in the footer. Google Analytics does not receive the content of your chat messages or enquiries. All sub-processors are bound by confidentiality and data-protection obligations.",
     "sec5Heading": "5. Your rights",
     "sec5Body": "Depending on where you are based, you may have the right to:",
     "sec5Item1": "Access the personal data we hold about you.",

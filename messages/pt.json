@@ -201,7 +201,15 @@
     "contactTitle": "Contacto",
     "contactDescription": "Contacte a Daron Namibia em Walvis Bay. Envie o RFQ por WhatsApp ou contacte diretamente a equipa de operações.",
     "privacyTitle": "Política de Privacidade",
-    "privacyDescription": "Como a Daron Namibia recolhe, utiliza e protege os seus dados pessoais — incluindo chat, pedidos de cotação e análises. Atualizado em abril de 2026."
+    "privacyDescription": "Como a Daron Namibia recolhe, utiliza e protege os seus dados pessoais — incluindo chat, pedidos de cotação e análises. Atualizado em setembro de 2026."
+  },
+  "Cookies": {
+    "title": "Cookies neste website",
+    "body": "Gostaríamos de utilizar cookies do Google Analytics para perceber como os visitantes utilizam o website e melhorá-lo. Só são colocados se aceitar, e pode alterar a sua escolha a qualquer momento.",
+    "accept": "Aceitar",
+    "decline": "Recusar",
+    "privacy": "Política de Privacidade",
+    "settings": "Definições de cookies"
   },
   "Privacy": {
     "heroEyebrow": "Política de Privacidade",
@@ -222,7 +230,7 @@
     "sec3Item2": "Operar, proteger e melhorar o website (incluindo prevenção de abusos e monitorização de erros).",
     "sec3Item3": "Cumprir as nossas obrigações ao abrigo da legislação namibiana e, quando aplicável, da legislação da sua jurisdição.",
     "sec4Heading": "4. Quem processa os seus dados em nosso nome",
-    "sec4Body": "As mensagens enviadas ao Don podem ser processadas por fornecedores empresariais de IA aprovados, incluindo OpenAI ou Anthropic, consoante a disponibilidade. Os dados do pedido são guardados de forma segura e podem ser enviados ao email de operações da Daron ou a um webhook de equipa aprovado. O website é alojado pela Vercel e utiliza o Plausible para análise sem cookies. Todos os subcontratantes estão sujeitos a obrigações de confidencialidade e proteção de dados.",
+    "sec4Body": "As mensagens enviadas ao Don podem ser processadas por fornecedores empresariais de IA aprovados, incluindo OpenAI ou Anthropic, consoante a disponibilidade. Os dados do pedido são guardados de forma segura e podem ser enviados ao email de operações da Daron ou a um webhook de equipa aprovado. O website é alojado pela Vercel. A análise de tráfego utiliza o Vercel Analytics, que não coloca cookies, e o Google Analytics 4, que só é carregado e coloca cookies se aceitar os cookies de análise no aviso de cookies. Pode alterar a sua escolha a qualquer momento em «Definições de cookies», no rodapé. O Google Analytics não recebe o conteúdo das suas mensagens ou pedidos. Todos os subcontratantes estão sujeitos a obrigações de confidencialidade e proteção de dados.",
     "sec5Heading": "5. Os seus direitos",
     "sec5Body": "Dependendo do local onde reside, poderá ter direito a:",
     "sec5Item1": "Aceder aos dados pessoais que temos sobre si.",

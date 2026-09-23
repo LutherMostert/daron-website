@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { contact, site } from "@/lib/site";
 import { Container } from "./Container";
+import { CookieSettingsLink } from "./CookieSettingsLink";
 
 const navItems = [
   { href: "/" as const, key: "home" as const },
@@ -18,7 +19,11 @@ const navItems = [
   { href: "/contact" as const, key: "contact" as const },
 ];
 
-export function Footer() {
+export function Footer({
+  showCookieSettings = false,
+}: {
+  showCookieSettings?: boolean;
+}) {
   const t = useTranslations("Footer");
   const tNav = useTranslations("Nav");
   const tGrowth = useTranslations("Growth");
@@ -143,6 +148,14 @@ export function Footer() {
             >
               {t("privacyLink")}
             </Link>
+            {showCookieSettings && (
+              <>
+                <span aria-hidden className="text-white/30">
+                  ·
+                </span>
+                <CookieSettingsLink className="transition-colors hover:text-white" />
+              </>
+            )}
             <span aria-hidden className="text-white/30">
               ·
             </span>

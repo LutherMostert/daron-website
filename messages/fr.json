@@ -201,7 +201,15 @@
     "contactTitle": "Contact",
     "contactDescription": "Contactez Daron Namibia à Walvis Bay. Envoyez la RFQ sur WhatsApp ou contactez directement l'équipe opérations.",
     "privacyTitle": "Politique de confidentialité",
-    "privacyDescription": "Comment Daron Namibia collecte, utilise et protège vos données personnelles — chat, demandes de devis et analytique. Mis à jour en avril 2026."
+    "privacyDescription": "Comment Daron Namibia collecte, utilise et protège vos données personnelles — chat, demandes de devis et analytique. Mis à jour en septembre 2026."
+  },
+  "Cookies": {
+    "title": "Cookies sur ce site",
+    "body": "Nous souhaitons utiliser les cookies Google Analytics pour comprendre comment les visiteurs utilisent le site et l'améliorer. Ils ne sont déposés que si vous les acceptez, et vous pouvez modifier votre choix à tout moment.",
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "privacy": "Politique de confidentialité",
+    "settings": "Paramètres des cookies"
   },
   "Privacy": {
     "heroEyebrow": "Politique de confidentialité",
@@ -222,7 +230,7 @@
     "sec3Item2": "Exploiter, sécuriser et améliorer le site (y compris la prévention des abus et le suivi des erreurs).",
     "sec3Item3": "Respecter nos obligations en vertu du droit namibien et, le cas échéant, des lois de votre propre juridiction.",
     "sec4Heading": "4. Qui traite vos données pour notre compte",
-    "sec4Body": "Les messages envoyés à Don peuvent être traités par des fournisseurs d'IA d'entreprise approuvés, dont OpenAI ou Anthropic, selon leur disponibilité. Les données de la demande sont stockées de manière sécurisée et peuvent être envoyées à l'adresse opérations de Daron ou à un webhook d'équipe approuvé. Le site est hébergé par Vercel et utilise Plausible pour une analyse sans cookies. Tous les sous-traitants sont soumis à des obligations de confidentialité et de protection des données.",
+    "sec4Body": "Les messages envoyés à Don peuvent être traités par des fournisseurs d'IA d'entreprise approuvés, dont OpenAI ou Anthropic, selon leur disponibilité. Les données de la demande sont stockées de manière sécurisée et peuvent être envoyées à l'adresse opérations de Daron ou à un webhook d'équipe approuvé. Le site est hébergé par Vercel. La mesure d'audience utilise Vercel Analytics, qui ne dépose aucun cookie, et Google Analytics 4, qui n'est chargé et ne dépose de cookies que si vous acceptez les cookies d'analyse dans le bandeau cookies. Vous pouvez modifier votre choix à tout moment via « Paramètres des cookies » en bas de page. Google Analytics ne reçoit pas le contenu de vos messages ou demandes. Tous les sous-traitants sont soumis à des obligations de confidentialité et de protection des données.",
     "sec5Heading": "5. Vos droits",
     "sec5Body": "Selon votre lieu de résidence, vous pouvez avoir le droit de :",
     "sec5Item1": "Accéder aux données personnelles que nous détenons à votre sujet.",

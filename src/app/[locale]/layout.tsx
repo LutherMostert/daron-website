@@ -12,6 +12,7 @@ import { ChatWidget } from "@/components/ChatWidget";
 import { RevealController } from "@/components/RevealController";
 import { StickyActions } from "@/components/StickyActions";
 import { ConversionAnalytics } from "@/components/ConversionAnalytics";
+import { CookieConsent } from "@/components/CookieConsent";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { contact, site } from "@/lib/site";
 import { routing } from "@/i18n/routing";
@@ -190,7 +191,7 @@ export default async function LocaleLayout({
           <main id="main" tabIndex={-1} className="flex-1 outline-none">
             {children}
           </main>
-          <Footer />
+          <Footer showCookieSettings={analyticsEnabled} />
           <StickyActions />
           <JsonLd id="ld-website" data={websiteJsonLd} />
           <JsonLd id="ld-organization" data={orgJsonLd} />
@@ -198,6 +199,10 @@ export default async function LocaleLayout({
           <ChatWidget />
           <RevealController />
           <ConversionAnalytics />
+          {/* Banner + GA4 loader: Google Analytics only loads after Accept. */}
+          {analyticsEnabled && (
+            <CookieConsent measurementId={site.gaMeasurementId} />
+          )}
         </NextIntlClientProvider>
         {analyticsEnabled && (
           <>

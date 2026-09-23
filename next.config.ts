@@ -29,11 +29,13 @@ const isDev = process.env.NODE_ENV !== "production";
 
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' https://plausible.io${isDev ? " 'unsafe-eval'" : ""}`,
+  // Google Analytics 4 hosts per Google's CSP guide (GA4 without Ads features):
+  // https://developers.google.com/tag-platform/security/guides/csp
+  `script-src 'self' 'unsafe-inline' https://plausible.io https://www.googletagmanager.com${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://www.daron.com.na",
+  "img-src 'self' data: blob: https://www.daron.com.na https://www.googletagmanager.com https://*.google-analytics.com",
   "font-src 'self' data:",
-  `connect-src 'self' https://plausible.io${isDev ? " ws: http:" : ""}`,
+  `connect-src 'self' https://plausible.io https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.google.com${isDev ? " ws: http:" : ""}`,
   "frame-ancestors 'self'",
   "form-action 'self' mailto:",
   "base-uri 'self'",

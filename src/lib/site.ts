@@ -18,6 +18,9 @@ export const site = {
   ogImage: "/og.png",
   locale: "en_NA",
   timezone: "Africa/Windhoek",
+  // GA4 measurement ID (public by design — it ships in page HTML).
+  // Must match the www.daron.com.na web data stream in Google Analytics.
+  gaMeasurementId: "G-WNGYQPLEEP",
 } as const;
 
 export const contact = {

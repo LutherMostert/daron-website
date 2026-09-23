@@ -33,7 +33,7 @@ export default async function PrivacyPage({
   setRequestLocale(locale);
   const t = await getTranslations("Privacy");
 
-  const lastUpdated = new Date("2026-04-23").toLocaleDateString(
+  const lastUpdated = new Date("2026-09-23").toLocaleDateString(
     locale === "pt" ? "pt-PT" : locale === "fr" ? "fr-FR" : "en-GB",
     { year: "numeric", month: "long", day: "numeric" },
   );
