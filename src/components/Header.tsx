@@ -96,6 +96,8 @@ function LanguageSwitcher() {
 }
 
 export function Header() {
+  const pathname = usePathname();
+  const quoteHref = pathname === "/brands/katradis" ? "/contact?from=katradis#rfq" : "/contact#rfq";
   const [open, setOpen] = useState(false);
   const tNav = useTranslations("Nav");
   const tHeader = useTranslations("Header");
@@ -131,7 +133,7 @@ export function Header() {
         <div className="hidden shrink-0 items-center gap-3 xl:flex">
           <LanguageSwitcher />
           <Link
-            href="/contact#rfq"
+            href={quoteHref}
             className="shrink-0 whitespace-nowrap rounded-md bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
           >
             {tHeader("chatCta")} &rarr;
@@ -202,7 +204,7 @@ export function Header() {
             <div className="mt-3 flex items-center gap-3">
               <LanguageSwitcher />
               <Link
-                href="/contact#rfq"
+                href={quoteHref}
                 onClick={() => setOpen(false)}
                 className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--color-cta)] px-5 py-3 text-sm font-semibold text-[var(--color-cta-ink)]"
               >

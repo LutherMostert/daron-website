@@ -11,6 +11,7 @@ import { AddCatalogue } from "@/components/CatalogueEnquiry";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { brands, getBrand, getPartnerByName, site } from "@/lib/site";
+import { localizeKatradisBrand } from "@/lib/katradis-localized";
 
 type Params = Promise<{ locale: string; brand: string }>;
 
@@ -26,8 +27,9 @@ export async function generateMetadata({
   params: Params;
 }): Promise<Metadata> {
   const { locale, brand } = await params;
-  const b = getBrand(brand);
-  if (!b) return {};
+  const baseBrand = getBrand(brand);
+  if (!baseBrand) return {};
+  const b = localizeKatradisBrand(baseBrand, locale);
   return buildMetadata({
     locale,
     path: `/brands/${b.slug}`,
@@ -39,8 +41,9 @@ export async function generateMetadata({
 export default async function BrandPage({ params }: { params: Params }) {
   const { locale, brand } = await params;
   setRequestLocale(locale);
-  const b = getBrand(brand);
-  if (!b) notFound();
+  const baseBrand = getBrand(brand);
+  if (!baseBrand) notFound();
+  const b = localizeKatradisBrand(baseBrand, locale);
   const partner = getPartnerByName(b.partnerName);
   const t = await getTranslations("Brands");
 
@@ -63,7 +66,7 @@ export default async function BrandPage({ params }: { params: Params }) {
     "@context": "https://schema.org",
     "@type": "Service",
     name: `${b.name} — ${b.tagline}`,
-    serviceType: "Authorised distribution",
+    serviceType: b.serviceType ?? "Authorised distribution",
     provider: { "@type": "Organization", name: site.name, url: site.url },
     areaServed: { "@type": "Country", name: "Namibia" },
     description: b.intro[0],
@@ -101,7 +104,8 @@ export default async function BrandPage({ params }: { params: Params }) {
                 alt={`${b.name} logo`}
                 width={partner.logoWidth}
                 height={partner.logoHeight}
-                className="h-9 w-auto max-w-[200px] object-contain"
+                sizes="200px"
+                className={b.slug === "katradis" ? "h-20 w-auto max-w-[200px] object-contain" : "h-9 w-auto max-w-[200px] object-contain"}
               />
             </div>
           ) : (
@@ -110,29 +114,29 @@ export default async function BrandPage({ params }: { params: Params }) {
             </p>
           )}
 
-          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-            {b.distributorTier}
-          </p>
+          {b.slug !== "katradis" && <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">{b.distributorTier}</p>}
           <h1 className="mt-3 max-w-3xl font-[family-name:var(--font-poppins)] text-3xl font-bold leading-tight sm:text-5xl">
             {b.tagline}
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
             {b.intro[0]}
           </p>
+          {b.enquiryNote && <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/85">{b.enquiryNote}</p>}
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <Link
-              href="/contact#rfq"
+              href={b.slug === "katradis" ? "/contact?from=katradis#rfq" : "/contact#rfq"}
               className="rounded-full bg-[var(--color-cta)] px-7 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
             >
               {t("sendRfq")} &rarr;
             </Link>
             <Link
-              href="/contact"
+              href={b.slug === "katradis" ? "/contact?from=katradis#rfq" : "/contact"}
               className="rounded-full border border-white/30 px-7 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
             >
               {t("talkCta")}
             </Link>
           </div>
+          {b.manufacturerUrl && <p className="mt-6 text-xs text-white/85">{t("manufacturerImage")}</p>}
         </Container>
       </section>
 
@@ -140,11 +144,12 @@ export default async function BrandPage({ params }: { params: Params }) {
       <section className="bg-white py-20 sm:py-24">
         <Container className="grid gap-12 md:grid-cols-[1.6fr_1fr] md:items-start">
           <div className="space-y-5 text-base leading-relaxed text-[var(--color-mute)]">
-            {b.intro.map((para, i) => (
+            {(b.slug === "katradis" ? b.intro.slice(1) : b.intro).map((para, i) => (
               <p key={i} data-reveal>
                 {para}
               </p>
             ))}
+            {b.manufacturerUrl && <a href={b.manufacturerUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center font-semibold text-[var(--color-accent-text)] underline underline-offset-4">{t("manufacturerLink")} &rarr;</a>}
           </div>
           <aside data-reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-text)]">
@@ -160,6 +165,10 @@ export default async function BrandPage({ params }: { params: Params }) {
                 </li>
               ))}
             </ul>
+            {b.productDetail && <figure className="mt-8">
+              <Image src={b.productDetail.image} alt={b.productDetail.alt} width={b.productDetail.width} height={b.productDetail.height} sizes="(max-width: 767px) 90vw, 400px" className="w-full object-contain" />
+              <figcaption className="mt-4 text-sm leading-relaxed text-[var(--color-mute)]"><strong className="block text-[var(--color-navy)]">{b.productDetail.title}</strong>{b.productDetail.body}</figcaption>
+            </figure>}
           </aside>
         </Container>
       </section>
@@ -268,6 +277,8 @@ export default async function BrandPage({ params }: { params: Params }) {
         variant="navy"
         heading={t("rfqHeading", { brand: b.name })}
         body={t("rfqBody")}
+        contactHref={b.slug === "katradis" ? "/contact?from=katradis#rfq" : undefined}
+        whatsappText={b.slug === "katradis" ? t("katradisWhatsapp") : undefined}
       />
 
       <JsonLd id="ld-brand-breadcrumb" data={breadcrumb} />

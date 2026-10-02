@@ -57,15 +57,18 @@
     "intro": "Nomes reais do nosso trabalho offshore, de doca seca e de aprovisionamento — não logótipos genéricos."
   },
   "Brands": {
+    "katradisWhatsapp": "Pedido de cabos de amarração Katradis: agradeço apoio na seleção do produto e na confirmação do preço e da disponibilidade para o meu navio.",
+    "manufacturerImage": "Imagem do fabricante Katradis · cabos sintéticos de amarração",
+    "manufacturerLink": "Consultar as informações do fabricante",
     "heroEyebrow": "Marcas que representamos",
     "heroTitle": "As marcas que representamos na Namíbia",
-    "heroIntro": "A Daron Namibia é o distribuidor local autorizado de um conjunto seleto de marcas marítimas, de segurança e industriais de classe mundial — fornecidas, armazenadas e apoiadas a partir de Walvis Bay.",
+    "heroIntro": "Conheça as nossas marcas marítimas, de segurança e industriais com a Daron Namibia em Walvis Bay. A nossa equipa confirma a especificação, a disponibilidade e a entrega para cada pedido.",
     "cardCta": "Ver marca",
     "sectorsLabel": "Setores",
     "rangesHeading": "O que fornecemos",
     "keyProductsHeading": "Produtos principais",
     "cataloguesHeading": "Catálogos de produtos",
-    "cataloguesNote": "Descarregue abaixo as brochuras do fabricante. Para preços ou disponibilidade, envie um pedido de cotação — um KAM responde no mesmo dia.",
+    "cataloguesNote": "Descarregue abaixo os documentos do fabricante. Para preços ou disponibilidade, envie um pedido de cotação para análise por um especialista da Daron.",
     "available": "({count} disponíveis)",
     "backToBrands": "Todas as marcas",
     "exploreAll": "Explorar todas as marcas",
@@ -82,6 +85,7 @@
     "talkCta": "Pergunte ao assistente de IA da Daron"
   },
   "ShipChandlery": {
+    "katradisLink": "Conhecer os cabos de amarração Katradis",
     "heroEyebrow": "Aprovisionamento naval · Walvis Bay",
     "heroTitle": "Aprovisionamento naval em Walvis Bay",
     "heroIntro": "A Daron Namibia é um fornecedor naval completo em Walvis Bay — lojas de convés e de máquinas, provisões, lojas alfandegadas, equipamento de segurança e abastecimentos técnicos, entregues a navios e plataformas dentro do prazo. Membro ISSA e IMPA.",
@@ -1108,6 +1112,7 @@
     "multiHint": "Indique cada porto ou local, a data e a parte correspondente do pedido.",
     "multiNote": "A equipa da Namíbia analisará a coordenação. Os outros escritórios e as condições de entrega serão confirmados para o seu âmbito.",
     "sources": {
+      "katradis": "Cabos de amarração Katradis",
       "vessel-reactivation": "Reativação de navios",
       "planned-maintenance": "Manutenção planeada",
       "remote-site-supply": "Abastecimento de locais remotos",

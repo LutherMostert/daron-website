@@ -49,6 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/industries", priority: 0.8, cf: "monthly" },
     { path: "/industries/oil-and-gas", priority: 0.8, cf: "monthly" },
     { path: "/brands", priority: 0.7, cf: "monthly" },
+    { path: "/brands/katradis", priority: 0.7, cf: "monthly" },
     { path: "/brands/hempel", priority: 0.7, cf: "monthly" },
     { path: "/brands/orlichem", priority: 0.7, cf: "monthly" },
     { path: "/brands/honeywell", priority: 0.7, cf: "monthly" },

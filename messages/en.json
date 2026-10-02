@@ -57,9 +57,12 @@
     "intro": "Real names from our offshore, dry-dock and provisioning work — not stock logos."
   },
   "Brands": {
+    "katradisWhatsapp": "Katradis mooring rope enquiry: please help with product selection, pricing and availability for my vessel.",
+    "manufacturerImage": "Katradis manufacturer image · synthetic mooring ropes",
+    "manufacturerLink": "View manufacturer product information",
     "heroEyebrow": "Brands we represent",
     "heroTitle": "The brands we represent in Namibia",
-    "heroIntro": "Daron Namibia is the authorised local distributor for a focused set of world-class marine, safety and industrial brands — supplied, stocked and supported from Walvis Bay.",
+    "heroIntro": "Explore our marine, safety and industrial brands through Daron Namibia in Walvis Bay. Our team confirms the product specification, availability and delivery arrangements for each enquiry.",
     "cardCta": "View brand",
     "sectorsLabel": "Sectors",
     "rangesHeading": "What we supply",
@@ -82,6 +85,7 @@
     "talkCta": "Ask the Daron AI assistant"
   },
   "ShipChandlery": {
+    "katradisLink": "Explore Katradis mooring ropes",
     "heroEyebrow": "Ship Chandlery · Walvis Bay",
     "heroTitle": "Ship Chandlery in Walvis Bay",
     "heroIntro": "Daron Namibia is a full-service ship chandler in Walvis Bay — deck and engine stores, provisions, bonded stores, safety equipment and technical supplies, delivered to vessels and rigs on schedule. ISSA and IMPA listed.",
@@ -1108,6 +1112,7 @@
     "multiHint": "List each port or site, the required date and the relevant part of your requirement.",
     "multiNote": "Our Namibia team will review coordination needs. Other offices and delivery arrangements are confirmed for your scope.",
     "sources": {
+      "katradis": "Katradis mooring ropes",
       "vessel-reactivation": "Vessel reactivation",
       "planned-maintenance": "Planned maintenance",
       "remote-site-supply": "Remote-site supply",

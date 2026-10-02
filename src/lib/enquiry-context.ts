@@ -4,6 +4,7 @@ export const catalogueDirectory = partners.flatMap(partner => partner.catalogues
   file: catalogue.file, title: catalogue.title, brand: partner.name,
 })));
 export const enquirySources = {
+  "katradis": "Katradis mooring ropes",
   "vessel-reactivation": "Vessel reactivation",
   "planned-maintenance": "Planned maintenance",
   "remote-site-supply": "Remote-site supply",

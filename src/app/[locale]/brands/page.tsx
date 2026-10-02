@@ -10,6 +10,7 @@ import { ClientWall } from "@/components/ClientWall";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { brands, getPartnerByName, site } from "@/lib/site";
+import { localizeKatradisBrand } from "@/lib/katradis-localized";
 
 export async function generateMetadata({
   params,
@@ -56,7 +57,8 @@ export default async function BrandsPage({
       <section className="bg-white py-20 sm:py-24">
         <Container>
           <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {brands.map((b, idx) => {
+            {brands.map((baseBrand, idx) => {
+              const b = localizeKatradisBrand(baseBrand, locale);
               const partner = getPartnerByName(b.partnerName);
               return (
                 <li
@@ -70,14 +72,15 @@ export default async function BrandsPage({
                     href={`/brands/${b.slug}`}
                     className="group flex h-full flex-col rounded-2xl border border-[var(--color-line)] bg-white p-7 shadow-sm transition-shadow hover:shadow-md"
                   >
-                    <div className="flex h-12 items-center">
+                    <div className="flex h-16 items-center">
                       {partner?.logo ? (
                         <Image
                           src={partner.logo}
                           alt={`${b.name} logo`}
                           width={partner.logoWidth}
                           height={partner.logoHeight}
-                          className="h-8 w-auto max-w-[170px] object-contain object-left"
+                          sizes="170px"
+                          className={b.slug === "katradis" ? "h-16 w-auto max-w-[170px] object-contain object-left" : "h-8 w-auto max-w-[170px] object-contain object-left"}
                         />
                       ) : (
                         <span className="font-[family-name:var(--font-poppins)] text-xl font-bold text-[var(--color-navy)]">

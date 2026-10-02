@@ -57,15 +57,18 @@
     "intro": "Des noms réels issus de nos opérations offshore, de cale sèche et d'avitaillement — pas des logos génériques."
   },
   "Brands": {
+    "katradisWhatsapp": "Demande de cordages d’amarrage Katradis : merci de m’aider à choisir le produit et à confirmer le prix et la disponibilité pour mon navire.",
+    "manufacturerImage": "Image du fabricant Katradis · cordages synthétiques d’amarrage",
+    "manufacturerLink": "Consulter les informations du fabricant",
     "heroEyebrow": "Les marques que nous représentons",
     "heroTitle": "Les marques que nous représentons en Namibie",
-    "heroIntro": "Daron Namibia est le distributeur local agréé d'un ensemble ciblé de marques maritimes, de sécurité et industrielles de classe mondiale — fournies, stockées et soutenues depuis Walvis Bay.",
+    "heroIntro": "Découvrez nos marques marines, de sécurité et industrielles avec Daron Namibia à Walvis Bay. Notre équipe confirme les spécifications, la disponibilité et la livraison pour chaque demande.",
     "cardCta": "Voir la marque",
     "sectorsLabel": "Secteurs",
     "rangesHeading": "Ce que nous fournissons",
     "keyProductsHeading": "Produits clés",
     "cataloguesHeading": "Catalogues de produits",
-    "cataloguesNote": "Téléchargez les brochures du fabricant ci-dessous. Pour les prix ou la disponibilité, envoyez une demande de devis — un KAM répond le jour même.",
+    "cataloguesNote": "Téléchargez les documents du fabricant ci-dessous. Pour les prix ou la disponibilité, envoyez une demande de devis à examiner par un spécialiste Daron.",
     "available": "({count} disponibles)",
     "backToBrands": "Toutes les marques",
     "exploreAll": "Découvrir toutes les marques",
@@ -82,6 +85,7 @@
     "talkCta": "Demander à l'assistant IA de Daron"
   },
   "ShipChandlery": {
+    "katradisLink": "Découvrir les cordages d’amarrage Katradis",
     "heroEyebrow": "Avitaillement maritime · Walvis Bay",
     "heroTitle": "Avitaillement maritime à Walvis Bay",
     "heroIntro": "Daron Namibia est un avitailleur maritime complet à Walvis Bay — magasins de pont et de machine, provisions, magasins sous douane, équipements de sécurité et fournitures techniques, livrés aux navires et plateformes dans les délais. Membre ISSA et IMPA.",
@@ -1108,6 +1112,7 @@
     "multiHint": "Indiquez chaque port ou site, la date et les besoins correspondants.",
     "multiNote": "Notre équipe namibienne examinera la coordination. Les autres bureaux et modalités de livraison seront confirmés pour votre périmètre.",
     "sources": {
+      "katradis": "Cordages d’amarrage Katradis",
       "vessel-reactivation": "Remise en service d’un navire",
       "planned-maintenance": "Maintenance planifiée",
       "remote-site-supply": "Approvisionnement de site isolé",

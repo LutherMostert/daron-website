@@ -197,7 +197,8 @@ export default async function ServicesPage({
                         alt={`${p.name} logo`}
                         width={p.logoWidth}
                         height={p.logoHeight}
-                        className="max-h-12 w-auto"
+                        sizes="170px"
+                        className="max-h-12 w-auto max-w-[170px] object-contain"
                       />
                     ) : (
                       <span className="font-[family-name:var(--font-poppins)] text-2xl font-bold tracking-tight text-[var(--color-navy)]">

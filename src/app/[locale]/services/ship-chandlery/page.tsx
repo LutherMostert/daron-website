@@ -6,6 +6,7 @@ import { PageHero } from "@/components/PageHero";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
+import { Link } from "@/i18n/routing";
 import { contact, site } from "@/lib/site";
 
 export async function generateMetadata({
@@ -113,6 +114,7 @@ export default async function ShipChandleryPage({
                 </li>
               ))}
             </ul>
+            <Link href="/brands/katradis" className="mt-8 inline-flex min-h-11 items-center font-semibold text-[var(--color-accent-text)] underline underline-offset-4">{t("katradisLink")} &rarr;</Link>
           </div>
 
           <aside

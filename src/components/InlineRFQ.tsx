@@ -14,12 +14,16 @@ type Props = {
   variant?: "navy" | "sand";
   heading?: string;
   body?: string;
+  contactHref?: string;
+  whatsappText?: string;
 };
 
 export function InlineRFQ({
   variant = "sand",
   heading,
   body,
+  contactHref = "/contact#rfq",
+  whatsappText,
 }: Props) {
   const t = useTranslations("InlineRFQ");
   const resolvedHeading = heading ?? t("defaultHeading");
@@ -60,7 +64,7 @@ export function InlineRFQ({
           </div>
           <div className="flex flex-col items-stretch gap-3">
             <a
-              href={contact.whatsapp.href}
+              href={whatsappText ? `${contact.whatsapp.href}?text=${encodeURIComponent(whatsappText)}` : contact.whatsapp.href}
               className="order-2 border border-current px-6 py-3 text-center text-sm font-semibold transition-colors hover:opacity-80"
               target="_blank"
               rel="noopener noreferrer"
@@ -68,7 +72,7 @@ export function InlineRFQ({
               {t("whatsappCta")} &rarr;
             </a>
             <Link
-              href="/contact#rfq"
+              href={contactHref}
               className="premium-button order-1 justify-center"
             >
               {t("contactCta")}

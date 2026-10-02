@@ -13,7 +13,7 @@ export function AddCatalogue({ file }: { file: string }) {
       const saved = selected ? saveCatalogueEnquiry(items.filter(item => item.file !== file)) : addCatalogue(file); setError(!saved);
       if (saved && !selected) trackEvent("Catalogue_Add_To_Enquiry", { catalogue: file });
     }}>{t(selected ? "added" : "addCatalogue")} {selected ? "✓" : "+"}</button>
-    {selected && <Link href="/contact#rfq">{t("reviewList", { count: items.length })} →</Link>}
+    {selected && <Link href={file.startsWith("/catalogues/katradis-") ? "/contact?from=katradis#rfq" : "/contact#rfq"}>{t("reviewList", { count: items.length })} →</Link>}
     {error && <p role="alert">{t("listError")}</p>}
   </div>;
 }

@@ -96,6 +96,18 @@ export type Partner = {
 
 export const partners: Partner[] = [
   {
+    name: "Katradis",
+    note: "Marine mooring ropes — enquiries through Daron Namibia",
+    category: "Marine ropes & mooring",
+    logo: "/images/partners/katradis.png",
+    logoWidth: 1572,
+    logoHeight: 1237,
+    catalogues: [
+      { title: "IMPROVED 8 — synthetic mooring rope datasheet", file: "/catalogues/katradis-improved-8-datasheet.pdf", sizeMB: 0.6 },
+      { title: "Synthetic mooring ropes — user's manual", file: "/catalogues/katradis-synthetic-mooring-ropes-manual.pdf", sizeMB: 3.7 },
+    ],
+  },
+  {
     name: "Orlichem",
     note: "Exclusive distributor — specialised marine chemicals",
     category: "Marine chemicals & coatings",
@@ -344,9 +356,44 @@ export type Brand = {
   /** Named product families — sourced from the manufacturer brochures/sites. */
   keyProducts?: string[];
   heroImage: string;
+  /** Optional supplier evidence for a rope/product detail within this template. */
+  productDetail?: { image: string; width: number; height: number; alt: string; title: string; body: string };
+  enquiryNote?: string;
+  manufacturerUrl?: string;
+  serviceType?: string;
 };
 
 export const brands: Brand[] = [
+  {
+    slug: "katradis",
+    partnerName: "Katradis",
+    name: "Katradis",
+    tagline: "Synthetic mooring ropes",
+    distributorTier: "Katradis enquiries — Walvis Bay",
+    sectors: ["Marine & shipping", "Offshore vessels", "Fishing vessels"],
+    intro: [
+      "Explore Katradis mooring ropes with Daron Namibia in Walvis Bay. Send your vessel's rope specification and delivery requirements to our team for product selection, pricing and availability.",
+      "The Katradis range includes IMPROVED 8, a specialised eight-strand mixed mooring rope made with NIKA-Steel high-tenacity polyolefin fibres and polyester. Manufacturer technical documents are available below to support your enquiry.",
+    ],
+    ranges: [
+      { title: "IMPROVED 8 mixed mooring rope", body: "An eight-strand construction combining NIKA-Steel high-tenacity polyolefin and polyester fibres. The manufacturer describes a floating rope with abrasion resistance; the exact specification must match your vessel's requirements." },
+      { title: "Specification & product selection", body: "Send the required diameter, length, quantity, material and construction, minimum breaking load, and any eye, splice or certification requirements. Our team will confirm the proposed product and supporting documentation before quotation." },
+      { title: "Handling, care & inspection", body: "Use the manufacturer's synthetic mooring rope manual for handling, storage, inspection and retirement guidance. Follow the vessel's mooring procedures and keep personnel clear of loaded ropes and potential snap-back areas." },
+    ],
+    keyProducts: ["IMPROVED 8"],
+    heroImage: "/images/brands/katradis-vessel-mooring.jpg",
+    productDetail: {
+      image: "/images/brands/katradis-improved-8-rope.jpg",
+      width: 1018,
+      height: 316,
+      alt: "Katradis IMPROVED 8 eight-strand mixed mooring rope, shown in the manufacturer's datasheet",
+      title: "A closer look at IMPROVED 8",
+      body: "Manufacturer product image. IMPROVED 8 features an eight-strand mixed rope construction; reduced snap-back construction belongs to a separate Katradis product range.",
+    },
+    enquiryNote: "Include the vessel name, rope specification, quantity, required delivery date and delivery point. Sizes, stock allocation, documentation and lead time are confirmed for each enquiry.",
+    manufacturerUrl: "https://www.katradis.com/our-products/mooring-ropes/high-quality-ropes-2/mixed-synthetic-ropes/improved-8/",
+    serviceType: "Marine mooring rope supply enquiries",
+  },
   {
     slug: "hempel",
     partnerName: "Hempel",

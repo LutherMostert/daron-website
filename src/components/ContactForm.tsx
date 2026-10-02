@@ -62,7 +62,7 @@ function ContactFormContent() {
   </div>;
   return <form id="enquiry-form" onSubmit={submit} className="intake-form" encType="multipart/form-data">
     <fieldset disabled={status === "sending"} className="space-y-6"><legend className="sr-only">{t("formTitle")}</legend>
-      {source && <p className="enquiry-context-label">{g("context")} <strong>{g(`sources.${source}`)}</strong></p>}
+      {source && <p className="enquiry-context-label" style={source === "katradis" ? { borderLeftWidth: 1 } : undefined}>{g("context")} <strong>{g(`sources.${source}`)}</strong></p>}
       <CatalogueEnquiryList />
       <div className="intake-choice" role="group" aria-label={t("typeLabel")}>
         {(["quote", "enquiry"] as const).map(type => <label key={type} className={requestType === type ? "selected" : ""}><input type="radio" name="requestType" value={type} checked={requestType === type} onChange={() => setRequestType(type)} /><span><strong>{t(type)}</strong><small>{t(`${type}Hint`)}</small></span></label>)}
@@ -74,7 +74,7 @@ function ContactFormContent() {
         <label className="intake-field"><span>{t("reply")}</span><select name="preferredContact" value={preferred} onChange={event => setPreferred(event.target.value)}>{["Email", "WhatsApp", "Phone call"].map((value, index) => <option key={value} value={value}>{t(`reply${index}`)}</option>)}</select></label>
       </div>
       {preferred !== "Email" && <Field id="phone" label={t("phone")} required type="tel" autoComplete="tel" placeholder="+264 …" maxLength={40} pattern="\+[0-9 ().\-]{7,24}" />}
-      <label className="intake-field"><span>{t("service")}{requestType === "quote" ? " *" : ` · ${t("optional")}`}</span><select name="category" defaultValue="" required={requestType === "quote"}><option value="">{t("choose")}</option>{CATEGORIES.map((value, index) => <option key={value} value={value}>{t(`category${index}`)}</option>)}</select></label>
+      <label className="intake-field"><span>{t("service")}{requestType === "quote" ? " *" : ` · ${t("optional")}`}</span><select name="category" defaultValue={source === "katradis" ? "Ship chandlery" : ""} required={requestType === "quote"}><option value="">{t("choose")}</option>{CATEGORIES.map((value, index) => <option key={value} value={value}>{t(`category${index}`)}</option>)}</select></label>
       <label className="intake-field"><span>{t("message")}{!fileName && !hasCatalogueRequirement && " *"}</span><textarea name="message" rows={4} minLength={fileName || hasCatalogueRequirement ? undefined : 10} maxLength={4000} required={!fileName && !hasCatalogueRequirement} placeholder={t(requestType === "quote" ? "messageQuote" : "messageEnquiry")} /></label>
       <label className="intake-upload"><span><strong>{t("attach")}</strong><small>{fileName || t("attachHint")}</small></span><input type="file" name="rfqFile" accept={ACCEPTED_EXTENSIONS.join(",")} aria-label={t("attach")} onChange={event => setFileName(event.target.files?.[0]?.name || "")} /><small>{t("fileLimit")}</small></label>
       {requestType === "quote" && <details className="intake-details"><summary>{t("deliveryDetails")} <span>{t("optional")}</span></summary><div className="mt-5 grid gap-5 sm:grid-cols-2"><Field id="vessel" label={t("vessel")} maxLength={120} /><Field id="deliveryPoint" label={t("delivery")} maxLength={140} /><Field id="urgency" label={t("date")} placeholder={t("dateHint")} maxLength={120} /></div></details>}

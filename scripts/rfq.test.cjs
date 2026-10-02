@@ -54,6 +54,17 @@ test('a catalogue alone needs an item detail; a described item can replace the m
   data.catalogueSelections[0].detail='Part ABC';assert.ok(rfq.parseContact(data,false).fields);
   assert.ok(rfq.parseContact({...sample,sourceContext:'invented-office'},false).error);
 });
+
+test('Katradis enquiry preserves trusted brand and product context in the operations notification',()=>{
+  const {fields,error}=rfq.parseContact({...sample,requestType:'quote',category:'Ship chandlery',sourceContext:'katradis',catalogueSelections:[{file:'/catalogues/katradis-improved-8-datasheet.pdf',detail:'IMPROVED 8; diameter, length and splice to confirm',quantity:'2 ropes'}]},false);
+  assert.equal(error,undefined);
+  assert.equal(fields.sourceContext,'katradis');
+  assert.equal(fields.catalogueSelections[0].brand,'Katradis');
+  const email=rfq.buildRfqEmail(fields,'RFQ-KATRADIS-TEST','2026-10-01T12:00:00Z');
+  assert.match(email.text,/Katradis mooring ropes/);
+  assert.match(email.text,/IMPROVED 8/);
+  assert.match(email.text,/2 ropes/);
+});
 test('catalogue notes and multi-location scope remain escaped in operations mail',()=>{
   const fields=rfq.parseContact({...sample,sourceContext:'planned-maintenance',multiLocation:'Walvis Bay\nCape Town',catalogueSelections:[{file:catalogueFile,detail:'Part <script>x</script>',quantity:'2 × 20 litres'}]},false).fields;
   const email=rfq.buildRfqEmail(fields,'RFQ-DEMO','2026-09-08T08:00:00Z');
