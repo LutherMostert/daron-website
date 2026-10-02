@@ -38,7 +38,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "How do I send an RFQ or request for quote?",
-    a: `Use the secure RFQ form on this website, contact Daron operations on WhatsApp at ${contact.whatsapp.display}, or email dnoperations@daron-group.com. The website form accepts Excel, PDF, Word, CSV and TXT documents up to 4 MB.`,
+    a: `Use any Request a quote button to open an email to ${contact.emails.operations}, or contact Daron operations on WhatsApp at ${contact.whatsapp.display}. Include your item list, quantities and delivery requirements, and attach supporting documents in your email.`,
   },
   {
     q: "What is “Don”, the Daron AI assistant?",

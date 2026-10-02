@@ -1,9 +1,10 @@
 "use client";
 
+import { QuoteLink } from "@/components/QuoteLink";
+
 import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 
 
-import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { contact } from "@/lib/site";
 import { Container } from "./Container";
@@ -17,7 +18,6 @@ type Props = {
   variant?: "navy" | "sand";
   heading?: string;
   body?: string;
-  contactHref?: string;
   whatsappText?: string;
 };
 
@@ -25,7 +25,6 @@ export function InlineRFQ({
   variant = "sand",
   heading,
   body,
-  contactHref = "/contact#rfq",
   whatsappText,
 }: Props) {
   const t = useTranslations("InlineRFQ");
@@ -72,12 +71,11 @@ export function InlineRFQ({
                 className="border border-current px-4 py-3 text-center text-sm font-semibold transition-colors hover:opacity-80"
               />
             </div>
-            <Link
-              href={contactHref}
+            <QuoteLink
               className="premium-button order-1 justify-center"
             >
               {t("contactCta")}
-            </Link>
+            </QuoteLink>
             <p
               className={`order-3 mt-1 text-center text-xs ${
                 isNavy ? "text-white/60" : "text-[var(--color-mute)]"

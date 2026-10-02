@@ -30,7 +30,7 @@
     "eyebrow": "How an RFQ moves",
     "heading": "Digital intake. Human-reviewed accountability.",
     "s1Title": "Received",
-    "s1Body": "Your RFQ can arrive through the secure website form, WhatsApp or email, with supporting documents where available.",
+    "s1Body": "Send your RFQ by email or WhatsApp, with supporting documents where available.",
     "s2Title": "Routed",
     "s2Body": "Daron operations reviews the scope and assigns the right commercial or technical specialist.",
     "s3Title": "Quoted",
@@ -75,7 +75,7 @@
     "talkCta": "Talk to our team",
     "sendRfq": "Send your RFQ",
     "rfqHeading": "Need {brand} products or a quote?",
-    "rfqBody": "Send your requirement on WhatsApp or through the secure RFQ form. Daron operations routes it to the right specialist for pricing, availability and delivery.",
+    "rfqBody": "Email your requirement or send it on WhatsApp. Daron operations routes it to the right specialist for pricing, availability and delivery.",
     "distributorOf": "Authorised distributor"
   },
   "Faq": {
@@ -203,7 +203,7 @@
     "aiTitle": "Meet Don — Daron's AI operations copilot",
     "aiDescription": "Meet Don — Daron Namibia's AI operations copilot. Answers operational questions, captures enquiry context and supports a direct handoff to the operations team.",
     "contactTitle": "Contact — Walvis Bay Ship Chandler & Marine Supply",
-    "contactDescription": "Get in touch with Daron Namibia in Walvis Bay. Send an RFQ through the secure form or contact operations by WhatsApp, phone or email.",
+    "contactDescription": "Contact Daron Namibia in Walvis Bay. Request a quotation directly by email or speak to our team on WhatsApp.",
     "privacyTitle": "Privacy Policy",
     "privacyDescription": "How Daron Namibia collects, uses and protects your personal data — including chat widget data, RFQ intake and website analytics. Updated September 2026."
   },
@@ -619,7 +619,7 @@
     "enterpriseEyebrow": "Built on enterprise-grade AI",
     "enterpriseHeading": "An always-on AI colleague — not a chatbot.",
     "enterpriseP1": "Don uses enterprise language models with provider failover. It works from approved Daron reference information and routes every commercial request to the operations team for human review.",
-    "enterpriseP2": "When an enquiry lands in the website assistant, Don answers scope questions and records the contact context. Uploaded RFQ files follow the secure contact workflow; pricing and quote approval remain human decisions.",
+    "enterpriseP2": "When an enquiry lands in the website assistant, Don answers scope questions and records the contact context. Send RFQ files directly to our operations team by email; pricing and quote approval remain human decisions.",
     "enterpriseP3": "A Daron specialist reviews and approves every quote before it leaves our system. Don accelerates response time; he does not replace the trust, judgment, and accountability our clients rely on.",
     "capEyebrow": "What Don does",
     "capHeading": "Enquiry to accountable operations handoff",
@@ -653,8 +653,8 @@
     "tech2Tech": "Daron operations layer",
     "tech3Cap": "Reference grounding",
     "tech3Tech": "Approved Daron operating information",
-    "tech4Cap": "RFQ file upload",
-    "tech4Tech": "Secure contact workflow",
+    "tech4Cap": "RFQ email attachments",
+    "tech4Tech": "Direct email to operations",
     "tech5Cap": "Lead continuity",
     "tech5Tech": "Durable operations queue",
     "tech6Cap": "Commercial review",
@@ -663,7 +663,7 @@
     "tech7Tech": "Website + direct operations handoff",
     "techNote": "Provider-resilient architecture with human review before any commercial commitment.",
     "rfqHeading": "Send your next RFQ.",
-    "rfqBody": "Upload a spreadsheet or PDF through the secure RFQ form, or send the requirement on WhatsApp. Daron operations routes it to a specialist for pricing, availability and delivery control."
+    "rfqBody": "Email your spreadsheet or PDF, or send the requirement on WhatsApp. Daron operations routes it to a specialist for pricing, availability and delivery control."
   },
   "Contact": {
     "heroEyebrow": "Contact",
@@ -1118,6 +1118,21 @@
       "remote-site-supply": "Remote-site supply",
       "group-network": "Daron Group support",
       "procurement-resources": "Supplier onboarding documents"
-    }
+    },
+    "emailList": "Email enquiry ({count})"
+  },
+  "QuoteEmail": {
+    "subject": "Quotation request",
+    "body": "Hello Daron team,\n\nPlease assist with a quotation for the following requirement:\n\nItems and quantities:\nDelivery location and date:",
+    "regarding": "Regarding",
+    "catalogues": "Selected catalogues",
+    "details": "Item details",
+    "quantity": "Quantity",
+    "source": "Website page",
+    "openEmail": "Email {email}",
+    "heading": "Email your request directly.",
+    "intro": "Send your product list or scope of work to our operations team. Attach any specifications or supporting documents in your email.",
+    "button": "Request a quote by email",
+    "hint": "The button opens your email app. You can also copy the address below into your preferred email service."
   }
 }

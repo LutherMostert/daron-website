@@ -1,7 +1,8 @@
 "use client";
+
+import { QuoteLink } from "@/components/QuoteLink";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
 import { addCatalogue, saveCatalogueEnquiry, useCatalogueEnquiry } from "@/lib/enquiry-browser";
 import { trackEvent } from "@/lib/analytics";
 
@@ -13,7 +14,7 @@ export function AddCatalogue({ file }: { file: string }) {
       const saved = selected ? saveCatalogueEnquiry(items.filter(item => item.file !== file)) : addCatalogue(file); setError(!saved);
       if (saved && !selected) trackEvent("Catalogue_Add_To_Enquiry", { catalogue: file });
     }}>{t(selected ? "added" : "addCatalogue")} {selected ? "✓" : "+"}</button>
-    {selected && <Link href={file.startsWith("/catalogues/katradis-") ? "/contact?from=katradis#rfq" : "/contact#rfq"}>{t("reviewList", { count: items.length })} →</Link>}
+    {selected && <QuoteLink>{t("emailList", { count: items.length })} →</QuoteLink>}
     {error && <p role="alert">{t("listError")}</p>}
   </div>;
 }

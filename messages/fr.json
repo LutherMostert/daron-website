@@ -30,7 +30,7 @@
     "eyebrow": "Le parcours d'un RFQ",
     "heading": "Saisie numérique. Responsabilité avec contrôle humain.",
     "s1Title": "Reçu",
-    "s1Body": "Votre RFQ peut arriver via le formulaire sécurisé du site, WhatsApp ou e-mail, avec les documents disponibles.",
+    "s1Body": "Envoyez votre demande de devis par e-mail ou WhatsApp, avec les documents disponibles.",
     "s2Title": "Orienté",
     "s2Body": "Les opérations Daron examinent le périmètre et désignent le bon spécialiste commercial ou technique.",
     "s3Title": "Chiffré",
@@ -75,7 +75,7 @@
     "talkCta": "Parler à notre équipe",
     "sendRfq": "Envoyer votre demande",
     "rfqHeading": "Besoin de produits {brand} ou d'un devis ?",
-    "rfqBody": "Envoyez votre demande par WhatsApp ou via le formulaire RFQ sécurisé. Les opérations Daron la transmettent au bon spécialiste pour les prix, la disponibilité et la livraison.",
+    "rfqBody": "Envoyez votre demande par e-mail ou WhatsApp. Les opérations Daron la transmettent au bon spécialiste pour les prix, la disponibilité et la livraison.",
     "distributorOf": "Distributeur agréé"
   },
   "Faq": {
@@ -203,7 +203,7 @@
     "aiTitle": "Découvrez Don — le copilote IA des opérations de Daron",
     "aiDescription": "Découvrez Don — le copilote IA des opérations de Daron Namibia. Il répond aux questions opérationnelles, enregistre le contexte et facilite un transfert direct vers l'équipe.",
     "contactTitle": "Contact",
-    "contactDescription": "Contactez Daron Namibia à Walvis Bay. Envoyez la RFQ sur WhatsApp ou contactez directement l'équipe opérations.",
+    "contactDescription": "Contactez Daron Namibia à Walvis Bay. Demandez un devis directement par e-mail ou échangez avec notre équipe sur WhatsApp.",
     "privacyTitle": "Politique de confidentialité",
     "privacyDescription": "Comment Daron Namibia collecte, utilise et protège vos données personnelles — chat, demandes de devis et analytique. Mis à jour en septembre 2026."
   },
@@ -619,7 +619,7 @@
     "enterpriseEyebrow": "Construit sur une IA de grade entreprise",
     "enterpriseHeading": "Un collègue IA toujours disponible — pas un chatbot.",
     "enterpriseP1": "Don utilise des modèles de langage d'entreprise avec redondance des fournisseurs. Il travaille à partir d'informations Daron approuvées et transmet chaque demande commerciale à l'équipe pour validation humaine.",
-    "enterpriseP2": "Lorsqu'une demande arrive dans l'assistant du site, Don répond aux questions de périmètre et enregistre le contexte de contact. Les fichiers RFQ suivent le flux sécurisé; la tarification et l'approbation restent humaines.",
+    "enterpriseP2": "Lorsque vous utilisez l’assistant du site, Don répond aux questions de périmètre et enregistre le contexte de contact. Envoyez les fichiers de demande de devis directement à notre équipe opérationnelle par e-mail ; les prix et l’approbation restent des décisions humaines.",
     "enterpriseP3": "Un spécialiste Daron vérifie et approuve chaque devis avant qu'il ne quitte notre système. Don accélère le temps de réponse ; il ne remplace ni la confiance, ni le jugement, ni la responsabilité dont nos clients dépendent.",
     "capEyebrow": "Ce que Don fait",
     "capHeading": "De la demande au transfert opérationnel responsable",
@@ -653,8 +653,8 @@
     "tech2Tech": "Couche opérationnelle Daron",
     "tech3Cap": "Références approuvées",
     "tech3Tech": "Informations opérationnelles validées par Daron",
-    "tech4Cap": "Téléversement de fichiers RFQ",
-    "tech4Tech": "Flux de contact sécurisé",
+    "tech4Cap": "Pièces jointes par e-mail",
+    "tech4Tech": "E-mail direct aux opérations",
     "tech5Cap": "Continuité des leads",
     "tech5Tech": "File opérationnelle durable",
     "tech6Cap": "Contrôle commercial",
@@ -663,7 +663,7 @@
     "tech7Tech": "Site web + transfert direct aux opérations",
     "techNote": "Architecture résiliente avec validation humaine avant tout engagement commercial.",
     "rfqHeading": "Envoyez votre prochain appel d'offres.",
-    "rfqBody": "Téléversez un tableur ou un PDF via le formulaire RFQ sécurisé, ou envoyez le besoin sur WhatsApp. Les opérations Daron le transmettent à un spécialiste pour les prix, la disponibilité et la livraison."
+    "rfqBody": "Envoyez votre fichier Excel ou PDF par e-mail, ou votre demande par WhatsApp. Les opérations Daron la transmettent à un spécialiste pour les prix, la disponibilité et la livraison."
   },
   "Contact": {
     "heroEyebrow": "Contact",
@@ -1118,6 +1118,21 @@
       "remote-site-supply": "Approvisionnement de site isolé",
       "group-network": "Soutien du groupe Daron",
       "procurement-resources": "Documents de référencement fournisseur"
-    }
+    },
+    "emailList": "Envoyer la demande ({count})"
+  },
+  "QuoteEmail": {
+    "subject": "Demande de devis",
+    "body": "Bonjour équipe Daron,\n\nMerci de nous proposer un devis pour le besoin suivant :\n\nArticles et quantités :\nLieu et date de livraison :",
+    "regarding": "Objet",
+    "catalogues": "Catalogues sélectionnés",
+    "details": "Détails des articles",
+    "quantity": "Quantité",
+    "source": "Page du site",
+    "openEmail": "Envoyer un e-mail à {email}",
+    "heading": "Envoyez votre demande par e-mail.",
+    "intro": "Envoyez votre liste de produits ou votre descriptif à notre équipe opérationnelle. Joignez les spécifications et documents utiles à votre e-mail.",
+    "button": "Demander un devis par e-mail",
+    "hint": "Le bouton ouvre votre application de messagerie. Vous pouvez aussi copier l’adresse ci-dessous dans votre service de messagerie."
   }
 }

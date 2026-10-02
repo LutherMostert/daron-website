@@ -1,3 +1,4 @@
+import { QuoteLink } from "@/components/QuoteLink";
 import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 import { HempelComparison } from "@/components/HempelComparison";
 import Image from "next/image";
@@ -28,7 +29,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <Container className="premium-hero-inner"><div className="premium-hero-copy">
         <p className="premium-eyebrow">{t("location")}<span aria-hidden="true" /></p>
         <h1>{t("title")}</h1><p className="premium-lead">{t("intro")}</p>
-        <div className="premium-hero-actions"><Link href="/contact#rfq" className="premium-button">{t("quote")}<span aria-hidden="true">→</span></Link><Link href="/track-record" className="premium-text-link">{t("explore")} <span aria-hidden="true">↗</span></Link></div>
+        <div className="premium-hero-actions"><QuoteLink className="premium-button">{t("quote")}<span aria-hidden="true">→</span></QuoteLink><Link href="/track-record" className="premium-text-link">{t("explore")} <span aria-hidden="true">↗</span></Link></div>
       </div></Container>
       <figure className="premium-hero-photo"><Image src="/images/site/operations/daron-fleet-normand-energy.jpg" alt={t("heroAlt")} fill preload sizes="(max-width: 850px) 100vw, 58vw" /><figcaption>{t("caption")}</figcaption></figure>
     </section>
@@ -53,6 +54,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </Link>;
     })}</div><Link href="/brands" className="premium-text-link mt-8 inline-flex">{t("brandsCta")} →</Link></Container></section>
     <GroupCapability locale={locale} />
-    <section className="premium-cta"><Container><div><p className="premium-eyebrow">{t("ctaEyebrow")}</p><h2>{t("ctaTitle")}</h2><p>{t("ctaBody")}</p></div><div className="premium-cta-actions"><Link href="/contact#rfq" className="premium-button">{t("quote")} →</Link><WhatsAppLinks className="premium-text-link" /><Link href="/procurement-resources" className="premium-text-link">{growth.resourcesLink} →</Link></div></Container></section>
+    <section className="premium-cta"><Container><div><p className="premium-eyebrow">{t("ctaEyebrow")}</p><h2>{t("ctaTitle")}</h2><p>{t("ctaBody")}</p></div><div className="premium-cta-actions"><QuoteLink className="premium-button">{t("quote")} →</QuoteLink><WhatsAppLinks className="premium-text-link" /><Link href="/procurement-resources" className="premium-text-link">{growth.resourcesLink} →</Link></div></Container></section>
   </div>;
 }

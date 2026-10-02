@@ -1,9 +1,9 @@
+import { QuoteLink } from "@/components/QuoteLink";
 import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
 
-import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
 import { RigCampaign } from "@/components/RigCampaign";
 import { InlineRFQ } from "@/components/InlineRFQ";
@@ -81,12 +81,11 @@ export default async function OilAndGasPage({
       >
         <div className="flex flex-col flex-wrap gap-3 sm:flex-row">
           <WhatsAppLinks className="rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]" />
-          <Link
-            href="/contact"
+          <QuoteLink
             className="rounded-full border border-white/30 px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
           >
             {t("talkToTeam")}
-          </Link>
+          </QuoteLink>
         </div>
       </PageHero>
 

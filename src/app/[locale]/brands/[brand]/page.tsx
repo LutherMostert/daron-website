@@ -1,3 +1,4 @@
+import { QuoteLink } from "@/components/QuoteLink";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -123,18 +124,18 @@ export default async function BrandPage({ params }: { params: Params }) {
           </p>
           {b.enquiryNote && <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/85">{b.enquiryNote}</p>}
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-            <Link
-              href={b.slug === "katradis" ? "/contact?from=katradis#rfq" : "/contact#rfq"}
+            <QuoteLink
+              context={b.name}
               className="rounded-full bg-[var(--color-cta)] px-7 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
             >
               {t("sendRfq")} &rarr;
-            </Link>
-            <Link
-              href={b.slug === "katradis" ? "/contact?from=katradis#rfq" : "/contact"}
+            </QuoteLink>
+            <QuoteLink
+              context={b.name}
               className="rounded-full border border-white/30 px-7 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
             >
               {t("talkCta")}
-            </Link>
+            </QuoteLink>
           </div>
           {b.manufacturerUrl && <p className="mt-6 text-xs text-white/85">{t("manufacturerImage")}</p>}
         </Container>
@@ -277,7 +278,6 @@ export default async function BrandPage({ params }: { params: Params }) {
         variant="navy"
         heading={t("rfqHeading", { brand: b.name })}
         body={t("rfqBody")}
-        contactHref={b.slug === "katradis" ? "/contact?from=katradis#rfq" : undefined}
         whatsappText={b.slug === "katradis" ? t("katradisWhatsapp") : undefined}
       />
 

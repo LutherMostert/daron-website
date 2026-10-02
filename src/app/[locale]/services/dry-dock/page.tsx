@@ -1,3 +1,4 @@
+import { QuoteLink } from "@/components/QuoteLink";
 import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 import { HempelComparison } from "@/components/HempelComparison";
 import Image from "next/image";
@@ -7,7 +8,6 @@ import { buildMetadata } from "@/lib/seo";
 
 import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
-import { Link } from "@/i18n/routing";
 import { PageHero } from "@/components/PageHero";
 
 // Source: Daron_Drydock_Presentation 2026.pdf (18 slides).
@@ -120,12 +120,11 @@ export default async function DryDockPage({
       >
         <div className="flex flex-col flex-wrap gap-3 sm:flex-row">
           <WhatsAppLinks className="rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]" />
-          <Link
-            href="/contact"
+          <QuoteLink
             className="rounded-full border border-white/30 px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
           >
             {t("contactTeam")}
-          </Link>
+          </QuoteLink>
         </div>
       </PageHero>
 

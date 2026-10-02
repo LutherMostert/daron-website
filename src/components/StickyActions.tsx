@@ -1,8 +1,9 @@
 "use client";
 
+import { QuoteLink } from "@/components/QuoteLink";
+
 import { useTranslations } from "next-intl";
 import { contact } from "@/lib/site";
-import { Link, usePathname } from "@/i18n/routing";
 
 /**
  * Mobile sticky conversion bar — RFQ, operations chat and tap-to-call, always one
@@ -10,7 +11,6 @@ import { Link, usePathname } from "@/i18n/routing";
  * The flow spacer keeps the bar from covering the footer's last lines.
  */
 export function StickyActions() {
-  const pathname = usePathname();
   const t = useTranslations("Sticky");
   const tChat = useTranslations("ChatWidget");
 
@@ -18,12 +18,11 @@ export function StickyActions() {
     <>
       <div aria-hidden="true" className="h-14 xl:hidden" />
       <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 gap-px border-t border-[var(--color-line)] bg-[var(--color-line)] pb-[env(safe-area-inset-bottom)] xl:hidden">
-        <Link
-          href={pathname === "/brands/katradis" ? "/contact?from=katradis#rfq" : "/contact#rfq"}
+        <QuoteLink
           className="flex items-center justify-center gap-2 bg-[var(--color-cta)] py-3.5 text-center text-sm font-semibold text-[var(--color-cta-ink)]"
         >
           {t("rfq")}
-        </Link>
+        </QuoteLink>
         <a
           href={contact.phone.href}
           className="flex items-center justify-center gap-2 bg-[var(--color-navy)] py-3.5 text-sm font-semibold text-white"

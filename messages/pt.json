@@ -30,7 +30,7 @@
     "eyebrow": "O percurso de um RFQ",
     "heading": "Entrada digital. Responsabilidade com revisão humana.",
     "s1Title": "Recebido",
-    "s1Body": "O seu RFQ pode chegar pelo formulário seguro do website, WhatsApp ou email, com documentos de apoio quando disponíveis.",
+    "s1Body": "Envie o pedido de cotação por e-mail ou WhatsApp, com os documentos disponíveis.",
     "s2Title": "Encaminhado",
     "s2Body": "As operações Daron analisam o âmbito e designam o especialista comercial ou técnico certo.",
     "s3Title": "Cotado",
@@ -75,7 +75,7 @@
     "talkCta": "Fale com a nossa equipa",
     "sendRfq": "Enviar o seu pedido",
     "rfqHeading": "Precisa de produtos {brand} ou de um orçamento?",
-    "rfqBody": "Envie o pedido por WhatsApp ou pelo formulário RFQ seguro. As operações Daron encaminham-no para o especialista certo em preços, disponibilidade e entrega.",
+    "rfqBody": "Envie o seu pedido por e-mail ou WhatsApp. A equipa de operações da Daron encaminha-o para o especialista adequado para preços, disponibilidade e entrega.",
     "distributorOf": "Distribuidor autorizado"
   },
   "Faq": {
@@ -203,7 +203,7 @@
     "aiTitle": "Conheça o Don — copiloto de operações com IA da Daron",
     "aiDescription": "Conheça o Don — o copiloto de operações com IA da Daron Namibia. Responde a questões operacionais, regista o contexto e apoia o encaminhamento direto para a equipa.",
     "contactTitle": "Contacto",
-    "contactDescription": "Contacte a Daron Namibia em Walvis Bay. Envie o RFQ por WhatsApp ou contacte diretamente a equipa de operações.",
+    "contactDescription": "Contacte a Daron Namibia em Walvis Bay. Peça uma cotação diretamente por e-mail ou fale com a nossa equipa no WhatsApp.",
     "privacyTitle": "Política de Privacidade",
     "privacyDescription": "Como a Daron Namibia recolhe, utiliza e protege os seus dados pessoais — incluindo chat, pedidos de cotação e análises. Atualizado em setembro de 2026."
   },
@@ -619,7 +619,7 @@
     "enterpriseEyebrow": "Construído com IA de classe empresarial",
     "enterpriseHeading": "Um colega de IA permanente — não um chatbot.",
     "enterpriseP1": "O Don utiliza modelos de linguagem empresariais com redundância de fornecedores. Trabalha com informação de referência aprovada pela Daron e encaminha cada pedido comercial para revisão humana.",
-    "enterpriseP2": "Quando um pedido chega ao assistente do website, o Don responde a questões de âmbito e regista o contexto de contacto. Os ficheiros RFQ seguem o fluxo seguro; preços e aprovação da cotação permanecem decisões humanas.",
+    "enterpriseP2": "Quando utiliza o assistente do website, o Don responde a questões de âmbito e regista o contexto de contacto. Envie os ficheiros do pedido de cotação diretamente à equipa de operações por e-mail; os preços e a aprovação continuam a ser decisões humanas.",
     "enterpriseP3": "Um especialista da Daron revê e aprova cada cotação antes de sair do nosso sistema. O Don acelera o tempo de resposta; não substitui a confiança, o julgamento e a responsabilidade de que os nossos clientes dependem.",
     "capEyebrow": "O que o Don faz",
     "capHeading": "Do pedido ao encaminhamento operacional responsável",
@@ -653,8 +653,8 @@
     "tech2Tech": "Camada operacional Daron",
     "tech3Cap": "Base de referência",
     "tech3Tech": "Informação operacional aprovada pela Daron",
-    "tech4Cap": "Carregamento de ficheiros RFQ",
-    "tech4Tech": "Fluxo de contacto seguro",
+    "tech4Cap": "Anexos do pedido por e-mail",
+    "tech4Tech": "E-mail direto para operações",
     "tech5Cap": "Continuidade de leads",
     "tech5Tech": "Fila operacional durável",
     "tech6Cap": "Revisão comercial",
@@ -663,7 +663,7 @@
     "tech7Tech": "Website + encaminhamento direto às operações",
     "techNote": "Arquitetura resiliente com revisão humana antes de qualquer compromisso comercial.",
     "rfqHeading": "Envie o seu próximo pedido de cotação.",
-    "rfqBody": "Carregue uma folha de cálculo ou PDF no formulário RFQ seguro, ou envie o requisito por WhatsApp. As operações Daron encaminham-no para um especialista em preços, disponibilidade e entrega."
+    "rfqBody": "Envie a folha de cálculo ou PDF por e-mail, ou o pedido por WhatsApp. A equipa de operações da Daron encaminha-o para um especialista para preços, disponibilidade e entrega."
   },
   "Contact": {
     "heroEyebrow": "Contacto",
@@ -1118,6 +1118,21 @@
       "remote-site-supply": "Abastecimento de locais remotos",
       "group-network": "Apoio do Grupo Daron",
       "procurement-resources": "Documentos de registo de fornecedor"
-    }
+    },
+    "emailList": "Enviar pedido ({count})"
+  },
+  "QuoteEmail": {
+    "subject": "Pedido de cotação",
+    "body": "Olá equipa Daron,\n\nSolicito uma cotação para a seguinte necessidade:\n\nArtigos e quantidades:\nLocal e data de entrega:",
+    "regarding": "Assunto",
+    "catalogues": "Catálogos selecionados",
+    "details": "Detalhes dos artigos",
+    "quantity": "Quantidade",
+    "source": "Página do site",
+    "openEmail": "Enviar e-mail para {email}",
+    "heading": "Envie o seu pedido por e-mail.",
+    "intro": "Envie a lista de produtos ou o âmbito do trabalho à nossa equipa de operações. Anexe as especificações e os documentos relevantes ao seu e-mail.",
+    "button": "Pedir cotação por e-mail",
+    "hint": "O botão abre a sua aplicação de e-mail. Também pode copiar o endereço abaixo para o serviço de e-mail que preferir."
   }
 }

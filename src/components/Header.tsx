@@ -1,5 +1,7 @@
 "use client";
 
+import { QuoteLink } from "@/components/QuoteLink";
+
 import { BrandLogo } from "./BrandLogo";
 import { useState, useRef, useEffect, useTransition } from "react";
 import { useTranslations, useLocale } from "next-intl";
@@ -96,8 +98,6 @@ function LanguageSwitcher() {
 }
 
 export function Header() {
-  const pathname = usePathname();
-  const quoteHref = pathname === "/brands/katradis" ? "/contact?from=katradis#rfq" : "/contact#rfq";
   const [open, setOpen] = useState(false);
   const tNav = useTranslations("Nav");
   const tHeader = useTranslations("Header");
@@ -132,12 +132,11 @@ export function Header() {
 
         <div className="hidden shrink-0 items-center gap-3 xl:flex">
           <LanguageSwitcher />
-          <Link
-            href={quoteHref}
+          <QuoteLink
             className="shrink-0 whitespace-nowrap rounded-md bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
           >
             {tHeader("chatCta")} &rarr;
-          </Link>
+          </QuoteLink>
         </div>
 
         <button
@@ -203,13 +202,12 @@ export function Header() {
             </ul>
             <div className="mt-3 flex items-center gap-3">
               <LanguageSwitcher />
-              <Link
-                href={quoteHref}
+              <QuoteLink
                 onClick={() => setOpen(false)}
                 className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--color-cta)] px-5 py-3 text-sm font-semibold text-[var(--color-cta-ink)]"
               >
                 {tHeader("chatCtaMobile")} &rarr;
-              </Link>
+              </QuoteLink>
             </div>
           </Container>
         </div>
