@@ -1,9 +1,11 @@
 "use client";
 
+import { WhatsAppLinks } from "@/components/WhatsAppLinks";
+
+
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
-import { contact } from "@/lib/site";
 
 export default function NotFound() {
   const t = useTranslations("NotFound");
@@ -20,21 +22,14 @@ export default function NotFound() {
         <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
           {t("body")}
         </p>
-        <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row">
+        <div className="mt-8 flex flex-col flex-wrap items-stretch gap-3 sm:flex-row">
           <Link
             href="/"
             className="rounded-full bg-white px-7 py-3 text-base font-semibold text-[var(--color-navy)] transition-colors hover:bg-white/90"
           >
             {t("backHome")}
           </Link>
-          <a
-            href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-cta)] px-7 py-3 text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t("chatCta")}
-          </a>
+          <WhatsAppLinks className="rounded-full bg-[var(--color-cta)] px-7 py-3 text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]" />
         </div>
       </Container>
     </section>

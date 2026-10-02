@@ -1,3 +1,5 @@
+import { contact } from "./site";
+
 /**
  * FAQ content — grounded in real site facts (services, certifications, track
  * record, the Don workflow). English for launch; PT/FR via Sanity (Week 2).
@@ -16,7 +18,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "How fast can I get a quote?",
-    a: "Fast. Send your RFQ to Daron operations on WhatsApp (+264 81 141 3840). The team structures the request and routes it to the right key account manager for pricing, availability and delivery control.",
+    a: `Fast. Send your RFQ to Daron operations on WhatsApp (${contact.whatsapp.display}). The team structures the request and routes it to the right key account manager for pricing, availability and delivery control.`,
   },
   {
     q: "Do you supply offshore drilling rigs?",
@@ -36,7 +38,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "How do I send an RFQ or request for quote?",
-    a: "Use the secure RFQ form on this website, contact Daron operations on WhatsApp at +264 81 141 3840, or email dnoperations@daron-group.com. The website form accepts Excel, PDF, Word, CSV and TXT documents up to 4 MB.",
+    a: `Use the secure RFQ form on this website, contact Daron operations on WhatsApp at ${contact.whatsapp.display}, or email dnoperations@daron-group.com. The website form accepts Excel, PDF, Word, CSV and TXT documents up to 4 MB.`,
   },
   {
     q: "What is “Don”, the Daron AI assistant?",

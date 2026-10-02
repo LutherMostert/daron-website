@@ -1,5 +1,8 @@
 "use client";
 
+import { WhatsAppLinks } from "@/components/WhatsAppLinks";
+
+
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { contact } from "@/lib/site";
@@ -63,14 +66,12 @@ export function InlineRFQ({
             </p>
           </div>
           <div className="flex flex-col items-stretch gap-3">
-            <a
-              href={whatsappText ? `${contact.whatsapp.href}?text=${encodeURIComponent(whatsappText)}` : contact.whatsapp.href}
-              className="order-2 border border-current px-6 py-3 text-center text-sm font-semibold transition-colors hover:opacity-80"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t("whatsappCta")} &rarr;
-            </a>
+            <div className="order-2 grid gap-3 sm:grid-cols-2">
+              <WhatsAppLinks
+                message={whatsappText}
+                className="border border-current px-4 py-3 text-center text-sm font-semibold transition-colors hover:opacity-80"
+              />
+            </div>
             <Link
               href={contactHref}
               className="premium-button order-1 justify-center"

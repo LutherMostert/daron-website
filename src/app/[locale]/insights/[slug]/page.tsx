@@ -1,3 +1,4 @@
+import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
@@ -9,7 +10,7 @@ import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { JsonLd } from "@/components/JsonLd";
 import { getPost, posts } from "@/lib/posts";
-import { contact, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 type Params = Promise<{ locale: string; slug: string }>;
 
@@ -171,14 +172,7 @@ export default async function PostPage({ params }: { params: Params }) {
                 &larr; {t("allInsights")}
               </Link>
               <span className="text-[var(--color-mute)]">&middot;</span>
-              <a
-                href={contact.whatsapp.href}
-                className="font-semibold text-[var(--color-accent-text)] underline-offset-4 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t("talkCta")} &rarr;
-              </a>
+              <WhatsAppLinks className="font-semibold text-[var(--color-accent-text)] underline-offset-4 hover:underline" />
             </div>
           </Container>
         </section>

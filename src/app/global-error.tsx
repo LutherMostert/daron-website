@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { contact } from "@/lib/site";
 
 /**
  * Last-resort boundary that catches errors in the root layout itself. It
@@ -52,7 +53,7 @@ export default function GlobalError({
           </h1>
           <p style={{ color: "rgba(255,255,255,0.8)", marginTop: 16, lineHeight: 1.6 }}>
             Please try again. If it keeps happening, reach us on WhatsApp at{" "}
-            +264&nbsp;81&nbsp;141&nbsp;3840 or email dnoperations@daron-group.com.
+            {contact.whatsapp.display} or email {contact.emails.operations}.
           </p>
           <button
             type="button"

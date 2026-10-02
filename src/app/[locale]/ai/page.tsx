@@ -1,3 +1,4 @@
+import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
@@ -7,7 +8,6 @@ import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { PageHero } from "@/components/PageHero";
 import { RfqPipeline } from "@/components/RfqPipeline";
-import { contact } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -71,15 +71,8 @@ export default async function AiPage({
         intro={t("heroIntro")}
         image={{ src: "/images/site/drydock/african-network-map.jpg" }}
       >
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <a
-            href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t("chatCta")} &rarr;
-          </a>
+        <div className="flex flex-col flex-wrap gap-3 sm:flex-row">
+          <WhatsAppLinks className="rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]" />
           <Link
             href="#how-it-works"
             className="rounded-full border border-white/30 px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"

@@ -1,3 +1,4 @@
+import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 import { BrandLogo } from "./BrandLogo";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
@@ -42,14 +43,7 @@ export function Footer({
             <p className="mt-3 max-w-md text-xs italic leading-relaxed text-[var(--color-accent)]">
               {t("proofLine")}
             </p>
-            <a
-              href={contact.whatsapp.href}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-cta)] px-5 py-2.5 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t("chatCta")} &rarr;
-            </a>
+            <div className="flex flex-wrap gap-x-3"><WhatsAppLinks className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-cta)] px-5 py-2.5 text-sm font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]" /></div>
           </div>
 
           <div>

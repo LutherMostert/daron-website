@@ -1,9 +1,11 @@
 "use client";
 
+import { WhatsAppLinks } from "@/components/WhatsAppLinks";
+
+
 import { useEffect } from "react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/Container";
-import { contact } from "@/lib/site";
 
 /**
  * Route-level error boundary for localized pages. Renders inside the locale
@@ -34,7 +36,7 @@ export default function Error({
           Try again, head back home, or reach the Daron team directly on WhatsApp —
           we&apos;ll route it to the right person.
         </p>
-        <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row">
+        <div className="mt-8 flex flex-col flex-wrap items-stretch gap-3 sm:flex-row">
           <button
             type="button"
             onClick={reset}
@@ -48,14 +50,7 @@ export default function Error({
           >
             Back to home
           </Link>
-          <a
-            href={contact.whatsapp.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-white/30 px-7 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10"
-          >
-            WhatsApp the team
-          </a>
+          <WhatsAppLinks className="rounded-full border border-white/30 px-7 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10" />
         </div>
       </Container>
     </section>

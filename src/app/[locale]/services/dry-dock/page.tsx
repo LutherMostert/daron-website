@@ -1,3 +1,4 @@
+import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 import { HempelComparison } from "@/components/HempelComparison";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -8,7 +9,6 @@ import { Container } from "@/components/Container";
 import { InlineRFQ } from "@/components/InlineRFQ";
 import { Link } from "@/i18n/routing";
 import { PageHero } from "@/components/PageHero";
-import { contact } from "@/lib/site";
 
 // Source: Daron_Drydock_Presentation 2026.pdf (18 slides).
 // All copy lifted from the presentation; flagged for Yolande refinement.
@@ -118,15 +118,8 @@ export default async function DryDockPage({
         intro={t("heroIntro")}
         image={{ src: "/images/site/operations/daron-team-hempel-launch.jpg" }}
       >
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <a
-            href={contact.whatsapp.href}
-            className="rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t("sendSchedule")} &rarr;
-          </a>
+        <div className="flex flex-col flex-wrap gap-3 sm:flex-row">
+          <WhatsAppLinks className="rounded-full bg-[var(--color-cta)] px-6 py-3 text-center text-base font-semibold text-[var(--color-cta-ink)] transition-colors hover:bg-[var(--color-cta-deep)]" />
           <Link
             href="/contact"
             className="rounded-full border border-white/30 px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"

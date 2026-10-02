@@ -1,5 +1,8 @@
 "use client";
 
+import { WhatsAppLinks } from "@/components/WhatsAppLinks";
+
+
 /**
  * Daron AI assistant — floating chat widget.
  *
@@ -606,9 +609,9 @@ export function ChatWidget() {
                     </svg>
                   </button>
                 </div>
-                <p className="mt-2 text-[11px] leading-tight text-[var(--color-mute)]">
-                  {t("whatsappFooter", { phone: contact.whatsapp.display })}
-                </p>
+                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-xs text-[var(--color-mute)]">
+                  <WhatsAppLinks className="min-h-11 inline-flex items-center font-semibold underline underline-offset-4" />
+                </div>
               </div>
             </>
           )}

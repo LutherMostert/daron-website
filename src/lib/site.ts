@@ -23,6 +23,11 @@ export const site = {
   gaMeasurementId: "G-WNGYQPLEEP",
 } as const;
 
+const whatsappContacts = [
+  { name: "Hein", e164: "+264811296407", display: "+264 81 129 6407", href: "https://wa.me/264811296407" },
+  { name: "Marco", e164: "+264812036751", display: "+264 81 203 6751", href: "https://wa.me/264812036751" },
+] as const;
+
 export const contact = {
   address: {
     line1: "No. 31 Grand Avenue",
@@ -38,11 +43,9 @@ export const contact = {
     href: "tel:+264833374710",
   },
   whatsapp: {
-    // Direct operations WhatsApp line for RFQs.
-    e164: "+264811413840",
-    display: "+264 81 141 3840",
-    href: "https://wa.me/264811413840",
-    label: "Send RFQ on WhatsApp",
+    // Named contacts supplied by Luther while the dOn WhatsApp line is offline.
+    contacts: whatsappContacts,
+    display: whatsappContacts.map((person) => `${person.name}: ${person.display}`).join(" / "),
   },
   emails: {
     operations: "dnoperations@daron-group.com",

@@ -1,3 +1,4 @@
+import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 import { HempelComparison } from "@/components/HempelComparison";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -5,7 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/Container";
 import { Link } from "@/i18n/routing";
 import { buildMetadata } from "@/lib/seo";
-import { contact, partners } from "@/lib/site";
+import { partners } from "@/lib/site";
 import { GroupCapability } from "@/components/GroupCapability";
 import { SolutionCards } from "@/components/SolutionCards";
 import { RigCampaign } from "@/components/RigCampaign";
@@ -52,6 +53,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </Link>;
     })}</div><Link href="/brands" className="premium-text-link mt-8 inline-flex">{t("brandsCta")} →</Link></Container></section>
     <GroupCapability locale={locale} />
-    <section className="premium-cta"><Container><div><p className="premium-eyebrow">{t("ctaEyebrow")}</p><h2>{t("ctaTitle")}</h2><p>{t("ctaBody")}</p></div><div className="premium-cta-actions"><Link href="/contact#rfq" className="premium-button">{t("quote")} →</Link><a href={contact.whatsapp.href} target="_blank" rel="noopener noreferrer" className="premium-text-link">{t("whatsapp")} ↗</a><Link href="/procurement-resources" className="premium-text-link">{growth.resourcesLink} →</Link></div></Container></section>
+    <section className="premium-cta"><Container><div><p className="premium-eyebrow">{t("ctaEyebrow")}</p><h2>{t("ctaTitle")}</h2><p>{t("ctaBody")}</p></div><div className="premium-cta-actions"><Link href="/contact#rfq" className="premium-button">{t("quote")} →</Link><WhatsAppLinks className="premium-text-link" /><Link href="/procurement-resources" className="premium-text-link">{growth.resourcesLink} →</Link></div></Container></section>
   </div>;
 }
