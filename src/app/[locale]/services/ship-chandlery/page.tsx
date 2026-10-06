@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { Link } from "@/i18n/routing";
 import { contact, site } from "@/lib/site";
+import { getCategory } from "@/lib/category-pages";
 
 export async function generateMetadata({
   params,
@@ -142,7 +143,16 @@ export default async function ShipChandleryPage({
                 </li>
               ))}
             </ul>
-            <Link href="/brands/katradis" className="mt-8 inline-flex min-h-11 items-center font-semibold text-[var(--color-accent-text)] underline underline-offset-4">{t("katradisLink")} &rarr;</Link>
+            <ul className="mt-8 space-y-1">
+              {(["vessel-provisions", "industrial-cleaning-chemicals", "marine-paint"] as const).map((slug) => (
+                <li key={slug}>
+                  <Link href={`/services/${slug}`} className="inline-flex min-h-11 items-center font-semibold text-[var(--color-accent-text)] underline underline-offset-4">{getCategory(slug, locale).title} &rarr;</Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/brands/katradis" className="inline-flex min-h-11 items-center font-semibold text-[var(--color-accent-text)] underline underline-offset-4">{t("katradisLink")} &rarr;</Link>
+              </li>
+            </ul>
           </div>
 
           <aside
