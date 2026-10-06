@@ -20,7 +20,7 @@ export async function generateMetadata({
     locale,
     path: "/services/ship-chandlery",
     title: `${t("heroTitle")} — Marine Supplies & Provisions`,
-    description: t("heroIntro"),
+    description: t("metaDescription"),
   });
 }
 
@@ -41,6 +41,14 @@ export default async function ShipChandleryPage({
     tS("p1Provide4"),
   ];
   const why = [tS("p1Why1"), tS("p1Why2"), tS("p1Why3")];
+  const delivery = [1, 2, 3, 4].map((n) => ({
+    title: t(`delivery${n}Title`),
+    body: t(`delivery${n}Body`),
+  }));
+  const chandleryFaqs = [1, 2, 3, 4, 5, 6].map((n) => ({
+    q: t(`faq${n}Q`),
+    a: t(`faq${n}A`),
+  }));
 
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${contact.address.line1}, ${contact.address.line2}, ${contact.address.city}, ${contact.address.country}`,
@@ -66,9 +74,28 @@ export default async function ShipChandleryPage({
     "@type": "Service",
     name: "Ship Chandlery — Walvis Bay",
     serviceType: "Ship chandler",
-    provider: { "@type": "Organization", name: site.name, url: site.url },
-    areaServed: { "@type": "Place", name: "Walvis Bay, Namibia" },
+    provider: {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.name,
+      alternateName: [...site.alternateNames],
+      url: site.url,
+    },
+    areaServed: [
+      { "@type": "City", name: "Walvis Bay" },
+      { "@type": "Country", name: "Namibia" },
+    ],
     description: t("heroIntro"),
+  };
+
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: chandleryFaqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   };
 
   return (
@@ -175,10 +202,62 @@ export default async function ShipChandleryPage({
         </Container>
       </section>
 
+      <section className="bg-white py-20 sm:py-24">
+        <Container>
+          <h2 className="font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
+            {t("deliveryHeading")}
+          </h2>
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {delivery.map((item) => (
+              <li
+                key={item.title}
+                className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-sand)] p-6"
+              >
+                <h3 className="font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--color-navy)]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--color-ink)]">{item.body}</p>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      <section className="bg-[var(--color-sand)] py-20 sm:py-24">
+        <Container className="max-w-3xl">
+          <h2 className="font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
+            {t("heritageHeading")}
+          </h2>
+          <p className="mt-6 text-base leading-relaxed text-[var(--color-ink)]">
+            {t("heritageBody")}
+          </p>
+        </Container>
+      </section>
+
+      <section className="bg-white py-20 sm:py-24">
+        <Container className="max-w-3xl">
+          <h2 className="font-[family-name:var(--font-poppins)] text-2xl font-bold leading-tight text-[var(--color-navy)] sm:text-3xl">
+            {t("faqHeading")}
+          </h2>
+          <div className="mt-8 divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
+            {chandleryFaqs.map((f) => (
+              <details key={f.q} className="group py-5">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 font-semibold text-[var(--color-navy)]">
+                  <h3 className="text-base">{f.q}</h3>
+                  <span aria-hidden="true" className="text-[var(--color-accent-text)] transition group-open:rotate-45">+</span>
+                </summary>
+                <p className="mt-3 text-base leading-relaxed text-[var(--color-ink)]">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       <InlineRFQ variant="navy" />
 
       <JsonLd id="ld-chandlery-breadcrumb" data={breadcrumb} />
       <JsonLd id="ld-chandlery-service" data={serviceLd} />
+      <JsonLd id="ld-chandlery-faq" data={faqLd} />
     </>
   );
 }

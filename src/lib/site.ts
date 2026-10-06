@@ -7,6 +7,18 @@
 export const site = {
   name: "Daron Namibia",
   legalName: "Daron Trading Namibia (Pty) Ltd",
+  // One identity for AI assistants and search engines: Walvis Bay Ship
+  // Chandlers (WBSC, wbsc.com.na) became Daron Namibia when it joined the
+  // Daron Group. Listing the old names lets Google, Bing, ChatGPT etc. treat
+  // old WBSC citations and reviews as the same business, not a competitor.
+  alternateNames: [
+    "Walvis Bay Ship Chandlers",
+    "WBSC",
+    "Daron Trading Namibia",
+  ],
+  formerName: "Walvis Bay Ship Chandlers",
+  legacyDomain: "wbsc.com.na",
+  parentOrganization: "Daron Group",
   founded: 2012,
   tagline: "Supplying Africa's seas, shores & industries with confidence",
   // Canonical host MUST match where the site actually serves: the apex
@@ -14,7 +26,7 @@ export const site = {
   // tags, og:url, JSON-LD and the sitemap — keep them all on www.
   url: "https://www.daron.com.na",
   description:
-    "Daron Namibia supplies Africa's seas, shores and industries with confidence. Marine chandlery, oil and gas logistics, catering, warehousing — from Walvis Bay since 2012.",
+    "Daron Namibia (formerly Walvis Bay Ship Chandlers) is a ship chandler and marine supplier in Walvis Bay since 2012 — provisions, stores, coatings, chemicals and offshore supply.",
   ogImage: "/og.png",
   locale: "en_NA",
   timezone: "Africa/Windhoek",
