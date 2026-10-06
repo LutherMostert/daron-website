@@ -156,7 +156,7 @@
     "contactHeading": "Contact",
     "linkedin": "LinkedIn",
     "facebook": "Facebook",
-    "copyright": "© {startYear}–{year} {legalName}. All rights reserved.",
+    "copyright": "© {startYear}–{year} {legalName}, formerly Walvis Bay Ship Chandlers. All rights reserved.",
     "privacyLink": "Privacy Policy",
     "location": "Walvis Bay, Namibia · GMT+2 (CAT)"
   },
@@ -209,10 +209,10 @@
     "offlineError": "Sorry — I'm offline right now. You can still reach us on WhatsApp: {whatsapp} or email {email}."
   },
   "Meta": {
-    "homeTitle": "Daron Namibia | Marine, oil & gas, logistics — Walvis Bay",
-    "homeDescription": "Daron Namibia — ship chandlery, offshore catering, logistics and dry-dock support from Walvis Bay. Compliant, dependable supply for Africa's seas and shores.",
+    "homeTitle": "Ship Chandler & Hempel Distributor in Walvis Bay | Daron Namibia",
+    "homeDescription": "Daron Namibia (formerly Walvis Bay Ship Chandlers): ship chandler, Hempel distributor and offshore supplier in Walvis Bay since 2012. Quotes in hours, 24/7.",
     "aboutTitle": "About — Walvis Bay Ship Chandler Since 2012",
-    "aboutDescription": "Founded in 2012, Daron Namibia has grown from a ship chandler into a full-service partner for marine, oil & gas, hospitality, mining, and industrial sectors.",
+    "aboutDescription": "Founded in 2012 as Walvis Bay Ship Chandlers, Daron Namibia is now a full-service partner for marine, oil & gas, hospitality, mining and industry in Walvis Bay.",
     "servicesTitle": "Ship Chandlery, Catering, Warehousing & Safety",
     "servicesDescription": "Ship chandlery, offshore catering, warehousing, health & safety, and dry-dock technical support in Walvis Bay — all through one dependable partner.",
     "dryDockTitle": "Dry Docking & Vessel Support",
@@ -368,7 +368,7 @@
     "stat3Label": "Employees across the group",
     "storyEyebrow": "The story",
     "storyHeading": "Built in Walvis Bay. Backed by the Daron Group.",
-    "storyP1": "Daron Namibia was founded in {founded} as the Namibian presence of the Daron Group — a family-owned marine support business that has been operating across Africa since 1959. The Group runs technical supply, provisions, food services, logistics and engineering operations through entities in Namibia, South Africa, Angola, Senegal, Mozambique, Congo and Côte d'Ivoire, with around 350 staff across the network.",
+    "storyP1": "Daron Namibia was founded in Walvis Bay in {founded} as Walvis Bay Ship Chandlers (WBSC). It later joined the Daron Group — a family-owned marine support business operating across Africa since 1959 — and took the Daron Namibia name. The Group runs technical supply, provisions, food services, logistics and engineering operations through entities in Namibia, South Africa, Angola, Senegal, Mozambique, Congo and Côte d'Ivoire, with around 350 staff across the network.",
     "storyP2": "Starting as a ship chandler in Walvis Bay, we've expanded into catering, warehousing, logistics, health & safety, and dry-dock technical support — always guided by our promise of quality, service, and excellence. From humble beginnings, we've grown into a trusted partner for shipowners, offshore operators, hospitality groups and industrial clients across Africa.",
     "missionEyebrow": "Mission",
     "missionHeading": "Anchored in service",

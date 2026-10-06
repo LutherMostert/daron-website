@@ -111,6 +111,7 @@ const orgJsonLd = {
   email: contact.emails.operations,
   telephone: contact.phone.e164,
   parentOrganization: { "@type": "Organization", name: site.parentOrganization },
+  founder: { "@type": "Person", name: site.founder.name, jobTitle: site.founder.jobTitle },
   areaServed: ["Walvis Bay", "Namibia", "Southern Africa"],
   knowsAbout: [
     "Ship chandlery",
@@ -121,8 +122,9 @@ const orgJsonLd = {
     "Hempel marine coatings",
     "Orlichem marine chemicals",
     "Dry-dock technical support",
+    "Hammelmann high-pressure water jetting",
   ],
-  sameAs: [contact.socials.linkedin, contact.socials.facebook],
+  sameAs: [contact.socials.linkedin, contact.socials.facebook, contact.socials.shipserv],
   address: {
     "@type": "PostalAddress",
     streetAddress: `${contact.address.line1}, ${contact.address.line2}`,
