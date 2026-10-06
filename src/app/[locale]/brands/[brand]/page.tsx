@@ -12,6 +12,7 @@ import { AddCatalogue } from "@/components/CatalogueEnquiry";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { brands, getBrand, getPartnerByName, site } from "@/lib/site";
+import { getCategory } from "@/lib/category-pages";
 import { localizeKatradisBrand } from "@/lib/katradis-localized";
 
 type Params = Promise<{ locale: string; brand: string }>;
@@ -160,6 +161,7 @@ export default async function BrandPage({ params }: { params: Params }) {
                 {para}
               </p>
             ))}
+            {b.categoryPage && <Link href={`/services/${b.categoryPage}`} className="inline-flex min-h-11 items-center font-semibold text-[var(--color-accent-text)] underline underline-offset-4">{getCategory(b.categoryPage, locale).title} &rarr;</Link>}
             {b.manufacturerUrl && <a href={b.manufacturerUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center font-semibold text-[var(--color-accent-text)] underline underline-offset-4">{t("manufacturerLink")} &rarr;</a>}
           </div>
           <aside data-reveal>

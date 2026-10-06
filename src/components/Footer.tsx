@@ -1,8 +1,9 @@
 import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 import { BrandLogo } from "./BrandLogo";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { contact, site } from "@/lib/site";
+import { categorySlugs, getCategory } from "@/lib/category-pages";
 import { Container } from "./Container";
 import { CookieSettingsLink } from "./CookieSettingsLink";
 
@@ -28,6 +29,7 @@ export function Footer({
   const t = useTranslations("Footer");
   const tNav = useTranslations("Nav");
   const tGrowth = useTranslations("Growth");
+  const locale = useLocale();
   const year = new Date().getFullYear();
 
   return (
@@ -51,6 +53,9 @@ export function Footer({
               {t("sitemap")}
             </h2>
             <ul className="mt-4 space-y-2 text-sm">
+              {categorySlugs.map((slug) => (
+                <li key={slug}><Link href={`/services/${slug}`} className="text-white/75 hover:text-white">{getCategory(slug, locale).navLabel}</Link></li>
+              ))}
               <li><Link href="/solutions" className="text-white/75 hover:text-white">{tGrowth("solutions")}</Link></li>
               <li><Link href="/group-network" className="text-white/75 hover:text-white">{tGrowth("group")}</Link></li>
               <li><Link href="/procurement-resources" className="text-white/75 hover:text-white">{tGrowth("resources")}</Link></li>

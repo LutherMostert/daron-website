@@ -377,6 +377,8 @@ export type Brand = {
   productDetail?: { image: string; width: number; height: number; alt: string; title: string; body: string };
   enquiryNote?: string;
   manufacturerUrl?: string;
+  /** Generic category landing page (src/lib/category-pages.ts) this brand feeds. */
+  categoryPage?: "marine-paint" | "industrial-cleaning-chemicals";
   serviceType?: string;
 };
 
@@ -413,6 +415,7 @@ export const brands: Brand[] = [
   },
   {
     slug: "hempel",
+    categoryPage: "marine-paint",
     manufacturerUrl: "https://www.hempel.com",
     partnerName: "Hempel",
     name: "Hempel",
@@ -435,6 +438,7 @@ export const brands: Brand[] = [
   },
   {
     slug: "orlichem",
+    categoryPage: "industrial-cleaning-chemicals",
     manufacturerUrl: "https://www.orlichem.co.za",
     partnerName: "Orlichem",
     name: "Orlichem",

@@ -22,7 +22,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const growth = getGrowthContent(locale);
   const services = [
     {key:"marine",href:"/services/ship-chandlery"}, {key:"offshore",href:"/industries/oil-and-gas"},
-    {key:"provisions",href:"/services#catering"}, {key:"coatings",href:"/services/coatings"}, {key:"logistics",href:"/services#warehousing"},
+    {key:"provisions",href:"/services/vessel-provisions"}, {key:"coatings",href:"/services/marine-paint"}, {key:"logistics",href:"/services#warehousing"},
   ];
   return <div className="premium-home">
     <section className="premium-hero">
