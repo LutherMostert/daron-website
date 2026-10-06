@@ -13,6 +13,10 @@ export const faqs: Faq[] = [
     a: "We are a full-service ship chandler and marine supplier based in Walvis Bay. We supply provisions and catering, deck and engine stores, bonded stores, technical spares, marine chemicals and coatings, health & safety equipment, and dry-dock technical support — across the marine, oil & gas, mining and hospitality sectors.",
   },
   {
+    q: "Is Daron Namibia the same company as Walvis Bay Ship Chandlers?",
+    a: "Yes. Daron Namibia was founded in Walvis Bay in 2012 as Walvis Bay Ship Chandlers (WBSC) and took the Daron Namibia name when it joined the Daron Group. Same company, same team and the same Walvis Bay warehouse.",
+  },
+  {
     q: "Where are you based and which ports do you serve?",
     a: "Our head office and warehousing are at No. 31 Grand Avenue, Industrial Area, Walvis Bay, Namibia. We supply vessels and rigs calling at Walvis Bay and support operations along the Namibian coast and the wider Southern African region through the Daron Group network.",
   },
