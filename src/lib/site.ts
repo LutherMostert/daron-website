@@ -19,6 +19,7 @@ export const site = {
   formerName: "Walvis Bay Ship Chandlers",
   legacyDomain: "wbsc.com.na",
   parentOrganization: "Daron Group",
+  founder: { name: "Luther Mostert", jobTitle: "Managing Director" },
   founded: 2012,
   tagline: "Supplying Africa's seas, shores & industries with confidence",
   // Canonical host MUST match where the site actually serves: the apex
@@ -47,7 +48,7 @@ export const contact = {
     city: "Walvis Bay",
     region: "Erongo Region",
     country: "Namibia",
-    postalCode: "",
+    postalCode: "13013",
   },
   phone: {
     e164: "+264833374710",
@@ -66,6 +67,7 @@ export const contact = {
   socials: {
     linkedin: "https://linkedin.com/company/daron-namibia",
     facebook: "https://www.facebook.com/WBshipchandlers",
+    shipserv: "https://www.shipserv.com/supplier/profile/s/daron-trading-namibia-pty-ltd-218967",
   },
 } as const;
 
@@ -411,6 +413,7 @@ export const brands: Brand[] = [
   },
   {
     slug: "hempel",
+    manufacturerUrl: "https://www.hempel.com",
     partnerName: "Hempel",
     name: "Hempel",
     tagline: "Marine, protective, fire & energy coatings",
@@ -432,6 +435,7 @@ export const brands: Brand[] = [
   },
   {
     slug: "orlichem",
+    manufacturerUrl: "https://www.orlichem.co.za",
     partnerName: "Orlichem",
     name: "Orlichem",
     tagline: "Specialised marine & industrial chemicals",
@@ -453,6 +457,7 @@ export const brands: Brand[] = [
   },
   {
     slug: "honeywell",
+    manufacturerUrl: "https://www.honeywell.com",
     partnerName: "Honeywell",
     name: "Honeywell Gas Detection",
     tagline: "Portable, marine & fixed gas detection",
@@ -475,6 +480,7 @@ export const brands: Brand[] = [
   },
   {
     slug: "blackline-safety",
+    manufacturerUrl: "https://www.blacklinesafety.com",
     partnerName: "Blackline Safety",
     name: "Blackline Safety",
     tagline: "Connected gas detection & lone-worker monitoring",
@@ -498,6 +504,7 @@ export const brands: Brand[] = [
   },
   {
     slug: "hammelmann",
+    manufacturerUrl: "https://www.hammelmann.com",
     partnerName: "Hammelmann",
     name: "Hammelmann",
     tagline: "High-pressure plunger pumps & water-jetting systems",
@@ -518,6 +525,7 @@ export const brands: Brand[] = [
   },
   {
     slug: "industrial-scientific",
+    manufacturerUrl: "https://www.indsci.com",
     partnerName: "Industrial Scientific",
     name: "Industrial Scientific",
     tagline: "Portable gas detection & docking systems",

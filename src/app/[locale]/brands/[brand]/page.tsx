@@ -68,7 +68,17 @@ export default async function BrandPage({ params }: { params: Params }) {
     "@type": "Service",
     name: `${b.name} — ${b.tagline}`,
     serviceType: b.serviceType ?? "Authorised distribution",
-    provider: { "@type": "Organization", name: site.name, url: site.url },
+    provider: {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.name,
+      url: site.url,
+    },
+    brand: {
+      "@type": "Brand",
+      name: b.name,
+      ...(b.manufacturerUrl ? { url: b.manufacturerUrl } : {}),
+    },
     areaServed: { "@type": "Country", name: "Namibia" },
     description: b.intro[0],
   };
@@ -137,7 +147,7 @@ export default async function BrandPage({ params }: { params: Params }) {
               {t("talkCta")}
             </QuoteLink>
           </div>
-          {b.manufacturerUrl && <p className="mt-6 text-xs text-white/85">{t("manufacturerImage")}</p>}
+          {b.slug === "katradis" && <p className="mt-6 text-xs text-white/85">{t("manufacturerImage")}</p>}
         </Container>
       </section>
 

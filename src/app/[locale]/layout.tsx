@@ -111,7 +111,8 @@ const orgJsonLd = {
   email: contact.emails.operations,
   telephone: contact.phone.e164,
   parentOrganization: { "@type": "Organization", name: site.parentOrganization },
-  areaServed: ["Walvis Bay", "Namibia", "Southern Africa"],
+  founder: { "@type": "Person", name: site.founder.name, jobTitle: site.founder.jobTitle },
+  areaServed: ["Walvis Bay", "Lüderitz", "Namibia", "Southern Africa"],
   knowsAbout: [
     "Ship chandlery",
     "Ship provisions",
@@ -121,13 +122,15 @@ const orgJsonLd = {
     "Hempel marine coatings",
     "Orlichem marine chemicals",
     "Dry-dock technical support",
+    "Hammelmann high-pressure water jetting",
   ],
-  sameAs: [contact.socials.linkedin, contact.socials.facebook],
+  sameAs: [contact.socials.linkedin, contact.socials.facebook, contact.socials.shipserv],
   address: {
     "@type": "PostalAddress",
     streetAddress: `${contact.address.line1}, ${contact.address.line2}`,
     addressLocality: contact.address.city,
     addressRegion: contact.address.region,
+    postalCode: contact.address.postalCode,
     addressCountry: "NA",
   },
 };
@@ -142,6 +145,7 @@ const localBusinessJsonLd = {
   parentOrganization: { "@type": "Organization", name: site.parentOrganization },
   areaServed: [
     { "@type": "City", name: "Walvis Bay" },
+    { "@type": "City", name: "Lüderitz" },
     { "@type": "Country", name: "Namibia" },
   ],
   image: `${site.url}/images/site/operations/normand-energy-wide.jpg`,
@@ -154,6 +158,7 @@ const localBusinessJsonLd = {
     streetAddress: `${contact.address.line1}, ${contact.address.line2}`,
     addressLocality: contact.address.city,
     addressRegion: contact.address.region,
+    postalCode: contact.address.postalCode,
     addressCountry: "NA",
   },
   geo: {
