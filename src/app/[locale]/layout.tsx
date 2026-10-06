@@ -112,7 +112,7 @@ const orgJsonLd = {
   telephone: contact.phone.e164,
   parentOrganization: { "@type": "Organization", name: site.parentOrganization },
   founder: { "@type": "Person", name: site.founder.name, jobTitle: site.founder.jobTitle },
-  areaServed: ["Walvis Bay", "Namibia", "Southern Africa"],
+  areaServed: ["Walvis Bay", "Lüderitz", "Namibia", "Southern Africa"],
   knowsAbout: [
     "Ship chandlery",
     "Ship provisions",
@@ -130,6 +130,7 @@ const orgJsonLd = {
     streetAddress: `${contact.address.line1}, ${contact.address.line2}`,
     addressLocality: contact.address.city,
     addressRegion: contact.address.region,
+    postalCode: contact.address.postalCode,
     addressCountry: "NA",
   },
 };
@@ -144,6 +145,7 @@ const localBusinessJsonLd = {
   parentOrganization: { "@type": "Organization", name: site.parentOrganization },
   areaServed: [
     { "@type": "City", name: "Walvis Bay" },
+    { "@type": "City", name: "Lüderitz" },
     { "@type": "Country", name: "Namibia" },
   ],
   image: `${site.url}/images/site/operations/normand-energy-wide.jpg`,
@@ -156,6 +158,7 @@ const localBusinessJsonLd = {
     streetAddress: `${contact.address.line1}, ${contact.address.line2}`,
     addressLocality: contact.address.city,
     addressRegion: contact.address.region,
+    postalCode: contact.address.postalCode,
     addressCountry: "NA",
   },
   geo: {

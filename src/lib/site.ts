@@ -48,7 +48,7 @@ export const contact = {
     city: "Walvis Bay",
     region: "Erongo Region",
     country: "Namibia",
-    postalCode: "",
+    postalCode: "13013",
   },
   phone: {
     e164: "+264833374710",

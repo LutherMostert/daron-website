@@ -90,7 +90,7 @@
     "heroTitle": "Avitaillement maritime à Walvis Bay",
     "heroIntro": "Daron Namibia (anciennement Walvis Bay Ship Chandlers) est un avitailleur maritime complet à Walvis Bay — provisions, magasins sous douane, de pont et de machine, sécurité et fournitures techniques, livrés à quai, au mouillage et en offshore. Membre ISSA et IMPA.",
     "provideHeading": "Ce que couvre notre avitaillement",
-    "areaHeading": "Au service de Walvis Bay et du littoral namibien",
+    "areaHeading": "Au service de Walvis Bay, Lüderitz et du littoral namibien",
     "areaBody": "Depuis nos entrepôts au n° 31 Grand Avenue, dans la zone industrielle de Walvis Bay, nous approvisionnons les navires faisant escale à Walvis Bay et soutenons les opérations le long de la côte namibienne — avec notre propre flotte, un stockage réfrigéré et sous douane, et le dédouanement géré en interne.",
     "whyHeading": "Pourquoi les navires choisissent Daron à Walvis Bay",
     "mapCta": "Voir notre emplacement sur Google Maps",
@@ -118,7 +118,9 @@
     "faq5A": "Envoyez votre réquisition (codes IMPA bienvenus) à dnoperations@daron-group.com ou à notre équipe opérations sur WhatsApp. Les demandes offshore sont traitées 24h/24, 7j/7.",
     "faq6Q": "Quelles marques Daron fournit-elle en Namibie ?",
     "faq6A": "Daron est le distributeur namibien des peintures marines et de protection Hempel et des produits chimiques marins Orlichem, et fournit la détection de gaz Honeywell et Blackline Safety, les cordages d'amarrage Katradis et les équipements haute pression Hammelmann.",
-    "metaDescription": "Shipchandler à Walvis Bay depuis 2012 (ex-Walvis Bay Ship Chandlers). Provisions, avitaillement et pièces livrés à quai, au mouillage et en offshore."
+    "metaDescription": "Shipchandler à Walvis Bay depuis 2012 (ex-Walvis Bay Ship Chandlers). Provisions, avitaillement et pièces livrés à quai, au mouillage et en offshore.",
+    "faq7Q": "Approvisionnez-vous les navires à Lüderitz ?",
+    "faq7A": "Oui. En plus de Walvis Bay, Daron approvisionne les navires et opérations offshore faisant escale à Lüderitz, au départ de notre entrepôt de Walvis Bay, avec documentation et dédouanement gérés en interne."
   },
   "Nav": {
     "home": "Accueil",
@@ -396,7 +398,7 @@
   },
   "Services": {
     "heroEyebrow": "Services",
-    "heroTitle": "Cinq piliers. Un partenaire. Des solutions infinies.",
+    "heroTitle": "Services d'avitaillement maritime et offshore à Walvis Bay",
     "heroIntro": "Approvisionnement, restauration, entreposage, logistique, santé et sécurité, et support technique en cale sèche — gérés en interne par des professionnels qui connaissent vos opérations.",
     "whatWeProvide": "Ce que nous fournissons",
     "whyChooseUs": "Pourquoi nous choisir",
@@ -534,7 +536,7 @@
   },
   "Industries": {
     "heroEyebrow": "Industries",
-    "heroTitle": "Un partenaire. Des solutions infinies.",
+    "heroTitle": "Les secteurs que nous approvisionnons depuis Walvis Bay",
     "heroIntro": "Du shipchandling à la restauration, de l'entreposage à la logistique — nous gérons l'ensemble sur quatre secteurs qui façonnent les économies africaines.",
     "marineName": "Maritime et offshore",
     "marinePromise": "Un support fiable dans chaque port.",
@@ -1000,7 +1002,7 @@
   },
   "Intake": {
     "eyebrow": "Contacter Daron",
-    "title": "Comment pouvons-nous vous aider ?",
+    "title": "Contacter Daron Namibia à Walvis Bay",
     "intro": "Envoyez votre besoin ou posez une question à notre équipe des opérations à Walvis Bay.",
     "urgentTitle": "Une escale approche ?",
     "whatsapp": "Opérations sur WhatsApp",
@@ -1063,8 +1065,8 @@
   },
   "PremiumHome": {
     "location": "Walvis Bay, Namibie",
-    "title": "Quand les opérations ne peuvent pas attendre.",
-    "intro": "Avitaillement maritime, approvisionnement technique et soutien offshore. Une équipe expérimentée, du premier besoin à la livraison.",
+    "title": "Shipchandler et avitaillement maritime à Walvis Bay.",
+    "intro": "Quand les opérations ne peuvent pas attendre : avitaillement maritime, approvisionnement technique et soutien offshore. Une équipe expérimentée, du premier besoin à la livraison.",
     "quote": "Demander un devis",
     "explore": "Découvrir nos réalisations",
     "caption": "Flotte et équipe Daron auprès du Normand Energy · Walvis Bay",

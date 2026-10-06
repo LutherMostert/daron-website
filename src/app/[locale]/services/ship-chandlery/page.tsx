@@ -45,7 +45,7 @@ export default async function ShipChandleryPage({
     title: t(`delivery${n}Title`),
     body: t(`delivery${n}Body`),
   }));
-  const chandleryFaqs = [1, 2, 3, 4, 5, 6].map((n) => ({
+  const chandleryFaqs = [1, 2, 3, 4, 5, 6, 7].map((n) => ({
     q: t(`faq${n}Q`),
     a: t(`faq${n}A`),
   }));
@@ -83,6 +83,7 @@ export default async function ShipChandleryPage({
     },
     areaServed: [
       { "@type": "City", name: "Walvis Bay" },
+      { "@type": "City", name: "Lüderitz" },
       { "@type": "Country", name: "Namibia" },
     ],
     description: t("heroIntro"),

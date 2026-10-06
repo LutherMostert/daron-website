@@ -18,7 +18,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "Where are you based and which ports do you serve?",
-    a: "Our head office and warehousing are at No. 31 Grand Avenue, Industrial Area, Walvis Bay, Namibia. We supply vessels and rigs calling at Walvis Bay and support operations along the Namibian coast and the wider Southern African region through the Daron Group network.",
+    a: "Our head office and warehousing are at No. 31 Grand Avenue, Industrial Area, Walvis Bay, Namibia. We supply vessels and rigs calling at Walvis Bay and Lüderitz, and support operations along the Namibian coast and the wider Southern African region through the Daron Group network.",
   },
   {
     q: "How fast can I get a quote?",

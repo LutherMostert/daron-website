@@ -65,17 +65,7 @@ const nextConfig: NextConfig = {
   },
   // Apply security headers to every route.
   async headers() {
-    return [
-      { source: "/:path*", headers: securityHeaders },
-      // The 2024 Orlichem brochures still print the old Walvis Bay Ship
-      // Chandlers address (10 Gamsberg Avenue) and operations@wbsc.com.na.
-      // Keep them downloadable but out of search/AI indexes until Orlichem
-      // supplies versions with current Daron details.
-      {
-        source: "/catalogues/:file(orlichem-.*\\.pdf)",
-        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
-      },
-    ];
+    return [{ source: "/:path*", headers: securityHeaders }];
   },
   // Old WordPress URL slugs → new Next.js routes (CLAUDE.md "Site routes")
   async redirects() {

@@ -16,7 +16,7 @@
 
 ## Locked decisions
 - **Real content + real contact details only** — copy lifted verbatim from extract, flagged with source comment for Yolande to refine.
-- **Brand starter (pending Firecracker/Lisa refinement Week 1):** deep navy `#0A2540` + white + orange accent `#F97316`; Poppins headings / Open Sans body (carry forward from current site).
+- **Brand (locked by Luther 2026-10-06; no external brand review gate):** deep navy `#0A2540` + white + orange accent `#F97316`; Poppins headings / Open Sans body (carry forward from current site).
 - **Light mode only for launch.** Dark-mode support deferred post-cutover.
 - **Viewport:** `width=device-width, initial-scale=1` — NEVER `maximum-scale=1` or `user-scalable=0` (current site's WCAG fail that must not be inherited).
 - **One `<h1>` per page, semantic HTML, mobile-first.**
@@ -38,7 +38,8 @@
 13. Fast mobile (LCP < 2.5s, CLS < 0.1) via `next/image` + font optimization
 
 ## Real contact (from extract — do not change without source)
-- Address: No. 31 Grand Avenue, Industrial Area, Walvis Bay, Erongo Region, Namibia
+- Address: No. 31 Grand Avenue, Industrial Area, Walvis Bay 13013, Erongo Region, Namibia
+- Ports served: Walvis Bay and Lüderitz · ISSA member · formerly Walvis Bay Ship Chandlers (WBSC)
 - Phone (landline): +264 83 337 4710
 - WhatsApp (Daron AI assistant, AI quoting agent): +264 81 141 3840 — `https://wa.me/264811413840`
 - Ops email: dnoperations@daron-group.com
@@ -79,7 +80,7 @@
 
 ## Pending decisions (ordered by blast radius)
 - **P0 (blocks Week 0 build):** GitHub account owner (personal `lutheroldbuck` vs. `daron-group` org); Vercel account origin (fresh via `luther.mostert@daron-group.com` vs. existing); preview subdomain public or private.
-- **P1 (Week 1):** Firecracker brand brief outcome; Yolande Sanity onboarding; Yolande sign-off on rewritten Why-Daron copy.
+- **P1 (Week 1):** Yolande Sanity onboarding; Yolande sign-off on rewritten Why-Daron copy.
 - **P2 (Week 2):** `quotes@daron-group.com` MX setup; Hermes FastAPI endpoint contract; Supabase pgvector schema.
 - **P3 (Week 3):** M365 app registration + Mail.Read admin consent; embedding-model choice (`text-embedding-3-small` vs. Voyage); Zoe's moderation workflow.
 - **P4 (Week 4):** Cloudflare DNS cutover window; analytics provider (leaning Plausible); privacy-policy legal review.
@@ -94,7 +95,6 @@
 ## Team
 - Luther Mostert — MD, solo technical operator on the build
 - Yolande Kuhn — GM, Sanity CMS owner
-- Lisa Herbst — Firecracker agency, brand review
 - Zoe — Firecracker, chatbot Q&A moderation
 
 ## Sister systems (integrate Week 2–4, do NOT rebuild)

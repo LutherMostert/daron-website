@@ -90,7 +90,7 @@
     "heroTitle": "Ship Chandlery in Walvis Bay",
     "heroIntro": "Daron Namibia (formerly Walvis Bay Ship Chandlers) is a full-service ship chandler in Walvis Bay — provisions, bonded, deck and engine stores, safety and technical supplies, delivered quayside, at anchorage and offshore. ISSA and IMPA listed.",
     "provideHeading": "What our chandlery covers",
-    "areaHeading": "Serving Walvis Bay and the Namibian coast",
+    "areaHeading": "Serving Walvis Bay, Lüderitz and the Namibian coast",
     "areaBody": "From our warehousing at No. 31 Grand Avenue in the Walvis Bay Industrial Area, we supply vessels calling at Walvis Bay and support operations along the Namibian coast — with our own branded fleet, refrigerated and bonded storage, and customs clearance handled in-house.",
     "whyHeading": "Why vessels choose Daron in Walvis Bay",
     "mapCta": "View our location on Google Maps",
@@ -118,7 +118,9 @@
     "faq5A": "Email your requisition (IMPA codes welcome) to dnoperations@daron-group.com or send it to our operations team on WhatsApp. Offshore RFQs are handled 24/7.",
     "faq6Q": "Which brands does Daron supply in Namibia?",
     "faq6A": "Daron is the Namibian distributor for Hempel marine and protective coatings and Orlichem marine chemicals, and supplies Honeywell and Blackline Safety gas detection, Katradis mooring ropes and Hammelmann high-pressure equipment.",
-    "metaDescription": "Ship chandler in Walvis Bay since 2012 (formerly Walvis Bay Ship Chandlers). Provisions, bonded and technical stores delivered quayside, at anchor and offshore."
+    "metaDescription": "Ship chandler in Walvis Bay since 2012 (formerly Walvis Bay Ship Chandlers). Provisions, bonded and technical stores delivered quayside, at anchor and offshore.",
+    "faq7Q": "Do you supply vessels in Lüderitz?",
+    "faq7A": "Yes. Alongside Walvis Bay, Daron supplies vessels and offshore operations calling at Lüderitz, dispatched from our Walvis Bay warehouse with documentation and clearance handled in-house."
   },
   "Nav": {
     "home": "Home",
@@ -396,7 +398,7 @@
   },
   "Services": {
     "heroEyebrow": "Services",
-    "heroTitle": "Five pillars. One partner. Endless solutions.",
+    "heroTitle": "Marine and offshore supply services in Walvis Bay",
     "heroIntro": "Procurement, catering, warehousing, logistics, health & safety, and dry-dock technical support — managed in-house by people who know your operation.",
     "whatWeProvide": "What we provide",
     "whyChooseUs": "Why choose us",
@@ -534,7 +536,7 @@
   },
   "Industries": {
     "heroEyebrow": "Industries",
-    "heroTitle": "One partner. Endless solutions.",
+    "heroTitle": "Industries we supply from Walvis Bay",
     "heroIntro": "From chandlery to catering, warehousing to logistics — we manage it all across four sectors that shape Africa's economies.",
     "marineName": "Marine & offshore",
     "marinePromise": "Reliable support at every port.",
@@ -1000,7 +1002,7 @@
   },
   "Intake": {
     "eyebrow": "Talk to Daron",
-    "title": "What can we help you deliver?",
+    "title": "Contact Daron Namibia in Walvis Bay",
     "intro": "Send a requirement or ask a question. Your enquiry goes to the Daron operations team in Walvis Bay.",
     "urgentTitle": "Working against a vessel schedule?",
     "whatsapp": "WhatsApp operations",
@@ -1063,8 +1065,8 @@
   },
   "PremiumHome": {
     "location": "Walvis Bay, Namibia",
-    "title": "When operations cannot wait.",
-    "intro": "Marine supply, technical procurement and offshore support. One experienced team, from your first requirement to the final delivery.",
+    "title": "Ship chandler & marine supply in Walvis Bay.",
+    "intro": "When operations cannot wait: marine supply, technical procurement and offshore support. One experienced team, from your first requirement to the final delivery.",
     "quote": "Request a quote",
     "explore": "Explore our work",
     "caption": "Daron fleet and team alongside Normand Energy · Walvis Bay",
