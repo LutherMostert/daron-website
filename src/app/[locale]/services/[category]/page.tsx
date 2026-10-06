@@ -10,7 +10,7 @@ import { QuoteLink } from "@/components/QuoteLink";
 import { categoryMeta, categorySlugs, getCategory, isCategorySlug } from "@/lib/category-pages";
 import { buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
-import { Link, routing } from "@/i18n/routing";
+import { Link, getPathname, routing } from "@/i18n/routing";
 
 type Params = Promise<{ locale: string; category: string }>;
 
@@ -42,14 +42,18 @@ export default async function CategoryPage({ params }: { params: Params }) {
   const c = getCategory(category, locale);
   const meta = categoryMeta[category];
   const loc = (["en", "pt", "fr"] as const).find((l) => l === locale) ?? "en";
-  const pageUrl = `${site.url}/services/${category}`;
+  const abs = (href: string) => {
+    const path = getPathname({ href, locale: loc });
+    return path === "/" ? site.url : `${site.url}${path}`;
+  };
+  const pageUrl = abs(`/services/${category}`);
 
   const breadcrumb = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
-      { "@type": "ListItem", position: 2, name: "Services", item: `${site.url}/services` },
+      { "@type": "ListItem", position: 1, name: "Home", item: abs("/") },
+      { "@type": "ListItem", position: 2, name: "Services", item: abs("/services") },
       { "@type": "ListItem", position: 3, name: c.title, item: pageUrl },
     ],
   };
