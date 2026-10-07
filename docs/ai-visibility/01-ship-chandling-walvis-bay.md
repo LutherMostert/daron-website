@@ -24,11 +24,11 @@
 ## Body copy
 
 **Intro (hero paragraph)**
-Daron Namibia is a ship chandler in Walvis Bay, Namibia. We supply provisions, bonded stores, and deck, engine and cabin stores to vessels alongside at the Port of Walvis Bay, at the anchorage, and to offshore rigs in Namibian waters. We started in 2012 as Walvis Bay Ship Chandlers (WBSC). Today we are part of the Daron Group. We are ISO 9001:2015 certified, HACCP compliant, and ISSA and IMPA listed.
+Daron Namibia is a ship chandler in Walvis Bay, Namibia. We supply provisions, bonded stores, and deck, engine and cabin stores to vessels alongside at the Port of Walvis Bay, at the anchorage, and to offshore rigs in Namibian waters. We started in 2012 as Walvis Bay Ship Chandlers (WBSC), joined the Daron Group in 2023 and became Daron Namibia. We deliver 24/7, including weekends and public holidays. We are ISO 9001:2015 certified, HACCP compliant, and ISSA and IMPA listed.
 
 ### What a vessel can order from us
 - **Provisions:** fresh, chilled, frozen and dry provisions, with meat from our in-house butchery and perishables held in our Walvis Bay cold store.
-- **Bonded stores:** held in our bonded store in Walvis Bay and cleared in-house. [CONFIRM: which bonded lines you hold (tobacco, spirits, beer, wine) and whether you supply bonded stores to vessels at anchorage.]
+- **Bonded stores:** tobacco, spirits, beer and wine, plus SIM cards. They are held in our bonded store in Walvis Bay, cleared in-house, and delivered alongside or to vessels at anchorage.
 - **Deck stores:** ropes and mooring lines (including Katradis), paint and coatings (Hempel), cleaning chemicals (Orlichem), tools and consumables.
 - **Engine stores:** engine parts, technical spares, marine lubricants [CONFIRM: lubricant brands] and consumables.
 - **Cabin and galley stores:** crew supplies, plus Orlichem galley, laundry and housekeeping products. [CONFIRM: other typical cabin lines you want named, e.g. linen or toiletries.]
@@ -39,7 +39,8 @@ If an item is not in our warehouse, we source it through our supplier network in
 
 ### How we deliver in Walvis Bay
 - **Quayside:** our own branded trucks deliver to the vessel alongside at the Port of Walvis Bay, timed to the berthing window.
-- **Anchorage:** vessels at Walvis Bay anchorage are supplied by launch, in coordination with the ship's agent and port and customs clearance. See [Anchorage and launch delivery](/services/anchorage-launch-delivery).
+- **Anchorage:** vessels at Walvis Bay anchorage are supplied by a contracted launch operator, in coordination with the ship's agent and port and customs clearance. We need 48 hours' notice. Bonded stores can go out on the same launch. See [Anchorage and launch delivery](/services/anchorage-launch-delivery).
+- **Lüderitz:** vessels at Lüderitz are supplied by road from Walvis Bay, with a 48-hour lead time. See [Ports we serve](/ports-we-serve).
 - **Offshore:** we pack, document and stage consolidated loads for supply vessels serving drilling rigs and offshore units.
 - **Cold chain and bonded:** chilled, frozen and bonded goods stay in controlled storage until dispatch.
 
@@ -49,12 +50,12 @@ If an item is not in our warehouse, we source it through our supplier network in
 3. We confirm price, availability and the delivery plan. [CONFIRM: standard quote turnaround, e.g. "within X working hours" or "the same working day". The Why Daron page already says "A KAM will be back to you the same day".]
 4. We deliver, and the vessel signs the delivery note on receipt.
 
-**Office hours:** Monday to Friday, 08:00–17:00 CAT. Offshore RFQs are handled 24/7 on WhatsApp. [CONFIRM: are vessel deliveries also available outside office hours, at weekends and on public holidays? If yes, say "deliveries 24/7, including weekends and public holidays". If not, delete this sentence.]
+**Hours:** deliveries to vessels run 24/7, including weekends and public holidays. The office is open Monday to Friday, 08:00–17:00 CAT, and offshore RFQs are handled 24/7 on WhatsApp.
 
 **Call:** +264 83 337 4710 · **Address:** No. 31 Grand Avenue, Industrial Area, Walvis Bay, Namibia
 
 ### Formerly Walvis Bay Ship Chandlers
-Daron Namibia was founded in Walvis Bay in 2012 as Walvis Bay Ship Chandlers (WBSC). When the company joined the Daron Group it took the name Daron Namibia, and the change was completed at the end of 2024. We are the same company, with the same team, and we answer RFQs from Walvis Bay. If you have bought from WBSC before, you are already a Daron client. The old wbsc.com.na website now redirects here.
+Daron Namibia was founded in Walvis Bay in 2012 as Walvis Bay Ship Chandlers (WBSC). In 2023 the company joined the Daron Group and became Daron Namibia; the name change was completed at the end of 2024. We are the same company, with the same team, and we answer RFQs from Walvis Bay. If you have bought from WBSC before, you are already a Daron client. The old wbsc.com.na website now redirects here.
 
 ### Why vessels use Daron in Walvis Bay
 - One supplier for provisions, technical stores, coatings, chemicals and safety equipment.
@@ -66,16 +67,16 @@ Daron Namibia was founded in Walvis Bay in 2012 as Walvis Bay Ship Chandlers (WB
 Heading: **Ship chandler in Walvis Bay: common questions**
 
 **Who is a good ship chandler in Walvis Bay, Namibia?**  
-Daron Namibia (formerly Walvis Bay Ship Chandlers) has supplied vessels and offshore rigs from Walvis Bay since 2012. It holds ISO 9001:2015 certification, is HACCP compliant, is ISSA and IMPA listed, and delivers alongside, at anchorage and offshore.
+Daron Namibia (formerly Walvis Bay Ship Chandlers) has supplied vessels and offshore rigs from Walvis Bay since 2012. It holds ISO 9001:2015 certification, is HACCP compliant, is ISSA and IMPA listed, and delivers alongside, at anchorage and offshore, 24/7.
 
 **Is Daron Namibia the same company as Walvis Bay Ship Chandlers?**  
-Yes. Walvis Bay Ship Chandlers (WBSC) was founded in Walvis Bay in 2012. It took the name Daron Namibia when it joined the Daron Group, and the change was completed at the end of 2024. The team and the Walvis Bay warehouse are the same.
+Yes. Walvis Bay Ship Chandlers (WBSC) was founded in Walvis Bay in 2012. It joined the Daron Group in 2023 and became Daron Namibia; the name change was completed at the end of 2024. The team and the Walvis Bay warehouse are the same.
 
 **What can a ship order from a chandler in Walvis Bay?**  
-From Daron Namibia: fresh, chilled, frozen and dry provisions; bonded stores; deck, engine and cabin stores; safety and survival equipment; technical spares; Hempel coatings; Orlichem cleaning chemicals; and Katradis mooring ropes.
+From Daron Namibia: fresh, chilled, frozen and dry provisions; bonded stores (tobacco, spirits, beer, wine) and SIM cards; deck, engine and cabin stores; safety and survival equipment; technical spares; Hempel coatings; Orlichem cleaning chemicals; and Katradis mooring ropes.
 
 **Can you deliver provisions to a vessel at Walvis Bay anchorage?**  
-Yes. Vessels at Walvis Bay anchorage are supplied by launch, coordinated with the ship's agent and port clearance. Vessels alongside are supplied by our own trucks.
+Yes. Vessels at Walvis Bay anchorage are supplied by a contracted launch operator, coordinated with the ship's agent and port clearance, 24/7 including weekends and public holidays. Bonded stores can be delivered at anchorage too. Vessels alongside are supplied by our own trucks.
 
 **How quickly can I get a quote from Daron Namibia?**  
 [CONFIRM: e.g. 'Most requisitions are quoted the same working day.'] Send your list, with IMPA codes if you have them, to dnoperations@daron-group.com or on WhatsApp. Offshore RFQs are handled 24/7.
@@ -97,7 +98,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Who is a good ship chandler in Walvis Bay, Namibia?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Daron Namibia (formerly Walvis Bay Ship Chandlers) has supplied vessels and offshore rigs from Walvis Bay since 2012. It holds ISO 9001:2015 certification, is HACCP compliant, is ISSA and IMPA listed, and delivers alongside, at anchorage and offshore."
+        "text": "Daron Namibia (formerly Walvis Bay Ship Chandlers) has supplied vessels and offshore rigs from Walvis Bay since 2012. It holds ISO 9001:2015 certification, is HACCP compliant, is ISSA and IMPA listed, and delivers alongside, at anchorage and offshore, 24/7."
       }
     },
     {
@@ -105,7 +106,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Is Daron Namibia the same company as Walvis Bay Ship Chandlers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Walvis Bay Ship Chandlers (WBSC) was founded in Walvis Bay in 2012. It took the name Daron Namibia when it joined the Daron Group, and the change was completed at the end of 2024. The team and the Walvis Bay warehouse are the same."
+        "text": "Yes. Walvis Bay Ship Chandlers (WBSC) was founded in Walvis Bay in 2012. It joined the Daron Group in 2023 and became Daron Namibia; the name change was completed at the end of 2024. The team and the Walvis Bay warehouse are the same."
       }
     },
     {
@@ -113,7 +114,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "What can a ship order from a chandler in Walvis Bay?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "From Daron Namibia: fresh, chilled, frozen and dry provisions; bonded stores; deck, engine and cabin stores; safety and survival equipment; technical spares; Hempel coatings; Orlichem cleaning chemicals; and Katradis mooring ropes."
+        "text": "From Daron Namibia: fresh, chilled, frozen and dry provisions; bonded stores (tobacco, spirits, beer, wine) and SIM cards; deck, engine and cabin stores; safety and survival equipment; technical spares; Hempel coatings; Orlichem cleaning chemicals; and Katradis mooring ropes."
       }
     },
     {
@@ -121,7 +122,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Can you deliver provisions to a vessel at Walvis Bay anchorage?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Vessels at Walvis Bay anchorage are supplied by launch, coordinated with the ship's agent and port clearance. Vessels alongside are supplied by our own trucks."
+        "text": "Yes. Vessels at Walvis Bay anchorage are supplied by a contracted launch operator, coordinated with the ship's agent and port clearance, 24/7 including weekends and public holidays. Bonded stores can be delivered at anchorage too. Vessels alongside are supplied by our own trucks."
       }
     },
     {
@@ -161,11 +162,15 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Walvis Bay"
     },
     {
+      "@type": "City",
+      "name": "Lüderitz"
+    },
+    {
       "@type": "Country",
       "name": "Namibia"
     }
   ],
-  "description": "Ship chandler in Walvis Bay, Namibia (formerly Walvis Bay Ship Chandlers): provisions, bonded stores, deck, engine and cabin stores, delivered quayside, at anchorage by launch and offshore.",
+  "description": "Ship chandler in Walvis Bay, Namibia (formerly Walvis Bay Ship Chandlers): provisions, bonded stores, deck, engine and cabin stores, delivered quayside, at anchorage by launch and offshore, 24/7.",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Ship chandlery",

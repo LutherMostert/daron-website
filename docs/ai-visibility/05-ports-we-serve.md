@@ -8,8 +8,8 @@
 |---|---|
 | URL slug | `/ports-we-serve` |
 | Route file | `src/app/[locale]/ports-we-serve/page.tsx (new)` |
-| SEO title (53 chars, render with `titleAbsolute: true`) | Ports We Serve: Walvis Bay & Offshore Namibia \| Daron |
-| Meta description (155 chars) | Daron Namibia supplies vessels at Walvis Bay, alongside and at anchorage, and offshore rigs in Namibian waters. See ports, delivery methods and lead times. |
+| SEO title (55 chars, render with `titleAbsolute: true`) | Ports We Serve: Walvis Bay, Lüderitz & Offshore \| Daron |
+| Meta description (139 chars) | Daron Namibia supplies vessels at Walvis Bay (alongside and at anchorage), at Lüderitz by road, and offshore rigs in Namibian waters, 24/7. |
 | H1 | Ports and locations we serve in Namibia |
 | Hero eyebrow | Ports we serve |
 | Breadcrumb | Home › Ports we serve |
@@ -17,20 +17,20 @@
 
 **Notes for the developer:**
 
-- If Luther confirms Lüderitz, change the title to "Ports We Serve: Walvis Bay, Lüderitz & Offshore | Daron" and add Lüderitz to the meta description: "…at Walvis Bay and Lüderitz…".
+- Lüderitz confirmed by Luther (6 Oct 2026): supplied by road from Walvis Bay, 48-hour lead time. Anchorage deliveries need 48 hours' notice.
 - Add this page to the footer sitemap list. A header link is optional (see the brief).
 
 ## Body copy
 
 **Intro**
-Daron Namibia supplies vessels and offshore units from its base at No. 31 Grand Avenue, Industrial Area, Walvis Bay, Namibia. The table shows where we deliver and how.
+Daron Namibia supplies vessels and offshore units from its base at No. 31 Grand Avenue, Industrial Area, Walvis Bay, Namibia. We deliver 24/7, including weekends and public holidays. The table shows where we deliver and how.
 
 | Location | UN/LOCODE | How we deliver | Typical lead time |
 |---|---|---|---|
-| Port of Walvis Bay, alongside | NAWVB | Our own trucks to the berth | [CONFIRM] |
-| Walvis Bay anchorage | NAWVB | By launch, with your agent | [CONFIRM] |
-| Offshore Namibia (rigs, FPSOs, offshore units) | n/a | Staged loads for the operator's supply vessel | [CONFIRM] |
-| Lüderitz | NALUD | [CONFIRM: road delivery from Walvis Bay, or a local partner] | [CONFIRM] |
+| Port of Walvis Bay, alongside | NAWVB | Our own trucks to the berth, 24/7 | [CONFIRM: alongside lead time] |
+| Walvis Bay anchorage | NAWVB | Contracted launch operator, coordinated with your agent, 24/7 | 48 hours' notice |
+| Lüderitz | NALUD | By road from Walvis Bay | 48 hours |
+| Offshore Namibia (rigs, FPSOs, offshore units) | n/a | Staged loads for the operator's supply vessel | [CONFIRM: offshore lead time] |
 
 ### Walvis Bay
 Walvis Bay is our home port. Our warehouse, cold store, bonded store and delivery fleet are based in the Walvis Bay Industrial Area. We supply vessels alongside, at anchorage (see [Anchorage and launch delivery](/services/anchorage-launch-delivery)) and in the dry dock (see [Dry-dock support](/services/dry-dock)).
@@ -39,7 +39,7 @@ Walvis Bay is our home port. Our warehouse, cold store, bonded store and deliver
 Our first offshore engagement was the Transocean Marianas in 2013. Over a two-year campaign we supplied the Deepsea Mira, Deepsea Bollsta and Deepsea Hercules, including more than eight months supplying all three rigs at once. We pack, document and stage consolidated loads for the operator's supply vessels from Walvis Bay. See [Oil and gas](/industries/oil-and-gas).
 
 ### Lüderitz
-[CONFIRM: does Daron supply vessels at Lüderitz? If yes, write 2–3 sentences: how goods get there (road from Walvis Bay or a local partner), what you supply (provisions, stores, paint, chemicals), and the lead time. If not, delete this section and the Lüderitz table row.]
+We supply vessels at the Port of Lüderitz by road from Walvis Bay. Send the requisition the same way as for Walvis Bay, with the vessel's ETA at Lüderitz. Lead time: 48 hours.
 
 ### Elsewhere in Namibia
 We deliver Hempel coatings, Orlichem chemicals and safety equipment to industrial and mine sites inland. [CONFIRM: regions and towns served.]
@@ -52,19 +52,19 @@ Daron Group companies operate in other African countries, including South Africa
 Heading: **Ports and coverage: common questions**
 
 **Which Namibian ports does Daron Namibia serve?**  
-Daron Namibia serves the Port of Walvis Bay (alongside and at anchorage) and offshore rigs and units in Namibian waters. [CONFIRM: add 'and Lüderitz' if true.]
+Daron Namibia serves the Port of Walvis Bay (alongside and at anchorage), the Port of Lüderitz (by road from Walvis Bay), and offshore rigs and units in Namibian waters. Deliveries run 24/7, including weekends and public holidays.
 
 **Is there a ship chandler that supplies Lüderitz?**  
-[CONFIRM: 'Yes. Daron Namibia supplies vessels at Lüderitz by [method], usually within [lead time].' Delete this Q&A if not.]
+Yes. Daron Namibia supplies vessels at Lüderitz by road from Walvis Bay. Lead time: 48 hours.
 
 **Do you supply offshore drilling rigs off Namibia?**  
 Yes. Daron Namibia has supplied offshore rigs since its first offshore engagement in 2013. In Namibia it supplied the Deepsea Mira, Deepsea Bollsta and Deepsea Hercules, with more than eight months supplying all three at once.
 
 **Where is Daron Namibia located?**  
-No. 31 Grand Avenue, Industrial Area, Walvis Bay, Namibia. Phone +264 83 337 4710, email dnoperations@daron-group.com. Office hours are Monday to Friday, 08:00–17:00 CAT.
+No. 31 Grand Avenue, Industrial Area, Walvis Bay, Namibia. Phone +264 83 337 4710, email dnoperations@daron-group.com. The office is open Monday to Friday, 08:00–17:00 CAT; deliveries run 24/7, including weekends and public holidays.
 
 **Can you deliver to vessels at Walvis Bay anchorage?**  
-Yes. Vessels at Walvis Bay anchorage are supplied by launch, coordinated with the ship's agent and port clearance.
+Yes. Vessels at Walvis Bay anchorage are supplied by a contracted launch operator, coordinated with the ship's agent and port clearance, 24/7.
 
 ## FAQPage JSON-LD
 
@@ -80,7 +80,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Which Namibian ports does Daron Namibia serve?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Daron Namibia serves the Port of Walvis Bay (alongside and at anchorage) and offshore rigs and units in Namibian waters. [CONFIRM: add 'and Lüderitz' if true.]"
+        "text": "Daron Namibia serves the Port of Walvis Bay (alongside and at anchorage), the Port of Lüderitz (by road from Walvis Bay), and offshore rigs and units in Namibian waters. Deliveries run 24/7, including weekends and public holidays."
       }
     },
     {
@@ -88,7 +88,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Is there a ship chandler that supplies Lüderitz?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "[CONFIRM: 'Yes. Daron Namibia supplies vessels at Lüderitz by [method], usually within [lead time].' Delete this Q&A if not.]"
+        "text": "Yes. Daron Namibia supplies vessels at Lüderitz by road from Walvis Bay. Lead time: 48 hours."
       }
     },
     {
@@ -104,7 +104,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Where is Daron Namibia located?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. 31 Grand Avenue, Industrial Area, Walvis Bay, Namibia. Phone +264 83 337 4710, email dnoperations@daron-group.com. Office hours are Monday to Friday, 08:00–17:00 CAT."
+        "text": "No. 31 Grand Avenue, Industrial Area, Walvis Bay, Namibia. Phone +264 83 337 4710, email dnoperations@daron-group.com. The office is open Monday to Friday, 08:00–17:00 CAT; deliveries run 24/7, including weekends and public holidays."
       }
     },
     {
@@ -112,7 +112,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Can you deliver to vessels at Walvis Bay anchorage?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Vessels at Walvis Bay anchorage are supplied by launch, coordinated with the ship's agent and port clearance."
+        "text": "Yes. Vessels at Walvis Bay anchorage are supplied by a contracted launch operator, coordinated with the ship's agent and port clearance, 24/7."
       }
     }
   ]
@@ -137,6 +137,10 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
     },
     {
       "@type": "Place",
+      "name": "Port of Lüderitz (NALUD)"
+    },
+    {
+      "@type": "Place",
       "name": "Offshore Namibia"
     },
     {
@@ -144,7 +148,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Namibia"
     }
   ],
-  "description": "Ship supply from Walvis Bay to vessels alongside and at anchorage at the Port of Walvis Bay, and to offshore units in Namibian waters."
+  "description": "Ship supply from Walvis Bay to vessels alongside and at anchorage at the Port of Walvis Bay, by road to the Port of Lüderitz, and to offshore units in Namibian waters."
 }
 ```
 

@@ -18,54 +18,54 @@
 **Notes for the developer:**
 
 - Main buyer queries this page targets: "vessel provisions Walvis Bay anchorage" and "launch delivery Walvis Bay". NSC is #1 for these today, partly because it says "anchorage via launch services" explicitly.
-- The live chandlery page already says that vessels at anchorage are supplied by launch. Luther should still confirm the operational details below before this page goes live.
+- Confirmed by Luther (6 Oct 2026): launches are run by a contracted operator (do not name them); deliveries are 24/7 including weekends and public holidays; bonded stores go out at anchorage; anchorage deliveries need 48 hours' notice; Lüderitz is supplied by road from Walvis Bay with a 48-hour lead time.
 
 ## Body copy
 
 **Intro**
-Daron Namibia delivers provisions, stores and spares to vessels at Walvis Bay anchorage. We pack and label the order in our Walvis Bay warehouse, clear it with customs where needed, take it to the launch and deliver it to the vessel. The delivery is coordinated with the ship's agent and port clearance.
+Daron Namibia delivers provisions, stores and spares to vessels at Walvis Bay anchorage. We pack and label the order in our Walvis Bay warehouse, clear it with customs where needed, and our contracted launch operator delivers it to the vessel. We deliver 24/7, including weekends and public holidays. The delivery is coordinated with the ship's agent and port clearance.
 
 ### How an anchorage delivery works
 1. **Requisition:** send the list to dnoperations@daron-group.com or on WhatsApp (Hein +264 81 129 6407 or Marco +264 81 203 6751), with the vessel name, IMO number, anchorage position, ship's agent and the required delivery window.
-2. **Confirmation:** we confirm price, availability and the delivery plan, including the launch time. [CONFIRM: standard lead time for an anchorage delivery, e.g. "24 hours' notice for full orders, shorter for urgent items".]
+2. **Confirmation:** we confirm price, availability and the delivery plan, including the launch time. Notice needed: 48 hours.
 3. **Packing:** goods are packed and labelled for the vessel in our Walvis Bay warehouse. [CONFIRM: if you pack by department (provisions, bonded, deck, engine, cabin), say so.] Chilled and frozen goods stay in the cold chain until loading.
 4. **Clearance:** we clear bonded stores with customs in-house, and coordinate port clearance with your agent.
-5. **Launch transfer:** the launch carries the order to the vessel. [CONFIRM: does Daron operate its own launch, or use a contracted launch or boat operator? Name the operator if you want to.]
+5. **Launch transfer:** our contracted launch operator takes the order out to the vessel.
 6. **Hand-over:** the vessel signs the delivery note on receipt.
 
 ### What we can deliver at anchorage
-Fresh, chilled, frozen and dry provisions; bonded stores [CONFIRM: bonded at anchorage]; deck, engine and cabin stores; spares and technical items; Hempel paint; Orlichem chemicals; mooring ropes; and safety equipment. [CONFIRM: any limit on the weight or size of a single launch delivery, e.g. pallets, drums or rope coils, and how larger items are handled.]
+Fresh, chilled, frozen and dry provisions; bonded stores (tobacco, spirits, beer and wine) and SIM cards; deck, engine and cabin stores; spares and technical items; Hempel paint; Orlichem chemicals; mooring ropes; and safety equipment. [CONFIRM: any limit on the weight or size of a single launch delivery, e.g. pallets, drums or rope coils, and how larger items are handled.]
 
 ### Weather and sea state
 Launch transfers depend on wind, swell and the launch master's decision. If conditions close the transfer window, we hold the order in controlled storage and rebook the delivery with your agent.
 
-### Other Namibian anchorages and offshore
-- **Lüderitz:** [CONFIRM: does Daron deliver to vessels at Lüderitz, alongside and/or at anchorage? If yes, give the delivery method (road from Walvis Bay, local partner) and lead time. If not, delete this line.]
+### Lüderitz and offshore
+- **Lüderitz:** we supply vessels at Lüderitz by road from Walvis Bay. Lead time: 48 hours.
 - **Offshore:** for drilling rigs, FPSOs and offshore units in Namibian waters, we stage documented loads for the operator's supply vessel. See [Ports we serve](/ports-we-serve).
 
 ### Cost
 [CONFIRM: how launch hire is charged, e.g. "included in the delivery" or "charged at cost and shown on the quote". Delete this section if you prefer not to say.]
 
-**Office hours:** Monday to Friday, 08:00–17:00 CAT. Offshore RFQs are handled 24/7 on WhatsApp. [CONFIRM: are out-of-hours and weekend anchorage deliveries available?]
+**Hours:** anchorage deliveries run 24/7, including weekends and public holidays. The office is open Monday to Friday, 08:00–17:00 CAT.
 
 ## FAQ block
 
 Heading: **Anchorage delivery at Walvis Bay: common questions**
 
 **Can I get provisions delivered to my vessel at Walvis Bay anchorage?**  
-Yes. Daron Namibia supplies vessels at Walvis Bay anchorage by launch, coordinated with the ship's agent and port clearance. Provisions, stores, spares, paint and chemicals can all go out on the same delivery.
+Yes. Daron Namibia supplies vessels at Walvis Bay anchorage using a contracted launch operator, coordinated with the ship's agent and port clearance, 24/7 including weekends and public holidays. Provisions, bonded stores, spares, paint and chemicals can all go out on the same delivery.
 
 **Which ship chandler in Walvis Bay delivers by launch?**  
-Daron Namibia (formerly Walvis Bay Ship Chandlers) delivers to vessels at Walvis Bay anchorage by launch, and alongside the quay with its own trucks.
+Daron Namibia (formerly Walvis Bay Ship Chandlers) delivers to vessels at Walvis Bay anchorage by contracted launch, and alongside the quay with its own trucks, 24/7 including weekends and public holidays.
 
 **How much notice do you need for an anchorage delivery?**  
-[CONFIRM: e.g. 'Send the requisition at least 24 hours before the delivery window; urgent items can often go out sooner.'] Include the anchorage position and your agent's details.
+We need 48 hours' notice. Send the requisition at least 48 hours before the delivery window, with the anchorage position and your agent's details.
 
 **Can bonded stores be delivered to a vessel at anchorage?**  
-[CONFIRM: 'Yes. We clear bonded stores with customs in-house and deliver them by launch with the rest of the order.' Or delete this Q&A.]
+Yes. Daron Namibia supplies bonded stores (tobacco, spirits, beer and wine) and SIM cards to vessels at Walvis Bay anchorage. We clear them with customs in-house and deliver them by launch with the rest of the order.
 
 **Do you deliver to vessels at Lüderitz?**  
-[CONFIRM: yes or no, and how. Delete this Q&A if you do not serve Lüderitz.]
+Yes. Daron Namibia supplies vessels at Lüderitz by road from Walvis Bay. Lead time: 48 hours.
 
 **What happens if the weather stops the launch?**  
 Launch transfers depend on wind, swell and the launch master's decision. If the window closes, we hold the order in controlled storage, including chilled and frozen goods, and rebook the delivery with your agent.
@@ -84,7 +84,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Can I get provisions delivered to my vessel at Walvis Bay anchorage?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Daron Namibia supplies vessels at Walvis Bay anchorage by launch, coordinated with the ship's agent and port clearance. Provisions, stores, spares, paint and chemicals can all go out on the same delivery."
+        "text": "Yes. Daron Namibia supplies vessels at Walvis Bay anchorage using a contracted launch operator, coordinated with the ship's agent and port clearance, 24/7 including weekends and public holidays. Provisions, bonded stores, spares, paint and chemicals can all go out on the same delivery."
       }
     },
     {
@@ -92,7 +92,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Which ship chandler in Walvis Bay delivers by launch?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Daron Namibia (formerly Walvis Bay Ship Chandlers) delivers to vessels at Walvis Bay anchorage by launch, and alongside the quay with its own trucks."
+        "text": "Daron Namibia (formerly Walvis Bay Ship Chandlers) delivers to vessels at Walvis Bay anchorage by contracted launch, and alongside the quay with its own trucks, 24/7 including weekends and public holidays."
       }
     },
     {
@@ -100,7 +100,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "How much notice do you need for an anchorage delivery?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "[CONFIRM: e.g. 'Send the requisition at least 24 hours before the delivery window; urgent items can often go out sooner.'] Include the anchorage position and your agent's details."
+        "text": "We need 48 hours' notice. Send the requisition at least 48 hours before the delivery window, with the anchorage position and your agent's details."
       }
     },
     {
@@ -108,7 +108,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Can bonded stores be delivered to a vessel at anchorage?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "[CONFIRM: 'Yes. We clear bonded stores with customs in-house and deliver them by launch with the rest of the order.' Or delete this Q&A.]"
+        "text": "Yes. Daron Namibia supplies bonded stores (tobacco, spirits, beer and wine) and SIM cards to vessels at Walvis Bay anchorage. We clear them with customs in-house and deliver them by launch with the rest of the order."
       }
     },
     {
@@ -116,7 +116,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Do you deliver to vessels at Lüderitz?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "[CONFIRM: yes or no, and how. Delete this Q&A if you do not serve Lüderitz.]"
+        "text": "Yes. Daron Namibia supplies vessels at Lüderitz by road from Walvis Bay. Lead time: 48 hours."
       }
     },
     {

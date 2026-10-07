@@ -45,7 +45,7 @@ Orlichem chemicals are used in Daron's own work, for example for deck cleaning o
 ### Safety data, packs and delivery
 - Safety data sheets (SDS) and technical data sheets: [CONFIRM: available on request for every product? If yes, say so.]
 - Pack sizes: [CONFIRM: e.g. 5 L, 25 L and 200 L, or 1,000 L IBC on request.]
-- Delivery: to vessels in Walvis Bay, and to sites in Namibia [CONFIRM: towns and regions you deliver to, e.g. Swakopmund, Windhoek, Lüderitz, mine sites, and lead times].
+- Delivery: to vessels in Walvis Bay (alongside and at anchorage, 24/7), by road to Lüderitz, and to sites in Namibia [CONFIRM: other towns and regions you deliver to, e.g. Swakopmund, Windhoek, mine sites, and lead times].
 - Dosing equipment, site surveys or user training: [CONFIRM: offered or not.]
 
 ### How to order

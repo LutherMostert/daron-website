@@ -4,14 +4,15 @@
 
 ## What changes compared with the live site (checked 6 Oct 2026, 20:55 CAT)
 
-The live site already has `@id`s (`#organization`, `#localbusiness`), `legalName`, `alternateName` (Walvis Bay Ship Chandlers, WBSC, Daron Trading Namibia), `foundingDate`, `knowsAbout` and `sameAs` (LinkedIn and Facebook). The audit (run earlier today) marked some of these as missing; a deploy at about 20:45 CAT added them (the sitemap build timestamp is 18:45 UTC). The changes still needed are:
+The live site already has `@id`s (`#organization`, `#localbusiness`), `legalName`, `alternateName` (Walvis Bay Ship Chandlers, WBSC, Daron Trading Namibia), `foundingDate`, `knowsAbout` and `sameAs` (LinkedIn and Facebook). The audit (run earlier today) marked some of these as missing; a deploy at about 20:45 CAT added them. The changes still needed are:
 
 1. **Put both nodes in one `@graph`** in a single `<script>` (or keep two scripts, but link them). `LocalBusiness.parentOrganization` should point to `{"@id": "https://www.daron.com.na/#organization"}`, not to a name-only "Daron Group" stub. Daron Group becomes the Organization's `parentOrganization`, with `url: https://daron-group.com`.
 2. **`alternateName`:** keep the three existing names on both nodes. On the Organization also add "Daron Namibia (Pty) Ltd" and "Walvis Bay Ship Chandlers (Pty) Ltd", the exact strings used on the old directory listings.
 3. **`postalCode`:** add `9000` [CONFIRM] to both addresses, and set `contact.address.postalCode` in `src/lib/site.ts`.
 4. **`sameAs`:** normalise LinkedIn to `https://www.linkedin.com/...`. Add the ShipServ profile now. Add the Google Business Profile, IMPA and ISSA URLs once they exist and show Daron's current details.
-5. **`areaServed`:** Walvis Bay, offshore Namibia and Namibia; add Lüderitz only if confirmed. Drop the vague "Southern Africa" string, or keep it only if Luther wants it.
-6. **`knowsAbout`:** extend it as below. It now covers anchorage delivery, marine paint, CIP and Hammelmann.
+5. **`areaServed`:** Walvis Bay, Lüderitz (confirmed by Luther: supplied by road from Walvis Bay), offshore Namibia and Namibia. Drop the vague "Southern Africa" string, or keep it only if Luther wants it.
+6. **`knowsAbout`:** extend it as below. It now covers anchorage delivery, 24/7 deliveries, bonded lines, marine paint, CIP and Hammelmann.
+6a. **History and hours (confirmed by Luther, 6 Oct 2026):** add `disambiguatingDescription` (founded 2012 as WBSC, joined the Daron Group in 2023, became Daron Namibia). Add `hoursAvailable` 24/7 on the sales `contactPoint` for vessel deliveries. Keep the office `openingHoursSpecification` at Mon–Fri 08:00–17:00. Hempel is described as **official** distributor only, never exclusive.
 7. **New:** `employee` (Luther Mostert, MD, with his LinkedIn as `sameAs`), `brand` (all 7 brands), `contactPoint`, `hasMap` (GBP URL once verified) and `hasCredential` (ISO 9001:2015). [CONFIRM: use `founder` instead of `employee` for Luther if he founded WBSC in 2012.]
 8. **Geo pin:** `-22.957, 14.508` is only 3 decimal places (about 100 m). [CONFIRM: take the exact coordinates of No. 31 Grand Avenue from the Google Business Profile pin.]
 9. **Brand-page `Service` provider:** `/brands/[brand]/page.tsx` uses `provider: {"@type":"Organization", name, url}` with no `@id`. Change it to `provider: {"@id": "https://www.daron.com.na/#organization"}` and add `brand: {"@type":"Brand","name": b.name, "url": b.manufacturerUrl}`.
@@ -45,6 +46,7 @@ Build this from `site` / `contact` constants in `src/lib/site.ts`. Do not hard-c
         "@type": "Place",
         "name": "Walvis Bay, Namibia"
       },
+      "disambiguatingDescription": "Founded in 2012 as Walvis Bay Ship Chandlers (WBSC); joined the Daron Group in 2023 and became Daron Namibia.",
       "email": "dnoperations@daron-group.com",
       "telephone": "+264833374710",
       "address": {
@@ -75,7 +77,7 @@ Build this from `site` / `contact` constants in `src/lib/site.ts`. Do not hard-c
         },
         {
           "@type": "City",
-          "name": "Lüderitz [CONFIRM or delete]"
+          "name": "Lüderitz"
         },
         {
           "@type": "Place",
@@ -89,9 +91,10 @@ Build this from `site` / `contact` constants in `src/lib/site.ts`. Do not hard-c
       "knowsAbout": [
         "Ship chandling",
         "Vessel provisions",
-        "Bonded stores",
+        "Bonded stores (tobacco, spirits, beer, wine, SIM cards)",
         "Deck, engine and cabin stores",
         "Anchorage and launch delivery",
+        "24/7 vessel deliveries",
         "Offshore rig supply",
         "Hempel marine and protective coatings",
         "Marine paint",
@@ -187,7 +190,7 @@ Build this from `site` / `contact` constants in `src/lib/site.ts`. Do not hard-c
         },
         {
           "@type": "City",
-          "name": "Lüderitz [CONFIRM or delete]"
+          "name": "Lüderitz"
         },
         {
           "@type": "Place",
@@ -232,7 +235,22 @@ Build this from `site` / `contact` constants in `src/lib/site.ts`. Do not hard-c
             "pt",
             "fr"
           ],
-          "areaServed": "NA"
+          "areaServed": "NA",
+          "hoursAvailable": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59",
+            "description": "Vessel deliveries 24/7, including weekends and public holidays"
+          }
         },
         {
           "@type": "ContactPoint",
@@ -255,7 +273,7 @@ export const site = {
   legacyLegalNames: ["Daron Namibia (Pty) Ltd", "Walvis Bay Ship Chandlers (Pty) Ltd"],
   parentOrganizationUrl: "https://daron-group.com",
   managingDirector: { name: "Luther Mostert", linkedin: "https://www.linkedin.com/in/luther-mostert-48915b54" },
-  areaServed: ["Walvis Bay", /* "Lüderitz", ← only if confirmed */ "Offshore Namibia", "Namibia"],
+  areaServed: ["Walvis Bay", "Lüderitz", "Offshore Namibia", "Namibia"],
 } as const;
 
 export const contact = {

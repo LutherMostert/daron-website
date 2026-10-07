@@ -18,13 +18,13 @@
 **Notes for the developer:**
 
 - This is the generic *category* page ("marine paint Namibia", where Daron is only 5th). `/brands/hempel` stays as the product-range and catalogue page. The two pages link to each other. `/services/coatings` (surface prep plus Hammelmann) links here as well.
-- "Official distributor" can be checked: Hempel's own Distributors Africa page lists DARON NAMIBIA as its Namibia entry. The site also uses "exclusive" in places (site.ts, the chandlery page, Why Daron). Use "exclusive" only if Luther confirms the agreement says so.
+- Wording confirmed by Luther (6 Oct 2026): say "official Hempel distributor" only. **Never call Daron an "exclusive" Hempel distributor.** Hempel's own Distributors Africa page lists DARON NAMIBIA as its Namibia entry. The live site still says "exclusive" for Hempel in several places; CLAUDE_BRIEF.md tells Claude to remove it.
 - Add an outbound link to Hempel's official site (https://www.hempel.com) on this page and on `/brands/hempel` (audit check #37).
 
 ## Body copy
 
 **Intro**
-Daron Namibia is the official Hempel distributor for Namibia, based in Walvis Bay. [CONFIRM: add "and exclusive" only if the Hempel agreement says so.] We supply Hempel marine paint, antifouling and protective coatings for vessels, dry-dock projects, offshore structures, mines and industrial sites. We launched the Hempel partnership in Walvis Bay on 12 December 2024. Hempel's own distributor directory lists Daron Namibia as its distributor in Namibia.
+Daron Namibia is the official Hempel distributor for Namibia, based in Walvis Bay. We supply Hempel marine paint, antifouling and protective coatings for vessels, dry-dock projects, offshore structures, mines and industrial sites. We launched the Hempel partnership in Walvis Bay on 12 December 2024. Hempel's own distributor directory lists Daron Namibia as its distributor in Namibia.
 
 ### About Hempel
 Hempel is a Danish coatings manufacturer founded in 1915. It operates in more than 80 countries. Its marine systems are specified worldwide for hull protection, fouling control and corrosion protection.
@@ -44,7 +44,7 @@ Hempel is a Danish coatings manufacturer founded in 1915. It operates in more th
 
 ### Stock, colours and delivery
 [CONFIRM: which Hempel ranges you keep in stock in Walvis Bay; whether you can tint or colour-match (e.g. a tinting machine on site); pack sizes; and typical lead time for non-stock items ordered from Hempel.]
-We deliver to vessels alongside and at anchorage, to the dry dock, and to sites in Namibia. [CONFIRM: inland delivery, e.g. Windhoek and mine sites, and how.]
+We deliver to vessels alongside and at anchorage in Walvis Bay, 24/7, by road to Lüderitz, to the dry dock, and to sites in Namibia. [CONFIRM: other inland towns and mine sites, and how.]
 
 ### Technical support
 Send us the asset, the substrate, the existing coating, the exposure conditions, the surface area and the work window. We will propose a Hempel system with product data sheets. [CONFIRM: is coating inspection or specification support available (the November 2024 LinkedIn post mentions "qualified NACE inspectors")? If yes, say who provides it: Daron, Hempel or the Daron Group.]
@@ -60,7 +60,7 @@ Email dnoperations@daron-group.com or namtechnical@daron-group.com, WhatsApp Hei
 Heading: **Hempel and marine paint in Namibia: common questions**
 
 **Who is the Hempel paint distributor in Namibia?**  
-Daron Namibia, based at No. 31 Grand Avenue, Industrial Area, Walvis Bay, is Hempel's distributor for Namibia. Contact +264 83 337 4710 or dnoperations@daron-group.com.
+Daron Namibia, based at No. 31 Grand Avenue, Industrial Area, Walvis Bay, is the official Hempel distributor for Namibia. Contact +264 83 337 4710 or dnoperations@daron-group.com.
 
 **Where can I buy marine paint in Walvis Bay?**  
 Daron Namibia in Walvis Bay supplies Hempel marine paint, antifouling and protective coatings, and delivers to vessels alongside, at anchorage and at the dry dock.
@@ -75,7 +75,7 @@ Yes. Send us the asset, substrate, existing coating, exposure conditions, surfac
 Yes. We supply Hempel anticorrosive, protective and passive fire protection coatings for mining, energy, oil and gas, and infrastructure assets in Namibia. [CONFIRM: inland delivery.]
 
 **Is Daron Namibia an official Hempel distributor?**  
-Yes. Hempel's distributor directory lists Daron Namibia as its Namibia distributor. The partnership was launched in Walvis Bay on 12 December 2024.
+Yes. Daron Namibia is the official Hempel distributor for Namibia, and Hempel's distributor directory lists it as its Namibia distributor. The partnership was launched in Walvis Bay on 12 December 2024.
 
 ## FAQPage JSON-LD
 
@@ -91,7 +91,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Who is the Hempel paint distributor in Namibia?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Daron Namibia, based at No. 31 Grand Avenue, Industrial Area, Walvis Bay, is Hempel's distributor for Namibia. Contact +264 83 337 4710 or dnoperations@daron-group.com."
+        "text": "Daron Namibia, based at No. 31 Grand Avenue, Industrial Area, Walvis Bay, is the official Hempel distributor for Namibia. Contact +264 83 337 4710 or dnoperations@daron-group.com."
       }
     },
     {
@@ -131,7 +131,7 @@ Must match the visible FAQ text word for word. Remove any Q&A whose [CONFIRM] is
       "name": "Is Daron Namibia an official Hempel distributor?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Hempel's distributor directory lists Daron Namibia as its Namibia distributor. The partnership was launched in Walvis Bay on 12 December 2024."
+        "text": "Yes. Daron Namibia is the official Hempel distributor for Namibia, and Hempel's distributor directory lists it as its Namibia distributor. The partnership was launched in Walvis Bay on 12 December 2024."
       }
     }
   ]
