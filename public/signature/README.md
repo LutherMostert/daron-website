@@ -1,0 +1,1 @@
+These are Luther Mostert's email signature images (image003.png-image012.png). They are referenced by absolute URL from his email signature at https://www.daron.com.na/signature/imageNNN.png. Do not move, rename, or delete them.
