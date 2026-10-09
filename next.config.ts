@@ -60,6 +60,9 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Let next-intl normalize locale prefixes itself. Next.js normalization
+  // otherwise loops /contact -> /en/contact -> /contact for English requests.
+  skipProxyUrlNormalize: true,
   turbopack: {
     root: PROJECT_ROOT,
   },
@@ -70,6 +73,14 @@ const nextConfig: NextConfig = {
   // Old WordPress URL slugs → new Next.js routes (CLAUDE.md "Site routes")
   async redirects() {
     return [
+      // Reuse the existing enquiry section. Next.js carries query parameters
+      // through; next-intl handles the unprefixed visitor's preferred locale.
+      { source: "/rfq", destination: "/contact#rfq", permanent: false },
+      {
+        source: "/:locale(en|fr|pt)/rfq",
+        destination: "/:locale/contact#rfq",
+        permanent: false,
+      },
       { source: "/about-us", destination: "/about", permanent: true },
       { source: "/services-2", destination: "/services", permanent: true },
       {
