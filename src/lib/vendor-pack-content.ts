@@ -1,8 +1,18 @@
 // Copy for the Vendor Registration Pack block on /procurement-resources.
 // The pack itself is an English Word file; French and Portuguese pages say so.
-// `roles` and `platforms` follow the order of PACK_ROLES and PACK_PLATFORMS.
+import type { ResourceAssetFormCopy } from "./resource-form-content";
 
-const en = {
+type VendorPackContent = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  includesTitle: string;
+  includes: string[];
+  certNote: string;
+  form: ResourceAssetFormCopy;
+};
+
+const en: VendorPackContent = {
   eyebrow: "VENDOR REGISTRATION PACK",
   title: "Register Daron Namibia in your supplier system.",
   intro: "One Word document with the details supplier forms ask for, taken from our registration and tax certificates.",
@@ -16,42 +26,15 @@ const en = {
     "Our ShipServ supplier profile",
   ],
   certNote: "Certificates and bank letters are not in the download. The operations team sends current copies on request.",
-  formTitle: "Get the pack",
-  email: "Work email",
-  company: "Company",
-  role: "Your role",
-  roles: [
-    "Purchasing or procurement",
-    "Technical or marine superintendent",
-    "Master or officer on board",
-    "Ship agent",
-    "Offshore or rig operations",
-    "Other",
-  ],
-  platform: "Where do you register suppliers?",
-  platforms: ["ShipServ", "MESPAS", "ProcureShip", "Own ERP or vendor portal", "Email or paper forms", "Other"],
-  choose: "Choose…",
-  optional: "optional",
-  callTitle: "Planning a call at Walvis Bay?",
-  callHint: "Tell us the vessel and ETA and we will contact you about supply for that call.",
-  vessel: "Vessel name",
-  eta: "ETA",
-  submit: "Get the pack",
-  sending: "Preparing the pack…",
-  privacy: "We use these details to give you the pack and to follow up on your request. Read our",
-  privacyLink: "privacy policy",
-  ready: "READY",
-  successTitle: "Your pack is ready.",
-  successBody: "Download the Word document. For certificates or a bank letter, email the operations team and quote your reference.",
-  download: "Download the pack (Word)",
-  reference: "Reference",
-  certCta: "Request certificates",
-  error: "We could not prepare the pack. Please try again, or email",
-  etaError: "Check the ETA. Choose a date from today onwards.",
-  rateError: "Too many requests from this connection. Please try again in an hour, or email",
+  form: {
+    formTitle: "Get the pack",
+    submit: "Get the pack",
+    successTitle: "Your pack is ready.",
+    successBody: "Download the Word document. For certificates or a bank letter, email the operations team and quote your reference.",
+    downloads: { pack: "Download the pack (Word)" },
+    followUp: { label: "Request certificates", subject: "Certificates for vendor registration" },
+  },
 };
-
-export type VendorPackContent = typeof en;
 
 const fr: VendorPackContent = {
   eyebrow: "DOSSIER DE RÉFÉRENCEMENT FOURNISSEUR",
@@ -67,39 +50,14 @@ const fr: VendorPackContent = {
     "Notre profil fournisseur ShipServ",
   ],
   certNote: "Les certificats et lettres bancaires ne sont pas inclus dans le téléchargement. L’équipe opérationnelle envoie des copies à jour sur demande.",
-  formTitle: "Obtenir le dossier",
-  email: "E-mail professionnel",
-  company: "Société",
-  role: "Votre fonction",
-  roles: [
-    "Achats / approvisionnement",
-    "Surintendant technique ou maritime",
-    "Capitaine ou officier à bord",
-    "Agent maritime",
-    "Opérations offshore ou plateforme",
-    "Autre",
-  ],
-  platform: "Où référencez-vous vos fournisseurs ?",
-  platforms: ["ShipServ", "MESPAS", "ProcureShip", "ERP ou portail fournisseurs interne", "E-mail ou formulaires papier", "Autre"],
-  choose: "Choisir…",
-  optional: "facultatif",
-  callTitle: "Une escale prévue à Walvis Bay ?",
-  callHint: "Indiquez le navire et l’ETA : nous vous contacterons pour l’avitaillement de cette escale.",
-  vessel: "Nom du navire",
-  eta: "ETA",
-  submit: "Obtenir le dossier",
-  sending: "Préparation du dossier…",
-  privacy: "Nous utilisons ces informations pour vous fournir le dossier et donner suite à votre demande. Consultez notre",
-  privacyLink: "politique de confidentialité",
-  ready: "PRÊT",
-  successTitle: "Votre dossier est prêt.",
-  successBody: "Téléchargez le document Word. Pour les certificats ou une lettre bancaire, écrivez à l’équipe opérationnelle en indiquant votre référence.",
-  download: "Télécharger le dossier (Word)",
-  reference: "Référence",
-  certCta: "Demander les certificats",
-  error: "Le dossier n’a pas pu être préparé. Réessayez ou écrivez à",
-  etaError: "Vérifiez l’ETA : choisissez une date à partir d’aujourd’hui.",
-  rateError: "Trop de demandes depuis cette connexion. Réessayez dans une heure ou écrivez à",
+  form: {
+    formTitle: "Obtenir le dossier",
+    submit: "Obtenir le dossier",
+    successTitle: "Votre dossier est prêt.",
+    successBody: "Téléchargez le document Word. Pour les certificats ou une lettre bancaire, écrivez à l’équipe opérationnelle en indiquant votre référence.",
+    downloads: { pack: "Télécharger le dossier (Word)" },
+    followUp: { label: "Demander les certificats", subject: "Certificates for vendor registration" },
+  },
 };
 
 const pt: VendorPackContent = {
@@ -116,39 +74,14 @@ const pt: VendorPackContent = {
     "O nosso perfil de fornecedor na ShipServ",
   ],
   certNote: "Os certificados e cartas bancárias não estão incluídos no download. A equipa de operações envia cópias atualizadas a pedido.",
-  formTitle: "Obter o pacote",
-  email: "E-mail profissional",
-  company: "Empresa",
-  role: "A sua função",
-  roles: [
-    "Compras / aprovisionamento",
-    "Superintendente técnico ou marítimo",
-    "Comandante ou oficial a bordo",
-    "Agente de navegação",
-    "Operações offshore ou de plataforma",
-    "Outra",
-  ],
-  platform: "Onde regista os fornecedores?",
-  platforms: ["ShipServ", "MESPAS", "ProcureShip", "ERP ou portal de fornecedores próprio", "E-mail ou formulários em papel", "Outro"],
-  choose: "Escolher…",
-  optional: "opcional",
-  callTitle: "Tem uma escala prevista em Walvis Bay?",
-  callHint: "Indique o navio e o ETA e contactamo-lo sobre o abastecimento para essa escala.",
-  vessel: "Nome do navio",
-  eta: "ETA",
-  submit: "Obter o pacote",
-  sending: "A preparar o pacote…",
-  privacy: "Usamos estes dados para lhe fornecer o pacote e dar seguimento ao seu pedido. Leia a nossa",
-  privacyLink: "política de privacidade",
-  ready: "PRONTO",
-  successTitle: "O seu pacote está pronto.",
-  successBody: "Descarregue o documento Word. Para certificados ou uma carta bancária, envie um e-mail à equipa de operações com a sua referência.",
-  download: "Descarregar o pacote (Word)",
-  reference: "Referência",
-  certCta: "Pedir certificados",
-  error: "Não foi possível preparar o pacote. Tente novamente ou envie um e-mail para",
-  etaError: "Verifique o ETA: escolha uma data a partir de hoje.",
-  rateError: "Demasiados pedidos a partir desta ligação. Tente novamente dentro de uma hora ou envie um e-mail para",
+  form: {
+    formTitle: "Obter o pacote",
+    submit: "Obter o pacote",
+    successTitle: "O seu pacote está pronto.",
+    successBody: "Descarregue o documento Word. Para certificados ou uma carta bancária, envie um e-mail à equipa de operações com a sua referência.",
+    downloads: { pack: "Descarregar o pacote (Word)" },
+    followUp: { label: "Pedir certificados", subject: "Certificates for vendor registration" },
+  },
 };
 
 export function getVendorPackContent(locale: string): VendorPackContent {
