@@ -3,12 +3,14 @@ import { getRedis } from "@/lib/redis";
 
 const LEAD_TTL_SECONDS = 180 * 24 * 60 * 60;
 
-export type LeadKind = "contact" | "chat" | "enquiry";
+export type LeadKind = "contact" | "chat" | "enquiry" | "resource";
+
+const REFERENCE_PREFIX: Record<LeadKind, string> = { contact: "RFQ", enquiry: "ENQ", chat: "CHAT", resource: "PACK" };
 
 function createReference(kind: LeadKind, timestamp: string) {
   const day = timestamp.slice(0, 10).replaceAll("-", "");
   const token = randomBytes(3).toString("hex").toUpperCase();
-  return `${kind === "contact" ? "RFQ" : kind === "enquiry" ? "ENQ" : "CHAT"}-${day}-${token}`;
+  return `${REFERENCE_PREFIX[kind]}-${day}-${token}`;
 }
 
 export async function persistLead(

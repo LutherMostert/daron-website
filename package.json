@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test scripts/rfq.test.cjs"
+    "test": "node --test scripts/rfq.test.cjs scripts/vendor-pack.test.cjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.90.0",
