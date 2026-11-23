@@ -6,6 +6,7 @@ import { Link } from "@/i18n/routing";
 import { getGrowthContent } from "@/lib/growth-content";
 import { getPortCallContent } from "@/lib/port-call-content";
 import { getResourceFormLabels } from "@/lib/resource-form-content";
+import { getRigContent } from "@/lib/rig-content";
 import { buildMetadata } from "@/lib/seo";
 import { getVendorPackContent } from "@/lib/vendor-pack-content";
 type Props = { params: Promise<{ locale: string }> };
@@ -18,7 +19,8 @@ export default async function ResourcesPage({ params }: Props) {
       <div><p className="premium-eyebrow">{pack.eyebrow}</p><h2 id="vendor-pack-title" className="mt-4">{pack.title}</h2><p className="premium-lead mt-5">{pack.intro}</p>
         <h3 className="mt-8">{pack.includesTitle}</h3><ul className="growth-checklist">{pack.includes.map(item => <li key={item}>{item}</li>)}</ul>
         <p className="group-scope-note">{pack.certNote}</p>
-        <Link href="/port-call-checklist" className="premium-text-link mt-6 inline-block">{portCall.resourcesLink} →</Link></div>
+        <Link href="/port-call-checklist" className="premium-text-link mt-6 block">{portCall.resourcesLink} →</Link>
+        <Link href="/rig-mobilisation" className="premium-text-link mt-3 block">{getRigContent(locale).resourcesLink} →</Link></div>
       <div className="premium-form-panel"><h3 className="mb-6">{pack.form.formTitle}</h3><ResourceRequestForm asset="vendor-pack" copy={formCopy} locale={locale} /></div>
     </Container></section>
     <section className="premium-section"><Container><div className="resource-cards">

@@ -17,6 +17,7 @@ const requests = load('src/lib/resource-requests.ts', { '@/lib/rfq': rfq });
 const formLabels = load('src/lib/resource-form-content.ts');
 const vendorContent = load('src/lib/vendor-pack-content.ts');
 const portCallContent = load('src/lib/port-call-content.ts');
+const rigContent = load('src/lib/rig-content.ts');
 
 const NOW = new Date('2026-11-23T10:00:00Z');
 const valid = { email: 'Buyer@Example-Shipping.com', company: 'Example Shipping', role: 'Purchasing or procurement', platform: 'ShipServ', vessel: 'MV Example', eta: '2026-12-14', locale: 'fr' };
@@ -91,6 +92,16 @@ test('resource route: stores the lead, alerts operations with reply-to and retur
   assert.ok(calls.emails[0].subject.startsWith('Port Call Pack downloaded'));
 });
 
+test('resource route: the rig brief returns its Word file and a rig-specific next step', async () => {
+  const { post, calls } = routeWith();
+  const eta = new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10); // the route checks against today
+  const body = await (await post({ ...valid, asset: 'rig-brief', role: 'Offshore or rig operations', eta })).json();
+  assert.equal(body.asset, 'rig-brief');
+  assert.deepEqual(body.downloads.map(file => file.key), ['brief']);
+  assert.equal(calls.emails[0].subject, `Rig Mobilisation Brief downloaded: Example Shipping (Walvis Bay call: MV Example, ETA ${eta})`);
+  assert.ok(calls.emails[0].text.includes("ask for the rig's requirements"));
+});
+
 test('resource route: old vendor-pack requests without an asset still get the vendor pack', async () => {
   const { post } = routeWith();
   const body = await (await post({ ...valid, eta: '' })).json();
@@ -137,12 +148,19 @@ test('resource copy: every language labels each role, platform and download file
     assert.equal(labels.platforms.length, requests.REQUEST_PLATFORMS.length, locale);
     const vendor = vendorContent.getVendorPackContent(locale);
     const portCall = portCallContent.getPortCallContent(locale);
-    for (const [asset, copy] of [['vendor-pack', vendor.form], ['port-call-pack', portCall.form]]) {
+    const rig = rigContent.getRigContent(locale);
+    for (const [asset, copy] of [['vendor-pack', vendor.form], ['port-call-pack', portCall.form], ['rig-brief', rig.form]]) {
       for (const file of requests.RESOURCE_ASSETS[asset].files) assert.ok(copy.downloads[file.key], `${locale} ${asset} ${file.key}`);
     }
+    assert.equal(Object.keys(requests.RESOURCE_ASSETS).length, 3);
     assert.equal(portCall.sections.length, 4, locale);
     assert.equal(portCall.sections.reduce((total, section) => total + section.items.length, 0), 13, locale);
-    assert.ok(portCall.metaDescription.length >= 120 && portCall.metaDescription.length <= 165, `${locale} meta description length ${portCall.metaDescription.length}`);
+    assert.equal(rig.sections.length, 2, locale);
+    assert.equal(rig.sections.reduce((total, section) => total + section.items.length, 0), 17, locale);
+    assert.equal(rig.record.length, 3, locale);
+    for (const [name, page] of [['port call', portCall], ['rig', rig]]) {
+      assert.ok(page.metaDescription.length >= 120 && page.metaDescription.length <= 165, `${locale} ${name} meta description length ${page.metaDescription.length}`);
+    }
   }
 });
 
