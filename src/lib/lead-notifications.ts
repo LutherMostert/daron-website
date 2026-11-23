@@ -14,6 +14,21 @@ export type EmailAttachment = {
   base64: string;
 };
 
+/**
+ * Website alerts always reach the operations mailbox. RFQ_TO_EMAIL adds further
+ * recipients (separate several with commas or semicolons); duplicates are dropped.
+ */
+export function operationsRecipients(configured = process.env.RFQ_TO_EMAIL): string[] {
+  const recipients: string[] = [];
+  for (const candidate of [...(configured ?? "").split(/[,;]/), contact.emails.operations]) {
+    const address = candidate.trim();
+    if (address && !recipients.some((existing) => existing.toLowerCase() === address.toLowerCase())) {
+      recipients.push(address);
+    }
+  }
+  return recipients;
+}
+
 export async function sendOperationsEmail(args: {
   subject: string;
   text: string;
@@ -28,7 +43,7 @@ export async function sendOperationsEmail(args: {
   const from =
     process.env.RFQ_FROM_EMAIL ||
     (emailDomain ? `Daron Website <website@${emailDomain}>` : "Daron Website <onboarding@resend.dev>");
-  const to = process.env.RFQ_TO_EMAIL || contact.emails.operations;
+  const to = operationsRecipients();
   if (process.env.NODE_ENV === "production" && /@resend\.dev\b/i.test(from)) {
     console.error("[lead-email] Configure RFQ_FROM_EMAIL with a verified sending domain before production release.");
     return false;
@@ -37,7 +52,7 @@ export async function sendOperationsEmail(args: {
   try {
     const { error } = await client.emails.send({
       from,
-      to: [to],
+      to,
       replyTo: args.replyTo,
       subject: args.subject,
       text: args.text,
