@@ -43,6 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/solutions/planned-maintenance", priority: 0.8, cf: "monthly" },
     { path: "/solutions/remote-site-supply", priority: 0.8, cf: "monthly" },
     { path: "/procurement-resources", priority: 0.7, cf: "monthly" },
+    { path: "/port-call-checklist", priority: 0.7, cf: "monthly" },
     { path: "/services/ship-chandlery", priority: 0.9, cf: "monthly" },
     { path: "/services/vessel-provisions", priority: 0.9, cf: "monthly" },
     { path: "/services/marine-paint", priority: 0.9, cf: "monthly" },
