@@ -164,6 +164,21 @@ test('production sender cannot silently fall back to resend.dev',async()=>{
     assert.equal(await notifications.sendOperationsEmail({subject:'Test',text:'Test',replyTo:'buyer@example.com'}),true);assert.equal(sends,1);
   } finally {for(const k of names){if(saved[k]===undefined)delete process.env[k];else process.env[k]=saved[k];}}
 });
+test('operations alerts reach the operations mailbox as well as RFQ_TO_EMAIL',async()=>{
+  const names=['NODE_ENV','RESEND_API_KEY','RFQ_FROM_EMAIL','RFQ_TO_EMAIL'];const saved=Object.fromEntries(names.map(k=>[k,process.env[k]]));
+  try {
+    process.env.NODE_ENV='production';process.env.RESEND_API_KEY='test-only';process.env.RFQ_FROM_EMAIL='Daron Website <website@example.com>';
+    const sent=[];
+    const notifications=load('src/lib/lead-notifications.ts',{'resend':{Resend:class{emails={send:async args=>{sent.push(args);return{error:null};}}}},'@/lib/site':{contact:{emails:{operations:'operations@example.com'}}}});
+    const cases=[[undefined,['operations@example.com']],['md@example.com',['md@example.com','operations@example.com']],['Operations@Example.com',['Operations@Example.com']],['md@example.com; sales@example.com, ',['md@example.com','sales@example.com','operations@example.com']]];
+    for(const [configured,expected] of cases){
+      if(configured===undefined)delete process.env.RFQ_TO_EMAIL;else process.env.RFQ_TO_EMAIL=configured;
+      assert.deepEqual(notifications.operationsRecipients(),expected);
+      assert.equal(await notifications.sendOperationsEmail({subject:'Test',text:'Test',replyTo:'buyer@example.com'}),true);
+      assert.deepEqual(sent.at(-1).to,expected);assert.equal(sent.at(-1).replyTo,'buyer@example.com');
+    }
+  } finally {for(const k of names){if(saved[k]===undefined)delete process.env[k];else process.env[k]=saved[k];}}
+});
 test('English, French and Portuguese have complete intake, home and growth dictionaries',()=>{
   const all=['en','fr','pt'].map(locale=>JSON.parse(fs.readFileSync(`messages/${locale}.json`,'utf8')));
   for(const namespace of ['Intake','PremiumHome','Growth'])for(const messages of all)assert.deepEqual(Object.keys(messages[namespace]).sort(),Object.keys(all[0][namespace]).sort());
