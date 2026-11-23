@@ -2,6 +2,8 @@ import { QuoteLink } from "@/components/QuoteLink";
 import { WhatsAppLinks } from "@/components/WhatsAppLinks";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/routing";
+import { getRigContent } from "@/lib/rig-content";
 import { buildMetadata } from "@/lib/seo";
 
 import { Container } from "@/components/Container";
@@ -86,6 +88,12 @@ export default async function OilAndGasPage({
           >
             {t("talkToTeam")}
           </QuoteLink>
+          <Link
+            href="/rig-mobilisation"
+            className="rounded-full border border-white/30 px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
+          >
+            {getRigContent(locale).heroCta}
+          </Link>
         </div>
       </PageHero>
 

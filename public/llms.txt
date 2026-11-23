@@ -38,4 +38,5 @@ Walvis Bay Ship Chandlers (WBSC, wbsc.com.na) and Daron Namibia are the same com
 
 ## Resources for buyers
 - [Walvis Bay port call supply checklist](https://www.daron.com.na/port-call-checklist): what to send, and when, before a vessel calls at Walvis Bay, with a downloadable RFQ template
+- [Rig mobilisation and reactivation in Walvis Bay](https://www.daron.com.na/rig-mobilisation): what to line up before a rig mobilises or comes out of a stack, with a downloadable supply brief
 - [Procurement resources](https://www.daron.com.na/procurement-resources): vendor registration pack, catalogues and supplier onboarding documents

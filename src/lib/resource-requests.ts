@@ -25,6 +25,14 @@ export const RESOURCE_ASSETS = {
       noCall: "Reply to offer help with their next Walvis Bay call and ask for the RFQ in the template.",
     },
   },
+  "rig-brief": {
+    name: "Rig Mobilisation Brief",
+    files: [{ key: "brief", url: "/downloads/daron-namibia-rig-mobilisation-brief.docx?v=20261123" }],
+    nextStep: {
+      call: "They gave a rig and arrival date. Contact them about supply for the mobilisation and ask for the rig's requirements.",
+      noCall: "Reply to offer support for their next rig mobilisation or reactivation, and ask for the rig's requirements.",
+    },
+  },
 } as const;
 
 export type ResourceAsset = keyof typeof RESOURCE_ASSETS;
