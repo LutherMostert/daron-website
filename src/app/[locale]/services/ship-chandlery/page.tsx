@@ -9,6 +9,7 @@ import { buildMetadata } from "@/lib/seo";
 import { Link } from "@/i18n/routing";
 import { contact, site } from "@/lib/site";
 import { getCategory } from "@/lib/category-pages";
+import { getPortCallContent } from "@/lib/port-call-content";
 
 export async function generateMetadata({
   params,
@@ -151,6 +152,9 @@ export default async function ShipChandleryPage({
               ))}
               <li>
                 <Link href="/brands/katradis" className="inline-flex min-h-11 items-center font-semibold text-[var(--color-accent-text)] underline underline-offset-4">{t("katradisLink")} &rarr;</Link>
+              </li>
+              <li>
+                <Link href="/port-call-checklist" className="inline-flex min-h-11 items-center font-semibold text-[var(--color-accent-text)] underline underline-offset-4">{getPortCallContent(locale).resourcesLink} &rarr;</Link>
               </li>
             </ul>
           </div>

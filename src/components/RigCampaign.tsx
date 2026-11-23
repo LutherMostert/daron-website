@@ -1,6 +1,8 @@
 import { QuoteLink } from "@/components/QuoteLink";
 import Image from "next/image";
 import { Container } from "@/components/Container";
+import { Link } from "@/i18n/routing";
+import { getRigContent } from "@/lib/rig-content";
 
 // Project duration, concurrent supply period and rig names confirmed by Luther,
 // 8 September 2026. Photographs selected from the supplied TLC marketing archive.
@@ -71,7 +73,10 @@ export function RigCampaign({ locale }: { locale: string }) {
           <ul aria-label={t.eyebrow}>
             <li>Deepsea Mira</li><li>Deepsea Bollsta</li><li>Deepsea Hercules</li>
           </ul>
-          <QuoteLink className="premium-text-link">{t.cta} <span aria-hidden="true">↗</span></QuoteLink>
+          <div className="flex flex-col items-start gap-2">
+            <QuoteLink className="premium-text-link">{t.cta} <span aria-hidden="true">↗</span></QuoteLink>
+            <Link href="/rig-mobilisation" className="premium-text-link">{getRigContent(locale).resourcesLink} <span aria-hidden="true">→</span></Link>
+          </div>
         </div>
       </Container>
     </section>

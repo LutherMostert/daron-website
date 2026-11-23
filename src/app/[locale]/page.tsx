@@ -12,6 +12,7 @@ import { GroupCapability } from "@/components/GroupCapability";
 import { SolutionCards } from "@/components/SolutionCards";
 import { RigCampaign } from "@/components/RigCampaign";
 import { getGrowthContent } from "@/lib/growth-content";
+import { getPortCallContent } from "@/lib/port-call-content";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params; const t = await getTranslations({ locale, namespace: "Meta" });
@@ -54,6 +55,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </Link>;
     })}</div><Link href="/brands" className="premium-text-link mt-8 inline-flex">{t("brandsCta")} →</Link></Container></section>
     <GroupCapability locale={locale} />
-    <section className="premium-cta"><Container><div><p className="premium-eyebrow">{t("ctaEyebrow")}</p><h2>{t("ctaTitle")}</h2><p>{t("ctaBody")}</p></div><div className="premium-cta-actions"><QuoteLink className="premium-button">{t("quote")} →</QuoteLink><WhatsAppLinks className="premium-text-link" /><Link href="/procurement-resources" className="premium-text-link">{growth.resourcesLink} →</Link></div></Container></section>
+    <section className="premium-cta"><Container><div><p className="premium-eyebrow">{t("ctaEyebrow")}</p><h2>{t("ctaTitle")}</h2><p>{t("ctaBody")}</p></div><div className="premium-cta-actions"><QuoteLink className="premium-button">{t("quote")} →</QuoteLink><WhatsAppLinks className="premium-text-link" /><Link href="/port-call-checklist" className="premium-text-link">{getPortCallContent(locale).resourcesLink} →</Link><Link href="/procurement-resources" className="premium-text-link">{growth.resourcesLink} →</Link></div></Container></section>
   </div>;
 }
