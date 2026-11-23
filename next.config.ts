@@ -66,9 +66,13 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: PROJECT_ROOT,
   },
-  // Apply security headers to every route.
+  // Apply security headers to every route. Gated downloads (e.g. the Vendor
+  // Registration Pack) are only linked after the form, so keep them out of search.
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      { source: "/downloads/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
+    ];
   },
   // Old WordPress URL slugs → new Next.js routes (CLAUDE.md "Site routes")
   async redirects() {
