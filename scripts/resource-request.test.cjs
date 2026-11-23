@@ -173,3 +173,23 @@ test('resource downloads: every published file exists where the route points and
     }
   }
 });
+
+test('resource pages are linked from the footer, home, ship chandlery, rig section and vessel provisions', () => {
+  const expectations = [
+    ['src/components/Footer.tsx', ['/procurement-resources', '/port-call-checklist', '/rig-mobilisation']],
+    ['src/app/[locale]/page.tsx', ['/procurement-resources', '/port-call-checklist']],
+    ['src/app/[locale]/services/ship-chandlery/page.tsx', ['/port-call-checklist']],
+    ['src/components/RigCampaign.tsx', ['/rig-mobilisation']],
+    ['src/app/[locale]/industries/oil-and-gas/page.tsx', ['/rig-mobilisation']],
+  ];
+  for (const [file, hrefs] of expectations) {
+    const source = fs.readFileSync(file, 'utf8');
+    for (const href of hrefs) assert.ok(source.includes(`href="${href}"`), `${file} links ${href}`);
+  }
+  const categories = load('src/lib/category-pages.ts');
+  for (const locale of ['en', 'fr', 'pt']) {
+    assert.ok(categories.getCategory('vessel-provisions', locale).related.some(r => r.href === '/port-call-checklist'), `vessel provisions (${locale})`);
+    assert.ok(portCallContent.getPortCallContent(locale).navLabel.length > 5, `port call nav label (${locale})`);
+    assert.ok(rigContent.getRigContent(locale).heroCta.length > 5, `rig nav label (${locale})`);
+  }
+});

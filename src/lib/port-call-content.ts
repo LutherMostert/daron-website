@@ -23,6 +23,7 @@ type PortCallContent = {
   packIncludes: string[];
   form: ResourceAssetFormCopy;
   resourcesLink: string;
+  navLabel: string;
 };
 
 const en: PortCallContent = {
@@ -92,6 +93,7 @@ const en: PortCallContent = {
     downloads: { checklist: "Download the checklist (Word)", rfq: "Download the RFQ template (Excel)" },
     followUp: { label: "Email your RFQ", subject: "RFQ - Walvis Bay" },
   },
+  navLabel: "Port call checklist",
   resourcesLink: "Planning a call at Walvis Bay? Get the port call checklist and RFQ template",
 };
 
@@ -162,6 +164,7 @@ const fr: PortCallContent = {
     downloads: { checklist: "Télécharger la liste (Word)", rfq: "Télécharger le modèle (Excel)" },
     followUp: { label: "Envoyer votre demande de prix", subject: "RFQ - Walvis Bay" },
   },
+  navLabel: "Liste d’escale",
   resourcesLink: "Une escale prévue à Walvis Bay ? Obtenez la liste d’escale et le modèle de demande de prix",
 };
 
@@ -232,6 +235,7 @@ const pt: PortCallContent = {
     downloads: { checklist: "Descarregar a lista (Word)", rfq: "Descarregar o modelo (Excel)" },
     followUp: { label: "Enviar o seu pedido de cotação", subject: "RFQ - Walvis Bay" },
   },
+  navLabel: "Lista de escala",
   resourcesLink: "Tem uma escala prevista em Walvis Bay? Obtenha a lista de escala e o modelo de pedido de cotação",
 };
 

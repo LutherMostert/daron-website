@@ -6,6 +6,8 @@ import { contact, site } from "@/lib/site";
 import { categorySlugs, getCategory } from "@/lib/category-pages";
 import { Container } from "./Container";
 import { CookieSettingsLink } from "./CookieSettingsLink";
+import { getPortCallContent } from "@/lib/port-call-content";
+import { getRigContent } from "@/lib/rig-content";
 
 const navItems = [
   { href: "/" as const, key: "home" as const },
@@ -59,6 +61,8 @@ export function Footer({
               <li><Link href="/solutions" className="text-white/75 hover:text-white">{tGrowth("solutions")}</Link></li>
               <li><Link href="/group-network" className="text-white/75 hover:text-white">{tGrowth("group")}</Link></li>
               <li><Link href="/procurement-resources" className="text-white/75 hover:text-white">{tGrowth("resources")}</Link></li>
+              <li><Link href="/port-call-checklist" className="text-white/75 hover:text-white">{getPortCallContent(locale).navLabel}</Link></li>
+              <li><Link href="/rig-mobilisation" className="text-white/75 hover:text-white">{getRigContent(locale).heroCta}</Link></li>
               {navItems.map((n) => (
                 <li key={n.href}>
                   <Link

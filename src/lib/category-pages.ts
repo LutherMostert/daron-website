@@ -191,6 +191,7 @@ const content: Record<Locale, Record<CategorySlug, CategoryContent>> = {
         { href: "/services/ship-chandlery", label: "Ship chandlery in Walvis Bay" },
         { href: "/industries/oil-and-gas", label: "Offshore and oil & gas supply" },
         { href: "/track-record", label: "Track record" },
+        { href: "/port-call-checklist", label: "Walvis Bay port call checklist and RFQ template" },
       ],
       faqHeading: "Vessel provisions: common questions",
       faqs: [
@@ -327,6 +328,7 @@ const content: Record<Locale, Record<CategorySlug, CategoryContent>> = {
         { href: "/services/ship-chandlery", label: "Ship chandlery em Walvis Bay" },
         { href: "/industries/oil-and-gas", label: "Abastecimento offshore e petróleo e gás" },
         { href: "/track-record", label: "Experiência comprovada" },
+        { href: "/port-call-checklist", label: "Lista de escala em Walvis Bay e modelo de pedido de cotação" },
       ],
       faqHeading: "Provisões para navios: perguntas frequentes",
       faqs: [
@@ -463,6 +465,7 @@ const content: Record<Locale, Record<CategorySlug, CategoryContent>> = {
         { href: "/services/ship-chandlery", label: "Shipchandler à Walvis Bay" },
         { href: "/industries/oil-and-gas", label: "Offshore et pétrole et gaz" },
         { href: "/track-record", label: "Références" },
+        { href: "/port-call-checklist", label: "Liste d’escale à Walvis Bay et modèle de demande de prix" },
       ],
       faqHeading: "Avitaillement : questions fréquentes",
       faqs: [
